@@ -1,0 +1,7 @@
+
+
+(defun mappend (fn origin_list)
+  (apply #'append (mapcar fn origin_list))
+  )
+(defun square (x) (* x x))
+(mappend square '(1 2 3 4 5))

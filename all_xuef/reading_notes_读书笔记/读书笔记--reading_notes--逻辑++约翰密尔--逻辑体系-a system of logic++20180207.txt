@@ -1,0 +1,43 @@
+
+What Induction is, therefore, and what conditions render it legitimate, can not
+but be deemed the main question of the science of logic—the question which includes all others.
+
+For the purposes of the present inquiry, Induction may
+be defined, the operation of discovering and proving general
+propositions.
+
+on the one hand, generals are but collections of particulars, definite
+in kind but indefinite in number; and on the other hand, whenever
+the evidence which we derive from observation of known cases
+justifies us in drawing an inference respecting even one unknown
+case, we should on the same evidence be justified in drawing
+a similar inference with respect to a whole class of cases. The
+inference either does not hold at all, or it holds in all cases of
+a certain description; in all cases which, in certain definable
+respects, resemble those we have observed.
+
+
+Success is here dependent on
+natural or acquired sagacity, aided by knowledge of the particular
+subject, and of subjects allied with it. Invention, though it can be
+cultivated, can not be reduced to rule; there is no science which
+will enable a man to bethink himself of that which will suit his
+purpose.
+
+
+Induction, then, is that operation of the mind, by which we
+infer that what we know to be true in a particular case or cases,
+will be true in all cases which resemble the former in certain
+assignable respects. In other words, Induction is the process by
+which we conclude that what is true of certain individuals of a
+class is true of the whole class, or that what is true at certain
+times will be true in similar circumstances at all times.
+
+ “This and that A are B, therefore every A is B”—is
+called an induction, whether any thing be really concluded or
+not: and the induction is asserted not to be perfect, unless every
+single individual of the class A is included in the antecedent, or
+premise: that is, unless what we affirm of the class has already
+been ascertained to be true of every individual in it, so that
+the nominal conclusion is not really a conclusion, but a mere
+re-assertion of the premises.

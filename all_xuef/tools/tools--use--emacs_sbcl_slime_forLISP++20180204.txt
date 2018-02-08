@@ -1,0 +1,18 @@
+
+emacs下写，执行lisp code
+假设你已经配置好 emacs + sbcl + slime
+
+c-x 中的 c 指的是ctrl
+1. 进入slime
+alt + x, slime ==>进入slime
+你可以执行lisp代码
+2. c-x, c-f, 打开文件(hello.lisp)。
+编辑hello.lisp
+c-x, c-s 保存文件
+3. 光标移到末尾。c-c,c-c 将代码编译进slime
+
+4. c-x,b 使用up down 选择进入slime
+
+
+
+

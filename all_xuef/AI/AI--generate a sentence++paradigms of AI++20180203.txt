@@ -1,0 +1,954 @@
+
+2.1  A  Grammar for  a  Subset of English
+
+Here is a simple grammar for a tiny portion of English:
+Sentence ==> Noun-Phrase + Verb-Phrase
+Noun-Phrase ==> Article + Noun
+Verb-Phrase ==> Verb + Noun-Phrase
+Article ==> the, a, ...
+Noun ==> man, ball, woman, table...
+Verb ==> hit, took, saw, liked...
+To be technical, this description is called a context-free phrase-structure grammar, and
+the underlying paradigm is called generative syntax.
+The idea is that anywhere we
+want a sentence, we can generate a noun phrase followed by a verb phrase. Anywhere
+a noun phrase has been specified, we generate instead an article followed by a noun.
+Anywhere an article has been specified, we generate either  " the, " " a, "  or some other
+article. The formalism is  "context-free" because the rules apply anywhere regardless
+of the surrounding words, and the approach is  "generative" because the rules as a
+whole define the complete set of sentences in a language (and by contrast the set of
+nonsentences as well). 
+
+To get a Sentence, append a Noun - Phrase and a Verb - Phrase
+	To get a Noun - Phrase, append an Article and a Noun
+		Choose  " the "  for the Article
+		Choose  " man "  for the Noun
+	The resultingrNoun-Phrase is  " the man "
+	To get a Verb - Phrase, append a Verb and  a  Noun - Phrase
+		Choose  " hit "  for the Verb
+		To get  a  Noun - Phrase, append an Article and a Noun
+		Choose  " the "  for the Article
+		Choose  " ball "  for the Noun
+		The resulting Noun - Phrase is  " the ball "
+	The resulting Verb - Phrase is  " hit the ball "
+The resulting Sentence is  " The man hit the ball "
+
+
+2.3  A  Rule - Based  Solution
+
+(defparameter *simple-grammar*
+	'((sentence -> (noun-phrase verb-phrase))
+	(noun-phrase -> (Article Noun))
+	(verb-phrase -> (Verb noun-phrase))
+	(Article -> the a)
+	(Noun -> man ball woman table)
+	(Verb -> hit took saw liked))
+	"A grammar for a trivial subset of English.")
+
+(defvar *grammar* *simple-grammar*
+	"The grammar used by generate. Initially, this is
+	*simple-grammar*, but we can switch to other grammars.")
+
+;; 使用assoc，获得指定规则
+> (assoc 'noun *grammar*) ==> (NOUN -> MAN BALL WOMAN TABLE)
+
+Although rules are quite simply implemented as lists, it is a good idea to impose a
+layer of abstraction by defining functions to operate on the rules.
+
+We will need three functions: one to get the right-hand side of a rule, one for the left - hand side, 
+and one to look up all the possible rewrites (right-hand sides) for a category.
+(defun rule-lhs (rule)
+	"The left-hand side of a rule."
+	(first rule))
+(defun rule-rhs (rule)
+	"The right-hand side of a rule. "
+	(rest (rest rule)))
+(defun rewrites (category)
+	"Return a list of the possible rewrites for this category."
+	(rule-rhs (assoc category *grammar*)))
+
+(defun generate (phrase)
+	"Generate a random sentence or phrase"
+	(cond ((listp phrase)
+		   (mappend #'generate phrase))
+		  ((rewrites phrase)
+		   (generate (random-elt (rewrites phrase))))
+		  (t (list phrase))))
+
+Like many of the programs in this book, this function is short, but dense with
+information: the craft of programming includes knowing what  not  to write, as well
+as what to write.
+
+This style of programming is called data-driven programming, because the data
+(the list of rewrites associated with a category) drives what the program does next. It
+is a natural and easy-to-use style in Lisp, leading to concise and extensible programs,
+because it is always possible to add a new piece of data with a new association without
+having to modify the original program.
+
+1et is the most common way of introducing variables that are not parameters of
+functions.
+
+
+2.4  Two Paths to Follow
+The two versions of the preceding program represent two alternate approaches that
+come up time and time again in developing programs:  
+(1) Use the most straightforward mapping of the problem description directly into Lisp code. 
+(2) Use the most natural notation available to solve the problem, and then worry about writing 
+an interpreter for that notation.
+
+Approach (2) involves an extra step, and thus is more work for small problems.
+However, programs that use this approach are often easier to modify and expand.
+This is especially true in a domain where there is a lot of data to account for. The
+grammar of natural language is one such domain-in fact, most AI problems fit this
+description. The idea behind approach (2) is to work with the problem as much as
+possible in its own terms, and to minimize the part of the solution that is written
+directly in Lisp.
+
+Fortunately, it is very easy in Lisp to design new notations - in effect, new programming languages. 
+Thus, Lisp encourages the construction of more robust programs.
+Throughout this book, we will be aware of the two approaches. The reader may
+notice that in most cases, we choose the second.
+
+
+2.5  Changing the Grammar without Changing the Program
+We show the utility of approach (2) by defining a new grammar that includes adjectives, 
+prepositional phrases（介词短语）, proper names（专有名词）, and pronouns（代词）. 
+We can then apply the generate  function without modification to this new grammar.
+
+(defparameter *bigger-grammar*
+  '((sentence -> (noun-phrase verb-phrase))
+	(noun-phrase -> (Article Adj* Noun PP*) (Name) (Pronoun))
+	(verb-phrase -> (Verb noun-phrase PP*))
+	(PP* -> () (PP PP*))
+	(Adj* -> () (Adj Adj*))
+	(PP -> (Prep noun-phrase))
+	(Prep -> to in by with on)
+	(Adj -> big little blue green adiabatic)
+	(Article -> the a)
+	(Name -> Pat Kim Lee Terry Robin)
+	(Noun -> man ball woman table)
+	(Verb -> hit took saw 1iked)
+	(Pronoun -> he she it these those that)))
+
+
+2.6  Using the Same Data for Several Programs
+Another advantage of representing information in a declarative form - as rules or
+facts rather than as Lisp functions - is that it can be easier to use the information for
+multiple purposes.
+
+
+excise2.4
+>  (cross-product #'+  '(1 2 3) '(10 20 30))
+(11 12 13
+21 22 23
+31 32 33)
+>  (cross-product #'list '(a b c d e f g h)
+					  ' (1 2 3 4 5 6 7 8))
+((A 1) (B 1) (C 1) (D 1) (E 1) (F 1) (G 1) (H 1)
+(A 2) (B 2) (C 2) (D 2) (E 2) (F 2) (G 2) (H 2)
+(A 3) (B 3) (C 3) (D 3) (E 3) (F 3) (G 3) (H 3)
+(A 4) (B 4) (C 4) (D 4) (E 4) (F 4) (G 4) (H 4)
+(A 5) (B 5) (C 5) (D 5) (E 5) (F 5) (G 5) (H 5)
+(A 6) (B 6) (C 6) (D 6) (E 6) (F 6) (G 6) (H 6)
+(A 7) (B 7) (C 7) (D 7) (E 7) (F 7) (G 7) (H 7)
+(A 8) (B 8) (C 8) (D 8) (E 8) (F 8) (G 8) (H 8))
+
+(defun cross-product (fn xlist ylist)
+	"Return a list of all (fn  x  y) values."
+	(mappend  #'(1ambda (y)
+					(mapcar #'(lambda (x) (funcall fn x y))
+					xlist))
+				ylist))
+
+
+chapter3. Functions and Special Forms for Repetition
+
+(defun length1 (1ist)
+	(let ((len 0))  ;  start with LEN=O
+	  (do1ist (element 1ist)  ;  and on each iteration
+	    (incf len))  ;  increment LEN  by  1
+	   len))  ;  and return LEN
+
+mapc takes two arguments, the first a function, the second a list. It
+applies the function to each element of the list.
+(defun length2 (1ist)
+	(let ((len 0))  ;  start with LEN=O
+	  (mapc #'(lambda (element)  ;  and on each iteration
+				(incf len))  ;  increment  LEN  by  1
+			list)
+		len))  ;  and return  LEN
+
+mapcar  executes the same function calls as mapc, but then returns the 
+results in a list.
+
+## dotimes
+There is also a dotimes form, which has the syntax:
+(dotimes (variable number optional-result) body...)  
+
+and executes the body with  variable  bound first to zero, then one, all the way up to
+number - 1  (for a total of  number  times). Of course, dotimes is not appropriate for
+implementing 1ength, since we don't know the number of iterations ahead of time.
+
+## do and loop
+There are two very general looping forms, do and  1OOP. The syntax of do is as
+follows:
+(do ((variable initial next)...)
+	(exit-test result)
+  body...)
+
+Each variable is initially bound to the  initial  value. If  exit-test  is true, then result  
+is returned. Otherwise, the body is executed and each  variable  is set to the corresponding
+next  value and  exit-test  is tried again. The loop repeats until  exit-test is true. If a next
+value is omitted, then the corresponding variable is not updated each time through
+the loop. Rather, it is treated as if it had been bound with a 1et form.
+
+(defun 1ength3 (1ist)
+	(do ((len 0 (+ len 1))  ;  start with  LEN=O,  increment
+	     (l list (rest l)))  ;  ...  on each iteration
+	    ((null l) len)))  ;  (until the end of the 1 i s t )
+
+Because it is so unspecific, do will not be used much in this book. 
+However, many good programmers use it, so it is important
+to know how to read  do  loops, even if you decide never to write one.
+
+
+The syntax of 1oop is an entire language by itself, and a decidedly non-Lisp - like
+language it is.
+
+
+Every programmer learns that there are certain kinds of loops that are used again
+and again. These are often called programming idioms or cliches.
+
+
+count-if,which counts the number of elements of a sequence that satisfy a predicate, and
+position-if,  which returns the index of an element satisfying a predicate. Both
+can be used to implement 1ength.
+(defun length7 (list)
+	(count-if #'true list))
+(defun true (x) t)
+
+
+>  (remove  1  '(1  2  3  2  1 0 -1))  ==>  (2 3  2  0 -1)
+>  (remove  1  '(1  2  3  2  1  0  -1)  :key  #'abs)  ==>  (2 3 2 0)
+>  (remove  1  '(1  2  3  2  1  0 -1) :test  #'<)  ==>  (1  1  0 -1)
+>  (remove  1  '(1  2  3  2  1 0 -1) :start  4)  ==>  (1  2  3  2  0 -1)
+
+
+>  (remove-if #'oddp '(1  2  3  2  1  0 -1))  ==>  (2  2  0)
+>  (remove-if-not #'oddp '(1  2  3  2  1  0 -1))  ==>  (1 3  1  -1)
+>  (find-if #'evenp '(1  2  3  2  1  0 -1))  ==>  2
+
+
+The following two tables assume these two values:
+(setf  x  '(a  b  c))
+(setf  y  '(1  2  3))
+The first table lists functions that work on any number of lists but do not accept keywords:
+
+(every #'oddp y)  ==>  nil  	test if every element satisfies a predicate
+(some #'oddp y)  ==>  t  		test if some element satisfies predicate
+(mapcar #'-  y) ==>  (-1 -2 - 3)  apply function to each element and return result
+(mapc #'print y)  prints  1  2  3  perform operation on each element
+
+
+The second table lists functions that have-if and -if-not versions and also
+accept keyword arguments:
+(member  2  y)  ==>  (2  3) 		see if element is in list
+(count 'b x)  ==> 1  				count the number of matching elements
+(delete  1  y)  ==>  (2 3)  omit matching elements
+(find  2  y)  ==> 2  find first element that matches
+(position 'a x) ==> 0  find index of element in sequence
+(reduce  #'+  y)  ==> 6  apply function to succesive elements
+(remove  2  y )  ==>  (1 3)  like  del ete,  but makes a new copy
+(substitute  4  2  y  )  ==>  (1 4 3)  replace elements with new ones
+
+
+## Repetition through Recursion
+
+(defun length9 (list)
+	(if (null list)
+		0
+		(+ 1 (length9 (rest list)))))
+
+因为list是递归结构的，所以能够递归处理。
+This version of 1ength arises naturally from the recursive definition of a list:  "a list
+is either the empty list or an element consed onto another list." In general, most
+recursive functions derive from the recursive nature of the data they are operating
+on. Some kinds of data, like binary trees, are hard to deal with in anything but a
+recursive fashion. Others, like lists and integers, can be defined either recursively
+(leading to recursive functions) or as a sequence (leading to iterative functions). In
+this book, I tend to use the "list-as-sequence" view rather than the "list-as-first-and-
+rest" view. The reason is that defining a list as a first and a rest is an arbitrary and
+artificial distinction that is based on the implementation of lists that Lisp happens to
+use. But there are many other ways to decompose a list. We could break it into the last
+element and all-but-the-last elements, for example, or the first half and the second
+half. The "list-as-sequence" view makes no such artificial distinction. It treats all
+elements identically.
+
+
+&optional
+
+## Macros
+词法层面的抽象
+
+Writing a macro is a four - step process:
+1. Decide if the macro is really necessary.
+2. Write down the syntax of the macro.
+3. Figure out what the macro should expand into.
+4. Use defmacro to implement the syntax/expansion correspondence.
+
+>  (macroexpand-1 '(while (< i 10)
+						(print (* i i))
+						(setf i (+ i 1))))
+
+						
+### Backquote Notation
+``````````````
+
+(defmacro while (test &rest body)
+	"Repeat body while test is true."
+	'(loop (unless ,test (return nil))
+			,@body)
+
+>  (setf test1 '(a test))  ==>  (A TEST)
+>  '(this is ,test1)  ==>  (THIS IS (A TEST))
+>  '(this is ,@test1)  ==>  (THIS IS A TEST)
+
+
+3.3 Functions on Lists
+For the sake of example, assume we have the following assignments:
+(setf x '(a b c))
+(setf y '(1 2 3))
+
+The most important functions on lists are summarized here. 
+(first x)
+(second x)
+(third x)
+(nth 0 x) ==> a
+(rest x)
+(car x)
+(cdr x)
+(last x)
+(length x)
+(reverse x)
+(cons 0 y)
+(append x y)
+(list x y) ==>((a b c) (1 2 3))
+(list* 1 2 x) ==> (1 2 a b c)
+(null nil) ==> T		predicate is true of the empty list
+(null x) ==>nil			...and false for everything else
+(listp x) ==>T			predicate is true of any list, including ni1
+(listp 3) ==>nil		and is false for nonlists
+(consp x) ==> t			predicate is true of non-nil lists
+(consp nil) ==> nil		and false for atoms, including nil
+(equal x x) ==> t
+(equal x y) ==> nil
+(sort y #'>) ==> (3 2 1)
+(subseq x 1 2) ==> (B)	subsequence with given start and end points
+
+### dotted pair
+(a . b)
+
+
+3.4 Equality and Internal Representation
+When two mathematically equal numbers are read (or computed) in two places,
+they may or may not be the same, depending on what the designers of your implemen -
+tation felt was more efficient. 
+
+= for numbers
+eq eql equal equalp
+
+The simplest predicate is eq, which tests for the exact same object. 
+Next, eql tests for objects that are either eq or are equivalent numbers. 
+equal tests for objects that are either eql or are lists or strings with eql elements. 
+Finally, equalp is like equal except it also matches upper and lowercase characters and numbers
+of different types.
+page94
+
+In addition, there are specialized equality predicates such as =,  tree-equal,
+char-equal, and string-equal, which compare numbers, trees, characters, and
+strings, respectively.
+
+
+3.5  Functions on Sequences
+The earliest Lisps dealt only with symbols, numbers, and lists, and
+provided list functions like append and 1ength. 
+More modern Lisps added support for vectors, strings, and other data types, 
+and introduced the term sequence to refer to both vectors and lists.
+Modern Lisps also support strings that are vectors of
+characters, and hence also a subtype of sequence.
+
+sequence
+	vectors
+		strings(vectors of characters)
+	lists
+
+In some cases, Common Lisp chose to extend an old function:  1ength can
+apply to vectors as well as lists. In other cases, the old names were reserved for the
+list functions, and new names were invented for generic sequence functions. For
+example, append and mapcar only work on lists, but concatenate and map work on
+any kind of sequence. In still other cases, new functions were invented for specific
+data types. For example, there are seven functions to pick the nth element out of a
+sequence. The most generalis e1t,  which works on any kind of sequence, but there are
+specific functions for lists, arrays, strings, bit vectors, simple bit vectors, and simple
+vectors. Confusingly, nth is the only one that takes the index as the first argument:
+(nth n list)
+(elt sequence n)
+(aref array n)
+(char string n)
+(bit bit vector n)
+(sbit simple-bit vector n)
+(svref simple-vector n)
+
+3.6 Functions for Maintaining Tables
+	
+Lisp lists can be used to represent a one-dimensional sequence of objects. Because
+they are so versatile(多功能的), they have been put to other purposes, such as representing
+tables of information. 
+
+## association list
+The association list is a type of list used to implement tables.
+An association list is a list of dotted pairs, where each pair consists of a key and a value.
+
+(setf state-table
+'((AL . Alabama) (AK . Alaska) (AZ . Arizona) (AR . Arkansas)))
+>  (assoc 'AK state-table)  ==>  (AK . ALASKA)
+>  (cdr (assoc 'AK state-table))  ==>  ALASKA
+>  (assoc 'TX state-table)  ==> NIL
+
+If we want to search the table by value rather than by key, we can use rassoc:
+>  (rassoc 'Arizona table)  ==>  (AZ . ARIZONA)
+>  (car (rassoc 'Arizona table))  ==>  AZ
+
+### 对于大数据量，关联表的效率很低
+Managing a table with assoc is simple, but there is one drawback: we have to search
+through the whole list one element at a time. If the list is very long, this may take
+a while.
+
+## hash tables
+Another way to manage tables is with hash tables.  These are designed to handle 
+large amounts of data efficiently but have a degree of overhead(瓶颈) that can make
+them inappropriate for small tables. 
+
+The function gethash works much like get - it takes two arguments, a key and a table. 
+The table itself is initialized with a call to make-hash-tab1e and modified with a setf of gethash:
+(setf table (make-hash-table)
+(setf (gethash 'AL table) 'A1abama)
+(setf (gethash 'AK table) 'A1aska)
+(setf (gethash 'AZ table) 'Arizona)
+(setf (gethash 'AR table) 'Arkansas)
+Here we retrieve values from the table:
+>  (gethash 'AK table)  ==>  ALASKA
+>  (gethash 'TX table)  ==>  NIL
+
+The function remhash removes a key/value pair from a hash table, clrhash  removes
+all pairs, and maphash can be used to map over the key/value pairs. The keys to hash
+tables are not restricted; they can be any Lisp object. There are many more details
+on the implementation of hash tables in Common Lisp, and an extensive literature
+on their theory.
+
+## property list
+A third way to represent table is with  property  lists.  A property list is a list of
+alternating key/value pairs. Property lists (sometimes called p-lists or plists) and
+association lists (sometimes called a-lists or alists) are similar:
+a-list: ((key1 . vall) (key2 . va12) ... (keyn . valn))
+p-list: (key1 val1 key2 val2 ... keyn valn)
+
+
+3.7 Functions on Trees
+Many Common Lisp functions treat the expression ((a b) ((c)) (d e))  as a
+sequence of three elements, but there are a few functions that treat it as a tree with
+five non-null leaves. 
+The function  copy-tree  creates a copy of a tree, and  tree-equal
+tests if two trees are equal by traversing cons cells, but not other complex data like
+vectors or strings. In that respect,  tree-equal is similar to equal, but tree-equal is
+more powerful because it allows a:test keyword:
+
+>  (setf tree '((a b) ((c)) (d e))
+>  (tree-equal tree (copy-tree tree))  ==> t 
+
+(defun same-shape-tree (a b)
+	"Are two trees the same except for the leaves? "
+	(tree-equal a b :test #'true))
+(defun true (&rest ignore) t)
+>  (same-shape-tree tree '((1 2) ((3)) (4 5)))  ==>  T
+>  (same-shape-tree tree '((1 2) (3) (4 5)))  ==>  NIL
+
+There are also two functions for substituting a new expression for an old one
+anywhere within a tree. subst substitutes a single value for another.
+>  (subst 'new 'old '(old ((very old)))  ==>  (NEW ((VERY NEW)))
+>  (sublis '((old . new)) '(old ((very old)))) ==>  (NEW ((VERY NEW)))
+
+(defun english->french (words)
+	(sublis '((are . va) (book . libre) (friend . ami)
+			  (hello . bonjour) (how . comment) (my . mon)
+			  (red . rouge) (you . tu))
+			words))
+>  (english->french '(hello my friend - how are you today?))  +
+(BONJOUR MON AM1 - COMMENT VA TU TODAY?)
+
+只是单纯的词汇替换，不涉及语法结构。
+
+
+3.8  Functions on Numbers
+
+(random 100)
+(expt 4 2) ==> 16
+(sin pi)
+(asin 0) ==> 0.0 
+(min 2 3 4)
+(abs -3)
+(sqrt 4)
+(round 4.1) ==> 4
+(rem 11 5) ==> 1		remainder (also mod)
+
+
+3.9  Functions on Sets
+One of the important uses of lists is to represent sets.
+Common Lisp provides functions that treat lists in just that way. 
+For example, to see what elements the sets
+r = {a, b, c, d}  and  s = {c, d, e}  have in common, we could use:
+>  (setf r '(a b c d)  ==>  (A  B  C  D)
+>  (setf s '(c d e)  ==>  (C D E)
+>  (intersection r s)  ==>  (C D)
+
+(union r s)
+(set-difference r s)
+(member 'd r)  ==>  (d)  check if an element is a member of a set
+(subsetp s r)  ==> nil   see if all elements of one set are in another
+(adjoin 'b s)  ==>  (b c d e)   add an element to a set
+(adjoin 'c s)  ==>  (c d e)  	...but don't add duplicates
+
+It is also possible to represent a set with a sequence of bits, given a particular
+universe of discourse. For example, if every set we are interested in must be a subset
+of  (a b c d e),  then we can use the bit sequence 11110 to represent  (a b c d),00000
+to represent the empty set, and 11001 to represent (a b e).  The bit sequence can be
+represented in Common Lisp as a bit vector, or as an integer in binary notation. For
+example, (a b e)  would be the bit vector  #*11001 or the integer 25,  which can also
+be written as #b11001.
+
+The advantage of using bit sequences is that it takes less space to encode a set,
+assuming a small universe. Computation will be faster, because the computer's
+underlying instruction set will typically process  32  elements at a time.
+
+
+3.10 Destructive Functions
+
+In mathematics, applying an operator to x can have no effect on the value of  x.
+
+In Lisp, some functions  are  able to take effect beyond just computing the result.
+
+>  (setf x '(a b c))  ==>  (A B C)
+>  (setf y '(1 2 3))  ==>  (1 2 3)
+>  (append x y)  ==>  (A B C 1 2 3)
+append is a pure function, so after evaluating the call to append, we can rightfully
+expect that x and y retain their values. Now consider this:
+>  (nconc x y)  ==>  (A B C 1 2 3)
+> x ==> (A B C 1 2 3)
+> y ==> (1 2 3)
+
+The function nconc computes the same result as append, but it has the side effect
+of altering its first argument. It is called a destructive function, because it destroys
+existing structures, replacing them with new ones.
+This means that there is quite a conceptual load on the programmer who dares to use nconc. 
+He or she must be aware that the first argument may be altered, and plan accordingly. 
+This is far more complicated than the case with nondestructive functions, where the programmer
+need worry only about the results of a function call.
+
+The advantage of nconc is that it doesn't use any storage. While append must
+make a complete copy of x and then have that copy end with y,  nconc does not need
+to copy anything. Instead, it just changes the rest field of the last element of  x  to
+point to y. So use destructive functions when you need to conserve storage, but be
+aware of the consequences.
+
+Besides nconc, many of the destructive functions have names that start with
+n, including nreverse, nintersection, nunion, nset-difference, and nsubst. An
+important exception is delete, which is the name used for the destructive version of
+remove. Of course, the setf special form can also be used to alter structures, but it
+is the destructive functions that are most dangerous, because it is easier to overlook
+their effects.
+
+
+3.11 Overview of Data Types
+This chapter has been organized around functions, with similar functions grouped
+together. But there is another way of organizing the Common Lisp world: by considering 
+the different data types. This is useful for two reasons. First, it gives an
+alternative way of seeing the variety of available functionality. Second, the data types
+themselves are objects in the Common Lisp language, and as we shall see, there are
+functions that manipulate data types. These are useful mainly for testing objects (as
+with the typecase macro) and for making declarations.
+
+character  		#\c  A single letter, number, or punctuation mark.
+number  		42  The most common numbers are floats and integers.
+float  			3.14159  A number with a decimal point.
+integer  		42  A whole number, of either fixed or indefinite size:
+fixnum  		123  An integer that fits in a single word of storage.
+bignum  		123456789  An integer of unbounded size.
+function  		#'sin  A function can be applied to an argument list.
+symbol  		sin  Symbols can name fns and vars, and are themselves objects.
+nu11  			ni1  The object ni1  is the only object of type null.
+keyword  		:key  Keywords are a subtype of  symbol.
+sequence  		(a  b  c)  Sequences include lists and vectors.
+list  			(a  b  C)  A list is either a  cons  or  nu11.
+vector  		#(a  b  C )  Avector is a subtype of  sequence.
+cons  			(a  b  C )  A  cons  is a non-nil list.
+atom  			t  An atom is anything that is not a cons.
+string  		"abc"  A  string is  a  type of vector of characters.
+array  			#1A(a b c)  Arrays include vectors and higher-dimensional arrays.
+structure  		#S(type ...)  Structuresaredefinedbydefstruct.
+hash-table  	...  Hash tables are created by make-hash-table.
+
+Almost every data type has a recognizer predicate - a function that returns true
+for only elements of that type.
+In most cases, the recognizer predicate's name is composed of the type name followed by
+p: characterp recognizes characters, numberp recognizes numbers, and so on. For
+example, (numberp 3) returns t because 3 is a number, but  (numberp "x") returns
+nil because "x" is a string, not a number.
+Unfortunately, Common Lisp is not completely regular. There are no recognizers
+for fixnums, bignums, sequences, and structures. Two recognizers,  nu1l and atom,
+do not end in p.  Also note that there is a hyphen before the p  in hash-tab1e-p,
+because the type has a hyphen in it. In addition, all the recognizers generated by
+defstruct have a hyphen before the p.
+
+The function type-of returns the type of its argument, and typep tests if an object
+is of a specified type. The function subtypep tests if one type can be determined to
+be a subtype of another. For example:
+>  (type-of 123)  ==>  FIXNUM
+>  (typep 123 'fixnum)  ==>  T
+>  (typep 123 'number)  ==>  T
+>  (typep 123 'integer)  ==>  T
+>  (typep 123.0 'integer)  ==>  NIL
+>  (subtypep 'fixnum 'number)  ==>  T
+
+The hierarchy of types is rather complicated in Common Lisp. As the prior example
+shows, there are many different numeric types, and a number like 123 is considered
+to be of type fixnum,  integer, and number. We will see later that it is also of type
+rationa1 and t.
+
+While almost every type has a predicate, it is also true that there are predicates
+that are not type recognizers but rather recognize some more general condition. For
+example, oddp is true only of odd integers, and string-greaterp is true if one string
+is alphabetically greater than another.
+
+
+3.12 Input/Output
+Input in Lisp is incredibly easy because a complete lexical and syntactic parser is
+available to the user. The parser is called  read. It is used to read and return a single
+Lisp expression. If you can design your application so that it reads Lisp expressions,
+then your input worries are over. Note that the expression parsed by read need not
+be a legal evaluable Lisp expression. That is, you can read ("hello" cons zzz) just
+as well as  (+ 2 2).  In cases where Lisp expressions are not adequate, the function
+read-char reads a single character, and read-1ine reads everything up to the next
+newline and returns it as a string.
+
+
+3.13 Debugging Tools
+
+>  (step (+ 3 4 (* 5 6 (1 7 8))))
+
+The functions describe, inspect, documentation, and apropos provide information
+about the state of the current program. apropos prints information about all symbols
+whose name matches the argument:
+>  (apropos 'string)
+
+Once you knowwhat object you are interested in, describe cangive more information on it:
+>  (describe 'make-string)
+>  (describe 1234.56)
+
+If all you want is a symbol's documentation string, the function documentati on will
+do the trick:
+
+
+
+
+## Timing Tools
+A  program is not complete just because it gives the right output. It must also deliver
+the output in a timely fashion. The form  (time expression) can be used to see how
+long it takes to execute expression. Some implementations also print statistics on the
+amount of storage required. 
+
+This shows that the compiled version is over  300  times faster and uses less storage
+to boot. Most serious Common Lisp programmers work exclusively with compiled
+functions. However, it is usually a bad idea to worry too much about efficiency details
+while starting to develop a program. It is better to design a flexible program, get it to
+work, and then modify the most frequently used parts to be more efficient. In other
+words, separate the development stage from the fine - tuning stage. Chapters  9  and
+10  give more details on efficiency consideration, and chapter  25  gives more advice
+on debugging and antibugging techniques.
+
+
+
+3.15  Evaluation
+There are three functions for doing evaluation in Lisp:  funcall, apply, and  eva1  .
+funcall is used to apply a function to individual arguments, while  apply  is used
+to apply a function to a list of arguments. Actually,  apply can be given one or
+more individual arguments before the final argument, which is always a list.  eval
+is passed a single argument, which should be an entire form - a function or special
+form followed by its arguments, or perhaps an atom. The following five forms are
+equivalent:
+> (+ 1 2 3 4) =>  10
+>  (funcall #'+ (1 2 3 4) => 10
+>  (apply #'+  '(1 2 3 4)) => 10
+>  (apply #'+ 1 2 '(3 4)) => 10
+>  (eval '(+ 1 2 3 4)) => 10
+In the past, eval was seen as the key to Lisp's flexibility. In modern Lisps with lexical
+scoping, such as Common Lisp, eval is used less often (in fact, in Scheme there is
+no eval at all). Instead, programmers are expected to use lambda to create a new
+function, and then apply or funcall the function. In general, if you find yourself
+using eval, you are probably doing the wrong thing.
+
+
+3.16  Closures
+
+What does it mean to create a new function? Certainly every time a function (or #')
+special form is evaluated, a function is returned. But in the examples we have seen
+and in the following one, it is always the same function that is returned.
+
+> (mapcar #'(lambda (x) (+ x x)) '(1 3 10)) => (2 6 20)
+
+Every time we evaluate the #'(lambda ...) form, it returns the function that doubles
+its argument.
+However, in the general case, a function consists of the body of the
+function coupled with any free lexical variables that the function references. Such a
+pairing is called a lexical closure, or just a closure, because the lexical variables are
+enclosed within the function. Consider this example:
+
+(defun adder (c)
+	"Return a function that adds c to its argument. "
+	#'(lambda (x) (+ x c)))
+>  (mapcar (adder 3) '(1 3 10))  =>  (4 6 13)
+>  (mapcar (adder 10) '(1 3 10))  =>  (11 13 20)
+Each time we call adder with a different value for c, it creates a different function,
+the function that adds c to its argument. Since each call to adder creates a new local
+variable named c, each function returned by adder is a unique function.
+
+Here is another example. The function bank-account returns a closure that can
+be used as a representation of a bank account. The closure captures the local variable
+balance. The body of the closure provides code to access and modify the local
+variable.
+(defun bank-account (balance)
+"Open a bank account starting with the given balance."
+	#'(1ambda (action amount)
+		(case action
+		  (deposit  (setf balance (+ balance amount)))
+		  (withdraw (setf balance (- balance amount))))))
+
+In the following, two calls to bank-account create two different closures, each with
+a separate value for the lexical variable balance. The subsequent(随后的) calls to the two
+closures change their respective balances, but there is no confusion between the two
+accounts.
+>  (setf my-account (bank-account 500.00))  =>  #<CLOSURE 52330407>
+>  (setf your-account (bank-account 250.00)) =>  #<CLOSURE 52331203>
+>  (funcall my-account 'withdraw 75.00)  =>  425.0
+>  (funcall your-account 'deposit 250.00)  =>  500.0
+>  (funcall your-account 'withdraw 100.00)  =>  400.0
+>  (funcall my-account 'withdraw 25.00)  =>  400.0
+This style of programming will be considered in more detail in chapter  13.	
+
+
+3.17 Special Variables
+## CL 的special variables 不同于 其他语言的 global variables
+Common Lisp provides for two kinds of variables: lexical and special variables. For
+the beginner, it is tempting to equate the special variables in Common Lisp with
+global variables in other languages. Unfortunately, this is not quite correct and can
+lead to problems. It is best to understand Common Lisp variables on their own terms.
+## 词法作用域
+By default, Common Lisp variables are lexical variables. Lexical variables are
+introduced by some syntactic construct like 1et or defun and get their name from the
+fact that they may only be referred to by code that appears lexically within the body
+of the syntactic construct. The body is called the scope of the variable.
+
+## 其他语言中，变量存活范围同于其作用域。（出了作用域，变量便不再存在）
+So far, there is no difference between Common Lisp and other languages. The
+interesting part is when we consider the extent(范围程度), or lifetime, of a variable. In other
+languages, the extent is the same as the scope: a new local variable is created when a
+block is entered, and the variable goes away when the block is exited. But because it
+is possible to create new functions - closures - in Lisp, it is therefore possible for code
+that references a variable to live on after the scope of the variable has been exited.
+Consider again the  bank-account function, which creates a closure representing a
+bank account:
+(defun bank-account (balance)
+"Open a bank account starting with the given balance."
+	#'(1ambda (action amount)
+		(case action
+		  (deposit  (setf balance (+ balance amount)))
+		  (withdraw (setf balance (- balance amount))))))
+
+The function introduces the lexical variable balance. The scope of balance is the
+body of the function, and therefore references to balance can occur only within this
+scope. What happens when bank-account is called and exited? 
+Once the body of the function has been left, no other code can refer to that instance of balance.  
+The scope has been exited, but the extent of  balance lives on. We can call the closure, and it
+can reference balance,  because the code that created the closure appeared lexically
+within the scope of balance.
+
+In summary, Common Lisp lexical variables are different because they can be
+captured inside closures and referred to even after the flow of control has left their
+scope.
+
+
+Now we will consider special variables. A variable is made special by a defvar or
+defparameter form. For example, if we say
+(defvar *counter* 0)
+### *counter* can be shadowed by a local binding for that variable. 
+(practicalCL中实现单元测试的方法全路径)
+then we can refer to the special variable  *counter*  anywhere in our program. This
+is just like a familiar global variable. The tricky part is that the global binding of
+*counter* can be shadowed by a local binding for that variable. 
+In most languages, the local binding would introduce a local lexical variable, but in Common Lisp, 
+special variables can be bound both locally and globally. Here is an example:
+(defun report ()
+  (format t "Counter = ~d" *counter*))
+>  (report)
+Counter = 0
+NIL
+>  (let ((*counter* 100))
+	(report))
+Counter = 100
+NIL
+>  (report)
+Counter = 0
+NIL
+
+In the second call, the 1et form introduces a new binding for the special variable *counter*,  
+which is again printed by report.
+Once the scope of the 1et is exited, the new binding is disestablished, so the final
+call to report uses the global value again.
+### local (dynamic) shadowing
+In summary, Common Lisp special variables are different because they have
+global scope but admit the possibility of local (dynamic) shadowing. 
+Remember: A lexical variable has lexical scope and indefinite extent.  
+A special variable has indefinite scope and dynamic extent.
+
+
+
+3.18  Multiple Values
+
+The function round serves both interested and disinterested programmers by
+returning two values: the rounded integer and the remaining fraction:
+>  (round 5.1)  =>  5  .1
+
+Most of the time, multiple values are ignored, and only the first value is used. 
+So (* 2 (round  5.1)) is 10, just as if round had only returned a single value. 
+If you want to get at multiple values, you have to use a special form, such as mu1tiple-va1ue-bind:
+
+(defun show-both (x)
+	(mu1tiple-value-bind (int rem)
+		(round x)
+	  (format t "~f = ~d + ~f" x int rem)))
+> (show-both 5.1)
+5.1 = 5 + 0.1
+
+You can write functions of your own that return multiple values using the function
+values, which returns its arguments as multiple values:
+>  (values 1 2 3) => 1 2 3
+
+
+3.19 More about Parameters
+
+(defun math-quiz (op range n)
+	"Ask the user a series of math problems."
+	(dotimes (i  n )
+		(problem (random range) op (random range))))
+
+(defun problem  (x  op y)
+	"Ask a math problem, read a reply, and say if it is correct."
+	(format t " "&How much is "d "a ~d?" x op y)
+	(if (eql (read) (funcall op x y))
+		(princ "Correct!")
+		(princ "Sorry, that's not right.")))
+
+>  (math-quiz '+ 100 2)
+
+One problem with the function math-quiz is that it requires the user to type three
+arguments: the operator, a range, and the number of iterations. The user must
+remember the order of the arguments, and remember to quote the operator. This is
+quite a lot to expect from a user who presumably is just learning to add!
+
+Common Lisp provides two ways of dealing with this problem. First, a programmer 
+can specify that certain arguments are optional, and provide default values for
+those arguments. For example, in  ]math-quiz we can arrange to make + be the default
+operator, 100 be the default number range, and 10 be the default number of examples
+with the following definition:
+
+(defun math-quiz (&optional (op '+) (range 100) (n 10))
+	"Ask the user a series of math problems."
+	(dotimes (i n)
+	  (problem (random range) op (random range))))
+
+	  
+(defun math-quiz (&key (op '+) (range 100) (n 10))
+	"Ask the user a series of math problems."
+	(dotimes (i n)
+	  (problem (random range) op (random range))))
+	  
+Now (math-quiz :n 5) and (math-quiz :op '+ :n 5 :range 100) meanthesame.
+Keyword arguments are specified by the parameter name preceded by a colon, and
+followed by the value. 
+
+A symbol starting with a colon is called a keyword, and can be used anywhere,
+not just in argument lists.
+Lisp keywords are symbols that happen to reside in the keyword package.
+They have no special syntactic meaning, although they do have the unusual property of being 
+self-evaluating: they are constants that evaluate to themselves, unlike other symbols, 
+which evaluate to whatever value was stored in the variable named by the symbol.
+It is important to remember that keywords are used in the function call, but
+normal nonkeyword symbols are used as parameters in the function definition.
+
+>  :xyz  =>  :XYZ  			;keywords are self-evaluating
+>  &optional  => 			;lambda-list keywords are normal symbols
+Error: the symbol &optional has no value
+
+>  (defun f (:xyz) (+ :xyz :xyz))  =>
+Error: the keyword :xyz appears in a variable list.
+Keywords are constants, and so cannot be used as names of variables.
+>  (defun g (&key x y) (list x y))  =>  G
+>  ( let ((keys '(:x :y :z)))  ;keyword args can be computed
+		(g (second keys) 1 (first keys) 2))  =>  (2 1)
+
+
+Many of the functions presented in this chapter take keyword arguments that make
+them more versatile. For example, remember the function find, which can be used
+to look for a particular element in a sequence:
+>  (find  3  '(1  2  3  4  -5  6.0))  =>  3
+It turns out that  find  takes several optional keyword arguments. For example,
+suppose we tried to find  6  in this sequence:
+>  (find 6  '(1  2  3  4  -5  6.0))  =>  n i l
+This fails because find  tests for equality with eql, and 6 is not eql to 6.0. However,
+6 is equalp to 6.0, so we could use the :test keyword:
+>  (find 6  '(1  2  3  4  -5  6.0) :test #'equalp)  =>  6.0
+In fact, we can specify any binary predicate for the :test keyword; it doesn't have to
+be an equality predicate. For example, we could find the first number that 4 is less
+than:
+>  (find  4  ' ( 1 2  3  4  -5  6.0) :test  #'<)  =>  6.0
+
+Now suppose we don't care about the sign of the numbers; if we look for 5, we want
+to find the  -5. We can handle this with the key keyword to take the absolute value of
+each element of the list with the abs function:
+>  (find 5  '(1  2  3  4  -5  6.0)  :key #'abs)  => -5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
