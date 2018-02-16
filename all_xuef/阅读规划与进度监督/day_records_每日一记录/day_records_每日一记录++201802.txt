@@ -16,3 +16,51 @@
 
 download 《随笔漫步的傻瓜》《黑天鹅》
 《How to Think Straight about Psychology》《这才是心理学》
+
+0208
+《美国种族简史》至77
+
+马斯克的读书方法，思考方法（第一性原理）[大量阅读和思考]
+整理房间，图书记录和分类
+
+0209
+电影 黑泽明《七武士》
+美国种族简史》至200
+（几种思考方法）
+历史和毛选得继续读
+《我生活的种种模式》至77
+
+0211
+电影《用心棒》
+《我生活的种种模式》 至117
+
+0212 0213
+《学会提问》完
+
+0214
+《美国种族简史》至250
+
+0215
+《Algorithm-Java》 red-black BST 没弄懂
+hash-table 没看
+undirected graph 至 depth-first search
+
+《顾准文集》之希腊城邦 至 第三章 p34
+《发现社会》 读 尼采一章
+《毛选一》 湖南农民运动考察报告
+
+《ANSI Common Lisp》至 第六章
+
+0216
+《发现社会》 弗洛伊德
+《美国种族简史》 至299
+
+《Algorithm-Java》
+dfs bfs 代码
+connectivity components
+
+
+
+
+
+

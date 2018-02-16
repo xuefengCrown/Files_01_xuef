@@ -927,14 +927,49 @@ each element of the list with the abs function:
 >  (find 5  '(1  2  3  4  -5  6.0)  :key #'abs)  => -5
 
 
+Among the built-in functions, the most
+common keywords fall into two main groups:  :test,  :test-not and  :  key, which are
+used for matching functions, and :start, :end, and :from-end, which are used on
+sequence functions.
+
+The matching functions include sub1is, position, subst, union, intersection,
+set-difference, remove, remove-if, subsetp, assoc, find, and member. By default,
+each tests if some item is eql to one or more of a series of other objects. This test can
+be changed by supplying some other predicate as the argument to :test.
+
+ (remove 1 nums :test #'/=)
+
+(defun complement (fn)
+	#'(lambda (&rest args) (not (apply fn args))))
+
+
+
+CHAPTER 4 GPS:  The General Problem Solver
+
+4.2 Stage 2: Specification
+
+We can represent the current state of the world - " what I have" - or the goal
+state - " what I want " - as sets of conditions. Common Lisp doesn't have a data
+type for sets, but it does have lists, which can be used to implement sets. Each
+condition can be represented by a symbol. Thus, a typical goal might be the list
+of two conditions  (rich  famous), and a typical current state might be (unknown
+poor).
 
 
 
 
+(defun op (action &key preconds add-list del-list)
+  (convert-op
+  (make-op :action action :preconds preconds
+	   :add-list add-list :del-list del-list))
+  )
+  
+(mapc #'convert-op *school-ops*)
 
-
-
-
+   
+   
+   
+   
 
 
 

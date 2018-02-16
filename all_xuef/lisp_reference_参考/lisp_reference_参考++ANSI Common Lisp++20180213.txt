@@ -1,0 +1,984 @@
+
+
+有两个通常在别的语言所找不到的 Lisp 数据类型是符号（symbol）与列表（lists），符号是英语的单词 (words)。
+无论你怎么输入，通常会被转换为大写：
+> 'Artichoke
+ARTICHOKE
+
+## 空列表
+()
+nil
+
+## 真与假 布尔
+t
+nil
+
+> (not nil)
+T
+
+> (and t (+ 1 2))
+3
+
+如果其中一个实参为 假 ，那之后的所有实参都不会被求值。 
+or 也是如此，只要碰到一个为 真 的实参，就停止对之后所有的实参求值。
+
+2.6 函数 (Functions)
+> (defun our-third (x)
+   (car (cdr (cdr x))))
+OUR-THIRD
+
+> (our-third '(a b c d))
+C
+
+
+2.9 输入输出 (Input and Output)
+
+> (format t "~A plus ~A equals ~A. ~%" 2 3 (+ 2 3))
+2 plus 3 equals 5.
+NIL
+
+format 的第一个实参 t ，表示输出被送到缺省的地方去。通常是顶层。第二个实参是一个用作输出模版的字符串。
+在这字符串里，每一个 ~A 表示了被填入的位置，而 ~% 表示一个换行。这些被填入的位置依序由后面的实参填入。
+
+
+函数主体可以有不只一个表达式。函数主体可以有任意数量的表达式。当函数被调用时，会依序求值，
+函数会返回最后一个的值。
+
+最后一个表达式的值，会被当成函数的返回值，而之前表达式的值都被舍弃了。
+
+2.10 变量 (Variables)
+let 是一个最常用的 Common Lisp 的操作符之一，它让你引入新的局部变量（local variable）：
+
+> (let ((x 1) (y 2))
+     (+ x y))
+3
+
+
+我们已经看过的这些变量都叫做局部变量。它们只在特定的上下文里有效。另外还有一种变量叫做
+全局变量（global variable），是在任何地方都是可视的。 [2]
+你可以给 defparameter 传入符号和值，来创建一个全局变量：
+> (defparameter *glob* 99)
+*GLOB*
+
+
+你也可以用 defconstant 来定义一个全局的常量：
+(defconstant limit (+ *glob* 1))
+
+
+2.11 赋值 (Assignment)
+> (setf *glob* 98)
+98
+> (let ((n 10))
+   (setf n 2)
+   n)
+2
+
+如果 setf 的第一个实参是符号（symbol），且符号不是某个局部变量的名字，则 setf 把这个符号设为全局变量：
+> (setf x (list 'a 'b 'c))
+(A B C)
+
+> (setf (car x) 'n)
+N
+> x
+(N B C)
+
+
+2.12 函数式编程 (Functional Programming)
+函数式编程意味着撰写利用返回值而工作的程序，而不是修改东西。它是 Lisp 的主流范式。
+大部分 Lisp 的内置函数被调用是为了取得返回值，而不是副作用。
+
+举例来说，函数 remove 接受一个对象和一个列表，返回不含这个对象的新列表：
+> (setf lst '(c a r a t))
+(C A R A T)
+> (remove 'a lst)
+(C R T)
+为什么不干脆说 remove 从列表里移除一个对象？因为它不是这么做的。原来的表没有被改变：
+> lst
+(C A R A T)
+
+
+函数式编程本质上意味着避免使用如 setf 的函数。起初可能觉得这根本不可能，更遑论去做了。
+怎么可以只凭返回值来建立程序？
+完全不用到副作用是很不方便的。然而，随着你进一步阅读，会惊讶地发现需要用到副作用的地方很少。
+副作用用得越少，你就更上一层楼。
+函数式编程最重要的优点之一是，它允许交互式测试（interactive testing）。在纯函数式的程序里，
+你可以测试每个你写的函数。如果它返回你预期的值，你可以有信心它是对的。这额外的信心，集结起来，
+会产生巨大的差别。当你改动了程序里的任何一个地方，会得到即时的改变。而这种即时的改变，使我们有
+一种新的编程风格。类比于电话与信件，让我们有一种新的通讯方式。
+
+2.13 迭代 (Iteration)
+当我们想重复做一些事情时，迭代比递归来得更自然。
+
+(defun show-squares (start end)
+  (do ((i start (+ i 1)))
+      ((> i end) 'done)
+    (format t "~A ~A~%" i (* i i))))
+列印从 start 到 end 之间的整数的平方：
+> (show-squares 2 5)
+2 4
+3 9
+4 16
+5 25
+DONE
+
+作为对比，以下是递归版本的 show-squares ：
+(defun show-squares (i end)
+   (if (> i end)
+     'done
+     (progn
+       (format t "~A ~A~%" i (* i i))
+       (show-squares (+ i 1) end))))
+唯一的新东西是 progn 。 progn 接受任意数量的表达式，依序求值，并返回最后一个表达式的值。
+
+
+为了处理某些特殊情况， Common Lisp 有更简单的迭代操作符。举例来说，要遍历列表的元素，你可能会
+使用 dolist 。以下函数返回列表的长度：
+(defun our-length (lst)
+  (let ((len 0))
+    (dolist (obj lst)
+      (setf len (+ len 1)))
+    len))
+这里 dolist 接受这样形式的实参(variable expression)，跟着一个具有表达式的函数主体。
+函数主体会被求值，而变量相继与表达式所返回的列表元素绑定。因此上面的循环说，对于列表 lst 
+里的每一个 obj ，递增 len 。很显然这个函数的递归版本是：
+(defun our-length (lst)
+ (if (null lst)
+     0
+     (+ (our-length (cdr lst)) 1)))
+
+也就是说，如果列表是空表，则长度为 0 ；否则长度就是对列表取 cdr 的长度加一。递归版本的 our-length 比较易懂，
+但由于它不是尾递归（tail-recursive）的形式 (见 13.2 节)，效率不是那么高。	 
+
+
+2.14 函数作为对象 (Functions as Objects)
+函数在 Lisp 里，和符号、字符串或列表一样，是稀松平常的对象。如果我们把函数的名字传给 function ，
+它会返回相关联的对象。和 quote 类似， function 是一个特殊操作符，所以我们无需引用（quote）它的实参：
+> (function +)
+#<Compiled-Function + 17BA4E>
+
+> #'+
+#<Compiled-Function + 17BA4E>
+
+
+和别种对象类似，可以把函数当作实参传入。有个接受函数作为实参的函数是 apply 。
+apply 接受一个函数和实参列表，并返回把传入函数应用在实参列表的结果：
+> (apply #'+ '(1 2 3))
+6
+> (+ 1 2 3)
+6
+
+
+apply 可以接受任意数量的实参，只要最后一个实参是列表即可：
+> (apply #'+ 1 2 '(3 4 5))
+15
+
+
+函数 funcall 做的是一样的事情，但不需要把实参包装成列表。
+> (funcall #'+ 1 2 3)
+6
+
+
+而通过在 lambda 表达式前面贴上 #' ，我们得到对应的函数，
+> (funcall #'(lambda (x) (+ x 100))
+          1)
+		  
+		  
+2.15 类型 (Types)
+Lisp 处理类型的方法非常灵活。在很多语言里，变量是有类型的，得声明变量的类型才能使用它。
+在 Common Lisp 里，数值才有类型，而变量没有。
+
+函数 typep 接受一个对象和一个类型，然后判定对象是否为该类型，是的话就返回真：
+> (typep 27 'integer)
+T
+
+
+2.16 展望 (Looking Forward)
+本章仅谈到 Lisp 的表面。然而，一种非比寻常的语言形象开始出现了。首先，这个语言用单一的语法，
+来表达所有的程序结构。语法基于列表，列表是一种 Lisp 对象。函数本身也是 Lisp 对象，函数能用
+列表来表示。而 Lisp 本身就是 Lisp 程序。几乎所有你定义的函数，与内置的 Lisp 函数没有任何区别。
+
+如果你对这些概念还不太了解，不用担心。 Lisp 介绍了这么多新颖的概念，在你能驾驭它们之前，得花
+时间去熟悉它们。不过至少要了解一件事：在这些概念当中，有着优雅到令人吃惊的概念。
+
+Richard Gabriel 曾经半开玩笑的说， C 是拿来写 Unix 的语言。我们也可以说， Lisp 是拿来写 Lisp 的语言。
+但这是两种不同的论述。一个可以用自己编写的语言和一种适合编写某些特定类型应用的语言，
+是有着本质上的不同。这开创了新的编程方法：你不但在语言之中编程，还把语言改善成适合程序的语言。
+如果你想了解 Lisp 编程的本质，理解这个概念是个好的开始。
+
+
+第三章：列表
+列表是 Lisp 的基本数据结构之一。在最早的 Lisp 方言里，列表是唯一的数据结构： “Lisp” 这个名字起初是
+“LISt Processor” 的缩写。但 Lisp 已经超越这个缩写很久了。 Common Lisp 是一个有着各式各样数据结构
+的通用性程序语言。
+
+Lisp 程序开发通常呼应着开发 Lisp 语言自身。在最初版本的 Lisp 程序，你可能使用很多列表。
+然而之后的版本，你可能换到快速、特定的数据结构。本章描述了你可以用列表所做的很多事情，
+以及使用它们来演示一些普遍的 Lisp 概念。
+
+
+3.1 构造 (Conses)
+在 2.4 节我们介绍了 cons , car , 以及 cdr ，基本的 List 操作函数。 cons 真正所做的事情是，
+把两个对象结合成一个有两部分的对象，称之为 Cons 对象。概念上来说，一个 Cons 是一对指针；
+第一个是 car ，第二个是 cdr 。
+
+如果参数是一个 Cons 对象，函数 consp 返回真。所以我们可以这样定义 listp :
+
+(defun our-listp (x)
+  (or (null x) (consp x)))
+因为所有不是 Cons 对象的东西，就是一个原子 (atom)，判断式 atom 可以这样定义：
+
+(defun our-atom (x) (not (consp x)))
+注意， nil 既是一个原子，也是一个列表。
+
+
+3.7 映射函数 (Mapping Functions)
+Common Lisp 提供了数个函数来对一个列表的元素做函数调用。最常使用的是 mapcar ，
+接受一个函数以及一个或多个列表，并返回把函数应用至每个列表的元素的结果，直到有的列表没有元素为止：
+> (mapcar #'(lambda (x) (+ x 10))
+          '(1 2 3))
+(11 12 13)
+
+> (mapcar #'list
+          '(a b c)
+          '(1 2 3 4))
+((A 1) (B 2) (C 3))
+
+
+相关的 maplist 接受同样的参数，将列表的渐进的下一个 cdr 传入函数。
+> (maplist #'(lambda (x) x)
+           '(a b c))
+((A B C) (B C) (C))
+
+
+3.8 树 (Trees)
+Cons 对象可以想成是二叉树， car 代表左子树，而 cdr 代表右子树。
+
+Common Lisp 有几个内置的操作树的函数。举例来说， copy-tree 接受一个树，并返回一份副本。
+它可以这么定义：
+(defun our-copy-tree (tr)
+  (if (atom tr)
+       tr
+       (cons (our-copy-tree (car tr))
+             (our-copy-tree (cdr tr)))))
+
+
+没有内部节点的二叉树没有太大的用处。 Common Lisp 包含了操作树的函数，不只是因为我们需要树这个结构，
+而且因为我们需要一种方法，来操作列表及所有内部的列表。举例来说，假设我们有一个这样的列表：
+(and (integerp x) (zerop (mod x 2)))
+而我们想要把各处的 x 都换成 y 。调用 substitute 是不行的，它只能替换序列 (sequence)中的元素：			 
+> (substitute 'y 'x '(and (integerp x) (zerop (mod x 2))))
+(AND (INTEGERP X) (ZEROP (MOD X 2)))
+这个调用是无效的，因为列表有三个元素，没有一个元素是 x 。我们在这所需要的是 subst ，它替换树之中的元素。
+> (subst 'y 'x '(and (integerp x) (zerop (mod x 2))))
+(AND (INTEGERP Y) (ZEROP (MOD Y 2)))
+
+
+如果我们定义一个 subst 的版本，它看起来跟 copy-tree 很相似：
+> (defun our-subst (new old tree)
+    (if (eql tree old)
+        new
+        (if (atom tree)
+            tree
+            (cons (our-subst new old (car tree))
+                  (our-subst new old (cdr tree))))))
+操作树的函数通常有这种形式， car 与 cdr 同时做递归。这种函数被称之为是 双重递归 (doubly recursive)。
+
+
+3.9 理解递归 (Understanding Recursion)
+学生在学习递归时，有时候是被鼓励在纸上追踪 (trace)递归程序调用 (invocation)的过程。 
+(288页「译注：附录 A 追踪与回溯」可以看到一个递归函数的追踪过程。)但这种练习可能会误导你：
+一个程序员在定义一个递归函数时，通常不会特别地去想函数的调用顺序所导致的结果。
+
+如果一个人总是需要这样子思考程序，递归会是艰难的、没有帮助的。递归的优点是它精确地让我们更抽象
+地来设计算法。你不需要考虑真正函数时所有的调用过程，就可以判断一个递归函数是否是正确的。
+
+要知道一个递归函数是否做它该做的事，你只需要问，它包含了所有的情况吗？
+
+举例来说，下面是一个寻找列表长度的递归函数：
+
+> (defun len (lst)
+    (if (null lst)
+        0
+        (+ (len (cdr lst)) 1)))
+我们可以借由检查两件事情，来确信这个函数是正确的：
+
+对长度为 0 的列表是有效的。
+给定它对于长度为 n 的列表是有效的，它对长度是 n+1 的列表也是有效的。
+如果这两点是成立的，我们知道这个函数对于所有可能的列表都是正确的。
+
+
+更复杂的递归函数，可能会有更多的情况需要讨论，但是流程是一样的。
+举例来说， 41 页的 our-copy-tree ，我们需要讨论三个情况： 
+原子，单一的 Cons 对象， n+1 的 Cons 树。
+
+
+3.10 集合 (Sets)
+列表是表示小集合的好方法。列表中的每个元素都代表了一个集合的成员：
+> (member 'b '(a b c))
+(B C)
+
+
+一般情况下， member 使用 eql 来比较对象。你可以使用一种叫做关键字参数的东西来重写缺省的比较方法。
+多数的 Common Lisp 函数接受一个或多个关键字参数。这些关键字参数不同的地方是，他们不是把对应的参数
+放在特定的位置作匹配，而是在函数调用中用特殊标签，称为关键字，来作匹配。一个关键字是一个前面有冒
+号的符号。
+
+一个 member 函数所接受的关键字参数是 :test 参数。
+
+如果你在调用 member 时，传入某个函数作为 :test 参数，那么那个函数就会被用来比较是否相等，
+而不是用 eql 。所以如果我们想找到一个给定的对象与列表中的成员是否相等( equal )，我们可以：
+> (member '(a) '((a) (z)) :test #'equal)
+((A) (Z))
+
+
+另一个 member 接受的关键字参数是 :key 参数。借由提供这个参数，你可以在作比较之前，指
+定一个函数运用在每一个元素：
+> (member 'a '((a b) (c d)) :key #'car)
+((A B) (C D))
+在这个例子里，我们询问是否有一个元素的 car 是 a 。
+
+
+如果我们想要找到一个元素满足任意的判断式像是── oddp ，奇数返回真──我们可以使用相关的 member-if ：
+> (member-if #'oddp '(2 3 4))
+(3 4)
+
+
+函数 adjoin 像是条件式的 cons 。它接受一个对象及一个列表，如果对象还不是列表的成员，
+才构造对象至列表上。
+> (adjoin 'b '(a b c))
+(A B C)
+> (adjoin 'z '(a b c))
+(Z A B C)
+
+
+集合论中的并集 (union)、交集 (intersection)以及补集 (complement)的实现，是由函数 
+union 、 intersection 以及 set-difference 。
+
+这些函数期望两个（正好 2 个）列表（一样接受与 member 函数同样的关键字参数）。
+
+> (union '(a b c) '(c b s))
+(A C B S)
+> (intersection '(a b c) '(b b c))
+(B C)
+> (set-difference '(a b c d e) '(b e))
+(A C D)
+因为集合中没有顺序的概念，这些函数不需要保留原本元素在列表被找到的顺序。
+
+
+3.11 序列 (Sequences)
+
+> (length '(a b c))
+3
+
+要复制序列的一部分，我们使用 subseq 。第二个（需要的）参数是第一个开始引用进来的元素位置，
+第三个（选择性）参数是第一个不引用进来的元素位置。
+> (subseq '(a b c d) 1 2)
+(B)
+>(subseq '(a b c d) 1)
+(B C D)
+如果省略了第三个参数，子序列会从第二个参数给定的位置引用到序列尾端。
+
+函数 reverse 返回与其参数相同元素的一个序列，但顺序颠倒。
+> (reverse '(a b c))
+(C B A)
+
+
+Common Lisp 有一个内置的排序函数叫做 sort 。它接受一个序列及一个比较两个参数的函数，
+返回一个有同样元素的序列，根据比较函数来排序：
+> (sort '(0 2 1 3 8) #'>)
+(8 3 2 1 0)
+你要小心使用 sort ，因为它是破坏性的(destructive)。考虑到效率的因素， sort 被允许修改传入的序列。
+所以如果你不想你本来的序列被改动，传入一个副本。
+
+使用 sort 及 nth ，我们可以写一个函数，接受一个整数 n ，返回列表中第 n 大的元素：
+(defun nthmost (n lst)
+  (nth (- n 1)
+       (sort (copy-list lst) #'>)))
+
+
+函数 every 和 some 接受一个判断式及一个或多个序列。当我们仅输入一个序列时，
+它们测试序列元素是否满足判断式：
+> (every #'oddp '(1 3 5))
+T
+> (some #'evenp '(1 2 3))
+T
+如果它们输入多于一个序列时，判断式必须接受与序列一样多的元素作为参数，
+而参数从所有序列中一次提取一个：
+> (every #'> '(1 3 5) '(0 2 4))
+T
+如果序列有不同的长度，最短的那个序列，决定需要测试的次数。	   
+	   
+	   
+3.12 栈 (Stacks)
+用 Cons 对象来表示的列表，很自然地我们可以拿来实现下推栈 (pushdown stack)。这太常见了，
+以致于 Common Lisp 提供了两个宏给堆使用： (push x y) 把 x 放入列表 y 的前端。而 (pop x) 
+则是将列表 x 的第一个元素移除，并返回这个元素。
+	   
+	   
+3.14 关联列表 (Assoc-lists)
+用 Cons 对象来表示映射 (mapping)也是很自然的。一个由 Cons 对象组成的列表称之为关联列表
+(assoc-listor alist)。这样的列表可以表示一个翻译的集合，举例来说：
+
+> (setf trans '((+ . "add") (- . "subtract")))
+((+ . "add") (- . "subtract"))
+关联列表很慢，但是在初期的程序中很方便。 Common Lisp 有一个内置的函数 assoc ，用来取出在
+关联列表中，与给定的键值有关联的 Cons 对：
+
+> (assoc '+ trans)
+(+ . "add")
+> (assoc '* trans)
+NIL
+如果 assoc 没有找到要找的东西时，返回 nil 。	   
+
+
+第四章：特殊数据结构
+
+在之前的章节里，我们讨论了列表，Lisp 最多功能的数据结构。本章将演示如何使用 Lisp 其它的
+数据结构：数组（包含向量与字符串），结构以及哈希表。它们或许不像列表这么灵活，但存取速度
+更快并使用了更少空间。
+Common Lisp 还有另一种数据结构：实例（instance）。实例将在 11 章讨论，讲述 CLOS。
+
+
+4.1 数组 (Array)
+在 Common Lisp 里，你可以调用 make-array 来构造一个数组，第一个实参为一个指定数组维度的列表。
+要构造一个 2 x 3 的数组，我们可以：
+> (setf arr (make-array '(2 3) :initial-element nil))
+#<Simple-Array T (2 3) BFC4FE>
+
+
+用 aref 取出数组内的元素。与 Common Lisp 的存取函数一样， aref 是零索引的（zero-indexed）：
+> (aref arr 0 0)
+NIL
+要替换数组的某个元素，我们使用 setf 与 aref ：
+> (setf (aref arr 0 0) 'b)
+B
+> (aref arr 0 0)
+B
+
+
+要表示字面常量的数组（literal array），使用 #na 语法，其中 n 是数组的维度。
+举例来说，我们可以这样表示 arr 这个数组：
+#2a((b nil nil) (nil nil nil))
+如果全局变量 *print-array* 为真，则数组会用以下形式来显示：
+> (setf *print-array* t)
+T
+> arr
+#2A((B NIL NIL) (NIL NIL NIL))
+
+
+> (setf vec (make-array 4 :initial-element nil))
+#(NIL NIL NIL NIL)
+一维数组又称为向量（vector）。你可以通过调用 vector 来一步骤构造及填满向量，向量的元素可以是任何类型：
+> (vector "a" 'b 3)
+#("a" b 3)
+字面常量的数组可以表示成 #na ，字面常量的向量也可以用这种语法表达。
+
+可以用 aref 来存取向量，但有一个更快的函数叫做 svref ，专门用来存取向量。
+> (svref vec 0)
+NIL
+在 svref 内的 “sv” 代表“简单向量”（“simple vector”），所有的向量缺省是简单向量。
+
+
+4.3 字符与字符串 (Strings and Characters)
+
+字符串是字符组成的向量。我们用一系列由双引号包住的字符，来表示一个字符串常量，而字符 c 用 #\c 表示。
+
+函数 char-code 返回与字符相关的数字，而 code-char 返回与数字相关的字符。
+
+字符比较函数 char< （小于）， char<= （小于等于)， char= （等于)， char>= （大于等于) ， char> （大于)，以及 char/= （不同)。
+> (sort "elbow" #'char<)
+"below"
+由于字符串是字符向量，序列与数组的函数都可以用在字符串。你可以用 aref 来取出元素，举例来说，
+> (aref "abc" 1)
+#\b
+但针对字符串可以使用更快的 char 函数：
+> (char "abc" 1)
+#\b
+
+
+如果你想要比较两个字符串，你可以使用通用的 equal 函数，但还有一个比较函数，是忽略字母大小写的 string-equal ：
+> (equal "fred" "fred")
+T
+> (equal "fred" "Fred")
+NIL
+>(string-equal "fred" "Fred")
+T
+
+
+有许多方式可以创建字符串。最普遍的方式是使用 format 。将第一个参数设为 nil 来调用 format ，使它返回一个原本会印出来的字符串：
+> (format nil "~A or ~A" "truth" "dare")
+"truth or dare"
+但若你只想把数个字符串连结起来，你可以使用 concatenate ，它接受一个特定类型的符号，加上一个或多个序列：
+> (concatenate 'string "not " "to worry")
+"not to worry"
+
+
+4.4 序列 (Sequences)
+有些用在列表的函数，实际上是序列函数，包括 remove 、 length 、 subseq 、 reverse 、 sort 、 every 以及 some 。
+
+我们已经看过四种用来取出序列元素的函数： 给列表使用的 nth ， 给向量使用的 aref 及 svref ，以及给字符串使用的 char 。 
+Common Lisp 也提供了通用的 elt ，对任何种类的序列都有效：
+> (elt '(a b c) 1)
+B
+
+针对特定类型的序列，特定的存取函数会比较快，所以使用 elt 是没有意义的，除非在代码当中，有需要支持通用序列的地方。
+
+
+许多序列函数接受一个或多个，由下表所列的标准关键字参数：
+参数	用途	缺省值
+:key	应用至每个元素的函数	identity
+:test	作来比较的函数	eql
+:from-end	若为真，反向工作。	nil
+:start	起始位置	0
+:end	若有给定，结束位置。	nil
+
+一个接受所有关键字参数的函数是 position ，返回序列中一个元素的位置，未找到元素时则返回 nil 。
+我们使用 position 来演示关键字参数所扮演的角色。
+> (position #\a "fantasia")
+1
+> (position #\a "fantasia" :start 3 :end 5)
+4
+
+
+:key 关键字参数是序列中每个元素在被考虑之前，应用至元素上的函数。如果我们说，
+> (position 'a '((c d) (a b)) :key #'car)
+1
+那么我们要找的是，元素的 car 部分是符号 a 的第一个元素。
+
+
+:test 关键字参数接受需要两个实参的函数，并定义了怎样是一个成功的匹配。缺省函数为 eql 。
+如果你想要匹配一个列表，你也许想使用 equal 来取代：
+> (position '(a b) '((a b) (c d)))
+NIL
+> (position '(a b) '((a b) (c d)) :test #'equal)
+0
+
+
+:test 关键字参数可以是任何接受两个实参的函数。举例来说，给定 < ，我们可以询问第一个使第一个参数比它小的元素位置：
+> (position 3 '(1 0 7 5) :test #'<)
+2
+
+
+要找到满足谓词的元素，其中谓词接受一个实参，我们使用 position-if 。它接受一个函数与序列，并返回第一个满足此函数的元素：
+> (position-if #'oddp '(2 3 4 5))
+1
+position-if 接受除了 :test 之外的所有关键字参数。
+
+
+有许多相似的函数，如给序列使用的 member 与 member-if 。分别是， find （接受全部关键字参数）与 
+find-if （接受除了 :test 之外的所有关键字参数）：
+> (find #\a "cat")
+#\a
+> (find-if #'characterp "ham")
+#\h
+
+
+(reduce #'fn '(a b c d))
+等同于
+(fn (fn (fn 'a 'b) 'c) 'd)
+我们可以使用 reduce 来扩充只接受两个参数的函数。举例来说，要得到三个或多个列表的交集(intersection)，我们可以：
+> (reduce #'intersection '((b r a d 's) (b a d) (c a t)))
+(A)
+
+
+4.6 结构 (Structures)
+要想定义结构，使用 defstruct 。在最简单的情况下，只要给出结构及字段的名字便可以了：
+
+(defstruct point
+  x
+  y)
+这里定义了一个 point 结构，具有两个字段 x 与 y 。同时隐式地定义了 make-point 、 point-p 、 copy-point 、 point-x 及 point-y 函数。
+
+2.3 节提过， Lisp 程序可以写出 Lisp 程序。这是目前所见的明显例子之一。当你调用 defstruct 时，它自动生成了其它几个函数的定义。
+有了宏以后，你将可以自己来办到同样的事情（如果需要的话，你甚至可以自己写出 defstruct ）。
+
+每一个 make-point 的调用，会返回一个新的 point 。可以通过给予对应的关键字参数，来指定单一字段的值：
+(setf p (make-point :x 0 :y 0))
+#S(POINT X 0 Y 0)
+
+
+存取 point 字段的函数不仅被定义成可取出数值，也可以搭配 setf 一起使用。
+> (point-x p)
+0
+> (setf (point-y p) 2)
+2
+> p
+#S(POINT X 0 Y 2)
+
+
+定义结构也定义了以结构为名的类型。每个点的类型层级会是，类型 point ，接着是类型 structure ，
+再来是类型 atom ，最后是 t 类型。所以使用 point-p 来测试某个东西是不是一个点时，也可以使用通用性的函数，像是 typep 来测试。
+> (point-p p)
+T
+> (typep p 'point)
+T
+
+
+4.8 哈希表 (Hash Table)
+第三章演示过列表可以用来表示集合（sets）与映射（mappings）。但当列表的长度大幅上升时（或是 10 个元素），
+使用哈希表的速度比较快。你通过调用 make-hash-table 来构造一个哈希表，它不需要传入参数：
+> (setf ht (make-hash-table))
+#<Hash-Table BF0A96>
+
+> (gethash 'color ht)
+NIL
+NIL
+在这里我们首次看到 Common Lisp 最突出的特色之一：一个表达式竟然可以返回多个数值。函数 gethash 返回两个数值。
+第一个值是与键值有关的数值，第二个值说明了哈希表是否含有任何用此键值来储存的数值。由于第二个值是 nil ，
+我们知道第一个 nil 是缺省的返回值，而不是因为 nil 是与 color 有关的数值。
+
+大部分的实现会在顶层显示一个函数调用的所有返回值，但仅期待一个返回值的代码，只会收到第一个返回值。 5.5 节会说明，代码如何接收多个返回值。
+
+要把数值与键值作关联，使用 gethash 搭配 setf ：
+> (setf (gethash 'color ht) 'red)
+RED
+现在如果我们再次调用 gethash ，我们会得到我们刚插入的值：
+
+> (gethash 'color ht)
+RED
+T
+第二个返回值证明，我们取得了一个真正储存的对象，而不是预设值。
+
+
+> (setf fruit (make-hash-table))
+#<Hash-Table BFDE76>
+> (setf (gethash 'apricot fruit) t)
+T
+然后要测试是否为成员，你只要调用：
+> (gethash 'apricot fruit)
+T
+T
+
+
+要从集合中移除一个对象，你可以调用 remhash ，它从一个哈希表中移除一个词条：
+> (remhash 'apricot fruit)
+T
+返回值说明了是否有词条被移除；在这个情况里，有。
+
+
+哈希表有一个迭代函数： maphash ，它接受两个实参，接受两个参数的函数以及哈希表。该函数会被每个键值对调用，没有特定的顺序：
+> (setf (gethash 'shape ht) 'spherical
+        (gethash 'size ht) 'giant)
+GIANT
+
+> (maphash #'(lambda (k v)
+               (format t "~A = ~A~%" k v))
+           ht)
+SHAPE = SPHERICAL
+SIZE = GIANT
+COLOR = RED
+NIL
+maphash 总是返回 nil ，但你可以通过传入一个会累积数值的函数，把哈希表的词条存在列表里。
+
+
+和任何牵涉到查询的结构一样，哈希表一定有某种比较键值的概念。预设是使用 eql ，但你可以提供一个额外的关键字参数 :test 来
+告诉哈希表要使用 eq ， equal ，还是 equalp ：
+> (setf writers (make-hash-table :test #'equal))
+#<Hash-Table C005E6>
+> (setf (gethash '(ralph waldo emerson) writers) t)
+T
+
+
+大多数 Lisp 编程的取舍（或是生活，就此而论）都有这种特质。起初你想要事情进行得流畅，甚至赔上效率的代价。
+之后当代码变得沉重时，你牺牲了弹性来换取速度。
+
+
+
+第五章：控制流
+
+2.2 节介绍过 Common Lisp 的求值规则，现在你应该很熟悉了。本章的操作符都有一个共同点，就是它们都违反了求值规则。
+这些操作符让你决定在程序当中何时要求值。如果普通的函数调用是 Lisp 程序的树叶的话，那这些操作符就是连结树叶的树枝。
+
+5.1 区块 (Blocks)
+Common Lisp 有三个构造区块（block）的基本操作符： progn 、 block 以及 tagbody 。
+我们已经看过 progn 了。在 progn 主体中的表达式会依序求值，并返回最后一个表达式的值：
+> (progn
+    (format t "a")
+    (format t "b")
+    (+ 11 12))
+ab
+23
+由于只返回最后一个表达式的值，代表着使用 progn （或任何区块）涵盖了副作用。
+
+
+一个 block 像是带有名字及紧急出口的 progn 。第一个实参应为符号。这成为了区块的名字。在主体中的任何地方，可以停止求值，
+并通过使用 return-from 指定区块的名字，来立即返回数值：
+> (block head
+    (format t "Here we go.")
+    (return-from head 'idea)
+    (format t "We'll never see this."))
+Here we go.
+IDEA
+
+
+5.2 语境 (Context)
+另一个我们用来区分表达式的操作符是 let 。它接受一个代码主体，但允许我们在主体内设置新变量：
+> (let ((x 7)
+        (y 2))
+    (format t "Number")
+    (+ x y))
+Number
+9
+一个像是 let 的操作符，创造出一个新的词法语境（lexical context）。在这个语境里有两个新变量，
+然而在外部语境的变量也因此变得不可视了。
+
+概念上说，一个 let 表达式等同于函数调用。
+
+前述的 let 表达式，实际上等同于：
+((lambda (x y)
+   (format t "Number")
+   (+ x y))
+ 7
+ 2)
+
+
+这个模型清楚的告诉我们，由 let 创造的变量的值，不能依赖其它由同一个 let 所创造的变量。举例来说，如果我们试着：
+(let ((x 2)
+      (y (+ x 1)))
+  (+ x y))
+在 (+ x 1) 中的 x 不是前一行所设置的值，因为整个表达式等同于：
+
+((lambda (x y) (+ x y)) 2
+                        (+ x 1))
+这里明显看到 (+ x 1) 作为实参传给函数，不能引用函数内的形参 x 。
+
+
+所以如果你真的想要新变量的值，依赖同一个表达式所设立的另一个变量？在这个情况下，使用一个变形版本 let* ：
+
+> (let* ((x 1)
+         (y (+ x 1)))
+    (+ x y))
+3
+一个 let* 功能上等同于一系列嵌套的 let 。这个特别的例子等同于：
+(let ((x 1))
+  (let ((y (+ x 1)))
+    (+ x y)))
+	
+	
+destructuring-bind 宏是通用化的 let 。其接受单一变量，一个模式 (pattern) ── 一个或多个变量所构成的树 ── 
+并将它们与某个实际的树所对应的部份做绑定。举例来说：
+> (destructuring-bind (w (x y) . z) '(a (b c) d e)
+    (list w x y z))
+(A B C (D E))
+若给定的树（第二个实参）没有与模式匹配（第一个参数）时，会产生错误。
+
+
+5.3 条件 (Conditionals)
+最简单的条件式是 if ；其余的条件式都是基于 if 所构造的。第二简单的条件式是 when ，它接受一个测试表达式（test expression）
+与一个代码主体。若测试表达式求值返回真时，则对主体求值。所以
+(when (oddp that)
+  (format t "Hmm, that's odd.")
+  (+ that 1))
+等同于
+(if (oddp that)
+    (progn
+      (format t "Hmm, that's odd.")
+      (+ that 1)))
+when 的相反是 unless ；它接受相同的实参，但仅在测试表达式返回假时，才对主体求值。
+
+
+所有条件式的母体 (从正反两面看) 是 cond ， cond 有两个新的优点：允许多个条件判断，与每个条件相关的代码隐含
+在 progn 里。 cond 预期在我们需要使用嵌套 if 的情况下使用。 举例来说，这个伪 member 函数
+(defun our-member (obj lst)
+  (if (atom lst)
+      nil
+      (if (eql (car lst) obj)
+          lst
+          (our-member obj (cdr lst)))))
+也可以定义成：
+
+(defun our-member (obj lst)
+  (cond ((atom lst) nil)
+        ((eql (car lst) obj) lst)
+        (t (our-member obj (cdr lst)))))
+事实上，Common Lisp 实现大概会把 cond 翻译成 if 的形式。
+
+
+当你想要把一个数值与一系列的常量比较时，有 case 可以用。我们可以使用 case 来定义一个函数，返回每个月份中的天数：
+
+(defun month-length (mon)
+  (case mon
+    ((jan mar may jul aug oct dec) 31)
+    ((apr jun sept nov) 30)
+    (feb (if (leap-year) 29 28))
+    (otherwise "unknown month")))
+一个 case 表达式由一个实参开始，此实参会被拿来与每个子句的键值做比较。接着是零个或多个子句，每个子句由一个或一串键值开始，
+跟随着零个或多个表达式。键值被视为常量；它们不会被求值。第一个参数的值被拿来与子句中的键值做比较 (使用 eql )。
+如果匹配时，子句剩余的表达式会被求值，并将最后一个求值作为 case 的返回值。
+
+缺省子句的键值可以是 t 或 otherwise 。
+	
+
+5.4 迭代 (Iteration)	
+
+(defun show-squares (start end)
+  (do ((i start (+ i 1)))
+      ((> i end) 'done)
+    (format t "~A ~A~%" i (* i i))))
+
+除了 do 与 do* 之外，也有几个特别用途的迭代操作符。要迭代一个列表的元素，我们可以使用 dolist :
+> (dolist (x '(a b c d) 'done)
+    (format t "~A " x))
+A B C D
+DONE
+当迭代结束时，初始列表内的第三个表达式 (译注: done ) ，会被求值并作为 dolist 的返回值。缺省是 nil 。	
+	
+有着同样的精神的是 dotimes ，给定某个 n ，将会从整数 0 ，迭代至 n-1 :
+(dotimes (x 5 x)
+  (format t "~A " x))
+0 1 2 3 4
+5	
+
+函数 mapc 和 mapcar 很像，但不会 cons 一个新列表作为返回值，所以使用的唯一理由是为了副作用。
+它们比 dolist 来得灵活，因为可以同时遍历多个列表：
+> (mapc #'(lambda (x y)
+          (format t "~A ~A  " x y))
+      '(hip flip slip)
+      '(hop flop slop))
+HIP HOP  FLIP FLOP  SLIP SLOP
+(HIP FLIP SLIP)
+总是返回 mapc 的第二个参数。
+	
+
+5.5 多值 (Multiple Values)
+	
+多值允许一个函数返回多件事情的计算结果，而不用构造一个特定的结构。举例来说，内置的 get-decoded-time 返回 9 个数值来表示
+现在的时间：秒，分，时，日期，月，年，天，以及另外两个数值。	
+	
+多值也使得查询函数可以分辨出 nil 与查询失败的情况。这也是为什么 gethash 返回两个值。因为它使用第二个数值来指出成功还是失败，
+我们可以在哈希表里储存 nil ，就像我们可以储存别的数值那样。
+
+values 函数返回多个数值。它一个不少地返回你作为数值所传入的实参：
+> (values 'a nil (+ 2 4))
+A
+NIL
+6	
+	
+要接收多个数值，我们使用 multiple-value-bind :
+> (multiple-value-bind (x y z) (values 1 2 3)
+    (list x y z))
+(1 2 3)
+
+> (multiple-value-bind (x y z) (values 1 2)
+    (list x y z))
+(1 2 NIL)
+	
+
+> (multiple-value-bind (s m h) (get-decoded-time)
+    (format t "~A:~A:~A" h m s))
+"4:32:13"
+
+你可以借由 multiple-value-call 将多值作为实参传给第二个函数：
+> (multiple-value-call #'+ (values 1 2 3))
+6
+还有一个函数是 multiple-value-list :
+> (multiple-value-list (values 'a 'b 'c))
+(A B C)	
+	
+
+
+第六章：函数
+
+理解函数是理解 Lisp 的关键之一。概念上来说，函数是 Lisp 的核心所在。	
+6.1 全局函数 (Global Functions)
+谓词 fboundp 告诉我们，是否有个函数的名字与给定的符号绑定。
+	
+> (fboundp '+)
+T
+
+由于字符串是 Lisp 表达式，没有理由它们不能出现在代码的主体。字符串本身是没有副作用的，
+除非它是最后一个表达式，否则不会造成任何差别。如果让字符串成为 defun 定义的函数主体的第一个表达式，
+(defun foo (x)
+  "Implements an enhanced paradigm of diversity"
+  x)
+那么这个字符串会变成函数的文档字符串（documentation string）。要取得函数的文档字符串，
+可以通过调用 documentation 来取得：
+> (documentation 'foo 'function)
+"Implements an enhanced paradigm of diversity"
+	
+	
+6.2 局部函数 (Local Functions)
+通过 defun 或 symbol-function 搭配 setf 定义的函数是全局函数。
+
+定义局部函数也是有可能的，局部函数和局部变量一样，只在某些上下文内可以访问。
+
+
+6.3 参数列表 (Parameter Lists)
+2.1 节我们演示过，有了前序表达式， + 可以接受任何数量的参数。从那时开始，我们看过许多接受
+不定数量参数的函数。要写出这样的函数，我们需要使用一个叫做剩余（ rest ）参数的东西。	
+
+如果我们在函数的形参列表里的最后一个变量前，插入 &rest 符号，那么当这个函数被调用时，
+这个变量会被设成一个带有剩余参数的列表。现在我们可以明白 funcall 是如何根据 apply 写成的。
+它或许可以定义成：
+(defun our-funcall (fn &rest args)
+  (apply fn args))
+
+
+我们也看过操作符中，有的参数可以被忽略，并可以缺省设成特定的值。这样的参数称为
+选择性参数（optional parameters）。（相比之下，普通的参数有时称为必要参数「required parameters」) 
+如果符号 &optional 出现在一个函数的形参列表时，
+(defun philosoph (thing &optional property)
+  (list thing 'is property))
+那么在 &optional 之后的参数都是选择性的，缺省为 nil :
+> (philosoph 'death)
+(DEATH IS NIL)
+
+
+我们可以明确指定缺省值，通过将缺省值附在列表里给入。这版的 philosoph
+(defun philosoph (thing &optional (property 'fun))
+  (list thing 'is property))
+有着更鼓舞人心的缺省值：
+> (philosoph 'death)
+(DEATH IS FUN)
+选择性参数的缺省值可以不是常量。可以是任何的 Lisp 表达式。
+若这个表达式不是常量，它会在每次需要用到缺省值时被重新求值。
+
+
+一个关键字参数（keyword parameter）是一种更灵活的选择性参数。如果你把符号 &key 放在一个形参列表，
+那在 &key 之后的形参都是选择性的。此外，当函数被调用时，这些参数会被识别出来，参数的位置在哪不重要，
+而是用符号标签（译注: : ）识别出来：
+> (defun keylist (a &key x y z)
+    (list a x y z))
+KEYLIST
+
+> (keylist 1 :y 2)
+(1 NIL 2 NIL)
+
+> (keylist 1 :y 3 :x 2)
+(1 2 3 NIL)
+和普通的选择性参数一样，关键字参数缺省值为 nil ，但可以在形参列表中明确地指定缺省值。
+
+
+5.2 节介绍过 destructuring-bind 宏。在通常情况下，每个模式（pattern）中作为第一个参数的子树，
+可以与函数的参数列表一样复杂：
+(destructuring-bind ((&key w x) &rest y) '((:w 3) a)
+  (list w x y))
+(3 NIL (A))
+
+
+6.4 示例：实用函数 (Example: Utilities)
+2.6 节提到过，Lisp 大部分是由 Lisp 函数组成，这些函数与你可以自己定义的函数一样。这是程序语
+言中一个有用的特色：你不需要改变你的想法来配合语言，因为你可以改变语言来配合你的想法。如果你
+想要 Common Lisp 有某个特定的函数，自己写一个，而这个函数会成为语言的一部分，就跟内置的 + 或 eql 
+6.4 示例：实用函数 (Example: Utilities)
+2.6 节提到过，Lisp 大部分是由 Lisp 函数组成，这些函数与你可以自己定义的函数一样。这是程序语言中一个
+有用的特色：你不需要改变你的想法来配合语言，因为你可以改变语言来配合你的想法。如果你想要 Common Lisp 
+有某个特定的函数，自己写一个，而这个函数会成为语言的一部分，就跟内置的 + 或 eql 一样。
+
+有经验的 Lisp 程序员，由上而下（top-down）也由下而上 (bottom-up)地工作。当他们朝着语言撰写程序的同时，
+也打造了一个更适合他们程序的语言。通过这种方式，语言与程序结合的更好，也更好用。
+
+写来扩展 Lisp 的操作符称为实用函数（utilities）。当你写了更多 Lisp 程序时，会发现你开发了一系列的程序，
+而在一个项目写过许多的实用函数，下个项目里也会派上用场。
+
+专业的程序员常发现，手边正在写的程序，与过去所写的程序有很大的关联。这就是软件重用让人听起来很吸引人的原因。
+但重用已经被联想成面向对象程序设计。但软件不需要是面向对象的才能重用 ── 这是很明显的，我们看看程序语言
+（换言之，编译器），是重用性最高的软件。
+
+要获得可重用软件的方法是，由下而上地写程序，而程序不需要是面向对象的才能够由下而上地写出。实际上，
+函数式风格相比之下，更适合写出重用软件。
+
+
+
+
+

@@ -1,0 +1,9 @@
+
+sequential search in a linked list
+
+Data Structure. Maintain an(unordered) linked list of key-value pairs.
+
+Search. scan through all keys until find a match.
+Insert. Scan through all keys until find a match; if no match add to front.
+
+
