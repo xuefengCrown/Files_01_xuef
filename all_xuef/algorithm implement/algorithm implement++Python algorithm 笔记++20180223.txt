@@ -1,0 +1,451 @@
+
+
+Tip 2: For timing things, use timeit.
+>>> import timeit
+>>> timeit.timeit("x = 2 + 2")
+0.034976959228515625
+>>> timeit.timeit("x = sum(range(10))")
+0.92387008666992188
+
+Tip 3: To find bottlenecks, use a profiler.
+It is a common practice to guess which part of your program needs optimization. Such guesses are
+quite often wrong. Instead of guessing wildly, let a profiler find out for you! Python comes with a few
+profiler variants, but the recommended one is cProfile. It’s as easy to use as timeit but gives more
+detailed information about where the execution time is spent. If your main function is main, you can use
+the profiler to run your program as follows:
+import cProfile
+cProfile.run('main()')
+
+Tip 4: Plot your results.
+Visualization can be a great tool when figuring things out. Two common plots for looking at
+performance are graphs, 10 for example of problem size vs. running time, and box plots, showing the
+distribution of running times. See Figure 2-2 for examples of these. A great package for plotting things
+with Python is matplotlib (available from http://matplotlib.sf.net).
+Tip 5: Be careful when drawing conclusions based on timing comparisons.
+
+
+## Implementing Graphs and Trees
+Graphs can represent all kinds of structures and systems, from transportation networks to
+communication networks and from protein interactions in cell nuclei to human interactions online. You
+can increase their expressivity by adding extra data such as weights or distances, making it possible to
+represent such diverse problems as playing chess or matching a set of people to as many jobs, with the
+best possible use of their abilities. Trees are just a special kind of graphs, so most algorithms and
+representations for graphs will work for them as well. However, because of their special properties (they
+are connected and have no cycles), some specialized (and quite simple) versions of both the 
+representations and algorithms are possible. There are plenty of practical structures (such as XML
+documents or directory hierarchies) that can be represented as trees 11 —this “special case” is actually
+quite general.
+
+While phrasing your problem in graph terminology gets you far, if you want to implement a
+solution, you need to represent the graphs as data structures somehow. (This, in fact, applies even if you
+just want to design an algorithm, because you must know what the running times of different operations
+on your graph representation will be.) In some cases, the graph will already be present in your code or
+data, and no separate structure will be needed. For example, if you’re writing a web crawler,
+automatically collecting information about web sites by following links, the graph is the web itself. If you
+have a Person class with a friends attribute, which is a list of other Person instances, then your object
+model itself is a graph on which you can run various graph algorithms. There are, however, specialized
+ways of implementing graphs.
+
+adjacency lists and adjacency matrices
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+BLACK BOX: DICT AND SET
+One technique covered in detail in most algorithm books, and usually taken for granted by Python
+programmers, is hashing. Hashing involves computing some (often seemingly random) integer value from
+an arbitrary object. This value can then be used, for example, as an index into an array (subject to some
+adjustments to make it fit the index range).
+The standard hashing mechanism in Python is available through the  hash function:
+>>> hash(42)
+42
+>>> hash("Hello, world!")
+-1886531940
+
+This is the mechanism that is used in dictionaries, which are implemented using so-called hash tables.
+Sets are implemented using the same mechanism. The important thing is that the hash value can be
+constructed in essentially constant time (it’s constant with respect to the hash table size but linear as a
+function of the size of the object being hashed). If the array that is used behind the scenes is large enough,
+accessing it using a hash value is also Θ(1) in the average case. (The worst-case behavior is Θ(n), unless
+we know the values beforehand and can write a custom hash function. Still, hashing is extremely efficient
+in practice.)
+What this means to us is that accessing elements of a  dict or  set can be assumed to take constant
+(expected) time, which makes them highly useful building blocks for more complex structures and
+algorithms.
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Adjacency Lists and the Like
+One of the most intuitive ways of implementing graphs is using adjacency lists. Basically, for each node,
+we can access a list (or set or other container or iterable) of its neighbors. Let’s take the simplest way of
+implementing this, assuming we have n nodes, numbered 0 ... n–1.
+
+Each adjacency (or neighbor) list is then just a list of such numbers, and we can place the lists
+themselves into a main list of size n, indexable by the node numbers. Usually, the ordering of these lists
+is arbitrary, so we’re really talking about using lists to implement adjacency sets. The term list in this
+context is primarily historical. In Python we’re lucky enough to have a separate set type, which in many
+cases is a more natural choice.
+
+Listing 2-1. A Straightforward Adjacency Set Representation
+a, b, c, d, e, f, g, h = range(8)
+N = [
+	{b, c, d, e, f}, # a
+	{c, e}, # b
+	{d}, # c
+	{e}, # d
+	{f}, # e
+	{c, g, h}, # f
+	{f, h}, # g
+	{f, g} # h
+]
+Note In Python versions prior to 2.7 (or 3.0), you would write set literals as  set([1, 2, 3]) rather than
+{1, 2, 3} . Note that an empty set is still written  set() , because  {} is an empty dict.
+
+The name N has been used here to correspond with the N function discussed earlier. In graph
+theory, N(v) represents the set of v’s neighbors. Similarly, in our code, N[v] is now a set of v’s
+neighbors. Assuming you have defined N as earlier in an interactive interpreter, you can now play
+around with the graph:
+>>> b in N[a] # Neighborhood membership
+True
+>>> len(N[f]) # Degree
+3
+
+
+Another possible representation, which can have a bit less overhead in some cases, is to replace the
+adjacency sets with actual adjacency lists. For an example of this, see Listing 2-2. The same operations
+are now available, except that membership checking is now Θ(n). This is a significant slowdown, but that
+is only a problem if you actually need it, of course. (If all your algorithm does is iterate over neighbors,
+using set objects would not only be pointless; the overhead would actually be detrimental to the
+constant factors of your implementation.)
+Listing 2-2. Adjacency Lists
+a, b, c, d, e, f, g, h = range(8)
+N = [
+	[b, c, d, e, f], # a
+	[c, e], # b
+	[d], # c
+	[e], # d
+	[f], # e
+	[c, g, h], # f
+	[f, h], # g
+	[f, g] # h
+]
+
+It might be argued that this representation is really a collection if adjacency arrays, rather than
+adjacency lists in the classical sense, because Python’s list type is really a dynamic array behind the
+covers (see earlier black box sidebar about list). If you wanted, you could implement a linked list type
+and use that, rather than a Python list. That would allow you (asymptotically) cheaper inserts at arbitrary
+points in each list, but this is an operation you probably will not need, because you can just as easily
+append new neighbors at the end. The advantage of using list is that it is a well-tuned, very fast data
+structure (as opposed to any list structure you could implement in pure Python).
+
+
+A recurring theme when working with graphs is that the best representation depends on what you
+need to do with your graph. For example, using adjacency lists (or arrays) keeps the overhead low and
+lets you efficiently iterate over N(v) for any node v. However, checking whether u and v are neighbors is
+Θ(N(v)), which can be problematic if the graph is dense (that is, if it has many edges). In these cases,
+adjacency sets may be the way to go.
+
+
+Listing 2-3. Adjacency dicts with Edge Weights
+a, b, c, d, e, f, g, h = range(8)
+N = [
+	{b:2, c:1, d:3, e:9, f:4}, # a
+	{c:4, e:3}, # b
+	{d:8}, # c
+	{e:7}, # d
+	{f:5}, # e
+	{c:2, g:2, h:2}, # f
+	{f:1, h:6}, # g
+	{f:9, g:8} # h
+]
+The adjacency dict version can be used just like the others, with the additional edge weight
+functionality:
+>>> b in N[a] # Neighborhood membership
+True
+>>> len(N[f]) # Degree
+3
+>>> N[a][b] # Edge weight for (a, b)
+2
+
+
+Listing 2-4. A Dict with Adjacency Sets
+N = {
+	'a': set('bcdef'),
+	'b': set('ce'),
+	'c': set('d'),
+	'd': set('e'),
+	'e': set('f'),
+	'f': set('cgh'),
+	'g': set('fh'),
+	'h': set('fg')
+}
+Note If you drop the  set constructor in Listing 2-4, you end up with adjacency strings, which would work as
+well as (immutable) adjacency lists of characters (with slightly lower overhead). A seemingly silly representation,
+but as I’ve said before, it depends on the rest of your program. Where are you getting the graph data from? (Is it
+already in the form of text, for example?) How are you going to use it?
+
+
+## Adjacency Matrices
+
+Listing 2-5. An Adjacency Matrix, Implemented with Nested Lists
+a, b, c, d, e, f, g, h = range(8)
+# a b c d e f g h
+N = [[0,1,1,1,1,1,0,0], # a
+	 [0,0,1,0,1,0,0,0], # b
+	 [0,0,0,1,0,0,0,0], # c
+	 [0,0,0,0,1,0,0,0], # d
+	 [0,0,0,0,0,1,0,0], # e
+	 [0,0,1,0,0,0,1,1], # f
+	 [0,0,0,0,0,1,0,1], # g
+	 [0,0,0,0,0,1,1,0]] # h
+
+The way we’d use this is slightly different from the adjacency lists/sets. Instead of checking whether
+b is in N[a], you would check whether the matrix cell N[a][b] is true. Also, you can no longer use
+len(N[a]) to find the number of neighbors, because all rows are of equal length. Instead, use sum:
+>>> N[a][b] # Neighborhood membership
+1
+>>> sum(N[f]) # Degree
+3
+
+Extending adjacency matrices to allow for edge weights is trivial: instead of storing truth values,
+simply store the weights. For an edge (u, v), let N[u][v] be the edge weight w(u, v) instead of True. 
+
+
+Listing 2-6. A Weight Matrix with Infinite Weight for Missing Edges
+a, b, c, d, e, f, g, h = range(8)
+_ = float('inf')
+# a b c d e f g h
+W = [[0,2,1,3,9,4,_,_], # a
+	 [_,0,4,_,3,_,_,_], # b
+	 [_,_,0,8,_,_,_,_], # c
+	 [_,_,_,0,7,_,_,_], # d
+	 [_,_,_,_,0,5,_,_], # e
+	 [_,_,2,_,_,0,2,2], # f
+	 [_,_,_,_,_,1,0,6], # g
+	 [_,_,_,_,_,9,8,0]] # h
+
+
+	 
+## Implementing Trees
+
+Listing 2-7. A Binary Tree Class
+class Tree:
+	def __init__(self, left, right):
+		self.left = left
+		self.right = right
+You can use the Tree class like this:
+>>> t = Tree(Tree("a", "b"), Tree("c", "d"))
+>>> t.right.left
+'c'
+
+
+## A Multitude of Representations
+
+An important type of graph implementation not discussed so far is more of a nonrepresentation:
+many problems have an inherent graphical structure—perhaps even a tree structure—and we can apply
+graph (or tree) algorithms to them without explicitly constructing a representation. In some cases, this
+happens when the representation is external to our program. For example, when parsing XML
+documents or traversing directories in the file system, the tree structures are just there, with existing
+APIs. In other cases, we are constructing the graph ourselves, but it is implicit. For example, if you want
+to find the most efficient solution to a given configuration of Rubik’s Cube, you could define a cube
+state, as well as operators for modifying that state. Even though you don’t explicitly instantiate and store
+all possible configurations, the possible states form an implicit graph (or node set), with the change
+operators as edges. You could then use an algorithm such as A* or Bidirectional Dijkstra (both discussed
+in Chapter 9) to find the shortest path to the solved state. In such cases, the neighborhood function N(v)
+would compute the neighbors on the fly, possibly returning them as a collection or some other form of
+iterable object.
+
+The final kind of graph I’ll touch upon in this chapter is the subproblem graph. This is a rather deep
+concept that I’ll revisit several times, when discussing different algorithmic techniques. In short, most
+problems can be decomposed into subproblems: smaller problems that often have quite similar
+structure. These form the nodes of the subproblem graph, and the dependencies (that is, which
+subproblems depend on which) form the edges. Although we rarely apply graph algorithms directly to
+such subproblem graphs (they are more of a conceptual or mental tool), they do offer significant insights
+into such techniques as divide and conquer (Chapter 6) and dynamic programming (Chapter 8).
+
+++++++++++++++++++++++++++++++ GRAPH LIBRARIES ++++++++++++++++++++++++++++++++
+The basic representation techniques described in this chapter will probably be enough for most of your
+graph algorithm coding, especially with some customization. However, there are some advanced
+operations and manipulations that can be tricky to implement, such as temporarily hiding or combining
+nodes, for example. There are some third-party libraries out there that take care of some of these things,
+and some of them are even implemented as C extensions, potentially leading to performance increase as a
+bonus. They can also be quite convenient to work with, and some of them have several graph algorithms
+available out of the box. While a quick web search will probably turn up the most actively supported graph
+libraries, here are a few to get you started:
+•  NetworkX:  http://networkx.lanl.gov
+•  python-graph:  http://code.google.com/p/python-graph
+•  Graphine:  http://gitorious.org/projects/graphine/pages/Home
+There is also Pygr, a graph database ( http://bioinfo.mbi.ucla.edu/pygr ); Gato, a graph animation
+toolbox ( http://gato.sourceforge.net ); and PADS, a collection of graph algorithms
+( http://www.ics.uci.edu/~eppstein/PADS )
+
+
+## Beware of Black Boxes
+
+While algorists generally work at a rather abstract level, actually implementing your algorithms takes
+some care. When programming, you’re bound to rely on components that you did not write yourself,
+and relying on such “black boxes” without any idea of their contents is a risky business. Throughout this
+book, you’ll find sidebars marked “Black Box,” briefly discussing various algorithms available as part of
+Python, either built into the language or found in the standard library. I’ve included these because I
+think they’re instructive; they tell you something about how Python works, and they give you glimpses of
+a few more basic algorithms.
+
+However, these are not the only black boxes you’ll encounter. Not by a long shot. Both Python and
+the machinery it rests on use many mechanisms that can trip you up if you’re not careful. In general, the
+more important your program, the more you should mistrust such black boxes and seek to find out
+what’s going on under the cover. I’ll show you two traps that it’s important that you’re aware of in the
+following sections, but if you take nothing else away from this section, remember the following:
+•  When performance is important, rely on actual profiling rather than intuition. You
+may have hidden bottlenecks, and they may be nowhere near where you suspect
+they are.
+•  When correctness is critical, the best thing you can do is calculate your answer
+more than once, using separate implementations (preferably written by separate
+programmers).
+
+### Hidden Squares
+>>> s = ""
+>>> for chunk in input():
+... 	s += chunk
+It works, and because of some really clever optimizations in Python, it actually works pretty well, up
+to a certain size—but then the optimizations break down, and you run smack into quadratic growth. The
+problem is that (without the optimizations) you need to create a new string for every += operation,
+copying the contents of the previous one. You’ll see a detailed discussion of why this sort of thing is
+quadratic in the next chapter, but for now, just be aware that this is risky business. A better solution
+would be the following:
+>>> chunks = []
+>>> for chunk in input():
+... 	chunks.append(chunk)
+...
+>>> s = ''.join(chunks)
+
+
+### The Trouble with Floats
+The first lesson here is to never compare floats for equality. It generally doesn’t make sense. Still, in
+many applications (such as computational geometry), you’d very much like to do just that. Instead, you
+should check whether they are approximately equal. For example, you could take the approach of
+assertAlmostEqual from the unittest module:
+>>> def almost_equal(x, y, places=7):
+... 	return round(abs(x-y), places) == 0
+...
+>>> almost_equal(sum(0.1 for i in range(10)), 1.0)
+True
+
+There are also tools you can use if you need exact decimal floating-point numbers, for example the
+decimal module:
+>>> from decimal import *
+>>> sum(Decimal("0.1") for i in range(10)) == Decimal("1.0")
+True
+
+
+## Summary
+Graphs are abstract mathematical objects, used to represent all kinds of network structures. They
+consist of a set of nodes, connected by edges, and the edges can have properties such as direction and
+weight. 
+
+Finally, there was a section about the dangers of black boxes. You should look around for potential
+traps—things you use without knowing how they work.
+
+For example, some rather straightforward uses of built-in Python functions can give you a quadratic running time 
+rather than a linear one. Profiling your program can, perhaps, uncover such performance problems. 
+There are traps related to accuracy as well. Carless use of floating-point numbers, for example, can give you inaccurate answers. 
+If it’s critical to get an accurate answer, the best solution may be to calculate it with two separately implemented programs,
+comparing the results.
+
+
+
+Vaingast, S. (2009). Beginning Python Visualization: Crafting Visual Transformation Scripts. Apress.
+West, D. B. (2001). Introduction to Graph Theory. Prentice Hall, Inc., second edition.
+
+
+
+
+# Counting 101
+The greatest shortcoming of the human race is our inability to understand the
+exponential function.
+
+## sums
+sum(f(i) for i in seq) + sum(g(i) for i in seq)
+is exactly the same as sum(f(i) + g(i) for i in seq). 
+
+
+## Subsets, Permutations, and Combinations
+
+The main ideas in this chapter—induction, recursion, and reduction—are also principles of abstraction.
+
+Once you’ve learned a bunch of standard algorithms (you’ll encounter many in this book), this is what you’ll usually do when
+you come across a new problem. Can you change it in some way so that it can be solved with one of the
+methods you know? In many ways, this is the core process of all problem solving.
+
+
+Let’s take an example. You have a list of numbers, and you want to find the two (nonidentical)
+numbers that are closest to each other (that is, the two with the smallest absolute difference).
+
+Let’s say you’ve worked with algorithms a bit, and you know that sequences can often be
+easier to deal with if they’re sorted. You also know that sorting is, in general, loglinear, or Θ(n lg n). See
+how this can help? The insight here is that the two closest numbers must be next to each other in the
+sorted sequence.
+
+Faster algorithm, same solution. (The new running time is loglinear, dominated by the sorting.)
+Our original problem was “Find the two closest numbers in a sequence,” and we reduced it to “Find the
+two closest numbers in a sorted sequence,” by sorting seq. In this case, our reduction (the sorting)
+won’t affect which answers we get. In general, we may need to transform the answer so it fits the
+original problem.
+
+
+## celebrity problem ???????????????
+
+
+## Problem Solving Advice
+•  Make sure you really understand the problem. What is the input? The output?
+What’s the precise relationship between the two? Try to represent the problem
+instances as familiar structures, such as sequences or graphs. A direct, brute-force
+solution can sometimes help clarify exactly what the problem is.
+•  Look for a reduction. Can you transform the input so it works as input for another
+problem that you can solve? Can you transform the resulting output so that you
+can use it? Can you reduce an instance if size n to an instance of size k < n and
+extend the recursive solution (inductive hypothesis) back to n?
+Together, these two form a powerful approach to algorithm design. I’m going to add a third item here, as
+well. It’s not so much a third step as something to keep in mind while working through the first two:
+•  Are there extra assumptions you can exploit? Integers in a fixed value range can
+be sorted more efficiently than arbitrary values. Finding the shortest path in a
+DAG is easier than in an arbitrary graph, and using only non-negative edge
+weights is often easier than arbitrary edge weights.
+
+At the moment, you should be able to start using the first two pieces of advice in constructing your
+algorithms. The first (understanding and representing the problem) may seem obvious, but a deep
+understanding of the structure of the problem can make it much easier to find a solution. Consider
+special cases or simplifications to see whether they give you ideas. Wishful thinking can be useful here,
+dropping parts of the problem specification, so you can think of one or a few aspects at a time. (“What if
+we ignored the edge weights? What if all the numbers were 0 or 1? What if all the strings were of equal
+length? What if every node had exactly k neighbors?”)
+
+The second item (looking for a reduction) has been discussed a lot in this chapter, especially
+reducing to (or decomposing into) subproblems. This is crucial when designing your own spanking new
+algorithms, but ordinarily, it is much more likely that you’ll find an algorithm that almost fits. Look for
+patterns in or aspects of the problem that you recognize, and scan your mental archives for algorithms
+that might be relevant. Instead of constructing an algorithm that will solve the problem, can you
+construct an algorithm that will transform the instances so an existing algorithm can solve them?
+Working systematically with the problems and algorithms you know can be more productive than
+waiting for inspiration.
+
+The third item is more of a general observation. Algorithms that are tailored to a specific problem
+are usually more efficient than more general algorithms. Even if you know a general solution, perhaps
+you can tweak it to use the extra constraints of this particular problem? If you’ve constructed a brute-
+force solution in an effort to understand the problem, perhaps you can develop that into a more efficient
+solution by using these quirks of the problem? Think of modifying insertion sort so it becomes bucket
+sort, 19 for example, because you know something about the distribution of the values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

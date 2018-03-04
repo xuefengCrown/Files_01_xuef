@@ -1,0 +1,174 @@
+
+
+
+Linked Lists,  
+Stacks,  
+Queues.  
+Trees,  
+Priority Queues,  
+Searching,  
+Sorting,  
+Hashing,  
+Algorithm Design Techniques.  
+Greedy,  
+Divide and Conquer,  
+Dynamic Programming
+Symbol Tables
+
+minimum spanning tree of a graph
+
+
+## Recursion and Backtracking
+
+For  many  real-world  problems,  the  solution  process  consists  of  working  your  way  through  a  sequence  of
+decision  points in  which  each  choice  leads  you  further  along  some  path  (for  example  problems  in  the Trees
+and  Graphs  domain). If  you  make  the  correct  set  of  choices,  you  end  up  at  the  solution.  On the other  hand,
+if  you reach a  dead  end  or otherwise  discover that  you have  made  an  incorrect choice  somewhere  along the
+way,  you have to  backtrack  to a previous decision point  and  try a different path.  Algorithms that use  this
+approach are  called  backtracking algorithms, and  backtracking is a form of recursion.  Also, some problems
+can  be  solved  by combining  recursion  with  backtrackin g.
+
+## Linked Lists :  A  linked list  is  a  dynamic  data  structure.  The  number of nodes  in a list  is  not  fixed  and  can
+grow  and  shrink  on  demand.  Any  application  which  has  to  deal  with  an  unknown  number  of  objects  will
+need  to  use  a  linked  list. It is a very  common  data  structure  that  is  used  to  create  other  data  structures  like
+trees,  graphs,  hashing.  etc.
+
+## Queues
+There  are  many  applications  of  queues , including:
+a.  In  operating  systems,  for  controlling  access  to  shared  system  resources  such  as  printers,  files,
+communication  lines,  disks  ,and  tapes.
+b.  Computer  systems  must  often  provide  a  holding area  for  messages  between  two  processes,  two
+programs,  or  even two  systems.  This  holding  area  is usually  called a  buffer  and  is often
+implemented  as  a  queue.
+c.  It  can  act  as  an  uuxiliury  duta  structure  for  other  abstract  data  types.
+
+
+## Trees
+A  tree  is  an  abstract  data  structure  used  to  organize  the  data  in  a tree  format  so as  to  make  the  data
+insertion  or  delelion  or  search  faster.  Trees  are  one  of  the  most  useful  data  structures  in  computer  science.
+
+
+## Sets
+集合与对世界的抽象
+编程是关于思想的
+
+
+## Searching  Algorithms  
+In computer science, searching is the process of finding an item with specified properties from a collection of items.  
+The item  may  be  stored  as  records  in a database,  simple data elements in arrays,  
+text in files,  nodes in trees,  vertices and  edges  in  graphs,  or  elements of other  search spaces.
+
+## Symbol  Tables (dictionaries)
+
+
+## String Algorithms
+URL (auto-completion)
+
+In  order  to  support  these  kinds  of  operations,  we  need  a  data  structure  which  stores  the  string  data
+efficiently. In  this  chapter,  we will look  at  the  data  structures  that  are  useful  for  implementing  string
+algorithms.  We  start  our  discussion  with  the  basic  problem  of  strings:  given a  string,  how  do  we  search  a
+substring  (pattern)?  This  is  called  string matching problem.  After  discussing  various  string  matching
+algorithms,  we will  see  different  data  structures  for  storing  strings.
+
+
+## Algorithms  Design  Techniques
+In the previous chapters, we have seen many algorithms for solving different kinds of problems.  
+Before solving a new problem,  the general tendency  is  to look for the similarity
+of the current problem to other problems for which  we  have  solutions.  This  helps  us  to  get  the  solution
+easily. In  this  chapter,  we  see  different  ways  of  classifying  the  algorithms,  and  in  subsequent  chapters  we
+will  focus  on  a few  of  them  (e.g, Greedy, Divide and Conquer, and Dynamic Programming).
+
+
+## Greedy  Algorithms
+is a prncess  that looks  for simple,  ensy-to-implement  sol1utions  to  complex,  multi-step problems by deciding
+which next step  will  provide  the  most  obvious  benefit.  The idea  behind  a  greedy  algorithm  is  to  perform  a
+single  procedure  in  the  recipe  over  and  over  again  until  it  can't  be  done  any  more,  and  see  what  kind  of
+results  it  will  produce.  It  may  not  completely  solve  the  problem,  or,  if it  produces  a  solution,  it  may  not  be
+the  very  best  one,  but  it  is  one  way  of  approaching  the  problem  and  sometimes  yields  very  good (or  even  the
+best  possible)  results.  Examples  of  greedy  algorithms  include  selection  sort,  Prim's  algorithms,  Kruskal's
+algorithms,  Dijkstra  algorithm,  Huffman  coding  algorithm  etc.
+
+
+## Divide  and  Conquer
+These  algorithms  work  based  on  the  principles  described  below.
+a.  Divide - break  the  problem  into  several  subproblems  that  one  similar  to  the  original  problem  but
+smaller  in  size
+b.  Conquer - solve  the  subproblems  recursively.
+c.  Base case:  If  the  subproblem  size  is  small  enough  (i.e.,  the  base  case  has  been  reached)  then  solve
+the  subproblem  directly  without  more  recursion.
+d.  Combine - the  solulions  to  create  a  solution  for  the  original  problem. 
+
+Binary  Search,  Merge  Sort  etc  ...
+
+
+## Complexity  Classes(复杂度)
+There  are  lots  of  problems  for which we  do  not  know  the solutions.
+
+It is  the  branch  of  theory  of  computation  that  studies  the  resources
+required  during  computation to  solve a given  problem. 
+
+## Miscellaneous  Concepts:  Bit-wise Hacking
+
+
+# chapter1 introduction
+
+data type
+	system defined --- primitive data types
+	User defined data types
+		structures in C/C++ and classes in Java
+
+## 1.4 Abstract Data Types(ADTs)		
+While  defining  the  ADTs  do  not  worry  about  the  implementation  details.  
+They  come  into  the  picture  only  when we  want  to  use  them.
+
+## 1.21 Master Theorem for Divide and Conquer
+
+
+## 1.26 Amortized  Analysis
+
+
+# chapter2 Recursion and Backtracking
+
+## 2.8  Example  Algorithms  of  Recursion
+•  Fibonacci  Series,  Factorial  Finding
+•  Merge Sort,  Quick Sort
+•  Binary  Search
+•  Tree  Traversals  and  many  Tree  Problems:  lnOrder,  PrcOrder  PostOrdcr
+•  Graph  Traversals:  DFS  !Depth  First  Search!  and  BFS  !Breadth  First  Search!
+•  Dynamic  Programming  Examples
+•  Divide  and  Conquer  Algorithms
+•  Towers  of  Hanoi
+•  Backtracking  Algorithms  !we will  discuss  in  next  scclion]
+
+## 2.11  Example  Algorithms  of  Backtracking
+•  Binary  Strings:  generating  all  binary  strings
+•  Generating  k-ary  Strings
+•  The  Knapsack  Problem
+•  Generalized  Strings
+•  Graph  Coloring Problem
+
+
+# chapter3 Linked Lists
+
+## 3.3  Why  Linked  Lists
+
+### Arrays
+
+### Dynamic  Arrays
+
+### Advantages  of  Linked  Lists
+The advuntagc  of  linked lists is that they can be expamled in constant time. 
+
+### Issues with Linked Lists
+
+The  main  disadvantage  of  linked  lists  is  access  time  to  individual elements.
+
+
+
+
+
+
+
+
+
+

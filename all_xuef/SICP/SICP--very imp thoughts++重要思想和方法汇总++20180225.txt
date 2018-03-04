@@ -1,0 +1,157 @@
+SICP是道，是思想。学会了它还不够，你还得学习大量知识，以供它驱使。
+如操作系统，unix,linux,windows
+网络知识，udp
+web知识。HTTP啥的
+# 你不能平地起高楼，那样太慢了。你需要站在别人的头上。利用别人的工具。
+关注当前业界的标准。 常用框架和工具
+高效开发所需的现成项目和工具，spring mvp 什么的 mybatis
+git, maven, svn
+# 数据库
+mysql
+
+# 工作方法和管理方法
+
+抓住一门语言的核心：
+
+1. 它提供的基本数据和基本操作有哪些？
+	Primitive Objects
+		Primitive Procedure
+		Primitive Data
+			语言提供的组合数据的粘合剂（Java 的 class； lisp 的 cons[linked list]）
+2. Means of Combination
+	Procedure Composition
+	Constructure of Compound Data
+3. Means of Abstraction
+	Procedure Definition
+	Simple Data Abstraction
+4. Capturing Common Patterns
+	Higher-order Procedures
+	Data as Procedures(??????)
+	Lisp 的宏(macro)提供的词法抽象是其他语言所不具有的
+	
+## 数据
+数值数据
+符号数据
+
+## 如何控制复杂度
+黑盒抽象
+接口约定
+元语言抽象(??????)
+
+## 数据抽象(一种强有力的设计方法学)
+(define (linear-combination a b x y)
+	(add (mul a x) (mul b y)))
+感想：使用Java难以洞悉程序的本质。
+
+构造函数
+选择函数
+
+我们假定已经有了一种从分子和分母构造有理数的方法。
+并进一步假定，如果有了一个有理数，我们有一种方法取得（选出）它的分子和分母。
+(make-rat <n> <d>)
+(numer <x>)
+(denom <x>)
+
+## 什么是数据？
+数据和过程之间的界限是不呢么分明的。
+我们能够用纯粹过程来形成数据。
+
+## 表示序列和树的一些常规技术
+
+
+## 闭包 思想
+列表内可以存放列表。(列表的列表的列表)
+
+## 以列表作为统一界面(数据流动的统一约定)
+unix中使用纯文本作为界面。作为数据流动和交互的约定
+
+## 探索表示对象集合的各种不同方式(???????)
+一种数据结构，可以有多种不同的表示方式。
+以
+符号微分，集合的表示，信息编码
+作为上下文来研究这种思想
+
+## 实现通用型操作
+处理在一个程序的不同部分可能采用不同表示的数据的问题。
+
+### 数据导向的程序设计
+
+我们将用本章学到的东西实现一个多项式算术的程序包，其中多项式的系统可以是整数，有理数，
+复数，甚至还可以是其他多项式。
+
+
+## 对表的映射
+一种特别有用的操作是将某种变换应用于一个表的所有元素，得到所有结果构成的表。
+如，将一个表里的所有元素按给定因子做一次缩放：
+(scale-list (list 1 2 3 4 5) 10)
+> (10 20 30 40 50)
+
+map
+我们可以抽象出这一具有一般性的想法，将其中的公共模式表述为一个高阶过程，这一高阶过程称为map。
+
+通过map定义的scale-list抑制了这种细节层面上的情况，强调的是从元素表到结果表的一个缩放变换。
+这两种定义方式之间的差别，不在于实际计算过程的不同（其实不会），而在于我们对这同一过程的
+不同思考方式。
+
+## 消息传递的程序设计风格
+数据的过程性表示将在我们的程序设计宝库中扮演一种核心角色。
+有关的程序设计风格通常称为消息传递。
+
+
+
+
+
+章3： 解释计算机程序
+3.1 介绍
+
+3.2 函数式编程
+
+3.3 异常
+
+3.4 Interpreters for Languages with Combination
+
+3.5 Interpreters for Languages with Abstraction
+
+Chapter 4: 数据处理
+4.1 介绍
+
+4.2 Implicit Sequences
+
+4.3 Declarative Programming
+
+4.4 Logic Programming
+
+4.5 Unification
+
+4.6 分布式计算 Distributed Computing
+
+4.7 分布式数据处理 Distributed Data Processing
+
+4.8 并行计算 Parallel Computing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,95 @@
+;; deriv 符号求导
+
+; (variable? e)               ;; e是变量吗
+; (same-variable?  v1 v2)     ;; 是同一个变量吗
+; (sum? e)                    ;; e是和式吗
+; (addend e)                  ;; e的被加数
+; (augend e)                  ;; e的加数
+; (make-sum a1 a2)            ;; 构造起a1与a2的和式
+
+; (product? e)                ;; e是乘式吗
+; (multiplier e)              ;; e的被乘数
+; (multiplicand e)            ;; e的乘数
+; (make-product m1 m2)        ;; 构造起m1与m2的和式
+
+(define (deriv exp var)
+  (cond ((number? exp) 0) ;; 表达式是数值的话，导数为0
+        ((variable? exp)  ;; 否则。表达式是变量吗
+                    (if (same-variable? exp var) 1 0)) ;与var是同一变量吗
+        ((sum? exp)       ;; 否则。exp是和式吗
+               ;; 和式的导数是其各分部的导数之和
+               (make-sum (deriv (addend exp) var) 
+                         (deriv (augend exp) var)))
+        ((product? exp)   ;; 否则。exp是乘式吗
+               ;; 乘式的求导规则稍复杂点，自己看书去
+                (make-sum (make-product (multiplier exp)
+                                        (deriv (multiplicand exp) var))
+                          (make-product (multiplicand exp)
+                                        (deriv (multiplier exp) var))))
+        (else 'oops) ;; 如何抛出错误?
+    )
+  )
+
+;; 代数表达式的表示
+;; 我们使用前缀表达式，这是Lisp里面表示组合式的方法
+;; (+ (a x) b)  为 ax + b
+
+; 变量就是符号
+(define (variable? x) (symbol? x))
+
+; 变量相同?
+(define (same-variable? v1 v2)
+  (and (variable? v1) (variable? v2) (eq? v1 v2)))
+
+; 和式和乘式都构造为表
+(define (=number? exp num) ;; 判断exp是否等于某个数num
+  (and (number? exp) (= exp num)))
+
+(define (make-sum a1 a2)
+  (cond ((=number? a1 0) a2)
+        ((=number? a2 0) a1)
+        ((and (number? a1) (number? a2)) (+ a1 a2))
+        (else (list '+ a1 a2))))
+      
+(define (make-product m1 m2)
+  (cond ((or (=number? m1 0) (=number? m2 0)) 0)
+        ((=number? m1 1) m2)
+        ((=number? m2 1) m1)
+        ((and (number? m1) (number? m2)) (* m1 m2))
+        (else (list '* m1 m2))))
+
+; 和式就是第一个符号为 + 的表
+(define (sum? x)
+  (and (pair? x) (eq? '+ (car x))))
+
+; 被加数是表示和式的表里的第二个元素
+(define (addend s) (cadr s))
+; 加数是表示和式的表里的第三个元素
+; 如果s超过三项，则和式是其余项
+(define (augend s) 
+  (cond ((= 3 (length s)) (caddr s))
+        (else (append (list '+) (cddr s)))
+        ))
+
+(define s '(+ x 3 (* x x) 4))
+; 乘式就是第一个符号为 * 的表
+(define (product? x) (and (pair? x) (eq? '* (car x))))
+
+; 被乘数是表示乘式的表里的第二个元素
+(define (multiplier p) (cadr p))
+; 乘数是表示乘式的表里的第三个元素
+(define (multiplicand p) (caddr p))
+
+;; test
+  s
+=> (+ x 3 (* x x) 4)
+   (deriv s 'x)
+=> (+ 1 (+ x x))
+
+
+
+
+
+
+
+

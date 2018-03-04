@@ -1,0 +1,25 @@
+
+## Java
+《Algorithm——Java》
+
+## 经典
+《Introduction to Algorithm》
+
+## Python
+《Data Structures and Algorithms in Python》
+
+《Data Structures and Algorithms with Python》
+
+《Fundamentals of Python: Data Structures》  
+
+《Python Algorithms》
+
+《数据结构与算法：Python语言描述》（还可以，理科老教授写的）
+
+《Problem Solving with Algorithms and Data Structures》
+
+《Data Structures and Algorithms with Object-Oriented Design Patterns in Python》
+
+## Lisp
+《SICP》
+

@@ -1,0 +1,46 @@
+; 集合作为二叉树
+
+;; 用表来表示树。
+;; 将结点表示为三个元素的表，如 (7 nil nil)
+;; (7 (1 nil nil) (9 nil nil))表示下面这棵树
+;; ----7----
+;; -1-----9-
+
+;; 定义 构造函数与选择函数
+;;; 获取结点数据项
+(define (entry tree) (car tree))
+;;; 获取左子树
+(define (left-branch tree) (cadr tree))
+;;; 获取右子树
+(define (right-branch tree) (caddr tree))
+;;; 构造树
+(define (make-tree entry left right)
+  (list entry left right))
+
+;;; 集合是否包含元素 x
+(define (element-of-set? x set)
+  (if (null? set)
+      #f
+      (let ((ele (entry set))) ;; (car set) 一定要在set的null? 判定后
+        (cond ((= x ele) #t)
+              ((< x ele) (element-of-set? x (left-branch set)))
+              (else (element-of-set? x (right-branch set)))
+          ))))
+(define tree '(7 (3 (1 () ()) 
+                    (5 () ()))
+                 (9 () 
+                    (11 () ()))))
+                  
+;;; 向集合添加一个项
+(define (adjoin-set x set)
+  (cond ((null? set) (make-tree x '() '()))
+        ((= x (entry set)) set)
+        ((< x (entry set)) (make-tree (entry set)
+                                      (adjoin-set x (left-branch set))
+                                      (right-branch set)))
+        (else (make-tree (entry set)
+                         (left-branch set)
+                         (adjoin-set x (right-branch set))))
+    )
+  )
+                  

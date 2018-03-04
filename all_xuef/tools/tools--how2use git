@@ -1,0 +1,24 @@
+如何使用git
+
+1. 你得有个github账号；建个仓库(repository)
+
+2. 安装 git
+
+3. 把central repository(中心仓库)load到本地(local repository)
+* 我在c盘下新建目录: C:\code_dxf\xuefgit
+* 打开cmd，cd到该目录
+* git clone [仓库链接]
+* 进到仓库目录，cd one-by-one
+
+4. 我修改了 Version Control 文件，如何提交修改？
+* First you stage your files which is where you tell Git which files have changes that you
+want to push to your central repository. 
+C:\code_dxf\xuefgit\one-day-one>git add "[abs path]"
+* C:\code_dxf\xuefgit\one-day-one>git config --global user.email "movebeyondfear@gmail.com"
+C:\code_dxf\xuefgit\one-day-one>git config --global user.name "xuefengCrown"
+* C:\code_dxf\xuefgit\one-day-one>git commit -m "my first commit"
+* git push origin master
+Once you enter your GitHub username and password from the command line, your changes
+will be pushed to GitHub.
+
+

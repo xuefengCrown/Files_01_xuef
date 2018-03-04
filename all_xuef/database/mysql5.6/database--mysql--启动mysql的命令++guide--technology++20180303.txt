@@ -1,0 +1,6 @@
+# 启动 mysql服务
+1. 以管理员身份启动 cmd
+2. net start mysql
+
+# 通过 mysql client 连接数据库
+enter password: 121314

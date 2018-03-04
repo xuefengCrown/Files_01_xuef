@@ -1,0 +1,28 @@
+
+方法一： 
+1、在DOS窗口下输入net stop mysql5 或 net stop mysql 
+
+2、开一个DOS窗口，这个需要切换到mysql的bin目录。
+一般在bin目录里面创建一个批处理1.bat,内容是cmd.exe运行一下即可就切换到当前目录，然后输入
+mysqld-nt --skip-grant-tables; 
+或
+mysqld --skip-grant-tables;
+不要关闭窗口
+3、再开一个DOS窗口，mysql -u root 
+
+4、输入：
+use mysql 
+update user set password=password("new_pass") where user="root"; 
+flush privileges; 
+exit
+
+5、使用任务管理器，找到mysqld-nt的进程，结束进程
+
+
+
+
+
+
+
+
+

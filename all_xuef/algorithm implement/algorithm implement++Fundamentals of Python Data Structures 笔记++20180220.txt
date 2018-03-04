@@ -1,0 +1,480 @@
+
+
+## Programming basics
+## Object-Oriented Programming (OOP)
+## Data structures
+## Software development life cycle
+Among other things, you’ll learn that coding a program is often not the most difficult or challenging 
+aspect of problem solving and software development.
+
+Today’s students learn a bit of programming and problem solving 
+and are then expected to move quickly into topics like software development,
+complexity analysis, and data structures that, 20 years ago, were relegated to advanced
+courses.
+
+### Optional and Keyword Function Arguments
+print("The cursor will stay on this line, at the end", end = "")
+
+### get help
+>>> import numberguess
+>>> help(numberguess)
+
+### Using if __name__ == "__main__"
+
+### loop
+while value <= 10:
+
+for value in range(1, 11):
+
+
+### strings
+
+"greater"[:] # Returns "greater"
+"greater"[2:] # Returns "eater"
+"greater"[:2] # Returns "gr"
+"greater"[2:5] # Returns "eat"
+
+
+print(exponent, 10 ** exponent)
+
+print("%-3d%12d" % (exponent, 10 ** exponent))
+7 10000000
+
+### Objects and Method Calls
+"greater".isupper() # Returns False
+"greater".upper() # Returns "GREATER"
+"greater".startswith("great") # Returns True
+
+To discover the set of methods that an object recognizes, you
+run Python’s dir function, in the Python shell, with the object’s type as an argument.
+For example, dir(str) returns a list of the names of the methods recognized by string
+objects. Running help(str.upper) prints documentation on the use of the method
+str.upper.
+
+
+## Built-In Python Collections and Their Operations
+
+### Lists
+[] # An empty list
+["greater"] # A list of one string
+["greater", "less"] # A list of two strings
+["greater", "less", 10] # A list of two strings and an int
+["greater", ["less", 10]] # A list with a nested list
+
+
+The most commonly used list mutator methods are append , insert , pop , remove , and
+sort . Here are some examples of their use:
+testList = [] # testList is []
+testList.append(34) # testList is [34]
+testList.append(22) # testList is [34, 22]
+testList.sort() # testList is [22, 34]
+testList.pop() # Returns 22; testList is [34]
+testList.insert(0, 22) # testList is [22, 34]
+testList.insert(1, 55) # testList is [22, 55, 34]
+testList.pop(1) # Returns 55; testList is [22, 34]
+testList.remove(22) # testList is [34]
+testList.remove(55) # raises ValueError
+
+The string methods split and join extract a list of words from a string and glue a list of
+words together to form a string, respectively:
+"Python is cool".split() # Returns [’Python’, ’is’, ’cool’]
+" ".join(["Python", "is", "cool"]) # Returns ’Python is cool’
+You are encouraged to explore the list methods with the dir and help functions.
+
+### Tuples
+
+### Loops Over Sequences
+
+testList = [67, 100, 22]
+for item in testList:
+	print(item)
+
+### Dictionaries
+{} # An empty dictionary
+{"name":"Ken"} # One entry
+{"name":"Ken", "age":61} # Two entries
+{"hobbies":["reading", "running"]} # One entry, value is a list
+
+You use the subscript operator to access a value at a given key, add a value at a new key,
+and replace a value at a given key. 
+The pop method removes the entry and returns the value for a given key. 
+The keys method returns an iterable object over the keys, whereas
+the values method returns an iterable object over the values. 
+The for loop iterates over a dictionary’s keys.
+
+
+### Pattern Matching with Collections
+For example, the value returned by a color chooser dialog is a tuple that contains
+two items. The first item is a nested tuple of three numbers, and the second item is a
+string. Thus, the outer tuple has the form ((<r>, <g>, <b>), <string>) .
+
+rgbTuple = colorTuple[0]
+hexString = colorTuple[1]
+r = rgbTuple[0]
+g = rgbTuple[1]
+b = rgbTuple[2]
+
+((r, g, b), hexString) = rgbTuple
+
+## Creating New Functions
+You can define functions in any order in a module, as long as no function is actually
+executed before its definition has been compiled. The next example shows an illegal
+function call at the beginning of a module:
+
+first() # Raises a NameError (function undefined yet)
+def first():
+	second() # Not an error, because not actually
+	print("Calling first.") # called until after second is defined
+def second():
+	print("Calling second.")
+first() # Here is where the call should go	
+	
+	
+### Nested Function Definitions
+
+# First definition
+def factorial(n):
+	"""Returns the factorial of n."""
+	def recurse(n, product):
+		if n == 1: return product
+		else: return recurse(n - 1, n * product)
+	recurse(n, 1)
+
+### Higher-Order Functions
+Python functions are first-class data objects. This means you can assign them to variables, 
+save them in data structures, pass them as arguments to other functions, and
+return them as the values of other functions. A higher-order function is a function that
+receives another function as an argument and applies it in some way. Python includes
+two built-in higher-order functions, map and filter , that are useful for processing iterable objects.	
+
+!!!XXXXXXXXXXXXXXXXXXXX	
+Suppose you want to convert a list of integers to another list of the string representa-
+tions of those integers. You could use a loop to visit each integer, convert it to a string,
+and append it to a new list, as follows:
+newList = []
+for number in oldList: newList.append(str(number))
+
+Thus, the code
+map(str, oldList)
+creates the iterable object containing the strings, and the code
+newList = list(map(str, oldList))
+creates a new list from that object.
+
+
+Suppose you want to drop all of the zero grades from a list of exam scores. The follow-
+ing loop would accomplish this:
+newList = []
+for number in oldList:
+if number > 0: newList.append(number)
+
+assuming the programmer has already defined the Boolean function isPositive , the
+code
+filter(isPositive, oldList)
+creates the iterable object containing the non-zero grades, and the code
+newList = list(filter(isPositive, oldList))
+creates a new list from that object.
+
+
+## Creating Anonymous Functions with lambda
+newList = list(filter(lambda number: number > 0, oldList))
+
+import functools
+product = functools.reduce(lambda x, y: x * y, range(1, 11))
+
+## Catching Exceptions
+try:
+	number = int(inputString)
+	return number
+except ValueError:
+	print("Error in number format:", inputString)
+	return safeIntegerInput(prompt)
+	
+## Files and Their Operations
+??????????????????????????
+??????????????????????????
+
+
+## Creating New Classes
+
+
+# chapter2 An Overview of Collections
+Although they may differ in structure and use, all collections have the same fundamental purpose:
+they help programmers effectively organize data in programs.
+
+## Collection Types
+As you already know, Python includes several built-in collection types: the string, the
+list, the tuple, the set, and the dictionary. The string and the list are probably the most
+common and fundamental types of collections. Other important types of collections
+include stacks, queues, priority queues, binary search trees, heaps, graphs, bags, and
+various types of sorted collections.
+
+Collections can be homogeneous, meaning that all items in the collection must be of the
+same type, or heterogeneous, meaning the items can be of different types. In many pro-
+gramming languages, collections are homogeneous, although most Python collections
+can contain multiple types of objects.
+
+
+
+>>> lyst1 = [2, 4, 8]
+>>> lyst2 = list(lyst1)
+>>> lyst1 is lyst2
+False
+>>> lyst1 == lyst2
+True
+>>>
+Not only do the two lists in this example have the same structure, but they share the
+same items. That is, the list function makes a shallow copy of its argument list; these
+items are not themselves cloned before being added to the new list. This policy does not
+cause problems when the items are immutable (numbers, strings, or Python tuples).
+However, when collections share mutable items, side effects can occur. To prevent
+these from happening, the programmer can create a deep copy by writing a for loop
+over the source collection, which explicitly clones its items before adding them to the
+new collection.
+
+
+## Implementations of Collections
+Some programming languages, like Python, provide only one implementation of each
+of the available collection types. Other languages, like Java, provide several. For exam-
+ple, Java’s java.util package includes two implementations of lists, named ArrayList
+and LinkedList , and two implementations of sets and maps (like Python dictionaries),
+named HashSet , TreeSet , HashMap , and TreeMap . Java programmers use the same inter-
+faces (set of operations) with each implementation but are free to choose among
+implementations with respect to their performance characteristics and other criteria.
+
+One aim of this book is to give the Python programmer the same options as the Java
+programmer, as well as to introduce abstract collection types and their implementa-
+tions that are not available in either language. For each category of collections (linear,
+hierarchical, graph, unordered, sorted), you’ll see one or more abstract collection types
+and one or more implementations of each type.
+
+In computer science, abstraction is used for ignoring or hiding details that are, for the
+moment, nonessential. A software system is often built layer by layer, with each layer
+treated as an abstraction by the layers above that utilize it. Without abstraction, you
+would need to consider all aspects of a software system simultaneously, which is an
+impossible task. Of course, you must consider the details eventually, but you can do so
+in a small and manageable context.
+
+“Interfaces, Implementations, and Polymorphism,” and 6, “Inheritance and Abstract
+Classes.” A complete list of the collection classes covered in this book is given in the
+Appendix, “A Collection Framework for Python Programmers.”
+
+
+# chapter5 Interfaces, Implementations, and Polymorphism(多态性)
+
+One of the hallmarks of well-designed software is the clean separation of interfaces from implementations.
+
+When programmers use a software resource, they need only be concerned with its
+interface—the set of methods, functions, and data type names available to them.
+
+
+## Developing an Interface
+
+## Designing the Bag Interface
+
+## Specifying Arguments and Return Values
+## Preconditions, Postconditions, Exceptions, and Documentation
+The final step before expressing an interface in code is to describe clearly and concisely
+what each method does. This description includes not only what you expect to occur
+under normal conditions when a method is called, but also what will happen when
+something abnormal, such as an error, occurs. Such descriptions are brief and deal
+only with what a method does, not with how it does it. They form the basis for docu-
+menting the coded interface with docstrings, as you will see shortly.
+
+As discussed in Chapter 1, “Basic Python Programming,” a docstring is a string enclosed
+in triple quotes that will be displayed when Python’s help function is run on a resource.
+A docstring for a method with no possible error conditions simply states what the
+method’s parameters are, what its return value is, and what action is performed. Some-
+times you can express this information in a single sentence, such as, “Returns the sum
+of the numbers in the list,” or “Sorts the list’s items in ascending order.”
+
+A more detailed form of documentation can include preconditions and postconditions.
+A precondition is a statement of what must be true for a method to perform its actions
+correctly. Typically, this condition has to do with the state of the object on which the
+method is run. For example, an item must be in a collection before it can be accessed or
+removed.
+A postcondition states what will be true after the method completes execution, assum-
+ing that its preconditions are also true. For example, the postcondition of clearing a
+collection is that the collection is empty. Postconditions are usually included in mutator
+methods, which modify the internal state of an object.
+Documentation in an interface should also include a statement of any exceptions that
+could be raised, usually as the result of the failure to adhere to the preconditions of a
+method. For example, a bag’s remove method might raise a KeyError if the target item is
+not in the bag.
+
+Now you’ll see what a bag’s remove method does, under normal or abnormal circum-
+stances. Here is a Python method header for this operation, which includes a detailed
+docstring that describes the method’s argument, preconditions, postconditions, and
+possible exceptions. Note that self is the name of the bag object, from the method’s
+perspective.
+def remove(self, item):
+	"""Precondition: item is in self.
+	Raises: KeyError if item in not in self.
+	Postcondition: item is removed from self."""
+
+## Coding an Interface in Python
+
+
+
+## Testing the Two Bag Implementations
+A critical part of software resource development is testing. 
+
+But once the code is completed, you must run a thorough
+test to build confidence that the resource meets its requirements.
+
+Unit testing with tools such as pyunit can provide such assurance, but an exploration of
+this type of testing is beyond the scope of this book. Instead, the approach used here is
+to include a tester function for each resource that you develop.
+
+Note that you can run the same methods—those in the bag interface—in this test pro-
+gram on any bag type. That’s the whole point of an interface: it remains the same while
+the implementations can change.
+
+## Diagramming the Bag Resource with UML
+
+a visual language called Unified Modeling Language (UML)
+
+Two other important relationships among classes are aggregation(聚合) and composition(构成).
+Each LinkedBag object aggregates zero or more nodes, whereas each ArrayBag object is
+composed of a single Array object. Figure 5.2 adds these relationships to the resources
+depicted in Figure 5.1. Note that the * symbol in Figure 5.2 indicates zero or more
+instances of the Node class in the aggregation.
+
+Informally, you can think of composition as a whole-to-part relationship, whereas
+aggregation is a one-to-many relationship. The next chapter introduces another important 
+relationship, that of inheritance. Keep your bags packed until then!
+
+
+
+# chapter6 Inheritance and Abstract Classes
+
+Software designers have a similar practice of reusing existing models rather than building 
+entirely new models from scratch.
+
+
+##
+The strategy for creating a subclass of an existing class is dramatically different. You
+still work on a copy of the parent class’s file, but you now perform the following steps:
+1. Begin by deleting all the methods that do not have to change. They will be
+automatically included from the parent class, by the windfall mechanism of
+inheritance.However,note that you still need the init method in the new class.
+2. To guarantee that the inheritance happens, you must place the name of the
+parent class within the parentheses of the class header.
+3. Modify the code for the methods that must change (including __init__ ).
+4. Add any new methods.
+
+
+## Using Abstract Classes to Eliminate Redundant Code
+
+In this section, you learn how to eliminate redundant methods and data in a set of exist-
+ing classes by factoring the code for them into a common superclass. Such a class is
+called an abstract class to indicate that it captures the common features and behavior
+of a set of related classes. An abstract class is not normally instantiated in client appli-
+cations. Its subclasses are called concrete classes to indicate that they are the classes
+actually used to create objects in client applications.
+
+
+
+
+
+# chapter10 Trees
+
+Nonetheless, trees have widespread uses. They represent collections of objects, such as a file directory 
+structure and a book’s table of contents, quite naturally. Trees can also be used for implementing
+other collections, such as sorted sets and sorted dictionaries, that require efficient
+searching, or that, like priority queues, must impose some priority order on their elements. 
+This chapter examines the properties of trees that make them useful data structures and 
+explores their role in implementing several types of collections.
+
+## Recursive Descent Parsing and Programming Languages
+递归下降
+
+### Introduction to Grammars
+Most programming languages, no matter how small or large they are, have a precise
+and complete definition called a grammar. A grammar consists of a few parts:
+1. A vocabulary (or dictionary or lexicon) consisting of words and symbols allowed in
+sentences in the language.
+2. A set of syntax rules that specify how symbols in the language are combined to
+form sentences.
+3. A set of semantic rules that specify how sentences in the language should be
+interpreted. For example, the statement x = y might mean “copy the value of y to
+the variable x .”
+
+suppose you want to define a language for representing simple arithmetic
+expressions such as the following:
+4 + 2
+3 * 5
+6 - 3
+10 / 2
+(4 + 5) * 10
+
+Now suppose you don’t want to allow expressions, such as 4 + 3 – 2 or 4 * 3 / 2, that
+contain consecutive adding operations or consecutive multiplying operations. The fol-
+lowing grammar defines the syntax and vocabulary of this new little language:
+expression = term [ addingOperator term ]
+term = factor [ multiplyOperator factor ]
+factor = number | "(" expression ")"
+number = digit { digit }
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+addingOperator = "+" | "-"
+multiplyingOperator = "*" | "/"
+
+
+## Recognizing, Parsing, and Interpreting Sentences in a Language
+To process the sentences in a language, you use recognizers, parsers, and interpreters. A
+recognizer analyzes a string to determine if it is a sentence in a given language. The
+inputs to the recognizer are the grammar and a string. The outputs are “Yes” or “No”
+and appropriate syntax error messages. If there are one or more syntax errors, you get
+“No,” and the string is not a sentence.
+A parser has all the features of a recognizer and returns information about the syntactic
+and semantic structure of the sentence. This information is used in further processing
+and is contained in a parse tree.
+An interpreter carries out the actions specified by a sentence. In other words, an inter-
+preter runs the program. Occasionally, parsing and interpreting occur at the same time.
+Otherwise, the input to the interpreter is the data structure that results from parsing.
+From now on, there’s no distinction between a recognizer and a parser, but parser refers
+to both.
+
+## Lexical Analysis and the Scanner
+
+## Parsing Strategies
+You can use several strategies for parsing. One of the simplest is called recursive descent
+parsing. A recursive descent parser defines a function for each rule in the grammar.
+
+
+
+The constructor for LeafNode expects an integer as an argument, whereas the con-
+structor for InteriorNode expects a character-based operator symbol and two other
+nodes as arguments.
+Here is a short tester program that illustrates the use of the node classes:
+from expressiontree import LeafNode, InteriorNode
+a = LeafNode(4)
+b = InteriorNode(’+’, LeafNode(2), LeafNode(3))
+c = InteriorNode(’*’, a, b)
+c = InteriorNode(’-’, c, b)
+print("Expect ((4 * (2 + 3)) - (2 + 3)) :", c.infix())
+print("Expect - * 4 + 2 3 + 2 3 :", c.prefix())
+print("Expect 4 2 3 + * 2 3 + - :", c.postfix())
+print("Expect 15 :", c.value())
+
+## Design and Implementation of the Parser Class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

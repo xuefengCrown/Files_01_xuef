@@ -1,0 +1,153 @@
+; 复数系统 数据导向的程序设计
+
+;; 直角坐标表示的复数包
+(define (install-rectangular-package)
+  ;; internal procedures
+  (define (real-part z) (car z))
+  (define (imag-part z) (cdr z))
+  (define (make-from-real-imag x y) (cons x y))
+  (define (magnitude z) 
+    (define (square x) (* x x))
+    (sqrt (+ (square (real-part z)) 
+             (square (imag-part z)))))
+  (define (angle z)
+    (atan (imag-part z)
+          (real-part z)))
+  (define (make-from-mag-ang r a)
+    (cons (* r (cos a)) (* r (sin a))))
+  
+  ;; interface to the rest of the system
+  (define (tag x) (attach-tag 'rectangular x))
+  (put 'real-part '(rectangular) real-part)
+  (put 'imag-part '(rectangular) imag-part)
+  (put 'magnitude '(rectangular) magnitude)
+  (put 'angle '(rectangular) angle)
+  (put 'make-from-real-imag 'rectangular
+       (lambda (x y) (tag (make-from-real-imag x y))))
+  (put 'make-from-mag-ang 'rectangular
+       (lambda (r a) (tag (make-from-mag-ang r a))))
+  'done)
+
+
+;; 极坐标表示的复数包
+(define (install-polor-package)
+  ;; internal procedures
+  ;; 不可在包外访问的过程
+  ;; 这些过程都被注册在表 operation-table 中
+  (define (magnitude z) (car z))
+  (define (angle z) (cdr z))
+  (define (make-from-mag-ang r a) (cons r a))
+  (define (real-part z)
+    (* (magnitude z) (cos (angle z))))
+  (define (imag-part z)
+    (* (magnitude z) (sin (angle z))))
+  (define (make-from-real-imag x y)
+    (define (square x) (* x x))
+    (cons (sqrt (+ (square x) (square y)))
+          (atan y x)))
+  
+  ;; interface to the rest of the system
+  (define (tag x) (attach-tag 'polar x))
+  (put 'real-part '(polar) real-part)
+  (put 'imag-part '(polar) imag-part)
+  (put 'magnitude '(polar) magnitude)
+  (put 'angle '(polar) angle)
+  (put 'make-from-real-imag 'polar
+       (lambda (x y) (tag (make-from-real-imag x y))))
+  (put 'make-from-mag-ang 'polar
+       (lambda (r a) (tag (make-from-mag-ang r a))))
+  'done)
+
+;;; 添加标志 与分离出标志和内容
+(define (attach-tag type-tag contents)
+  (cons type-tag contents))
+(define (type-tag datum)
+  (if (pair? datum)
+      (car datum)
+      'oops))
+(define (contents datum)
+  (if (pair? datum)
+      (cdr datum)
+      'oops))
+;;; 谓词
+(define (rectangular? z) (eq? (type-tag z) 'rectangular))
+(define (polar? z) (eq? (type-tag z) 'polar))
+
+
+(define (apply-gereric op . args)
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+          (apply proc (map contents args))
+          'oops))))
+;;; 通用型选择函数
+(define (real-part z) (apply-gereric 'real-part z))
+(define (imag-part z) (apply-gereric 'imag-part z))
+(define (magnitude z) (apply-gereric 'magnitude z))
+(define (angle z) (apply-gereric 'angle z))
+
+
+;; 两维表格
+
+;;; 在一维表格中搜寻key对应的key-value pair
+(define (_assoc key records)
+  (cond ((null? records) #f)
+        ((equal? key (caar records)) (car records))
+        (else (_assoc key (cdr records)))))
+
+(define (make-table)
+  (let ((local-table (list '*table*)))
+      (define (lookup key-1 key-2)
+        (let ((subtable (_assoc key-1 (cdr local-table))))
+             (if subtable
+                 (let ((record (_assoc key-2 (cdr subtable))))
+                   (if record
+                       (cdr record)
+                       #f))
+                     #f)))
+      (define (insert! key-1 key-2 value)
+        (let ((subtable (_assoc key-1 (cdr local-table))))
+             (if subtable
+                 (let ((record (_assoc key-2 (cdr subtable))))
+                      (if record
+                          (set-cdr! record value)
+                          (set-cdr! subtable
+                                    (cons (cons key-2 value) 
+                                          (cdr subtable)))))
+                  (set-cdr! local-table
+                            (cons (list key-1
+                                        (cons key-2 value)) 
+                                  (cdr local-table)))))
+        'ok)
+      (define (dispatch m)
+        (cond ((eq? m 'lookup-proc) lookup)
+              ((eq? m 'insert-proc!) insert!)
+              (#t 'oops)
+          ))
+    dispatch))
+(define operation-table (make-table)) ;; new一个table
+(define get (operation-table 'lookup-proc))
+(define put (operation-table 'insert-proc!))
+
+
+; test make-table
+;;;;;;;;;
+;;  operation-table
+;;=> #<Closure>
+;;   (put 'letters 'a 97)
+;;=> ok
+;;   (put 'letters 'b 98)
+;;=> ok
+;;   (get 'letters 'a)
+;;=> 97
+
+;;; 从表中提取出构造函数，用到包外面的程序中
+(define (make-from-real-imag x y)
+  ((get 'make-from-real-imag 'rectangular) x y))
+(define (make-from-mag-ang r a)
+  ((get 'make-from-mag-ang 'polar) r a))
+
+
+
+
+

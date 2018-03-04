@@ -1,0 +1,124 @@
+
+
+System.out 表示标准输出
+System.in 表示标准输入
+默认情况下，输出设备是显示器，输入设备是键盘。
+unix中用文件标识符？？？来标识打开的文件(0,1,2...)
+
+import java.util.Scanner
+Scanner input = new Scanner(System.in)
+
+## 变量 variable
+int i, j, k;
+int i=1, j=2;
+
+### 变量的使用范围
+
+## 命名常量
+final datatype CONSTANTNAME = value;
+final double PI = 3.14159;
+
+java 命名习惯
+
+## 幂运算
+Math.pow(2,3)
+
+## 时间
+System.currentTimeMillis()
+
+## 软件开发过程
+需求规范，分析，设计，实现（编码，自我测试以及调试），测试，维护。
+
+chapter3 conditional
+## 对布尔值的冗余测试
+if (even == true) // xxx
+if (even)
+
+## 随机数
+Math.random() //0到1的随机double
+
+与或非 && || !
+python  and or not
+
+## 调试
+
+
+chapter4
+ceil()
+floor()
+
+min
+max
+abs
+
+## 字符
+char letter = 'A'; // ++letter
+char charfour = '4';
+
+### 字符与数值之间的转换
+char c = (char)65;
+
+### 字符的比较与测试
+'a' < 'b'
+if (ch>='A' && ch<='Z')
+
+java 的 Character类提供了下列方法用于字符测试。
+isDigit()
+isLetter()
+isLetterOfDigit()
+isLowerCase()
+isUpperCase()
+toLowerCase()
+toUpperCase()
+
+
+## 4.4 String 类型
+与 c 的字符串作对比
+
+String message = "welcome to java";
+
+获得字符串长度，访问字符串中字符，连接字符串，转换为大写或小写，裁剪字符串
+length()
+charAt()
+s2.concat(s1)
+toLowerCase()
+toUpperCase()
+trim() //去掉两边空白字符
+
+### 4.4.7 字符串比较
+s2.equals(s1)
+equalsIgnoreCase(s1)
+s2.compareTo(s1)//返回大于0，等于0，小于0的整数，表明s2大于，等于，或小于s1
+compareToIgnoreCase(s1)
+startsWith(prefix)
+endsWith(suffix)
+contains(s1)
+
+//提取子串
+message.substring(0,11)
+
+### 字符串和数字间的转换
+int intV = Integer.parseInt("123");
+double doubleV = Double.parseDouble("12.3");
+
+
+chapter5
+## 5.2.5 输入输出重定向
+
+//输入重定向 从input.txt 读取
+java Sentine1Value < input.txt 
+
+java Sentine1Value < input.txt > output.txt
+
+## for 循环
+for (i = 0; i < 10; i++){
+
+}
+
+## 嵌套循环
+其实是笛卡儿积
+
+
+
+
+

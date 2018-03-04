@@ -1,0 +1,122 @@
+; 复数系统
+
+;; 选择函数
+;;; real-part imag-part magnitude angle
+;; 构造函数
+;;; make-from-real-imag make-from-mag-ang
+
+(define (add-complex z1 z2)
+  (make-from-real-imag (+ (real-part z1) (real-part z2))
+                       (+ (imag-part z1) (imag-part z2))))
+
+(define (sub-complex z1 z2)
+  (make-from-real-imag (- (real-part z1) (real-part z2))
+                       (- (imag-part z1) (imag-part z2))))
+
+(define (mul-complex z1 z2)
+  (make-from-mag-ang (* (magnitude z1) (magnitude z2))
+                     (+ (angle z1) (angle z2))))
+                   
+(define (div-complex z1 z2)
+  (make-from-mag-ang (/ (magnitude z1) (magnitude z2))
+                     (- (angle z1) (angle z2))))
+
+
+;;; 添加标志 与分离出标志和内容
+(define (attach-tag type-tag contents)
+  (cons type-tag contents))
+(define (type-tag datum)
+  (if (pair? datum)
+      (car datum)
+      'oops))
+(define (contents datum)
+  (if (pair? datum)
+      (cdr datum)
+      'oops))
+;;; 谓词
+(define (rectangular? z) (eq? (type-tag z) 'rectangular))
+(define (polar? z) (eq? (type-tag z) 'polar))
+
+
+; 复数的表示
+;; 实部虚部对偶 (x . y)
+(define (real-part-rectangular z) (car z))
+(define (imag-part-rectangular z) (cdr z))
+(define (magnitude-rectangular z) 
+  (define (square x) (* x x))
+  (sqrt (+ (square (real-part-rectangular z)) 
+           (square (imag-part-rectangular z)))))
+(define (angle-rectangular z) 
+  (atan (imag-part-rectangular z) 
+        (real-part-rectangular z)))
+
+(define (make-from-real-imag-rectangular x y) 
+  (attach-tag 'rectangular (cons x y)))
+;;; 模幅——>实部虚部 表示
+(define (make-from-mag-ang-rectangular r a)
+  (attach-tag 'rectangular (cons (* r (cos a)) (* r (sin a)))))
+
+
+;;; 极坐标表示
+(define (magnitude-polar z) (car z))
+(define (angle-polar z) (cdr z))
+(define (real-part-polar z)
+  (* (magnitude-polar z) (cos (angle-polar z))))
+(define (imag-part-polar z)
+  (* (magnitude-polar z) (sin (angle-polar z))))
+
+(define (make-from-mag-ang-polar r a)
+  (attach-tag 'polar (cons r a)))
+(define (make-from-real-imag-polar x y)
+  (define (square x) (* x x))
+  (attach-tag 'polar (cons (sqrt (+ (square x) (square y)))
+                           (atan y x))))
+
+
+;;; 通用型选择函数
+(define (real-part z) ; 根据z的type-tag,调用不同的过程
+  (cond ((rectangular? z) 
+         (real-part-rectangular (contents z)))
+        ((polar? z)
+         (real-part-polar (contents z)))
+       ;; 应该有个异常处理
+    ))
+
+(define (imag-part z) ; 根据z的type-tag,调用不同的过程
+  (cond ((rectangular? z) 
+         (imag-part-rectangular (contents z)))
+        ((polar? z)
+         (imag-part-polar (contents z)))
+       ;; 应该有个异常处理
+    ))
+
+(define (magnitude z) ; 根据z的type-tag,调用不同的过程
+  (cond ((rectangular? z) 
+         (magnitude-rectangular (contents z)))
+        ((polar? z)
+         (magnitude-polar (contents z)))
+       ;; 应该有个异常处理
+    ))
+
+(define (angle z) ; 根据z的type-tag,调用不同的过程
+  (cond ((rectangular? z) 
+         (angle-rectangular (contents z)))
+        ((polar? z)
+         (angle-polar (contents z)))
+       ;; 应该有个异常处理
+    ))
+
+
+(define (make-from-real-imag x y)
+  (make-from-real-imag-rectangular x y))
+(define (make-from-mag-ang r a)
+  (make-from-mag-ang-polar r a))
+
+(define c1 (make-from-real-imag 1 2))
+(define c2 (make-from-real-imag 2 2)) 
+
+
+
+
+
+

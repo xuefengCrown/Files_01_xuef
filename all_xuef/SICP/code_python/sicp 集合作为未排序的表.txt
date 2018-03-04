@@ -1,0 +1,37 @@
+; 集合作为未排序的表
+;; 元素包含检测
+(define (element-of-set? x set)
+  (cond ((null? set) #f)
+        ((equal? x (car set)) #t)
+        (else (element-of-set? x (cdr set)))))
+
+; 添加元素
+;; 如果set 已经包含 x,返回set
+;; 否则，添加进表
+(define (adjoin-set x set)
+  (if (element-of-set? x set)
+      set
+      (cons x set)))
+    
+;; 求两个集合的交集
+(define (intersection-set set1 set2)
+  (cond ((or (null? set1) (null? set2)) '()) ;; 有一个空集，交集就为空
+        ((element-of-set? (car set1) set2)
+                          (cons (car set1) (intersection-set (cdr set1) set2)))
+        (else (intersection-set (cdr set1) set2))))
+
+;; 求集合的并集
+(define (union-set set1 set2)
+  (cond ((null? set1) set2)
+        ((null? set2) set1)
+        ((element-of-set? (car set1) set2) 
+                          (union-set (cdr set1) set2))
+        (else (cons (car set1) (union-set (cdr set1) set2)))))
+		
+;; test
+  (union-set '(1 2 3 6) '(3 4 5 1 6 2))
+=> (3 4 5 1 6 2)
+   (union-set '() '(3 4 5 1 6 2))
+=> (3 4 5 1 6 2)
+   (union-set '(1) '(3 4 5 2))
+=> (1 3 4 5 2)

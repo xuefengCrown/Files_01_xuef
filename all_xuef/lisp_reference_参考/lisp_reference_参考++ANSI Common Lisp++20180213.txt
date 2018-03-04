@@ -979,6 +979,170 @@ KEYLIST
 函数式风格相比之下，更适合写出重用软件。
 
 
+6.5 闭包 (Closures)
+函数可以如表达式的值，或是其它对象那样被返回。
+
+以下是接受一个实参，并依其类型返回特定的结合函数：
+(defun combiner (x)
+  (typecase x
+    (number #'+)
+    (list #'append)
+    (t #'list)))
+在这之上，我们可以创建一个通用的结合函数:
+(defun combine (&rest args)
+  (apply (combiner (car args))
+         args))
+它接受任何类型的参数，并以适合它们类型的方式结合。（为了简化这个例子，我们假定所有的实参，都有着一样的类型。）
+> (combine 2 3)
+5
+> (combine '(a b) '(c d))
+(A B C D)
+
+
+如果函数在词法变量的作用域里被定义时，函数仍可引用到那个变量，即便函数被作为一个值返回了，返回至词法变量
+被创建的上下文之外。下面我们创建了一个把实参加上 3 的函数：
+> (setf fn (let ((i 3))
+             #'(lambda (x) (+ x i))))
+#<Interpreted-Function C0A51E>
+> (funcall fn 2)
+5
+
+
+当函数引用到外部定义的变量时，这外部定义的变量称为自由变量（free variable）。函数引用到自由的词法变量时，称之为闭包（closure）。
+只要函数还存在，变量就必须一起存在。
+
+闭包结合了函数与环境（environment）；无论何时，当一个函数引用到周围词法环境的某个东西时，闭包就被隐式地创建出来了。
+这悄悄地发生在像是下面这个函数，是一样的概念:
+(defun add-to-list (num lst)
+  (mapcar #'(lambda (x)
+              (+ x num))
+          lst))
+这函数接受一个数字及列表，并返回一个列表，列表元素是元素与传入数字的和。在 lambda 表达式里的变量 num 是自由的，所以像是这样的情况，
+我们传递了一个闭包给 mapcar 。
+
+一个更显着的例子会是函数在被调用时，每次都返回不同的闭包。下面这个函数返回一个加法器（adder）:
+(defun make-adder (n)
+  #'(lambda (x)
+      (+ x n)))
+它接受一个数字，并返回一个将该数字与其参数相加的闭包（函数）。
+> (setf add3 (make-adder 3))
+#<Interpreted-Function COEBF6>
+> (funcall add3 2)
+5
+> (setf add27 (make-adder 27))
+#<Interpreted-Function C0EE4E>
+> (funcall add27 2)
+29
+
+
+我们可以产生共享变量的数个闭包。下面我们定义共享一个计数器的两个函数:
+(let ((counter 0))
+  (defun reset ()
+    (setf counter 0))
+  (defun stamp ()
+    (setf counter (+ counter 1))))
+这样的一对函数或许可以用来创建时间戳章（time-stamps）。每次我们调用 stamp 时，我们获得一个比之前高的数字，
+而调用 reset 我们可以将计数器归零:
+> (list (stamp) (stamp) (reset) (stamp))
+(1 2 0 1)
+你可以使用全局计数器来做到同样的事情，但这样子使用计数器，可以保护计数器被非预期的引用。
+
+
+Common Lisp 有一个内置的函数 complement 函数，接受一个谓词，并返回谓词的补数（complement）。比如：
+> (mapcar (complement #'oddp)
+          '(1 2 3 4 5 6))
+(NIL T NIL T NIL T)
+有了闭包以后，很容易就可以写出这样的函数：
+(defun our-complement (f)
+  #'(lambda (&rest args)
+      (not (apply f args))))
+如果你停下来好好想想，会发现这是个非凡的小例子；而这仅是冰山一角。闭包是 Lisp 特有的美妙事物之一。
+闭包开创了一种在别的语言当中，像是不可思议的程序设计方法。
+
+
+6.6 示例：函数构造器 (Example: Function Builders)
+？？？？？？
+
+(defun compose (&rest fns)
+  (destructuring-bind (fn1 . rest) (reverse fns)
+    #'(lambda (&rest args)
+        (reduce #'(lambda (v f) (funcall f v))
+                rest
+                :initial-value (apply fn1 args)))))
+
+				
+首先， compose 接受一个或多个函数，并返回一个依序将其参数应用的新函数，即，
+(compose #'a #'b #'c)
+返回一个函数等同于
+
+#'(lambda (&rest args) (a (b (apply #'c args))))
+这代表着 compose 的最后一个实参，可以是任意长度，但其它函数只能接受一个实参。
+
+下面我们建构了一个函数，先给取参数的平方根，取整后再放回列表里，接着返回:
+
+> (mapcar (compose #'list #'round #'sqrt)
+          '(4 9 16 25))
+((2) (3) (4) (5))
+
+
+(reduce #'fn '(a b c d))
+等同于
+(fn (fn (fn 'a 'b) 'c) 'd)
+我们可以使用 reduce 来扩充只接受两个参数的函数。举例来说，要得到三个或多个列表的交集(intersection)，我们可以：
+> (reduce #'intersection '((b r a d 's) (b a d) (c a t)))
+(A)
+
+
+6.7 动态作用域 (Dynamic Sc​​ope)
 
 
 
+6.9 使用递归 (Using Recursion)
+比起多数别的语言，递归在 Lisp 中扮演了一个重要的角色。这主要有三个原因：
+1.函数式程序设计。递归演算法有副作用的可能性较低。
+2.递归数据结构。 Lisp 隐式地使用了指标，使得递归地定义数据结构变简单了。最常见的是用在列表：一个列表的递归定义，
+列表为空表，或是一个 cons ，其中 cdr 也是个列表。
+3.优雅性。Lisp 程序员非常关心它们的程序是否美丽，而递归演算法通常比迭代演算法来得优雅。
+
+如果你想要知道是否正确，不需要去想递归函数所有的调用过程。
+同样的如果你想写一个递归函数。如果你可以描述问题是怎么递归解决的，通常很容易将解法转成代码。要使用递归来解决一个问题，你需要做两件事：
+1.你必须要示范如何解决问题的一般情况，通过将问题切分成有限小并更小的子问题。
+2.你必须要示范如何通过 ── 有限的步骤，来解决最小的问题 ── 基本用例。
+如果这两件事完成了，那问题就解决了。因为递归每次都将问题变得更小，而一个有限的问题终究会被解决的，而最小的问题仅需几个有限的步骤就能解决。
+
+这里有两个递归算法的示例。假定参数是有限的。注意第二个示例，我们每次递归时，将问题分成两个更小的问题：
+第一个例子， member 函数，我们说某物是列表的成员，需满足：如果它是第一个元素的成员或是 member 的 cdr 的成员。但空列表没有任何成员。
+第二个例子， copy-tree 一个 cons 的 copy-tree ，是一个由 cons 的 car 的 copy-tree 与 cdr 的 copy-tree 所组成的。
+一个原子的 copy-tree 是它自己。
+
+一旦你可以这样描述算法，要写出递归函数只差一步之遥。
+
+
+某些算法通常是这样表达最自然，而某些算法不是。你可能需要翻回前面，试试不使用递归来定义 our-copy-tree (41 页，译注: 3.8 小节)。
+另一方面来说，23 页 (译注: 2.13 节) 迭代版本的 show-squares 可能更容易比 24 页的递归版本要容易理解。某些时候是很难看出哪个形式
+比较自然，直到你试着去写出程序来。
+
+如果你关心效率，有两个你需要考虑的议题。第一，尾递归（tail-recursive），会在 13.2 节讨论。一个好的编译器，使用循环或是尾递归的速度，
+应该是没有或是区别很小的。然而如果你需要使函数变成尾递归的形式时，或许直接用迭代会更好。
+
+另一个需要铭记在心的议题是，最显而易见的递归算法，不一定是最有效的。
+
+
+
+
+> (subst 'm 'b '(a b (a b c) d))
+(a m (a m c) d)
+我们可以这样表示此函数
+(label subst (lambda (x y z)
+               (cond ((atom z)
+                      (cond ((eq z y) x)
+                            ('t z)))
+                     ('t (cons (subst x y (car z))
+                               (subst x y (cdr z)))))))
+							   
+(defun subst (x y z)
+  (cond ((atom z)
+         (cond ((eq z y) x)
+               ('t z)))
+        ('t (cons (subst x y (car z))
+                  (subst x y (cdr z))))))

@@ -1,0 +1,55 @@
+; 集合作为排序的表
+; 假设元素都是数值
+; 假设表中元素为升序
+
+;; 包含性检查。这一实现策略与未排序的表相比，基本一样慢 O(n)
+;; 使用BinarySearch 可以将时间复杂度提升到 O(logn)
+(define (element-of-set? x set)
+  (cond ((null? set) #f)
+        ((= (car set) x) #t)
+        ((< x (car set)) #f)
+        (else (element-of-set? x (cdr set)))))
+
+;; 交集
+(define (intersection-set set1 set2)
+  (if (or (null? set1) (null? set2)) 
+      '()
+      (let ((x1 (car set1))
+            (x2 (car set2)))
+        (cond ((= x1 x2)
+                  (cons x1 (intersection-set (cdr set1) (cdr set2))))
+              ((< x1 x2)
+                  (intersection-set (cdr set1) set2))
+              (else (intersection-set set1 (cdr set2)))
+        ))))
+(define set1 '(1 2 5 7 8 10))
+(define set2 '(3 4 7 8 9 10 11))
+;; 并集
+(define (union-set set1 set2)
+  (if (null? set1)
+      set2
+      (if (null? set2) 
+          set1
+          (let ((x1 (car set1))
+                (x2 (car set2)))
+            (cond ((= x1 x2) 
+                      (cons x1 (union-set (cdr set1) (cdr set2))))
+                  ((< x1 x2) 
+                      (cons x1 (union-set (cdr set1) set2)))
+                  (else 
+                        (cons x2 (union-set set1 (cdr set2))))
+              )))
+      )
+  )
+
+;; 添加元素
+(define (adjoin-set x set)
+  (cond ((null? set) '(x))
+        ((= x (car set)) set)
+        ((> x (car set)) (cons (car set) (adjoin-set x (cdr set))))
+        (else (cons x set))
+    ))
+
+
+
+

@@ -1,0 +1,5 @@
+
+I have made an effort to avoid using any advanced calculus, probability,  
+or stochastic  process concepts.  
+
+
