@@ -1,0 +1,15 @@
+
+## spring4 的 四个核心包
+spring-beans-4.0.5.RELEASE
+spring-context-4.0.5.RELEASE
+spring-core-4.0.5.RELEASE
+spring-expression-4.0.5.RELEASE
+
+## 依赖的一个包
+commons-logging-1.1.1
+
+## 添加jar步骤
+1. 新建一个 folder
+2. copy jar 进去
+3. add to build path
+

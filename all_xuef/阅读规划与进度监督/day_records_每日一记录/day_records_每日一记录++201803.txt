@@ -38,9 +38,16 @@ Spring http://projects.spring.io/spring-framework/
 观察者模式
 《Mysql 5.6》 左右连接没明白
 
+0305
 
+mark 《user interface design for programmers》
+https://www.joelonsoftware.com/2001/10/24/user-interface-design-for-programmers/
+《Don’t Make Me Think / 点石成金:访客至上的网页设计秘笈》
 
-
+！！！！！！
+工作自动化。
+python 脚本。
+批处理文件。
 
 
 

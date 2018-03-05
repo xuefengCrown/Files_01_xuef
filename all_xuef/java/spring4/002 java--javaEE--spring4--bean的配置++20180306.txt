@@ -1,0 +1,34 @@
+
+## IOC的前世今生
+1. service——>接口与实现
+2. 工厂设计模式
+service 只需要知道接口，和工厂打交道。
+3. 控制反转(inversion of control)
+service 只要找容器(container)
+
+## 配置 bean
+-- 配置形式：基于XML文件的方式；基于注解的方式
+-- Bean的配置方式：通过全类名（反射），通过工厂方法（静态工厂方法 & 实例工厂方法），FactoryBean
+-- IOC容器 FactoryBean & ApplicationContext 概述
+-- 依赖注入的方式： 属性注入； 构造器注入
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

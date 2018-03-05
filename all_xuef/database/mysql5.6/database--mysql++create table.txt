@@ -1,0 +1,41 @@
+
+CREATE TABLE customers(
+ c_id int NOT NULL AUTO_INCREMENT,
+ c_name char(50) NOT NULL,
+ c_address char(50) NULL,
+ c_city char(50) NULL,
+ c_zip char(10) NULL,
+ c_contact char(50) NULL,
+ c_email char(255) NULL,
+ PRIMARY KEY(c_id)
+);
+
+INSERT INTO customers(c_id, c_name, c_address, c_city, c_zip, c_contact, c_email)
+VALUES(10001, 'RedHook', '200 Street', 'Tianjin', '300000', 'Liming', 'LMing@163.com'),
+(10002, 'Stars', '333 Fromage Lane', 'Dalian', '116000', 'Zhangbo', 'Jerry@hotmail.com'),
+(10003, 'Netbhood', '1 Sunny Place', 'Qingdao', '266000', 'Luocong', NULL),
+(10004, 'JOTO', '829 Riverside Drive', 'Haikou', '570000', 'YangShan', 'sam@hotmail.com');
+
+CREATE TABLE orders(
+ o_num int NOT NULL AUTO_INCREMENT,
+ o_date datetime NOT NULL,
+ c_id int Not NULL,
+ PRIMARY KEY(o_num) 
+);
+
+INSERT INTO orders(o_num, o_date, c_id)
+VALUES(30001, '2008-09-01', 10001),
+(30002, '2008-09-12', 10003),
+(30003, '2008-09-30', 10004),
+(30004, '2008-10-03', 10005),
+(30005, '2008-10-08', 10001);
+
+
+
+
+
+
+
+
+
+
