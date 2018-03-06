@@ -1,0 +1,82 @@
+遇到问题：
+spring 通配符的匹配很全面, 但无法找到元素 'context:property-placeholder' 的声明。
+
+## 
+0. 依赖jar：
+com.springsource.net.sf.cglib-2.2.0
+com.springsource.org.aopalliance-1.0.0
+com.springsource.org.aspectj.weaver-1.6.8.RELEASE
+spring-aop-4.0.0.RELEASE
+spring-aspects-4.0.0.RELEASE
+
+1. 检查命名空间，是否添加 aop 命名空间
+
+2. <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+我的错误：把aspectj 写成 aspect
+
++++++++++++++++++++++++++++++++++++++++++++++++
+1. jar
+2. 在配置文件中加入 aop 命名空间
+3. 基于注解的方式
+>>1 在配置文件中加入如下配置：
+<!--  使AspectJ注解起作用: 自动为匹配的类生成代理对象 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+>>2 把横切关注点的代码抽象到切面的类中。
+i 切面首先是IOC中的bean， 即加入 @Component
+ii 切面需要加入 @Aspect 注解
+
+>>3 在类中声明各种通知：
+i 声明一个方法
+ii 在方法前加入 @Before()
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

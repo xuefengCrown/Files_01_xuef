@@ -1,0 +1,35 @@
+遇到问题：
+spring 通配符的匹配很全面, 但无法找到元素 'context:property-placeholder' 的声明。
+
+## 
+0. 依赖jar：
+com.springsource.net.sf.cglib-2.2.0
+com.springsource.org.aopalliance-1.0.0
+com.springsource.org.aspectj.weaver-1.6.8.RELEASE
+spring-aop-4.0.0.RELEASE
+spring-aspects-4.0.0.RELEASE
+
+1. 检查命名空间，是否添加 aop 命名空间
+
+2. <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+我的错误：把aspectj 写成 aspect
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

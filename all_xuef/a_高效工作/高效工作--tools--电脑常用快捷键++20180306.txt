@@ -1,0 +1,7 @@
+
+ctrl + shift + N 	新建文件夹
+enter            	打开 txt 文件
+win + tab 			打开任务列表
+alt + tab			切换窗口
+
+新建 txt 文件

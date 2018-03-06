@@ -1,0 +1,17 @@
+
+ctrl + T  打开新标签页
+ctrl + tab 下个标签页
+ctrl + shift + tab 上个标签页
+
+ctrl + H 历史记录
+ctrl + D 添加书签
+ctrl + J 下载内容
+
+ctrl + shift + O 打开书签栏
+
+ctrl + W 关闭当前页
+
+ctrl + U 当前页源代码
+
+ctrl + '+' or '-' 缩放比例
+
