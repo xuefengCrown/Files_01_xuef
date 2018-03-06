@@ -1,0 +1,36 @@
+你必须知道组件(components)实际上做了什么。现在我认为最好先学习C和Lisp，然后学习Java。<br/>
+更普遍的一点是。如果该语言为你做了太多事，在生产上来说它是个好工具但却不适合用来学习。
+不唯编程语言如此；web应用框架如RubyOnRails, CakePHP, Django也会导致对问题的肤浅理解，这在你
+需要解决某个细节难题时会显现出来。<br/>
+如果想深入serous programming，你得学习C，它是Unix内核语言。
+C++与C很相近，如果知道其中一个，另一个也很好学习。不过都不好作为入门语言。
+实际上，越避免使用C，生产率越高。<br/>
+C是运行效率很高的，占用计算机资源比较少的。不幸的是，这需要你做很多对资源的底层管理(如memory内存)。
+处理底层的代码是复杂而且易生bug的，需要耗费大量时间在测试上。如今的计算机计算速度很快，这样看来纠缠于底层
+就是个坏选择了。宁愿浪费机器的时间，而不浪费程序员的时间，是聪明的办法。Python即是如此。<br/>
+其他对hackers来说重要的语言包括Perl和Lisp。Perl很值得学习，它广泛应用于active web pages和system administration(系统管理)，
+所以你至少能读懂Perl程序。很多人基于选择Python的原因选择用Perl。<br/>
+LISP值得学习，有着另外的原因。当你最终获得它，这学习的过程是个不凡的经历。这经历将使你在以后的学习中成为
+更好的programmer，即使你不再使用LISP。(可通过writing and modifying editing modes for the Emacs text editor学习LISP)。<br/>
+能学习 Python, C/C++, Java, Perl, and LISP这所有5种是最好了。作为最重要的hacking语言，它们代表着不同
+的编程方法，每种都以不同的方式来educate你。<br/>
+但是你要明白，学得语言多不代表你的编程能力就高，甚至不能就算得上是个programmer。你需要学习以通用方式来
+思考编程问题(learn how2think about programming problems in a general way)，这是独立于特定语言的。
+真正的hacker，具有思考并解决问题的能力(problem-solving with computer)以及对语言要素和模式的熟悉，
+基于此你可以几天就能学会一门语言(参考)。所以你需要学习不同的语言。<br/>
+我不可能给出如何学习编程的完整指导——它是复杂的技能。但是我可以告诉你，书和课程是做不到的，大部分hackers
+都是自学的。你能够从书上学习语言特征(language features)，但是把这些知识变成活的技能所需的mind-set是
+只能通过实践和学徒期学到。能做到这些的只是——reading code and writing code。<br/>
+Peter Norvig，是google的一名top hacker，他写的<a href="http://norvig.com/21-days.html">
+Teach Yourself Programming in Ten Years</a>是一篇非常精彩的文章。其中的recipe for programming success值得细读和实践。
+<br/>
+学习编程就如同学习写好文章。最好的方法就是阅读高手的作品，然后自己写，再读，再写...直到你写得跟老师一样好。<br/>
+我还有一些建议，<a href="">How2Learn Hacking</a>。只是一些指导，但却不容易。<br/>
+得到优秀代码曾经很难，而今因为open source而容易许多。包括开源软件，编程工具，操作系统，代码都易得。
+这就是我们下面要说的...
+
+
+
+
+
+

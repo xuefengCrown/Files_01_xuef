@@ -1,0 +1,149 @@
+chapter3: Interpreting computer programs
+
+3.1 intro
+前两章描述了两种编程基本要素即函数和数据之间的紧密联系。我们看到可以使用高阶函数
+将函数当作数据来操纵。我们也看到通过消息传递（message passing）和对象系统（object system）
+怎样使得数据被赋予行为。我们还学习了一些组织大型程序的技术技巧，比如函数抽象，数据抽象，
+类继承（class inheritance），和通用函数（generic functions）。这些核心概念组成了
+构建模块化（modular），可维护的（maintainable），和可扩展（extensible）的程序的强力基础。
+
+本章聚焦于编程的第三个基本要素：程序本身。一个Python程序只是一系列文本文件。
+只有通过解释处理我们在该文本基础上才能执行有意义的计算。
+一门编程语言如python之所以有用，是因为我们能够定义一个解释器，它生成python的计算（evaluation）
+和执行过程。毫不夸张的说，这是编程中的最根本思想。解释器只是另一个程序，它决定/解释表达式的意义。
+
+为了领会这一点是如何改变作为程序员的我们的想象的。我们把自己设想为语言的设计者，而不是使用者。
+
+3.1.1 programming language
+各种编程语言在语法结构，特性，应用领域各不相同。
+对于一般目的的编程语言，函数定义和应用的结构是普遍的。
+另一方面，很多强大语言不包括对象系统，高阶函数，赋值，甚至控制结构（while for）。
+作为一个拥有最小功能集合的强大语言的例子，我们将介绍Scheme语言。我们在这里谈的Scheme子集
+不允许值修改。
+本章，我们研究许欸小解释器的设计以及它们在程序执行时所生成的计算过程。
+为一般编程语言设计解释器似乎优点令人畏惧。毕竟，解释器是个可以根据输入生成任何可能计算的程序。
+然而，很多解释器都有着优雅的共同结构：两个互助的（mutually）递归函数。第一个负责求值环境
+中的表达式；另一个将函数应用到参数。
+函数是递归的，因为它们都使用对方来定义自己：应用函数需要求值函数体内的表达式，而求值表达式需要
+调用一个或多个函数。
+
+3.2 函数式编程
+高级语言构建在机器语言之上，隐藏数据作为位集合的表示细节，以及作为基本指令序列的程序表示。
+这些语言有着组织和抽象手段，如函数定义，很适合软件系统的大规模组织管理。
+本节，我们介绍一种函数式风格的高级语言。我们研究的是，Scheme的一个子集，有着与python相似
+的计算模型，但只使用表达式（没有语句statement），专于符号计算（symbolic computation），只
+使用不可更改的值。
+scheme是lisp的一种方言。
+
+3.2.1 Expressions
+scheme程序有表达式构成，调用表达式或特殊形式（special forms）。
+调用表达式有一个操作符表达式后跟零或多个操作数子表达式，同python。
+操作符于操作数都在括号内，如(+ 3 2)
+调用表达式的求值过程同python：首先操作符和操作数表达式被计算，然后函数（即操作符的值）
+被应用在操作数的值上。
+
+if是一个special form，
+(if <predicate> <consequent> <alternative>)
+
+The boolean values #t (or true) and #f (or false) in Scheme can be combined 
+with boolean special forms, which have evaluation procedures similar to those in Python.
+and or not
+
+3.2.2 Definitions
+Values can be named using the define special form:
+(define pi 3.14)
+
+(define (<name> <formal parameters>) <body>)
+
+对于非特殊形式（if define cond），出现 ( 就表示要调用函数了。
+scheme支持局部定义（local definitions），与python有着一样的词法作用域规则（lexical scoping rules）
+(define (sqrt x)
+  (define (good-enough? guess)
+    (< (abs (- (square guess) x)) 0.001))
+  (define (improve guess)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+        guess
+        (sqrt-iter (improve guess))))
+  (sqrt-iter 1.0))
+(sqrt 9)
+
+lambda 定义匿名函数
+(lambda (<formal-parameters>) <body>)
+
+(define (plus4 x) (+ x 4))
+(define plus4 (lambda (x) (+ x 4)))
+
+3.2.3 Compound values
+Pairs are built into the Scheme language. For historical reasons, pairs are 
+created with the cons built-in function, and the elements of a pair are accessed 
+with car and cdr:
+
+A special value denoted nil or '() represents the empty list.
+(cons 1
+      (cons 2
+            (cons 3
+                  (cons 4 nil))))
+				  
+(list 1 2 3 4)
+
+Whether a list is empty can be determined using the primitive null? predicate.
+
+
+3.2.4 Symbolic Data（符号数据）
+All the compound data objects we have used so far were constructed ultimately （根本上）
+from numbers. One of Scheme's strengths is working with arbitrary symbols as data.
+
+需要声明/标记，该字符不是 符号变量（symbol variable）
+In order to manipulate symbols we need a new element in our language: the ability 
+to quote a data object.
+(list 'a 'b)
+
+约翰麦卡锡问，python能像lisp那样自如的将代码当作数据一样处理吗？
+Python是否能如Lisp那样优雅地像处理数据一样处理代码。
+Ruby能像数据那样使用列表结构吗？那每次算加和减的时候，都得进行解析啰？
+这方面Ruby还不如1960年的Lisp。
+In Scheme, any expression that is not evaluated is said to be quoted. This notion 
+of quotation is derived from(来自于) a classic philosophical distinction between a thing, 
+such as a dog, which runs around and barks, and the word "dog" that is a linguistic(语言学的) 
+construct for designating(指示) such things. When we use "dog" in quotation marks, we do 
+not refer to some dog in particular but instead to a word. In language, quotation 
+allow us to talk about language itself, and so it is in Scheme:
+
+！！！！！！在代码中写代码：
+(list 'define 'list)
+(define list)
+
+say your name
+say "your name"
+
+Quotation also allows us to type in compound objects, using the conventional printed 
+representation for lists:
+(car '(a b c))
+a
+(cdr '(a b c))
+(b c)
+
+The full Scheme language contains additional features, such as mutation operations, 
+vectors, and maps. However, the subset we have introduced so far provides a rich 
+functional programming language capable of implementing many of the ideas we have 
+discussed so far in this text.
+
+
+3.4   Interpreters for Languages with Combination
+我们现在开始踏上使用其他语言建立新语言的旅程。
+元语言抽象——建立一种新语言——在所有工程设计分支中都起着重要作用。
+在计算机编程中尤其重要，因为在编程中我们不仅能构造新语言，还能通过构建解释器来
+实现新语言。解释器是一个函数，当它被应用到一个该语言的表达式时，它会执行操作以
+计算该表达式。（evaluate that expression）
+我们将首相定义一个scheme的有限子集的解释器，叫做Calculator。
+然后，我们将给出scheme解释器的梗概。
+在某种意义上来说，该解释器是完整，因为它允许我们使用scheme来编写一般程序（general program）。
+为了做到这些，它将实现与我们在第一章为python程序引入的相同的求值环境模型。（environment model of 
+evaluation）
+
+
+
+
+

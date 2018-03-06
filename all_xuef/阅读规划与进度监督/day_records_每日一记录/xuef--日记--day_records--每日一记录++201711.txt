@@ -1,0 +1,314 @@
+2017-11-11
+读《资本论卷一》10，11 章
+《论法的精神》至35页
+《列宁：马克思主义的三个来源和三个组成部分》
+《德意志意识形态》至47页
+
+2017-11-12 11:04:56
+我在读书和看剧中发现，总是坏人耍阴谋手段把好人整倒，简直气死人。
+我觉得，应该鼓励好人也搞阴谋，来把坏人整死。
+我认为，好人为了对付坏人，不仅可以而且应该不择手段。
+为此，我提出两点：
+1 思想上要认识到，既是斗争就该无关乎道德，如果说有道德什么事，那也是拿道德作为口号或手段。
+2 行动上，要学习以使自己具备搞阴谋的能力
+从历史中，社会学中，以及一切资料中，尤其是实践中，学习如何搞阴谋手段，如何拉拢派系，如何
+煽动舆论...泛言之，进行斗争的一切手段，策略，战略。
+
+2017-11-14 06:26:33
+《论法的精神》至80页
+sicp lecture8 通用运算符
+sicp lecture9 赋值 状态和副作用
+《黑客与画家》至80页
+
+2017-11-15 22:23:17
+只有一件事会使人疲劳，摇摆不定和优柔寡断。
+而每做一件事，都会使人身心解放，即使把事情办坏了，也比什么都不做强。
+
+2017-11-16 19:41:45
+学习 Emacs
+How2Become a Hacker
+Teach yourself programming in 10 years
+
+2017-11-18 15:32:18
+《Learning Python》对于学习Python细节，很棒。
+
+《python基础教程》第21章 Instant Markup
+纯文本文件转化为HTML(简单的markdown)
+
+2017-11-19 15:33:47
+《Comprehensive learning path – Data Science in Python》
+https://www.analyticsvidhya.com/learning-paths-data-science-business-analytics-business-intelligence-big-data/learning-path-data-science-python/
+知道了众包模式 以及 问题解决方案竞赛平台：Kaggle
+
+2017-11-20 15:38:12
+《web scrapingwith python》
+知乎文章：26岁开始学习编程，晚了吗？
+Quora可以多逛逛
+
+《500 Lines or Less》
+http://www.aosabook.org/en/index.html
+https://www.zhihu.com/question/29372574
+
+《深入分析javaweb技术内幕》
+
+the only thing we have to fear is fear itself--罗斯福演讲
+
+2017-11-21 16:34:39
+《计算机网络 自顶向下》
+tcp 三次握手
+udp套接字编程(python实现)
+《深入分析javaweb技术内幕》至 84页
+
+
+2017-11-23 01:27:51
+《intro2java programming》
+- File
+- IO
+《AI人物志：约翰·麦卡锡》
+《黑客与画家》
+
+2017-11-24 16:16:10
+《图灵数学 统计学丛书》
+《对我启发最大的数学学习方法》
+《统计学》 至47页
+《黑客与画家》 至239页
+<chrome 快捷键>
+《ANSI Common Lisp》 章一章二
+
+******************
+72 应用实例：拯救007
+73 应用实例：六度空间
+74 小白专场：如何建立图
+78 邻接表表示图
+
+88 最短路径问题
+******************
+
+2017-11-25 04:37:47
+《ANSI Common Lisp》章三
+尤其 最短路径问题
+《浙大数据结构》
+广度优先搜索
+无权图的单源最短路径算法（89讲）
+http://www.bilibili.com/video/av10948002/index_75.html#page=89
+
+PTA
+https://pintia.cn/problem-sets/15/problems
+
+《具体数学》 至39页 （习题没做）
+
+
+2017-11-25 22:39:18
+http://www.paulgraham.com/books.html
+https://github.com/justjavac/free-programming-books-zh_CN#lisp
+https://introcs.cs.princeton.edu/java/12types/
+
+Don't undermine your worth by comparing yourself with others.
+
+《ANSI Common Lisp》章四 （习题未作）
+hash table 不是很明白
+
+download 几部 lisp书
+
+什么是好的，什么是坏的，这确实是最重要的事。
+《理想国》必读
+
+《Common Lisp: A Gentle Introduction to Symbolic Computation》 至38页
+
+2017-11-29 22:06:18
+胜，不妄喜；败，不徨馁；
+胸有激雷而面如平湖者，可拜上将军。
+
+《Common Lisp》 277页
+
+2017-12-01 01:03:11
+mark 《算法引论》第五章 归纳法
+《SICP》
+
+2017-12-01 19:06:30
+《ANSI Common Lisp》第七章 字符串匹配 还有诸多不懂的地方（细节）
+
+2017-12-01 22:45:30
+ 
+2017-12-07 07:23:40
+
+2017-12-11 07:12:23
+《论法的精神》
+《ANSI CL》 数值运算之示例光线追踪器，没明白（不是lisp不懂，是对光和数学知识不理解）
+知乎《如何系统自学Python》 编程也在别处，“跳出Python，拥抱世界”
+《ANSI CL》宏 （对宏又增进部分了解了）
+
+bbbfxJJ88x
+
+2017-12-13 10:13:45
+《编程范式》01-05
+《web scraper with python》 至76
+《我是如何学习编程的》实践实践实践+理论 上课
+做出实际东西来，玩真的。
+《用python玩转数据》
+
+
+2017-12-14 01:12:25
+《编程范式》05完
+《web scraping with python》 至117
+《dataquest》 modules csv
+youtube《how to learn to code》
+don't learn to program, just solve cool problems and make cool things
+
+mark几本书
+《python编程 从入门到实践》
+《python核心编程》一些具体领域的开发方法
+《Flask Web开发》
+《流畅的python》
+
+
+
+
+teach how2program through problem-solving
+programming basically involves listing all the things that must happen to
+solve a problem and whenever you're writing a program you have to determine
+step by step what needs to happen and then you need to convert those steps
+into the language
+
+Except input and store it in many ways
+Output information to the screen, files, etc.
+Conditionally do one thing or another thing
+Do sth multiple times
+Make mathematical calculus
+Change data
+Model real world objects
+
+2017-12-15 10:52:00
+《dataquest》
+class，numpy
+《编程范式》06完
+《编程方法学》至08
+Derek 《learn2program》 至09 object oriented programming
+
+download 《The+Art+And+Science+Of+Java》
+
+2017-12-15 14:30:40
+mark 书
+Tufte's first book, The Visual Display of Quantitative Information,
+is considered a bible among information designers.
+
+My recommendation is to get to a point where you can do "cool stuff" - 
+projects that interest you and will make you want to learn more. 
+The faster you go from forcing yourself to learn to having goals 
+for implementing new interesting ideas, the higher your chances 
+of achieving your goals.
+
+How Do I Learn More Advanced Topics?
+By far one of the best resources is Github. Github allows you to read other 
+people's open source code to learn from it. Reading other people's work is 
+very important because you'll learn what makes sense and what can be confusing. 
+Python places a lot of emphasis on language readability and maintainability. 
+You want to embrace that philosophy in the code you write.
+
+最后也奉劝各位在学习的时候一定要戒骄戒躁，大数据/人工智能相关岗位薪资虽高，
+对从业者的要求自然也高，学习数据分析也好，机器学习也好，不是掌握一门编程
+语言的语法，会跑几个框架那么简单。它们都要求你对数学，计算机相关的只是有着
+深入的理解。
+踏踏实实掌握基础，学好概率论，微积分，算法和数据结构才是真。
+
+以上的内容你不应该感到惧怕，编程的入门不是几个星期就能完成的小项目。
+期间你还会遇到无数的困难，当你碰壁时试着尝试「费曼」技巧：将难点分而化之，
+切成小知识块，再逐个对付，之后通过向别人清楚地解说来检验自己是否真的理解。
+当然，依旧会有你解决不了的问题，这时候不要强迫自己——很多时候当你之后回过
+头来再看这个问题时，一切豁然开朗。
+
+
+
+Dimensions Of Programming
+In the real world, problems tend not to just solve one specific puzzle,
+but they exist in an environment.
+They occupy a niche in an environment that evolves over time, and we can
+plot the program's evolution through a multidimensional space, and we can 
+think of the different axes along this space, and one of the most important
+axes is correctness. Does the program do the right thing?
+Another axis is efficiency. Does it do fast enough?
+Another axis is features(功能). what exactly does it do?
+and another one is elegance.(simplicity clarity generality)
+You may say, changing the elegance isn't gaining you any of these features.
+but what it is gaining you is nothing right now, but it's gaining you sth for the future.
+A program that is Elegant is easier to maintain, to change. so what you're doing 
+is buying time in the future by making the program easier to maintain today.
+Voltaire said, "The best is the enemy of good."
+he meant by this is if you're striving for perfection, then you may waste too much
+time. You may make a bad engineering tradeoff. to say "I'm gonna have got to 100% correctness,
+and I'm gonna spend so much time doing that when I could have been doing sth else.
+I could have been adding more features or adding other attributes to the program."
+So you have to learn to be a good engineer and make good tradeoffs.
+For any change you make in the multidimensional space, any improvement make in any of the 
+dimensions, there's a benefit to that. You make the program more correct or more featureful
+or more efficient. But there's also a cost. It takes you time to do that.
+And you have to learn to make the right tradeoffs and say "What do I need most?!"
+"Which direction do I need to move, or am I done?"
+
+Lesson Learned
+1. understand the problem
+look at the specification, see if it makes sense. If it doesn't make sense, talk to people.
+try to figure it out. Consider different ways of trying to make sense of it.
+2. define the pieces of the problem
+Figure out everything there is to represent in the problem.
+3. reuse
+as much as you can, try to reuse the pieces that you have.
+4. test
+make sure you write tests
+5. explore
+explore the design space
+
+
+Joel Spolsky
+他著有5本书，其中包括《程序员UI设计指南》（User Interface Design for Programmers）、
+Smart and Gets Things Done，以及《软件随想录》。
+同时他也是“Joel测试”的创造者。这个测试旨在衡量代码是否已经足够好。
+JOEL测试
+
+使用源控制代码吗？
+能一步完成连编吗？
+每天都做连编吗？
+有故障信息数据库吗？
+在编写新代码之前修复故障吗？
+有最新的进度表吗？
+有规格说明书吗？
+程序员拥有安静的工作环境吗？
+你用到了你资金能力内可买到的最好工具吗？
+有测试人员吗？
+新聘人员在试用期写代码吗？
+进行走廊可用性测试吗？
+
+《软件随想录》
+所以，Joel的第一个结论是：人生中重要的，是关注那些真正的问题（real problem），
+而不是陷入那些没有意义的琐碎问题（trivial problem）。就像苏格拉底说的，"认识你自己"。
+
+此外，Joel说，还有一门叫做CS 323的课，也很有用。这门课有大量的课后习题，
+都是关于编程的，平均每星期要花40个小时来做题。
+Joel发现他能够做出大部分的题目，更重要的是，他发现自己喜欢做这些题。
+这样一来，他就明白自己是适合编程的。
+
+Joel的第二个结论是：选择职业时，不要只考虑职位是否专业对口，应该尽量选择业务方向与你专业相同的公司。
+
+Joel将创业的成功，部分归功于他在大学里受过的写作训练，那时有一个教授每周都要布置写论文，
+并且对平庸的文章恨之入骨，不给学分。这使得Joel学会了将复杂的话题说得清晰易懂，并且引人入胜。
+因此，Joel的第四个结论是，一个普通工作人员和一个领袖之间的差别，就是有没有良好的表达能力。
+
+GET / HTTP/1.0
+HOST: www.baidu.com
+
+
+
+面向对象分析与设计
+
+C程序设计语言第2版·新版
+设计模式
+SICP
+C和指针
+线性代数及其应用
+数据结构与算法：Python语言描述
+具体数学
+深入理解计算机系统
+算法导论
+算法——java
+普林斯顿微积分
+

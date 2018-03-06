@@ -1,0 +1,101 @@
+Felleisen et al. give a nod to this trend in their book How to Design Programs, 
+when they say "Bad programming is easy. Idiots can learn it in 21 days, even if they are dummies."
+
+As Alexander Pope said, a little learning is a dangerous thing.
+
+C++: In 24 hours you might be able to learn some of the syntax of C++ 
+(if you already know another language), but you couldn't learn much about 
+how to use the language. In short, if you were, say, a Basic programmer, 
+you could learn to write programs in the style of Basic using C++ syntax, 
+but you couldn't learn what C++ is actually good (and bad) for. 
+So what's the point? Alan Perlis once said: "A language that doesn't 
+affect the way you think about programming, is not worth knowing". 
+One possible point is that you have to learn a tiny bit of C++ (or more likely, 
+something like JavaScript or Processing) because you need to interface with an 
+existing tool to accomplish a specific task. But then you're not learning how to 
+program; you're learning to accomplish that task.
+
+The key is deliberative practice: not just doing it again and again, 
+but challenging yourself with a task that is just beyond your current ability, 
+trying it, analyzing your performance while and after doing it, and 
+correcting any mistakes. Then repeat. And repeat again. 
+
+# So You Want to be a Programmer
+
+Here's my recipe for programming success:
+
+1 Get interested in programming, and do some because it is fun. 
+Make sure that it keeps being enough fun so that you will be willing 
+to put in your ten years/10,000 hours.
+
+2 Program. The best kind of learning is learning by doing.
+the most effective learning requires a well-defined task with 
+an appropriate difficulty level for the particular individual, 
+informative feedback, and opportunities for repetition and corrections of errors.
+
+3 Talk with other programmers; read other programs. 
+This is more important than any book or training course.
+
+4 In any case, book learning alone won't be enough. 
+"Computer science education cannot make anybody an expert programmer 
+any more than studying brushes and pigment can make somebody an expert painter" 
+says Eric Raymond, author of The New Hacker's Dictionary.
+
+
+5 Work on projects with other programmers. 
+Be the best programmer on some projects; be the worst on some others. 
+When you're the best, you get to test your abilities to lead a project, 
+and to inspire others with your vision. When you're the worst, you learn 
+what the masters do, and you learn what they don't like to do 
+(because they make you do it for them).
+
+6 Work on projects after other programmers. 
+Understand a program written by someone else. 
+See what it takes to understand and fix it when the original 
+programmers are not around. Think about how to design your programs 
+to make it easier for those who will maintain them after you.
+
+7 Learn at least a half dozen programming languages. 
+Include one language that emphasizes class abstractions (like Java or C++), 
+one that emphasizes functional abstraction (like Lisp or ML or Haskell), 
+one that supports syntactic abstraction (like Lisp), 
+one that supports declarative specifications (like Prolog or C++ templates), 
+and one that emphasizes parallelism (like Clojure or Go).
+
+8 Remember that there is a "computer" in "computer science". 
+Know how long it takes your computer to execute an instruction, 
+fetch a word from memory (with and without a cache miss), 
+read consecutive words from disk, and seek to a new location on disk.
+
+
+So go ahead and buy that Java/Ruby/Javascript/PHP book; 
+you'll probably get some use out of it. 
+But you won't change your life, or your real overall expertise as a programmer 
+in 24 hours or 21 days. 
+How about working hard to continually improve over 24 months? 
+Well, now you're starting to get somewhere...
+
+
+Given these criteria, my recommendations for a first programming language 
+would be Python or Scheme. Another choice is Javascript, not because it is 
+perfectly well-designed for beginners, but because there are so many online tutorials for it.
+
+The important thing is that you choose and get started.
+
+# Appendix: Books and Other Resources
+Several people have asked what books and web pages they should learn from. 
+I repeat that "book learning alone won't be enough" 
+but I can recommend the following:
+
+Scheme: Structure and Interpretation of Computer Programs (Abelson & Sussman) 
+is probably the best introduction to computer science, and it does teach programming 
+as a way of understanding the computer science.
+The book is challenging and will weed out some people who perhaps could be 
+successful with another approach.
+
+Scheme: How to Design Programs (Felleisen et al.) is one of the best books on 
+how to actually design programs in an elegant and functional way.
+
+Python: Python Programming: An Intro to CS (Zelle) is a good introduction using Python.
+
+Python: Several online tutorials are available at Python.org.
