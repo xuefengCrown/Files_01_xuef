@@ -1,0 +1,46 @@
+
+Java web dev
+----视图层
+------HTML5, CSS, JS, jQuery, Ajax, JSP
+
+----控制层
+------servlet, Action, Handler
+
+--业务逻辑层
+
+--持久化层
+----JDBC, DBUtils, Spring JDBCTemplate, Hibrnate, Mybatis
+----数据库(MySql, Oracle)
+----SQL 优化
+
+--工具
+----Maven(自动化构建), SVN(版本控制), Git
+----Office, PPT (表达沟通工具), 教程pdf制作
+
+----Web 安全
+----SQL 注入
+
+----设计模式
+----性能优化
+
+----数据结构与算法
+
+----测试
+------Junit
+
+--编程语言
+Python
+
+Lisp
+
+--批处理
+----Linux脚本, dos bat
+
+--数据格式
+----XML(大神通过配置和约定来解决问题，而不是编码)
+----JSON
+
+
+--platform
+----Linux, Windows
+

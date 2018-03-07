@@ -18,3 +18,13 @@ tree 显示磁盘目录结构
 
 delete 删除整个目录
 
+### 环境变量
+通过echo %变量名% 查看环境变量值，
+echo %path%
+echo %JAVA_HOME%
+set 变量名查看环境变量名  或者set 变量名=新值   设置新值（当前窗口有效）
+
+### 启动，关闭服务
+net start mysql
+net stop mysql
+(cmd 以管理员身份启动)

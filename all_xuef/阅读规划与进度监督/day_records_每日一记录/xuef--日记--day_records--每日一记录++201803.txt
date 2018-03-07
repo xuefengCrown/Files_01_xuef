@@ -51,7 +51,7 @@ python 脚本。
 
 
 0306
-如何高效工作，这是一个极其重要的额主题！！！
+如何高效工作，这是一个极其重要的主题！！！
 硅谷程序员的效率是国产程序员的10倍，不是盖的！
 《高效能人士的7个习惯》
 Google 搜索 如何提高工作效率
@@ -63,13 +63,23 @@ Google 搜索 如何提高工作效率
 Eclipse 快捷键
 
 ！！！三岛由纪夫
+肉体比精神不朽
 
 《深入理解计算机系统》
 
 http://blog.knownsec.com/Knownsec_RD_Checklist/index.html
 
+学习dos bat
 
 
+陈虎平推荐现代生活书单
+
+
+0307
+如何制作pdf版本文档，带目录。
+word的熟练使用
+ppt
+markdown
 
 
 
