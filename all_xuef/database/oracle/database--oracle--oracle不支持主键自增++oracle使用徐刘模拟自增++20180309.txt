@@ -1,0 +1,5 @@
+
+select * from user_sequences;
+
+select EMPLOYEES_SEQ.nextval from dual;
+currval

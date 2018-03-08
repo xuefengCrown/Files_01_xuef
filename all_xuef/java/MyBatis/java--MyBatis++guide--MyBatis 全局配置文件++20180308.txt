@@ -1,0 +1,73 @@
+
+
+1. xml中无编码提示
+引入dtd约束
+需要引入dtd 文件，dtd就是用来约束xml语法的。
+
+2.
+官方文档 3.1 Configuration
+
+3. 
+<properties></properties> 来引入 properties 配置文件的内容
+resource： 引入类路径下的资源（src下?）
+url： 引入网络路径或者此盘路径下的资源
+
+4. 全局配置文件_settings_运行时行为设置
+
+5. typeAliases_别名
+批量起别名时，可以使用 @Alias 为类起新的别名。
+
+6. typeHandlers_类型处理器
+
+7. 3.1.7plugins_插件
+
+8. enviroments_运行环境
+enviroments 环境们。mybatis可以配置多种环境，default指定使用某种环境，(设置为某 environment 的id)
+可以达到快速切换环境。(development or test)
+environment：配置一个具体的环境信息，必须有两个标签；id代表当前环境的唯一标识。
+transactionManager:
+dataSource:
+(ctrl+shift+T    package org.apache.ibatis.session.Configuration 类查看)
+
+9. 全局配置文件_databaseIdProvider_多数据库支持
+3.1.9 databaseIdProvider
+MyBatis is able to execute different statements depending on your database vendor. 
+能把你的sql语句翻译成针对不同数据库厂商的sql。（跨数据库平台的数据库sql执行）
+
+9.1 首先为不同的数据库厂商起别名
+	<databaseIdProvider type="DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+        <property name="Oracle" value="oracle"/>
+        <property name="SQL Server" value="sqlserver"/>
+    </databaseIdProvider>
+9.2 databaseId 指定这是向哪个数据库发的sql。（如果还要查询Oracle的，就还得写个 select）
+	<select id="getEmployeeById" resultType="com.xuef2018.mybatis.beans.Employee" 
+	    databaseId="mysql">
+		select * from Employee where e_no = #{id}
+	</select>
+	
+	<select id="getEmployeeById" resultType="com.xuef2018.mybatis.beans.Employee" 
+	    databaseId="oracle">
+		select EMPLOYEE_ID id, LAST_NAME lastName, EMAIL email from Employee where EMPLOYEE_ID = #{id}
+	</select>
+
+9.3 要额外配置连接Oracle数据库（environments 标签）
+
+10. mappers_sql映射注册
+将sql映射注册到全局映射中
+<!--
+	mapper：注册一个sql映射
+		resource：引用类路径下的sql映射文件
+			mybatis/mapper/EmployeeMapper.xml
+		url：引用网络路径或者磁盘路径下的sql映射文件
+		
+		注册接口
+		class:引用注册接口
+		1.有sql映射文件，映射文件必须和接口同名，并放在同一目录下。
+		2.没有sql映射文件，所有的sql都是利用注解下载接口上。
+-->
+
+11. eclipse 中 src中代码最终会被打进bin下。
+
+
+

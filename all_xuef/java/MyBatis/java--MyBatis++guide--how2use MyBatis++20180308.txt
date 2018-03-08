@@ -1,0 +1,36 @@
+
+
+1. add jars to build path（也可以使用maven dependencies）
+mybatis-3.4.1
+//数据库驱动
+commons-logging-1.2
+log4j-1.2.17
+
+2. log4j.xml 放在 source folder---conf 下
+
+3. 编码
+ 3.1 conf下建立 全局配置文件 mybatis-config.xml (参照官方文档)
+ 3.2 conf下建立 EmployeeMapper.xml, 以映射sql
+ 3.3 code
+
+		String resource = "mybatis-config.xml";
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+	
+		SqlSession openSession = sqlSessionFactory.openSession();
+		/**
+		 * 执行sql查询
+		 * statement Unique identifier matching the statement to use.
+			parameter A parameter object to pass to the statement.
+		 */
+		try{
+			Employee employee = openSession.selectOne("com.xuef2018.mybatis.EmploeeMapper.selectEmp", 1001);
+			System.out.println(employee);
+		}finally{
+			openSession.close();
+		}
+
+
+
+
+

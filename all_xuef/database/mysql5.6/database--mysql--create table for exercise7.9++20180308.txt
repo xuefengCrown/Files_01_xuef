@@ -1,0 +1,36 @@
+
+create table dept(
+ d_no int not null primary key auto_increment,
+ d_name varchar(50),
+ d_location varchar(100)
+); 
+
+create table employee(
+ e_no int not null primary key,
+ e_name varchar(100) not null,
+ e_gender char(2) not null,
+ dept_no int not null,
+ e_job varchar(100) not null,
+ e_salary smallint not null,
+ hireDate date,
+ constraint dno_fk foreign key(dept_no) references dept(d_no)
+);
+
+insert into dept values(10, 'ACCOUNTING', 'ShangHai'),
+(20, 'RESEARCH', 'BeiJing'),
+(30, 'SALES', 'ShenZhen'),
+(40, 'OPERATIONS', 'FuJian');
+
+insert into employee
+values(1001, 'SMITH', 'm', 20, 'CLERK', 800, '2005-11-12'),
+(1002, 'ALLEN', 'f', 30, 'SALESMAN', 1600, '2003-05-12'),
+(1003, 'WARD', 'f', 30, 'SALESMAN', 1250, '2003-05-12'),
+(1004, 'JONES', 'm', 20, 'MANAGER', 2975, '1998-05-18'),
+(1005, 'MARTIN', 'm', 30, 'SALESMAN', 1250, '2001-06-12'),
+(1006, 'BLAKE', 'f', 30, 'MANAGER', 2850, '1997-02-15'),
+(1007, 'CLARK', 'm', 10, 'MANAGER', 2450, '2002-09-12'),
+(1008, 'SCOTT', 'm', 20, 'ANALYST', 3000, '2003-05-12'),
+(1009, 'KING', 'f', 10, 'PRESIDENT', 5000, '1995-01-01'),
+(1010, 'TURNER', 'f', 30, 'SALESMAN', 1500, '1997-10-12'),
+(1011, 'ADAMS', 'm', 20, 'CLERK', 1100, '1999-10-05'),
+(1012, 'JONES', 'm', 30, 'CLERK', 950, '2008-06-15');

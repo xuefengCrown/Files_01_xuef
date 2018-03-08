@@ -1,0 +1,6 @@
+
+	<insert id="addEmployee" parameterType="com.xuef2018.mybatis.beans.Employee"
+	    useGeneratedKeys="true" keyProperty="e_no">
+	    insert into Employee(e_no, e_name, e_gender, dept_no, e_job, e_salary, hireDate)
+	    values(#{e_no}, #{e_name}, #{e_gender}, #{dept_no}, #{e_job}, #{e_salary}, #{hireDate}) 
+	</insert>
