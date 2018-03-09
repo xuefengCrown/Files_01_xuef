@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 
+    	配置bean
+    	class： 全类名，通过反射的方式在IOC容器中创建bean，所以要求Bean中必须有无参构造器。
+    	程序中 通过 id 来引用 bean 
+    	 -->   
+<!-- Spring 想管理所有的业务逻辑组件 --> 
+	<!-- 只扫描 控制器之外的部分 -->    
+    <context:component-scan base-package="com.xuef2018.mybatis">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+    <!-- Spring 用来控制所有业务逻辑。 数据源，事务控制，aop -->
+    
+    <!-- 引入数据库的配置文件 -->
+    <context:property-placeholder location="classpath:dbconfig.properties"/>
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+        <property name="driverClass" value="${jdbc.driverClass}"></property>
+        <property name="user" value="${jdbc.user}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+    
+    <!-- spring 事务管理 -->
+    <bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!-- 开启基于注解的事务 enable transaction demarcation with annotations -->
+    <tx:annotation-driven transaction-manager="dataSourceTransactionManager" />
+    
+<!-- 整合 mybatis -->
+    <!-- spring会创建 SqlSessionFactory对象 -->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 指定全局文件的位置 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <!-- 指定mapper文件的位置 -->
+        <property name="mapperLocations" value="classpath:mybatis/mapper/*.xml"></property>
+    </bean> 
+    
+    <!-- scan for mappers and let them be autowired -->
+    <mybatis:scan base-package="com.xuef2018.mybatis.dao" />
+    
+</beans>

@@ -12,6 +12,7 @@ Java web dev
 ----JDBC, DBUtils, Spring JDBCTemplate, Hibrnate, Mybatis
 ----数据库(MySql, Oracle)
 ----SQL 优化
+----数据缓存(redis) mybatis 整合 ehcache
 
 --工具
 ----Maven(自动化构建), SVN(版本控制), Git
@@ -44,3 +45,16 @@ Lisp
 --platform
 ----Linux, Windows
 
+目的：1. spring管理所有组件。 包括 mapper 的实现类。
+		service===>Dao  @Autowired:自动注入mapper
+	2. spring 用来管理事务，其声明式事务是很强大的。
+	
+	严重: Error configuring application listener of class 
+	
+	Error creating bean with name 'employeeService': Injection of autowired dependencies failed; nested exception is 
+	org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.xuef2018.mybatis.dao.EmployeeMapper
+	com.xuef2018.mybatis.service.EmployeeService.employeeMapper; nested exception is 
+	org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.mchange.v2.c3p0.ComboPooledDataSource] 
+	for bean with name 'dataSource' defined in class path resource [applicationContext.xml]; 
+	nested exception is java.lang.ClassNotFoundException: com.mchange.v2.c3p0.ComboPooledDataSource
+	

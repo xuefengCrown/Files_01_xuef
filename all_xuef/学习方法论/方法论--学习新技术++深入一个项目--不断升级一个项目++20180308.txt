@@ -7,5 +7,7 @@
 之后又学了高级技术（《effective Java》《MySQL性能优化》《设计模式》《算法》）
 利用这些知识来升级，重构该项目。这样才能越来越厉害。
 
+Cannot find class [com.mchange.v2.c3p0.ComboPooledDataSource] for bean with name 'dataSource' defined in class path 
+resource [applicationContext.xml]; nested exception is java.lang.ClassNotFoundException: com.mchange.v2.c3p0.ComboPooledDataSource
 
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- 
+    	1. <properties></properties> 来引入 properties 配置文件的内容
+			resource： 引入类路径下的资源（src下?）
+			url： 引入网络路径或者此盘路径下的资源
+     -->
+	 <!--为不同的数据库厂商起别名  -->
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+        <property name="Oracle" value="oracle"/>
+        <property name="SQL Server" value="sqlserver"/>
+    </databaseIdProvider>
+</configuration>

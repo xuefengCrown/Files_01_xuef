@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuef2018.mybatis.dao.EmployeeMapper">
+    <!-- 
+    	namespace: 命名空间
+    	id: sql 唯一标识
+    	resultType: 返回对象类型
+     -->
+	<!-- 
+	public Employee getEmployeeById(Integer id);
+	 -->
+	 <select id="getEmployeeById" resultType="com.xuef2018.mybatis.beans.Employee">
+		select * from employee where e_no = #{e_no}  
+	 </select>
+	 <!-- public List<Employee> getEmps(); -->
+	 <select id="getEmps" resultType="com.xuef2018.mybatis.beans.Employee">
+	     select * from employee
+	 </select>
+</mapper>

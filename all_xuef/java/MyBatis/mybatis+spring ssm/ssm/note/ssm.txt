@@ -1,0 +1,65 @@
+
+1. 引入jar
+1.1 spring
+//依赖的日志包
+commons-logging-1.1.3.jar
+
+//aop
+com.springsource.net.sf.cglib-2.2.0.jar
+com.springsource.org.aopalliance-1.0.0.jar
+com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar
+spring-aop-4.0.0.RELEASE.jar
+spring-aspects-4.0.0.RELEASE.jar
+
+//ioc
+spring-beans-4.0.0.RELEASE.jar
+spring-context-4.0.0.RELEASE.jar
+spring-core-4.0.0.RELEASE.jar
+spring-expression-4.0.0.RELEASE.jar
+
+//jdbc
+spring-jdbc-4.0.0.RELEASE.jar
+spring-orm-4.0.0.RELEASE.jar
+spring-tx-4.0.0.RELEASE.jar
+
+//spring mvc
+spring-web-4.0.0.RELEASE.jar
+spring-webmvc-4.0.0.RELEASE.jar
+
+//jstl
+taglibs-standard-impl-1.2.1.jar
+taglibs-standard-spec-1.2.1.jar
+
+1.2 mybatis
+mybatis-3.4.1.jar
+// database driver
+mysql-connector-java-5.1.37-bin.jar
+
+1.3 mybatis-spring 整合适配器 integration adapter
+mybatis-spring-1.3.0.jar
+
+1.4 数据源
+c3p0-0.9.1.2.jar
+
+step2 配置文件
+2.1 mybatis
+## mybatis 全局配置文件
+mybatis-config.xml
+## 数据库连接配置
+dbconfig.properties
+## 映射文件
+EmployeeMapper.xml
+
+2.2 SpringMVC配置文件编写
+<!-- Spring 配置 needed for ContextConfigLocation -->
+	  <context-param>
+	      <param-name>contextConfigLocation</param-name>
+	      <param-value>classpath:applicationContext.xml</param-value>
+	  </context-param>
+	  <listener>
+	      <listener-class></listener-class>
+	  </listener>
+
+## 配置 applicationContext.xml
+
+	  
