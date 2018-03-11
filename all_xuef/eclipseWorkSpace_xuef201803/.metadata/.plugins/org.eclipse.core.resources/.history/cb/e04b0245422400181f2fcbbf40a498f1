@@ -1,0 +1,7 @@
+package com.xuef2018.servlet;
+
+import javax.servlet.http.HttpServlet;
+
+public class LoginServlet extends HttpServlet{
+
+}

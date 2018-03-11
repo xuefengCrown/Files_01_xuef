@@ -1,0 +1,76 @@
+
+create table tb_user(
+ id int not null primary key auto_increment,
+ user_name varchar(50) not null,
+ user_password varchar(20) not null
+);
+
+create table tb_books(
+ id int not null primary key auto_increment,
+ user_id int,
+ user_name varchar(50) not null,
+ book_name varchar(255) not null,
+ book_path varchar(255) not null,
+ stars int not null,
+ last_modified_time date,
+ constraint userid_fk foreign key(user_id) references tb_user(id)
+) DEFAULT CHARSET=utf8;
+
+
+insert into tb_user(user_name, user_password)
+values('xuef', '121314');
+
+insert into tb_books(user_id, user_name, book_name, book_path, stars, last_modified_time)
+values(1, 'xuef', '鸟哥Linux', 'C:\\code_dxf\\xuefgit\\Files_01_xuef\\all_xuef', 0, '2018-03-11'),
+(1, 'xuef', 'structure and interpretation of computer programs', 'C:\\code_dxf\\xuefgit\\Files_01_xuef\\all_xuef', 0, '2018-03-11'),
+(1, 'xuef', 'Effective Java', 'C:\\code_dxf\\xuefgit\\Files_01_xuef\\all_xuef', 0, '2018-03-11'),
+(1, 'xuef', 'MySQL 性能优化', 'C:\\code_dxf\\xuefgit\\Files_01_xuef\\all_xuef', 0, '2018-03-11'),
+(1, 'xuef', '深入理解计算机系统', 'C:\\code_dxf\\xuefgit\\Files_01_xuef\\all_xuef', 0, '2018-03-11');
+
+
+
+alter database books_2018 character set utf8;
+
+set character_set_client=utf8;
+set character_set_connection=utf8;
+
+set character_set_database=utf8;
+
+set character_set_results=utf8;
+set character_set_server=utf8;
+set character_set_system=utf8;
+set collation_connection=utf8;
+set collation_database=utf8;
+set collation_server=utf8;
+
+这里列几条命令，大家可以自己试下：  
+1.列出MYSQL支持的所有字符集：  
+SHOW CHARACTER SET;  
+  
+2.当前MYSQL服务器字符集设置  
+SHOW VARIABLES LIKE 'character_set_%';  
+  
+3.当前MYSQL服务器字符集校验设置  
+SHOW VARIABLES LIKE 'collation_%';  
+  
+4.显示某数据库字符集设置  
+show create database 数据库名;  
+
+5.显示某数据表字符集设置  
+show create table 表名;  
+ 
+6.修改数据库字符集  
+alter database 数据库名 default character set 'utf8';  
+  
+7.修改数据表字符集  
+alter table 表名 default character set 'utf8';  
+  
+8.建库时指定字符集  
+create database 数据库名 character set gbk collate gbk_chinese_ci;  
+  
+9.建表时指定字符集  
+CREATE TABLE `mysqlcode` (  
+`id` TINYINT( 255 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,  
+`content` VARCHAR( 255 ) NOT NULL  
+TYPE = MYISAM CHARACTER SET gbk COLLATE gbk_chinese_ci;
+

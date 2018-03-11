@@ -1,0 +1,14 @@
+
+req.getRequestDispatcher("/someServlet").forward(req, resp);
+//请求转发只能转发到当前应用的资源
+/ 代表当前Web应用的根目录
+
+
+resp.sendRedirect("someServlet");
+//重定向可以到任何资源
+/ 代表当前Web站点的根目录
+
+
+
+
+

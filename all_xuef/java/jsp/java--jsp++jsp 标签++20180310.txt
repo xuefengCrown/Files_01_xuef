@@ -1,0 +1,6 @@
+
+
+1. 
+<jsp:forward page='/b.jsp'>
+	<jsp:param name='' value='' /> # 向b.jsp传一些参数
+</jsp:forward> 

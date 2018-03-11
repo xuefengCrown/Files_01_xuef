@@ -1,0 +1,36 @@
+
+## jsp——>chrome
+1. 浏览器编码
+2. jsp页面 编码
+
+## chrome——>jsp(获取浏览器传过来的中文参数)
+### 对于post请求
+request.setCharacterEncoding("UTF-8"); // 设置请求中的参数的编码
+
+setCharacterEncoding
+void setCharacterEncoding(String env)
+                          throws UnsupportedEncodingException
+Overrides the name of the character encoding used in the body of this request. 
+This method must be called prior to reading request parameters or reading input using getReader(). 
+Otherwise, it has no effect.
+
+### 对于get请求
+浏览器会将参数 放在URI即地址栏中传输，而其编码方式是由tomcat指定的。
+默认是ISO-8859-1。(当然你可以去修改。这需要你去看tomcat的官方文档。URIEncoding)
+URIEncoding	
+This specifies the character encoding used to decode the URI bytes, after %xx decoding the URL. 
+If not specified, ISO-8859-1 will be used.
+
+useBodyEncodingForURI	
+This specifies if the encoding specified in contentType should be used for URI query parameters, 
+instead of using the URIEncoding. This setting is present for compatibility with Tomcat 4.1.x, where the 
+encoding specified in the contentType, or explicitly set using Request.setCharacterEncoding method was also 
+used for the parameters from the URL. The default value is false.
+
+
+除此方法外，还可以：
+<%
+	String val = resuest.getParameter("username");
+	String username = new String(val.getBytes("ISO-8859-1"), "UTF-8");
+%>
+

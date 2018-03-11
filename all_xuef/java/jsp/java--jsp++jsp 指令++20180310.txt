@@ -1,0 +1,10 @@
+page, include, taglib
+
+1. page指令(常用属性)
+<%@ page session='true|false' errorPage='/WEB-INF/error.jsp' %> 
+## /表示web应用根目录
+## error.jsp 不能让用户直接访问，可以放在 WEB-INF下
+
+import
+[isErrorPage='true']
+Error Message: <%= exception.getMessage() %>

@@ -1,0 +1,140 @@
+
+
+## 查看版本信息
+show variables like '%version_%';
+
+## 列出MYSQL支持的所有字符集：  
+SHOW CHARACTER SET; 
+
+## MYSQL 字符集问题
+MySQL的字符集支持(Character Set Support)有两个方面：
+     字符集(Character set)和排序方式(Collation)。
+对于字符集的支持细化到四个层次:
+     服务器(server)，数据库(database)，数据表(table)和连接(connection)。
+1.MySQL默认字符集
+MySQL对于字符集的指定可以细化到一个数据库，一张表，一列，应该用什么字符集。
+但是，传统的程序在创建数据库和数据表时并没有使用那么复杂的配置，它们用的是默认的配置，那么，默认的配置从何而来呢？    
+	(1)编译MySQL 时，指定了一个默认的字符集，这个字符集是 latin1；
+    (2)安装MySQL 时，可以在配置文件 (my.ini) 中指定一个默认的的字符集，如果没指定，这个值继承自编译时指定的；
+		[mysqld]
+		下，添加：
+		character-set-server=utf8
+		default-character-set=utf8 
+		collation-server=utf8_general_ci
+	
+    (3)启动mysqld 时，可以在命令行参数中指定一个默认的的字符集，如果没指定，这个值继承自配置文件中的配置,
+		此时 character_set_server 被设定为这个默认的字符集；
+    (4)当创建一个新的数据库时，除非明确指定，这个数据库的字符集被缺省设定为character_set_server；
+	
+		设置数据库编码
+		CREATE DATABASE dbname DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+		
+    (5)当选定了一个数据库时，character_set_database 被设定为这个数据库默认的字符集；
+    (6)在这个数据库里创建一张表时，表默认的字符集被设定为 character_set_database，也就是这个数据库默认的字符集；
+		设置数据表编码
+		CREATE TABLE 'author' (
+			'authorid' char(20) NOT NULL,
+			'name' char(20) NOT NULL,
+			'age' char(20) NOT NULL,
+			'country' char(20) NOT NULL
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+		mysql中两种数据库引擎 
+		ENGINE=MyISAM 
+		ENGINE=InnoDB
+	
+    (7)当在表内设置一栏时，除非明确指定，否则此栏缺省的字符集就是表默认的字符集；
+	
+简单的总结一下，如果什么地方都不修改，那么所有的数据库的所有表的所有栏位的都用 latin1 存储，不过我们如果安装 MySQL，
+一般都会选择多语言支持，也就是说，安装程序会自动在配置文件中把 default_character_set 设置为 UTF-8，这保证了缺省情况下，
+所有的数据库的所有表的所有栏位的都用 UTF-8 存储。
+
+2.查看默认字符集(默认情况下，mysql的字符集是latin1(ISO_8859_1)
+通常，查看系统的字符集和排序方式的设定可以通过下面的两条命令：
+     mysql> SHOW VARIABLES LIKE 'character%';
++--------------------------+---------------------------------+
+| Variable_name            | Value                           |
++--------------------------+---------------------------------+
+| character_set_client     | latin1                          |
+| character_set_connection | latin1                          |
+| character_set_database   | latin1                          |
+| character_set_filesystem | binary                    |
+| character_set_results    | latin1                          |
+| character_set_server     | latin1                          |
+| character_set_system    | utf8                            |
+| character_sets_dir       | D:"mysql-5.0.37"share"charsets" |
++--------------------------+---------------------------------+
+mysql> SHOW VARIABLES LIKE 'collation_%';
++----------------------+-----------------+
+| Variable_name        | Value           |
++----------------------+-----------------+
+| collation_connection | utf8_general_ci |
+| collation_database   | utf8_general_ci |
+| collation_server     | utf8_general_ci |
++----------------------+-----------------+
+
+3.修改默认字符集
+(1) 最简单的修改方法，就是修改mysql的my.ini文件中的字符集键值，
+如    default-character-set = utf8
+      character_set_server = utf8
+   修改完后，重启mysql的服务，service mysql restart (Windows下，以管理员身份打开cmd，net start mysql)
+   
+   使用 mysql> SHOW VARIABLES LIKE 'character%';查看，发现数据库编码均已改成utf8
++--------------------------+---------------------------------+
+| Variable_name            | Value                           |
++--------------------------+---------------------------------+
+| character_set_client     | utf8                            |
+| character_set_connection | utf8                            |
+| character_set_database   | utf8                            |
+| character_set_filesystem | binary                          |
+| character_set_results    | utf8                            |
+| character_set_server     | utf8                            |
+| character_set_system     | utf8                            |
+| character_sets_dir       | D:"mysql-5.0.37"share"charsets" |
++--------------------------+---------------------------------+
+   (2) 还有一种修改字符集的方法，就是使用mysql的命令
+		mysql> SET character_set_client = utf8 ;
+		mysql> SET character_set_connection = utf8 ;
+		mysql> SET character_set_database = utf8 ;
+		mysql> SET character_set_results = utf8 ;
+		mysql> SET character_set_server = utf8 ;
+		mysql> SET collation_connection = utf8 ;
+		mysql> SET collation_database = utf8 ;
+		mysql> SET collation_server = utf8 ;
+一般就算设置了表的默认字符集为utf8并且通过UTF-8编码发送查询，你会发现存入数据库的仍然是乱码。问题就出在这个connection连接层上。
+解决方法是在发送查询前执行一下下面这句：
+SET NAMES 'utf8';它相当于下面的三句指令：
+SET character_set_client = utf8;
+SET character_set_results = utf8;
+SET character_set_connection = utf8;
+
+总结:
+因此，使用什么数据库版本，不管是3.x，还是4.0.x还是4.1.x，其实对我们来说不重要，重要的有二：
+1) 正确的设定数据库编码.MySQL4.0以下版本的字符集总是默认ISO8859-1，MySQL4.1在安装的时候会让你选择。
+	如果你准备使用UTF-8，那么在创建数据库的时候就要指定好UTF-8(创建好以后也可以改，4.1以上版本还可以单独指定表的字符集)
+	
+2) 正确的设定数据库connection编码.设置好数据库的编码后，在连接数据库时候，应该指定connection的编码，比如使用jdbc连接时，指定连接为utf8方式.
+总结：你的字符集假如是gbk 就改gbk 这应该与你的web project中的所用的字符集一致 utf-8只是举例用的 要支持中文建议用gbk（繁简） gb2312（简）
+
+
+
+## mysql客户端命令行也有个字符编码(MySQL Command Line Client 不支持utf-8???)
+使用命令行方式登陆到MySQL服务器， 建立一个数据库，数据库编码设为UTF-8。此时，
+如果直接在命令行窗口使用insert语句插入中文，就遇到类似 ERROR 1406 (22001): Data too long for column 'name' at row 1 错误。
+乍一看，是字段长度引起的问题，但是实际是字符编码的问题。可是尝试以下解决方法：
+    1、在Linux中，使用终端方式登陆MySQL服务器，运行以下命令：
+        set names utf8;
+        该命令将终端的字符编码设为了UTF-8。此后再插入数据库中的内容都会按照UTF-8的编码来处理。
+        注意：在Linux中，终端方式中直接插入中文内容，可能并不会出现1406错误，但是这时插入的数据
+        是按照系统的默认编码进行处理。因此对编码为UTF-8的数据库，在显示数据的地方可能会出现乱码。
+          
+    2、在Windows下，命令行窗口不支持UTF-8编码，所以使用“set names utf8;”不会达到转化中文的
+        效果。但是这个问题还是可以解决的：
+        （1）使用默认编码建立数据库。这种情况下就可以直接输入中文了，但是相应的问题，就是会
+             失去UTF-8编码的灵活性。特别是不利于软件的国际化。
+        （2）放弃命令行窗口登录MySQL，使用图形化客户端。客户端工具可以MySQL的官方网站上找到。”
+
+
+
+
+

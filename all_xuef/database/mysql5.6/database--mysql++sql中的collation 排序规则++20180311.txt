@@ -1,0 +1,209 @@
+排序规则（collation）
+ 
+关于SQL Server的排序规则，估计大家都不陌生，在创建数据库时我们经常要选择一种排序规则（conllation），
+一般我们会留意到每一种语言的排序规则都有许多种，比如标准大陆简体中文Chinese_PRC的排序规则就有数十种之多
+
+这些排序规则有什么作用呢？让我们先来看看MS官方的解释：
+
+排序规则指定了表示每个字符的位模式。它还指定了用于排序和比较字符的规则。排序规则具有下面的特征：
+语言
+区分大小写
+区分重音
+区分假名
+
+比如在SQL Server 2005中，排序规则名称由两部份构成，比如 Chinese_PRC_CI_AI_WS 
+前半部份是指本排序规则所支持的字符集，如Chinese_PRC 指针对大陆简体字UNICODE的排序规则。 
+后半部份即后缀的含义如下：
+ 
+_BIN                
+    指定使用向后兼容的二进制排序顺序。    
+_BIN2         指定使用 SQL Server 2005 中引入的码位比较语义的二进制排序顺序。    
+_Stroke      按笔划排序    
+_CI(CS)    是否区分大小写，CI不区分，CS区分    
+_AI(AS)    是否区分重音，AI不区分，AS区分    
+_KI(KS)    是否区分假名类型，KI不区分，KS区分    
+_WI(WS)    是否区分全半角，WI不区分，WS区分    
+ 
+既然排序规则如此复杂，那么应用了不同排序规则的列之间默认情况下便不能进行Union、Join、Like等equal操作了，
+于是便有了排序规则（collation）冲突。
+ 
+## 排序规则（collation）冲突
+ 
+我们知道，SQL Server 从2000 开始，便支持多个排序规则。SQL Server 2000 的数据库可使用除默认排序规则以外的其他排序规则。
+此外，SQL Server 2000 还支持为列专门制定排序规则。
+这样一来，我们在写跨表、跨数据库、跨服务器操作的T-SQL时，如果equal的字段排序规则不同，便会发生排序规则冲突。
+比如我们先见两个结构相同的表，但字段的排序规则不同：
+           -- 1. Create TableA.
+            CREATE TABLE TagsTableA
+            (
+                TagName        NVARCHAR(64)    COLLATE Chinese_PRC_BIN
+            )   
+            -- 2. Create TableB.
+            CREATE TABLE TagsTableB
+            (
+                TagName        NVARCHAR(64)    COLLATE Chinese_PRC_CI_AS
+            )   
+当表建好之后执行：
+           -- 3. Try to join them
+            SELECT * from TagsTableA A INNER JOIN TagsTableB B on A.TagName = B.TagName 
+
+		
+便会出下类似下面的问题：
+无法解决 equal to 操作中 "Chinese_PRC_BIN" 和 "Chinese_PRC_CI_AS" 之间的排序规则冲突。
+常见的场景——临时表
+ 
+我们知道，SQL Server的临时表是保存在Tempdb数据库中的。而使用临时表的数据库与临时表的排序规则（conllation）不一定相同。
+所以，当Tempdb的排序规则与当前使用临时表的数据库排序规则不同时，便会出现排序规则冲突。
+
+一般来说，我们在创建临时表时可能不会注意到排序规则，从而留下排序规则冲突的隐患。
+比如Openlab V4.0的Blog模块中的一个存储过程，便有着这种隐患：
+/****** 对?象ó:  StoredProcedure [blogs].[up_CreateGetTagIds]    脚本日期: 01/20/2010 19:10:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/*
+RETURN VALUES:
+    Ids
+*/
+-- =============================================
+-- Author:        <Lance Zhang>
+-- Create date: <2010-01-06>
+-- Description: <Make sure all the tag EXISTS in DB, and then get their ids.>
+-- 1. Create Temp Table.
+-- 2. Insert TagNames into Temp Table.
+-- 3. Add new Tags to [Categories] from query Temp Table.
+-- 4. Batch Get All Tag Ids from [Categories].
+-- 5. Clear and drop Temp Table.
+-- =============================================
+ALTER PROCEDURE [blogs].[up_CreateGetTagIds]
+(
+    @BlogId                INT,
+    @TagNames            XML
+)
+AS
+BEGIN
+    /******************************* SET CONFIG *************************************************/
+    SET NOCOUNT ON
+    SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+    SET NUMERIC_ROUNDABORT OFF
+    /******************************* DECLARE VARIABLE *************************************************/
+    /********************************BEGIN TRANSATION**********************************************/
+    BEGIN TRY
+        BEGIN TRANSACTION;
+            -- 1. Create Temp Table.
+            CREATE TABLE #TagsTable
+            (
+                TagName        NVARCHAR(64)    
+            )   
+            -- 2. Insert TagNames into Temp Table.
+            INSERT INTO 
+                #TagsTable 
+            SELECT 
+                TG.Tags.value('@i','NVARCHAR(64)') AS TagName
+            FROM 
+                @TagNames.nodes('/ts/t') TG(Tags) 
+            -- 3. Add new Tags to [Categories] from query Temp Table.
+            BEGIN
+                INSERT INTO 
+                    [Categories]
+               (
+                    [BlogId]
+                    ,[ParentId]
+                    ,[CategoryType]
+                    ,[CategoryName]
+                    ,[LoweredCategoryName]
+                    ,[Slug]
+                    ,[LoweredSlug]
+                    ,[Description]
+                    ,[CreatedDateUtc]
+                    ,[TotalEntities]
+                    ,[SortOrder]
+                    ,[State]
+                )
+                SELECT
+                    @BlogId,
+                    0,                                    -- ParentId, 0 as default.
+                    2,                                    -- CategoryType, 2 as Post Tag.
+                    TT.TagName,
+                    LOWER(TT.TagName),
+                    TT.TagName,                            -- Slug, use CategoryName as default.
+                    LOWER(TT.TagName),                    -- LoweredSlug, use LoweredCategoryName as default.
+                    '',                                    -- Description, Empty as default.
+                    GETUTCDATE(),
+                    0,                                    -- TotalEntities, 0 as default.
+                    1,                                    -- SortOrder of PostTags can always be 1.
+                    1                                    -- State, 1 as Normal.
+                FROM
+                    #TagsTable TT
+                WHERE
+                    LOWER(TT.TagName) NOT IN 
+                    (
+                        SELECT 
+                            C.[LoweredCategoryName] 
+                        FROM 
+                            [Categories] C WITH( UPDLOCK, HOLDLOCK )
+                        WHERE 
+                            [BlogId] = @BlogId
+                            AND [CategoryType] = 2        -- Post Tag.    
+                    )
+            END
+            -- 4. Batch Get All Tag Ids from [Categories].
+            BEGIN
+                SELECT
+                    [CategoryId]
+                FROM
+                    [Categories] C WITH(NOLOCK)
+                JOIN
+                    #TagsTable TT
+                ON 
+                    C.[LoweredCategoryName] = LOWER( TT.TagName )
+                WHERE
+                    C.[BlogId] = @BlogId 
+                    AND C.[CategoryType] = 2                -- Post Tag.
+                    AND C.[State] = 1                        -- 1 as Normal status.
+            END
+            -- 5. Clear and drop Temp Table.
+            TRUNCATE TABLE 
+                #TagsTable
+            DROP TABLE 
+                #TagsTable
+        COMMIT TRANSACTION;
+        RETURN 1
+    END TRY
+    BEGIN CATCH
+        IF XACT_STATE() <> 0
+        BEGIN
+            ROLLBACK TRANSACTION;
+            RETURN -1
+        END
+    END CATCH
+END
+GO
+
+常见的解决方案
+ 
+知道了什么是排序规则冲突，我们接下来分析冲突的解决方案，以数据库级别的排序规则为例，一般来说，解决方案有下面几种
+把SQL实例删了重建 ——大多数情况下等于没说-_-|||
+修改数据库的排序规则 ——参考阿牛兄的这篇文章
+在T-SQL中使用COLLATE DATABASE_DEFAULT来解决冲突 ——接下来主要讨论这个
+COLLATE DATABASE_DEFAULT
+ 
+Collate XXX 操作可以用在字段定义或使用时，它会将字段定义或转换成XXX 的排序规则格式。而Collate Database_Default 
+则会将字段定义或转换成当前数据库的默认排序规则，从而解决冲突。
+
+比如在下面的代码中便使用了Collate Database_Default 来解决字段在equal操作中的排序规则冲突：
+       Insert into Security.Report (Name)
+              Select C.Path From SSRS.Catalog C 
+        Where C.Path Collate Database_Default Like @ReportPath + '/%' 
+              And C.Path Collate Database_Default Not In (Select Name From Security.Report R)
+当然，在创建临时表时若对字段定义加上Collate Database_Default ，也可以方便地解决潜在的排序规则冲突，比如上一节中提到的存储过程，
+只要做如下修改即可。
+           -- 1. Create Temp Table.
+            CREATE TABLE #TagsTable
+            (
+                TagName        NVARCHAR(64)    COLLATE DATABASE_DEFAULT
+            )   
+结束语
+对于专业的SQLer来说，排序规则的应用场景还有很多，例如利用排序规则特点计算汉字笔划和取得拼音首字母等等，更多信息，
+请查阅MSDN文档：http://msdn.microsoft.com/zh-cn/library/aa258237(en-us,SQL.80).aspx

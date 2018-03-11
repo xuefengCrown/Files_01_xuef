@@ -1,0 +1,7 @@
+
+request, response
+pageContext 获取当前页面的几乎一切信息
+session 代表浏览器和服务器的一次会话
+application ServletContext对象 获取当前应用信息
+config, out, page
+exception

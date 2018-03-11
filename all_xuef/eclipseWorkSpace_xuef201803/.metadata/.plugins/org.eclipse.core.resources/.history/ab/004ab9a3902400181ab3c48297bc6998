@@ -1,0 +1,39 @@
+package com.xuef2018.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+
+import com.xuef2018.bean.Book;
+
+public class BookDaoPrimitiveImpl implements BookDao {
+
+	@Override
+	public List<Book> getAllBooks(String username) {
+		Connection conn = null;
+		PreparedStatement ps null;
+		ResultSet rs = null;
+		conn = DriverManager.getConnection(url, user, pwd);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return null;
+	}
+
+}

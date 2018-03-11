@@ -1,0 +1,14 @@
+
+getAttribute
+setAttribute
+removeAttribute
+
+pageContext (属性范围 当前页面)
+request (属性范围 同一个请求)
+session (属性范围 一次会话[浏览器打开直到关闭{在此期间会话不失效}])
+application (属性范围 当前web应用)
+对象都有这些方法
+
+
+
+
