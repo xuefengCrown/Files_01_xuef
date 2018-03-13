@@ -58,25 +58,58 @@ public final class success_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\r\n");
       out.write("<head>\r\n");
       out.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
-      out.write("<title>Insert title here</title>\r\n");
+      out.write("<title>");
+      out.print( request.getAttribute("user_name") );
+      out.write("'s BookOnline</title>\r\n");
       out.write("</head>\r\n");
       out.write("<body>\r\n");
-      out.write("\tWelcome\r\n");
+      out.write("\tWelcome ");
+      out.print( request.getAttribute("user_name") );
+      out.write("<br><br>\r\n");
       out.write("\t\r\n");
       out.write("\t");
  
 		List<Book> books = (List<Book>)request.getAttribute("all_books");
-		for (Book book: books){
 	
       out.write("\r\n");
+      out.write("\t<table>\r\n");
+      out.write("\t\t<tr>\r\n");
+      out.write("\t\t\t<td>book_name</td>\r\n");
+      out.write("\t\t\t<td>last updated</td>\r\n");
+      out.write("\t\t\t<td>stars</td>\r\n");
+      out.write("\t\t</tr>\r\n");
       out.write("\t\t");
-      out.print( book.getBook_name() );
-      out.write("<br>\r\n");
-      out.write("\t");
- 
-		}
-	
+
+			for (Book book: books){
+		
       out.write("\r\n");
+      out.write("\t\t<tr>\r\n");
+      out.write("\t\t\t<td>\r\n");
+      out.write("\t\t\t\t<a href=\"openBookServlet?id=");
+      out.print( book.getBook_id() );
+      out.write('"');
+      out.write('>');
+      out.print( book.getBook_name() );
+      out.write("</a>\r\n");
+      out.write("\t\t\t</td>\r\n");
+      out.write("\t\t\t<td>\r\n");
+      out.write("\t\t\t\t");
+      out.print( book.getLast_modified_time() );
+      out.write("\r\n");
+      out.write("\t\t\t</td>\r\n");
+      out.write("\t\t\t<td>\r\n");
+      out.write("\t\t\t\t");
+      out.print( book.getStars() );
+      out.write("\r\n");
+      out.write("\t\t\t</td>\r\n");
+      out.write("\t\t</tr>\r\n");
+      out.write("\t\t");
+ 
+			}
+		
+      out.write("\r\n");
+      out.write("\t\r\n");
+      out.write("\t</table>\r\n");
       out.write("</body>\r\n");
       out.write("</html>");
     } catch (java.lang.Throwable t) {

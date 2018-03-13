@@ -20,4 +20,13 @@
     <url-pattern>/loginSuccessServlet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>openBookServlet</servlet-name>
+    <servlet-class>com.xuef2018.servlet.OpenBookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>openBookServlet</servlet-name>
+    <url-pattern>/openBookServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

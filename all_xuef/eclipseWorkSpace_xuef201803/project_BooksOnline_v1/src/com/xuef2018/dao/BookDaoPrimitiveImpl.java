@@ -11,7 +11,10 @@ import java.util.List;
 import com.xuef2018.bean.Book;
 
 public class BookDaoPrimitiveImpl implements BookDao {
-
+	private String driverClass = "com.mysql.jdbc.Driver";
+	private String url = "jdbc:mysql:///books_2018";
+	private String user = "root";
+	private String pwd = "121314";
 	@Override
 	public List<Book> getAllBooks(String username) {
 		List<Book> books = new ArrayList<>();
@@ -20,10 +23,6 @@ public class BookDaoPrimitiveImpl implements BookDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String driverClass = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql:///books_2018";
-		String user = "root";
-		String pwd = "121314";
 		try {
 			Class.forName(driverClass);
 			conn = DriverManager.getConnection(url, user, pwd);
@@ -37,6 +36,8 @@ public class BookDaoPrimitiveImpl implements BookDao {
 			while(rs.next()){
 				Book b =new Book();
 				b.setBook_name(rs.getString("book_name"));
+				b.setUser_name(rs.getString("user_name"));
+				b.setBook_id(rs.getInt("id"));
 				b.setBook_path(rs.getString("book_path"));
 				b.setStars(rs.getInt("stars"));
 				b.setLast_modified_time(rs.getString("last_modified_time"));

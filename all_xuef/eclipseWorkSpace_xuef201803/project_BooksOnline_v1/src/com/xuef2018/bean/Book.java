@@ -1,12 +1,20 @@
 package com.xuef2018.bean;
 
 public class Book {
+	private Integer book_id;
 	private Integer user_id;
 	private String user_name;
 	private String book_name;
 	private String book_path;
 	private Integer stars; // ±»¹Ø×¢Êý
 	private String last_modified_time;
+	
+	public Integer getBook_id() {
+		return book_id;
+	}
+	public void setBook_id(Integer book_id) {
+		this.book_id = book_id;
+	}
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -45,10 +53,10 @@ public class Book {
 	}
 	@Override
 	public String toString() {
-		return "Book [user_id=" + user_id + ", user_name=" + user_name
-				+ ", book_name=" + book_name + ", book_path=" + book_path
-				+ ", stars=" + stars + ", last_modified_time="
-				+ last_modified_time + "]";
+		return "Book [book_id=" + book_id + ", user_id=" + user_id
+				+ ", user_name=" + user_name + ", book_name=" + book_name
+				+ ", book_path=" + book_path + ", stars=" + stars
+				+ ", last_modified_time=" + last_modified_time + "]";
 	}
 	
 }

@@ -4,18 +4,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title><%= request.getAttribute("user_name") %>'s BookOnline</title>
 </head>
 <body>
-	Welcome
+	Welcome <%= request.getAttribute("user_name") %><br><br>
 	
 	<% 
 		List<Book> books = (List<Book>)request.getAttribute("all_books");
-		for (Book book: books){
 	%>
-		<%= book.getBook_name() %><br>
-	<% 
-		}
-	%>
+	<table>
+		<tr>
+			<td>book_name</td>
+			<td>last updated</td>
+			<td>stars</td>
+		</tr>
+		<%
+			for (Book book: books){
+		%>
+		<tr>
+			<td>
+				<a href="openBookServlet?id=<%= book.getBook_id() %>"><%= book.getBook_name() %></a>
+			</td>
+			<td>
+				<%= book.getLast_modified_time() %>
+			</td>
+			<td>
+				<%= book.getStars() %>
+			</td>
+		</tr>
+		<% 
+			}
+		%>
+	
+	</table>
 </body>
 </html>

@@ -1,0 +1,50 @@
+
+
+1. 学习 doctest
+https://docs.python.org/3/library/doctest.html
+测试驱动开发
+
+https://stackoverflow.com/users/95810/alex-martelli
+
+
+2. 序列
+
+2.1　内置序列类型概览
+## 容器序列
+　　list、tuple 和 collections.deque 这些序列能存放不同类型的数据。
+
+## 扁平序列
+　　str、bytes、bytearray、memoryview 和 array.array，这类序列只能容纳一种类型。
+
+容器序列存放的是它们所包含的任意类型的对象的引用，而扁平序列里存放的是值而不是引用。
+换句话说，扁平序列其实是一段连续的内存空间。
+由此可见扁平序列其实更加紧凑，但是它里面只能存放诸如字符、字节和数值这种基础类型。
+
+序列类型还能按照能否被修改来分类。
+## 可变序列
+　　list、bytearray、array.array、collections.deque 和memoryview。
+## 不可变序列
+　　tuple、str 和 bytes。
+
+2.2　列表推导和生成器表达式
+列表推导是构建列表（list）的快捷方式，而生成器表达式则可以用来创建其他任何类型的序列。
+
+示例 2-2　把字符串变成 Unicode 码位的另外一种写法
+>>> codes = [ord(symbol) for symbol in symbols]
+>>> codes
+[36, 162, 163, 165, 8364, 164]
+
+Python 会忽略代码里 []、{} 和 () 中的换行，因此如果你的代码里
+有多行的列表、列表推导、生成器表达式、字典这一类的，可以省
+略不太好看的续行符 \。
+
+列表推导可以帮助我们把一个序列或是其他可迭代类型中的元素过滤或
+是加工，然后再新建一个列表。Python 内置的 filter 和 map 函数组合
+起来也能达到这一效果，但是可读性上打了不小的折扣。
+
+
+
+
+
+
+

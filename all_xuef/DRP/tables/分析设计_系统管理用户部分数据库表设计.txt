@@ -1,0 +1,165 @@
+
+
+# 用户表 tb_user	
+用户代码 user_id	varchar(10) primary key not null
+用户名称 user_name	varchar(30)	not null
+密码	password	varchar(20)	not null
+联系电话 contact_tel varchar(30)
+email email			varchar(30)
+创建日期 create_date date
+
+# 基础数据管理
+## 分销商 t_client
+id				id 					int			primary key  not null
+pid				pid					int			foreign key ref id
+名称			name				varchar(30) not null
+分销商代码		client_id			varchar(10) 
+银行账号		bank_acoount_no		varchar(40)
+联系电话		contact_tel			varchar(30)
+地址			address				varchar(30)
+邮编			zip_code			varchar(10)
+是否为叶子		is_leaf				char(1)	not null	//y 是叶子， n 非叶子。default y
+是否分销商		is_client			char(1)	not null	//区分 区域和分销商
+分销商级别		client_level_id		char(3)		foreign key ref t_data_dict(id)
+
+# 数据字典 t_data_dict
+## 分销商类型 终端客户类型
+代码	id	char(3)		primary key not null
+名称	name	varchar(30)	not null
+类别	type	char(1)		not null	// A:分销商级别 B:终端客户类型 C:物料类别 D:物料计量单位
+
+
+# 终端客户信息 t_temi_client
+id				id	int pk not null
+pid				pid	int fk ref t_temi_client(id)
+终端客户级别代码	temi_client_level_id fk ref t_data_dict(id)
+名称			name	varchar(40)	not null	
+终端客户代码	temi_client_code	varchar(10)
+联系电话		contact_tel			varchar(30)
+联系人			contactor			varchar(20)
+地址			address				varchar(30)
+邮编			zip_code			varchar(10)
+是否为叶子		is_leaf				char(1)	not null
+是否为终端客户	is_temi_client		char(1) not null
+
+# 物料信息 t_items
+物料代码	dem_no	varchar(10) pk not null
+物料类别代码	dem_category_id char(3) fk t_data_dict(id)
+计量单位代码	dem_unit_id char(3) fk t_data_dict(id)
+物料名称	dem_name	varchar(20) not null
+规格		spec	varchar(20)
+型号		pattern	varchar(20)
+
+
+# 会计核算期间 t_fiscal_year_period
+id int pk auto_increment notnull
+核算年 fiscal_year int notnull
+核算月 fiscal_period int notnull
+开始日期 begin_date date notnull
+结束日期 end_date date  notnull
+核算状态 period_sts char(1) notnull // Y:可用 N:不可用
+
+# 分销库存管理--
+--分销商库存明细（台账）
+会计核算期间id int pk fk
+分销商id int pk fk
+物料代码 varchar(10) pk fk
+期初数量 int
+入库数量 int
+出库数量 int
+
+
+# 流向单主信息 t_flow_card_master
+流向单号 flow_card_no varchar(20) pk notnull
+操作类型 opt_type char(1)  //A:流向单 B:盘点单据
+会计核算期间 fiscal_year_period_id int fk notnull
+分销商id client_id int fk notnull
+录入人代码 recorder_id varchar(20) fk notnull
+操作日期 opt_date date notnull
+单据状态 vou_sts char(1) notnull  //S: 送审(不可更改) N:录入  default: N
+调整人代码 adjuster_id varchar(20) fk  //如果此字段不为空，说明调整了
+调整日期 adjust_date date
+抽查人代码 spotter_id varchar(20) fk
+抽查日期 spot_date date
+抽查描述 spot_desc varchar(40)
+复审人代码 confirmer_id varchar(10) fk
+复审日期 conf_date date
+
+
+# 流向单明细表 flow_card_detail
+流向单号 flow_card_no varchar(20) pk(flow_card_no, item_no) fk
+物料代码 item_no varchar(10) fk
+操作数量 opt_qty int
+调整数量 adjust_qty int
+调整原因 adjust_reason
+调整标记 adjust_flag char(1) //Y: 调整 N:未调整
+
+
+# 视图 v_aim_client (lecture26 10)
+该视图主要将分销商和终端进行合并
+
+# 主键维护表 t_table_id
+表名 table_name varchar(30) pk notnull
+值 value int notnull
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+

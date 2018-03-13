@@ -1,0 +1,19 @@
+
+
+1. 使用jQuery核心函数： $/jQuery
+2. 使用jQuery核心对象：执行$()返回的对象
+
+执行jQuery函数，返回的就是jQuery对象。
+
+引入jQuery后，只引进两个东西： $ jQuery
+console.log($, typeof $)
+console.log(jQuery===$) //true
+
+/*jQuery源码解析 大致结构*/
+(function(window){
+	var jQuery = function(){
+		return new xxx()
+	}
+	
+	window.$ = window.jQuery = jQuery
+})(window)

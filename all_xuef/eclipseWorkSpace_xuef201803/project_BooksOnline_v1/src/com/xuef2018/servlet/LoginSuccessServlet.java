@@ -31,6 +31,7 @@ public class LoginSuccessServlet extends HttpServlet {
 		List<Book> allBooks = bookDao.getAllBooks(username );
 		System.out.println(allBooks);
 		request.setAttribute("all_books", allBooks);
+		request.setAttribute("user_name", username);
 		request.getRequestDispatcher("/success.jsp").forward(request, response);
 	}
 
