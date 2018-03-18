@@ -1,0 +1,12 @@
+package com.xuef2018.server_version2;
+
+import com.xuef2018.server.Request;
+import com.xuef2018.server.Response;
+
+public class StaticResoureProcessor {
+
+	public void process(Request request, Response response) {
+		response.sendStaticResource();
+	}
+
+}

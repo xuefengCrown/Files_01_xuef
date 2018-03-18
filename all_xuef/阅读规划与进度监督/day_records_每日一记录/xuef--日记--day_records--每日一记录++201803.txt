@@ -91,12 +91,26 @@ linux
 《尚硅谷 MyBatis》 至57
 
 
+0315
+《佟刚——JDBC》至6
+《Bookstore》 至5 30:00
+《advanced js》
 
+https://drboolean.gitbooks.io/mostly-adequate-guide-old/content/
 
+王阳明
+曾国藩
+阳明学述要
 
+0318
+《java编程思想》 至57
+《深入剖析Tomcat》至 38
+《架构探险》至 37
 
-
-
+尚硅谷 《JavaSE---动态代理》 “动态语言”的特征
+java.lang.Class--->Class (String.class)
+java.lang.reflect--->Field Method
+Field f = clazz.getField("name");
 
 
 

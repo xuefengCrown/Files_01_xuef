@@ -1,0 +1,23 @@
+我们的目标是 通用的代码
+
+JDBC(Java DataBase Connection) 是面向接口编程的典范
+
+Java Application
+		|
+		|
+JDBC (一组规范，接口)
+		|
+		|
+JDBCMysqlImpl, JDBCOracleImpl (各种数据库驱动负责提供相关实现)
+		|
+		|
+MySQL, Oracle (各种数据库)
+
+
+# JDBC：
+面向应用的API
+面向数据库厂商的API
+
+## url
+jdbc:mysql://localhost:3306/books_2018
+协议:子协议://主机ip:端口号/数据库

@@ -1,0 +1,19 @@
+package com.xuef2018.bookstore.utils.webutil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.xuef2018.bookstore.domain.ShoppingCart;
+
+public class WebUtil {
+	/**
+	 * 从session中获取 shopCart;
+	 * 如果没有，创建一个。
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
+	public ShoppingCart getShopCart(HttpServletRequest req, HttpServletResponse resp){
+		return null;
+	}
+}

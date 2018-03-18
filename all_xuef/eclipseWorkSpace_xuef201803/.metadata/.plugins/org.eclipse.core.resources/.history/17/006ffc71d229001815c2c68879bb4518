@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+-->
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+
+<struts>
+    <!--  Overwrite Convention -->
+    <constant name="struts.convention.action.suffix" value="Controller"/>
+    <constant name="struts.convention.action.mapAllMatches" value="true"/>
+    <constant name="struts.convention.default.parent.package" value="rest-showcase"/>
+
+    <constant name="struts.convention.package.locators" value="example"/>
+
+<!-- Uncomment the lines below to use Jackson XML bindings instead of the XStream library to handle XML serialisations -->
+<!--
+    <bean name="jacksonXml" type="org.apache.struts2.rest.handler.ContentTypeHandler" class="org.apache.struts2.rest.handler.JacksonXmlHandler" />
+    <constant name="struts.rest.handlerOverride.xml" value="jacksonXml"/>
+-->
+
+    <package name="rest-showcase" extends="rest-default">
+        <global-allowed-methods>index,show,create,update,destroy,deleteConfirm,edit,editNew</global-allowed-methods>
+    </package>
+</struts>

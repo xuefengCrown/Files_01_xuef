@@ -1,0 +1,9 @@
+
+
+
+function Person(name, age){
+	this.name = name
+	this.age = age
+}
+
+var xuef = new Person('xuef', 28)

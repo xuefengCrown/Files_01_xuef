@@ -1,0 +1,28 @@
+
+chapter2
+## javax.servlet.Servlet Interface
+
+All servlets must
+implement this interface or extend a class that does.
+The Servlet interface has five methods whose signatures are as follows.
+	public void init(ServletConfig config) throws ServletException
+	public void service(ServletRequest request, ServletResponse response) throws ServletException, java.io.IOException
+	public void destroy()
+	public ServletConfig getServletConfig()
+	public java.lang.String getServletInfo()
+	
+Of the five methods in Servlet, the init, service, and destroy methods are the
+servlet's life cycle methods. The init method is called by the servlet container after
+the servlet class has been instantiated. The servlet container calls this method
+exactly once to indicate to the servlet that the servlet is being placed into service.
+The init method must complete successfully before the servlet can receive any
+requests. A servlet programmer can override this method to write initialization code
+that needs to run only once, such as loading a database driver, initializing values,
+and so on. In other cases, this method is normally left blank.
+
+The servlet container calls the service method of a servlet whenever there is a
+request for the servlet. The servlet container passes a javax.servlet.ServletRequest
+object and a javax.servlet.ServletResponse object. The ServletRequest object
+contains the client's HTTP request information and the ServletResponse object
+encapsulates the servlet's response. The service method is invoked many times
+during the life of the servlet.

@@ -1,0 +1,15 @@
+package com.xuef2018.server;
+
+import java.io.InputStream;
+
+public class Request {
+
+	public Request(InputStream inputStream) {
+	}
+
+	public void parse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

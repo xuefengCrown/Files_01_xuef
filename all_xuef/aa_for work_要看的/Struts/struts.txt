@@ -1,0 +1,7 @@
+MVC
+
+## 控制器
+
+1. servlet
+2. 一个servlet 多个方法(反射？)，doGet中根据方法名(作为参数从前端传过来)的不同，调用不同的方法。(在java里得使用反射？)
+3. struts 使用 Filter

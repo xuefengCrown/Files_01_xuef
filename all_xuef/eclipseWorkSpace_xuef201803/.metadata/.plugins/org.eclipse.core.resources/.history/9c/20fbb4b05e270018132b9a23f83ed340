@@ -1,0 +1,10 @@
+package com.xuef2018.dao;
+
+import java.sql.Connection;
+
+public class DaoUtils {
+	public static Connection getConnection(){
+		
+		return null;
+	}
+}

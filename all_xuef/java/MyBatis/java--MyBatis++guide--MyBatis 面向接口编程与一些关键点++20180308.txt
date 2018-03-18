@@ -15,3 +15,6 @@ EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
  * 		mybatis的全局配置文件：包含数据库连接池信息，事务管理器信息等...系统运行环境信息
  * 		sql映射文件：保存了每一个sql语句的映射信息：
  * 					将sql抽取出来。
+
+ 
+ 

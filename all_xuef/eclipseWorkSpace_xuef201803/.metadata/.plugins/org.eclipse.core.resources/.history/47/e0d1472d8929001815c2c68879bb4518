@@ -1,0 +1,19 @@
+package com.xuef2018.bookstore.domain;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ShoppingCart {
+	private Map<Integer, ShoppingCartItem> shopCart = 
+			new HashMap<>();
+			
+	public boolean hasBook(Integer id){
+		return shopCart.get(id) != null;
+	}
+	public void addBook(Book book){
+		// 如果购物车中已经有该书
+		if(hasBook(book.getId())){
+			
+		}
+	}
+}

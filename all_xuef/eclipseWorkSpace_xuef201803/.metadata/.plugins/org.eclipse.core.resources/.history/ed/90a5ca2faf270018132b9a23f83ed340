@@ -1,0 +1,7 @@
+package com.xuef2018.bookstore.servlet;
+
+public class Page<T> {
+	//µ±Ç°Ò³
+	private int pageNo;
+	//
+}

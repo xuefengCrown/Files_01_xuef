@@ -1,0 +1,25 @@
+package com.xuef2018.server;
+
+import java.io.OutputStream;
+/**
+ * 表示一个 HTTP请求
+ * @author moveb
+ *
+ */
+public class Response {
+
+	public Response(OutputStream outputStream) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setRequest(Request request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void sendStaticResource() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,31 @@
+## 数据表
+
+### bs_user
+user_id int(11)
+user_name varchar(30)
+account_id int(11) /* fk ref bs_account(account_id) */
+
+### bs_trade
+trade_id int(11)
+trade_time datetime
+user_id(11) /* fk ref bs_user(user_id) */
+
+### bs_account
+account_id int(11)
+balance int(11)
+
+### bs_books
+book_id int(11)
+author varchar(255)
+title varchar(255)
+price float
+publish_date date
+sales_account int(11)
+stores_num int(11)
+remark varchar(255)
+
+## bs_trade_item
+item_id int(11) 
+quantity int(11)
+book_id int(11) /* fk ref bs_books(book_id) */
+trade_id int(11) /* fk ref bs_trade(trade_id) */

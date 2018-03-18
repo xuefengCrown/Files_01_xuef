@@ -1,0 +1,13 @@
+package com.xuef2018.bookstore.dao.impl;
+
+import com.xuef2018.bookstore.dao.UserDAO;
+import com.xuef2018.bookstore.domain.User;
+
+
+	@Override
+	public User getUser(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

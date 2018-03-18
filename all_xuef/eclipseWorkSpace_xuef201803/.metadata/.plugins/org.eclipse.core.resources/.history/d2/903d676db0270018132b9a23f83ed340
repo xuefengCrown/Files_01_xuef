@@ -1,0 +1,14 @@
+package com.xuef2018.bookstore.servlet;
+
+import java.util.List;
+
+public class Page<T> {
+	//当前页
+	private int pageNo;
+	//当前页的图书
+	private List<T> list;
+	//每页的 记录数
+	private int pageSize;
+	//总记录数
+	private int totalItemNumber;
+}

@@ -1,0 +1,12 @@
+
+1. 服务器向客户端(浏览器)发送原始数据。需要以
+HTTP/1.1 200 OK
+开头，浏览器才能解析。
+
+2. 响应servlet时，PrimitiveServlet.class (即类文件)放在webroot下。
+## 一定得是类文件
+## 不能有package
+## 要加上 响应行 out.println("HTTP/1.1 200 OK\n");
+PrintWriter out = response.getWriter();
+out.println("HTTP/1.1 200 OK\n");
+out.println("Hello. Roses are red.");

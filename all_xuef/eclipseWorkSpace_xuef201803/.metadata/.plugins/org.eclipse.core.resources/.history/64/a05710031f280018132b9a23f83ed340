@@ -1,0 +1,18 @@
+package com.xuef2018.bookstore.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.xuef2018.bookstore.dao.BaseDao;
+
+public class TestBaseDao {
+
+	@Test
+	public void testInsert() {
+		String sql = "insert into ";
+		BaseDao bd = new BaseDao<>();
+		bd.insert(sql, args);
+	}
+
+}

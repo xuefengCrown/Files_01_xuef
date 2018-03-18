@@ -1,0 +1,16 @@
+package com.xuef2018.bookstore.dao.impl;
+
+import com.xuef2018.bookstore.dao.BaseDao;
+import com.xuef2018.bookstore.dao.UserDAO;
+import com.xuef2018.bookstore.domain.User;
+
+public class UserDaoImpl extends BaseDao implements UserDAO{
+	@Override
+	public User getUser(String username) {
+		String sql = "select userid, username, accountid from"
+				+ " userinfo where username = ?";
+		
+		return query(sql, username);
+	}
+
+}

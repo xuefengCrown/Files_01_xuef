@@ -1,0 +1,5 @@
+package com.xuef2018.struts_pro1.domain;
+
+public class Product {
+
+}

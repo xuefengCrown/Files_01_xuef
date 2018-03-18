@@ -1,0 +1,54 @@
+
+参考：
+《图解HTTP》
+《HTTP权威指南》
+《计算机网络-自顶向下方法》
+
+如果要深层了解的话，我想应该全面的了解一下计算机网络，入门的书有 《计算机网络-自顶向下方法》。
+在你全面的了解了 TCP/UDP 以及网络各种层之间的联系以后，你才能对HTTP有一个深入全面的认识。
+
+可以先看HTTP权威指南，先对HTTP有总体了解，然后针对各部分查看RFC了解细节。
+当然要自己抓包看看才能更加明了。
+
+
+1. 
+http://localhost:8080/pro/login.html
+
+## HTTP 请求报文(都是纯文本)
+GET /pro/login.html HTTP/1.0
+User-agent:Mozilla/4.75 [en](Win98;U)
+Host: localhost
+### 首部字段
+Accept: text/html, image/gif, image/jpeg
+Accept-Language: en,fr
+...
+### 主体(可能包含任意二进制数据)
+
+## HTTP响应报文
+HTTP/1.0 200 OK
+Date: Sun,01 Oct 2000 23:23:12 GMT
+Server: Apache/1.3.11 BSafe-SSL/1.38(Unix)
+Last-modified:Tue, 04 Jul 2000 09:46:21 GMT
+Content-length:403
+Content-type:text/html
+
+
+当你在浏览器地址栏键入一行合法资源输入时，浏览器做了什么：
+(a)浏览器从URL中解析出服务器的主机名；
+(b)浏览器将服务器的主机名转换成服务器的IP地址；
+(c)浏览器将端口号(if exists)从URL中解析出来；
+(d)浏览器建立一条与Web服务器的TCP连接；
+(e)浏览器向服务器发送一条HTTP请求报文；
+(f)服务器向浏览器回送一条HTTP响应报文；
+(g)关闭连接，浏览器显示文档。
+
+
+# 使用Telnet
+Telnet 程序可以将键盘连接到某个目标TCP端口，并将此TCP端口的输出回送到显示屏上。Telnet常用于远程
+终端会话，但它几乎可以链接所有的TCP服务器，包括HTTP服务器。
+
+telnet www.joes-hardware.com 80
+
+GET /tools.html HTTP/1.1
+Host: www.joes-hardware.com
+

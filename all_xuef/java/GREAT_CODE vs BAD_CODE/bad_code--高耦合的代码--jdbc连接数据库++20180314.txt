@@ -1,0 +1,46 @@
+
+********************************************************************
+		//1. 创建一个 Driver 实现类的对象
+		Driver driver = new com.mysql.jdbc.Driver();
+	
+		//2. 准备连接数据库的基本信息: url, user, password
+		String url = "jdbc:mysql://localhost:3306/test";
+		Properties info = new Properties();
+		info.put("user", "root");
+		info.put("password", "1230");
+		
+		//3. 调用 Driver 接口的　connect(url, info) 获取数据库连接
+		Connection connection = driver.connect(url, info);
+		System.out.println(connection);
+********************************************************************
+
+## 坏在哪儿？
+1. 在代码中 new, 这就是高耦合。如果我要更换 Driver，怎么办？
+
+2. 连接数据库所需的信息也内嵌在代码中，这也是一种高耦合。
+如果我要切换数据库，怎么办？
+
+## 解决办法
+将Driver 实现类的全类名(通过反射来创建类实例)，以及
+连接信息放在配置文件中。
+这样就可以通过修改配置文件的方式来实现和具体的数据库解耦。
+
+********************************************************************
+		//1. 准备连接数据库的 4 个字符串. 
+		//驱动的全类名.
+		String driverClass = "com.mysql.jdbc.Driver";
+		//JDBC URL
+		String jdbcUrl = "jdbc:mysql:///test";
+		//user
+		String user = "root";
+		//password
+		String password = "1230";
+		
+		//2. 加载数据库驱动程序(对应的 Driver 实现类中有注册驱动的静态代码块.)
+		Class.forName(driverClass);
+		
+		//3. 通过 DriverManager 的 getConnection() 方法获取数据库连接. 
+		Connection connection = 
+				DriverManager.getConnection(jdbcUrl, user, password);
+		System.out.println(connection); 
+********************************************************************

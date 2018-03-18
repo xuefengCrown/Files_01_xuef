@@ -1,0 +1,4 @@
+
+XML (eXtensible Markup Language)
+DTD (Document Type Definition)---约定 xml 的标签
+Schema---约定 xml 标签和类型

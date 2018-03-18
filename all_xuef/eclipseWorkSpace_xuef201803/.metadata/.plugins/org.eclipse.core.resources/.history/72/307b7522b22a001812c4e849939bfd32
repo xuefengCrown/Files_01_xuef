@@ -1,0 +1,5 @@
+package com.xuef2018.servlet;
+
+public class PrimitiveServlet {
+
+}

@@ -1,0 +1,12 @@
+package com.xuef2018.dao;
+
+import java.io.InputStream;
+import java.sql.Connection;
+
+public class DaoUtils {
+	public  Connection getConnection(){
+		InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("db.properties");
+		
+		return null;
+	}
+}

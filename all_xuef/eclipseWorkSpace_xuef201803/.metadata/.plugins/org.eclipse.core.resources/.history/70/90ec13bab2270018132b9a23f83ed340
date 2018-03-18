@@ -1,0 +1,25 @@
+package com.xuef2018.bookstore.servlet;
+
+public class CriteriaBook {
+	private float minPrice;
+	private float maxPrice;
+	private int pageNo;
+	public float getMinPrice() {
+		return minPrice;
+	}
+	public void setMinPrice(float minPrice) {
+		this.minPrice = minPrice;
+	}
+	public float getMaxPrice() {
+		return maxPrice;
+	}
+	public void setMaxPrice(float maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+	public int getPageNo() {
+		return pageNo;
+	}
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+}

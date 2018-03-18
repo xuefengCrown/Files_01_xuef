@@ -1,9 +1,0 @@
-package com.xuef2018.bean;
-
-public class Book {
-	private Integer user_id;
-	private String user_name;
-	private String book_name;
-	private String book_path;
-	private Integer stars; // ±»¹Ø×¢Êý
-}

@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Method"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="com.xuef2018.bookstore.domain.ShoppingCart"/>
+<fullyQualifiedTypeName name="org.apache.catalina.Session"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.xuef2018.bookstore.domain.ShoppingCartItem"/>
+<fullyQualifiedTypeName name="com.xuef2018.bookstore.utils.webutil.WebUtil"/>
+<fullyQualifiedTypeName name="javax.servlet.Servlet"/>
+<fullyQualifiedTypeName name="com.xuef2018.bookstore.dao.BaseDao"/>
+<fullyQualifiedTypeName name="com.xuef2018.bookstore.dao.UserDAO"/>
+<fullyQualifiedTypeName name="com.xuef2018.bookstore.dao.impl.UserDaoImpl"/>
+<fullyQualifiedTypeName name="com.xuef2018.bookstore.domain.User"/>
 </qualifiedTypeNameHistroy>

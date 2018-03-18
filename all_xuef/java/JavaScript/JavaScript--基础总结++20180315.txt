@@ -1,0 +1,24 @@
+
+## 数据类型
+
+### 5种基本类型
+String
+Number
+Boolean
+undefined
+null
+
+### 判断数据的类型 
+typeof
+instanceof
+=== (强等于，不进行类型转换)
+### 三种对象(引用)类型
+Object {name:'xuef', id:'3522******'}
+
+Function
+
+Array []
+
+
+
+

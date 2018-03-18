@@ -1,0 +1,9 @@
+package com.xuef2018.bookstore.utils.webutil;
+
+import com.xuef2018.bookstore.domain.ShoppingCart;
+
+public class WebUtil {
+	public ShoppingCart getShopCart(){
+		
+	}
+}

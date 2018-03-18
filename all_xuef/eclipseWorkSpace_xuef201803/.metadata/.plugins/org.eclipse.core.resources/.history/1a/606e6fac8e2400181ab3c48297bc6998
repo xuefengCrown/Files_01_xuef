@@ -1,9 +1,0 @@
-package com.xuef2018.dao;
-
-import java.util.List;
-
-public interface StudentDao {
-	public List<Student> getAllBooks(String username){
-		return null;
-	}
-}

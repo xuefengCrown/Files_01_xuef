@@ -1,0 +1,16 @@
+package com.xuef2018.bookstore.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.xuef2018.bookstore.dao.impl.BookDaoImpl;
+
+public class TestBookDao {
+	private BookDao bd = new BookDaoImpl();
+	@Test
+	public void testGetBook() {
+		
+	}
+
+}

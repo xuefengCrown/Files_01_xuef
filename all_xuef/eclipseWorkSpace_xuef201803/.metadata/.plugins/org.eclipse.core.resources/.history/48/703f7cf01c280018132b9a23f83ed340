@@ -1,0 +1,49 @@
+package com.xuef2018.bookstore.dao;
+
+import java.util.List;
+
+import org.apache.commons.dbutils.QueryRunner;
+
+public class BaseDao<T> implements Dao<T> {
+	private QueryRunner qr = new QueryRunner();
+	
+	/**
+	 * 插入对象，并返回主键
+	 */
+	@Override
+	public long insert(String sql, Object... args) {
+		
+		return 0;
+	}
+
+	@Override
+	public void update(String sql, Object... args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public T query(String sql, Object... args) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List queryForList(String sql, Object... args) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getSingleVal(String sql, Object... args) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void batch(String sql, Object[]... params) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

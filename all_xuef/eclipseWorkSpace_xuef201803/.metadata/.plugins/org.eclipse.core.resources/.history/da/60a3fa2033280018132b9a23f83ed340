@@ -1,0 +1,24 @@
+package com.xuef2018.bookstore.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.xuef2018.bookstore.dao.BookDao;
+import com.xuef2018.bookstore.dao.impl.BookDaoImpl;
+import com.xuef2018.bookstore.domain.Book;
+import com.xuef2018.bookstore.servlet.CriteriaBook;
+
+public class TestBookDao {
+	private BookDao bd = new BookDaoImpl();
+	@Test
+	public void testGetBook() {
+		Book book = bd.getBook(1);
+		System.out.println("book: " + book);
+	}
+	@Test
+	public void test() {
+		System.out.println(bd.getTotalBookNumber(new 
+				CriteriaBook(0, 900, 1)));
+	}
+}

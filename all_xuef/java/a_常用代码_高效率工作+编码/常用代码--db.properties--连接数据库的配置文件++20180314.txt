@@ -1,0 +1,14 @@
+
+## mysql
+mysql.driverClass = com.mysql.jdbc.Driver
+mysql.url = jdbc:mysql://localhost:3306/books_2018
+mysql.user = root
+mysql.password = 121314
+
+## oracle
+
+
+## sqlServer
+
+
+
