@@ -1,0 +1,13 @@
+
+
+1. 新建 工程目录(C:\xuef_projects\bookstore_v1)
+>> cd C:\xuef_projects\bookstore_v1
+>> git init
+
+新建 README.md
+>> git add README.md
+>> git commit -m "add README.md"
+
+2. 查看状态
+>> git status
+

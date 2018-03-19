@@ -1,0 +1,8 @@
+1. 用户名，密码
+
+cmd 下输入：
+>> git config --global user.name "xuefengCrown"
+>> git config --global user.email "movebeyondfear@gmail.com"
+
+显示配置：
+>> git config --list

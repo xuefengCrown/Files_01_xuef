@@ -1,0 +1,17 @@
+package com.xuef2018.server_version3.processor.http;
+
+import 
+import org.apache.catalina.connector.http.SocketInputStream;
+
+public class HttpRequest implements HttpServletRequest {
+
+	public HttpRequest(SocketInputStream input) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getRequestURI() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
