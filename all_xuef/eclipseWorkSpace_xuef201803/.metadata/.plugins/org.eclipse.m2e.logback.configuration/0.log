@@ -13709,3 +13709,4 @@
 2018-03-28 04:26:52,288 [Worker-568] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
 2018-03-28 04:26:52,292 [Worker-568] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2018-03-28 04:26:52,300 [Worker-568] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-03-28 04:26:52,303 [Worker-568] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
