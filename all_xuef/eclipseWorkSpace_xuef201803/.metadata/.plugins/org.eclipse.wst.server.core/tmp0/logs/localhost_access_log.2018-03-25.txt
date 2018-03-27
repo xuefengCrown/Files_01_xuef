@@ -1,0 +1,17 @@
+127.0.0.1 - - [25/Mar/2018:13:13:17 +0800] "GET / HTTP/1.1" 404 955
+127.0.0.1 - - [25/Mar/2018:13:13:24 +0800] "GET /ssm_crud/index.jsp HTTP/1.1" 200 1519
+127.0.0.1 - - [25/Mar/2018:13:13:24 +0800] "GET /ssm_crud/js/bootstrap-3.3.7-dist/js/bootstrap.min.js HTTP/1.1" 404 1111
+127.0.0.1 - - [25/Mar/2018:13:13:24 +0800] "GET /ssm_crud/css/bootstrap-3.3.7-dist/css/bootstrap.min.css HTTP/1.1" 200 -
+127.0.0.1 - - [25/Mar/2018:22:48:55 +0800] "GET / HTTP/1.1" 404 955
+127.0.0.1 - - [25/Mar/2018:22:49:23 +0800] "GET /book_store_v1/index.jsp HTTP/1.1" 404 1024
+127.0.0.1 - - [25/Mar/2018:22:49:29 +0800] "GET /bookstore_xuef/book-getBooks.action HTTP/1.1" 200 3198
+127.0.0.1 - - [25/Mar/2018:22:49:29 +0800] "GET /bookstore_xuef/book-getBooks.action HTTP/1.1" 200 3198
+127.0.0.1 - - [25/Mar/2018:22:49:29 +0800] "GET /bookstore_xuef/styles/basic.css HTTP/1.1" 304 -
+127.0.0.1 - - [25/Mar/2018:22:49:30 +0800] "GET /bookstore_xuef/js/jquery-1.10.1.min.js HTTP/1.1" 304 -
+127.0.0.1 - - [25/Mar/2018:22:49:34 +0800] "GET /bookstore_xuef/book-add2cart.action?id=1&pageNo=1 HTTP/1.1" 200 3291
+127.0.0.1 - - [25/Mar/2018:22:49:38 +0800] "GET /bookstore_xuef/book-add2cart.action?id=2&pageNo=1 HTTP/1.1" 200 3291
+127.0.0.1 - - [25/Mar/2018:22:49:38 +0800] "GET /bookstore_xuef/book-add2cart.action?id=3&pageNo=1 HTTP/1.1" 200 3291
+127.0.0.1 - - [25/Mar/2018:22:52:04 +0800] "GET /bookstore_xuef/book-seeCart.action?pageNo=1 HTTP/1.1" 200 1097
+127.0.0.1 - - [25/Mar/2018:22:52:07 +0800] "GET /bookstore_xuef/book-settle.action HTTP/1.1" 200 2011
+127.0.0.1 - - [25/Mar/2018:22:52:07 +0800] "POST /bookstore_xuef/book-logincheck.action HTTP/1.1" 200 40
+127.0.0.1 - - [25/Mar/2018:22:52:09 +0800] "POST /bookstore_xuef/book-logincheckpwd.action HTTP/1.1" 200 37

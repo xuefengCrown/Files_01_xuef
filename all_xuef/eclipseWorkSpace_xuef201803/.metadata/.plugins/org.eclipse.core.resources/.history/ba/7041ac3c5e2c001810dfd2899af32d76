@@ -1,0 +1,9 @@
+package org.smart4j.framework.utils;
+/**
+ * 处理 JSON 与 POJO之间的转换
+ * @author moveb
+ *
+ */
+public class JsonUtil {
+
+}

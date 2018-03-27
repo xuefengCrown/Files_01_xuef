@@ -1,0 +1,12 @@
+1521639365769	Rename package 'java.com.xuef2018.bookstore.dao'
+1521639379568	Rename package 'java.com.xuef2018.bookstore.dao.daoImpl'
+1521639391446	Rename package 'java.com.xuef2018.bookstore.dbUtils'
+1521639404806	Rename package 'java.com.xuef2018.bookstore.domain'
+1521639418246	Rename package 'java.com.xuef2018.bookstore.domain.web'
+1521639428567	Rename package 'java.com.xuef2018.bookstore.exception'
+1521639439176	Rename package 'java.com.xuef2018.bookstore.service'
+1521639451948	Rename package 'java.com.xuef2018.bookstore.servlet'
+1521639458946	Delete element
+1521639469088	Rename package 'java.com.xuef2018.bookstore.utils'
+1521643378479	Delete element
+1521645105445	Rename package 'java.com.xuef2018.bookstore.test'

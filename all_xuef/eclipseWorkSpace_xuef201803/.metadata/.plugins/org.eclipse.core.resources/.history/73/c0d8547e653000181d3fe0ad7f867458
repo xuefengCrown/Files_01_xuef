@@ -1,0 +1,5 @@
+package com.xuef.ssm.domain;
+
+public class Department {
+	
+}

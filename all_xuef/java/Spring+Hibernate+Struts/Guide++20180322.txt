@@ -1,0 +1,5 @@
+
+# hibernate.cfg.xml
+1. 數據源配置到IOC容器中，所以此處不需要配置數據源
+2. 關聯的 .hbm.xml 也在 IOC中配置SessionFactory時配置
+3. 配置Hibernate的基本屬性 

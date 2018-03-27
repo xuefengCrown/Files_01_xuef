@@ -1,0 +1,43 @@
+
+
+## 目標是高效和安全
+## 强力的管理和執行
+
+一定要明白，爲什麽使用某種工具或框架
+
+MVC T(Test) B(Build)
+
+1. M
+|---Dao
+|---	BaseDao
+|---BookDao
+|---	BookDaoImpl
+	
+Hibernate, JPA, MyBatis, SpringData
+
+2. VC
+輕量級 MVC 框架
+爲什麽要用 Struts
+爲什麽要用 Spring (Ioc, AOP, 事務控制)
+
+jQuery (强大的選擇器)
+Vue(雙向數據綁定)
+Ajax(異步通信)
+
+3. 版本控制
+Git
+SVN
+
+4. 日志記錄
+Log4j
+
+5. 測試
+junit
+
+6. Build
+Maven
+
+
+
+
+

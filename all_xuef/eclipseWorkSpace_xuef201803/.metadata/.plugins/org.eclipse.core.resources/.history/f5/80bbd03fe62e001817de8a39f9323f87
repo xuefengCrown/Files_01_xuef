@@ -1,0 +1,16 @@
+<?xml version="1.0"?>    
+<!DOCTYPE hibernate-mapping PUBLIC     
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"    
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">    
+        
+<hibernate-mapping>    
+    <class name="com.xuef2018.bookstore.domain.User" table="userinfo">    
+        <id name="id">  
+            <column name="userid" />  
+            <generator class="native"/>    
+        </id>    
+        <property name="name" column="username" />    
+        <property name="accountid" column="accountid"/>    
+    </class>    
+        
+</hibernate-mapping>

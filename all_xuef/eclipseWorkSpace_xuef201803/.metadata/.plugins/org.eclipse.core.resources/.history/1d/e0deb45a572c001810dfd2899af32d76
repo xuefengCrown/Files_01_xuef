@@ -1,0 +1,21 @@
+package org.smart4j.framework;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+/**
+ * 请求转发器
+ * @author moveb
+ *
+ */
+@WebServlet(urlPatterns="/*", loadOnStartup=0)
+public class DispatcherServlet extends HttpServlet {
+	@Override
+	public void init(ServletConfig servletConfig) throws ServletException {
+		// 初始化相关 Helper 类
+		HelperLoader.init();
+		
+	}
+}

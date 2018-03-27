@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <libraryInfos>
+<libraryInfo home="C:\Program Files (x86)\java1.7\jdk" version="1.7.0_79">
+<bootpath>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\lib\resources.jar"/>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\lib\rt.jar"/>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\lib\sunrsasign.jar"/>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\lib\jsse.jar"/>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\lib\jce.jar"/>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\lib\charsets.jar"/>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\lib\jfr.jar"/>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Program Files (x86)\java1.7\jdk\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
 <libraryInfo home="C:\Program Files (x86)\java1.7" version="1.7.0_79">
 <bootpath>
 <entry path="C:\Program Files (x86)\java1.7\jre\lib\resources.jar"/>

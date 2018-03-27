@@ -1,7 +1,0 @@
-package com.xuef2018.dao;
-
-public class DaoUtils {
-	public static Connection getConnection(){
-		
-	}
-}

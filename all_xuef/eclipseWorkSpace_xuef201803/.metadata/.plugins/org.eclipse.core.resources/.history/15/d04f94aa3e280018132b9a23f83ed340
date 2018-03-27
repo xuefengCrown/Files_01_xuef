@@ -1,9 +1,0 @@
-package com.xuef2018.bookstore.service;
-
-import com.xuef2018.bookstore.servlet.CriteriaBook;
-
-public class BookService {
-	public Page<Book> getPage(CriteriaBook cb){
-		
-	}
-}

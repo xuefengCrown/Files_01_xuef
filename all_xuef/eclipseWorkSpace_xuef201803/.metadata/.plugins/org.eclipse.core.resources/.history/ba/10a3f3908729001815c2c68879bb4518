@@ -1,8 +1,0 @@
-package com.xuef2018.bookstore.domain;
-
-import java.util.Map;
-
-public class ShoppingCart {
-	private Map<Integer, ShoppingCartItem> shopCart = 
-			new HashMap<>();
-}

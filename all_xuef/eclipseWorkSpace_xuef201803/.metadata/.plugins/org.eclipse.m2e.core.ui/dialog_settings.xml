@@ -11,6 +11,9 @@
 	</section>
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\example"/>
+			<item value="C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\BookStore_xxx"/>
+			<item value="C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\book_store_v1"/>
 			<item value="C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\struts1"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -20,6 +23,12 @@
 			<item value="[groupId].[artifactId]"/>
 			<item value="[groupId].[artifactId]-[version]"/>
 		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.ui.internal.dialogs.MavenRepositorySearchDialog">
+		<item value="450" key="height"/>
+		<item value="480" key="width"/>
+		<item value="64" key="y"/>
+		<item value="443" key="x"/>
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="groupId">
@@ -41,11 +50,19 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
+			<item value="com.xue2018"/>
+			<item value="com.xuef2018"/>
+			<item value="com.xuef201803"/>
 			<item value="com.xuef2018.struts2"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="ssm_crud"/>
+			<item value="bookstore_xuef"/>
+			<item value="BookStore_xxx"/>
+			<item value="bookstore_xf"/>
+			<item value="bookstore"/>
 			<item value="proj1"/>
 		</list>
 		<list key="projectNameTemplate">

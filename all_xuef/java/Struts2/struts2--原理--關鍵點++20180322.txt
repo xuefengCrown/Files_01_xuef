@@ -1,0 +1,50 @@
+
+1. 關鍵文件
+struts-default.xml
+default.properties
+
+2. 關鍵方法
+使用 Ctrl + Shift + T 查找和跟蹤類
+使用 debug 跟蹤才能弄清楚處理流程
+
+3. param 封裝 請求參數 並注入JavaBean
+
+4. 《架構設計》
+前端： 請求方法 + 請求路徑(xxx.action)
+後端： ControllerClass + ActionMethod
+構成一個映射(Map)
+
+5. 注入
+參數 注入到 JavaBean
+
+6. 注入 request, session, application
+XxxAction implements RequestAware, SessionAware
+7. 重要的類
+ActionSupport
+
+8. 重要接口
+Action
+Validateable
+ValidationAware
+TextProvider
+LocalProvider
+
+9. result
+result 節點是 action 節點的子節點; 一個action 可對應多個 result 節點。
+<action name="product-save" class="com.atguigu.struts2.helloworld.Product"
+    method="save">
+    <result name="details">/WEB-INF/pages/details.jsp</result>	
+</action>
+在 《架構設計》中，Action注解 標注方法，方法返回值有：View && Data
+
+10. 值棧 ValueStack
+對象棧
+Map 棧
+
+取值：
+<s:property value="[0].message"> // 對象棧中對象的屬性值
+<s:property value="#session.product.productName" /> //取Map棧中session的對象的某屬性
+11. 查看值棧
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<s:debug></s:debug>
+

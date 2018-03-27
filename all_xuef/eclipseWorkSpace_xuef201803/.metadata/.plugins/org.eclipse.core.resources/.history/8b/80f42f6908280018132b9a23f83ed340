@@ -1,7 +1,0 @@
-package com.xuef2018.bookstore.domain;
-
-public class Book {
-	private int id;
-	private String author;
-	private String title;
-}

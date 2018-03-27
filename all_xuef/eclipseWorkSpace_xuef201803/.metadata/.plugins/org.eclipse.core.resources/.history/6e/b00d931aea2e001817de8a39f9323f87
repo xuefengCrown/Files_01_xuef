@@ -1,0 +1,8 @@
+package com.xuef2018.bookstore.dao;
+
+public interface TradeItemDao {
+	/**
+	 * 插入n条记录
+	 */
+	public void insertAny();
+}

@@ -26,3 +26,53 @@ object and a javax.servlet.ServletResponse object. The ServletRequest object
 contains the client's HTTP request information and the ServletResponse object
 encapsulates the servlet's response. The service method is invoked many times
 during the life of the servlet.
+
+chapter3
+## 解析请求行
+GET /myApp/ModernServlet?userName=tarzan&password=pwd HTTP/1.1
+
+在servlet/JSP编程中，参数名jsessionid用于携带一个会话标识符。会话标识符通常是作为Cookie嵌入的，但是
+当浏览器禁用了Cookie时，程序员也可以将会话标识符嵌入到字符串中。
+
+### 4. 解析 cookie
+Cookie是由浏览器作为HTTP请求头的一部分发送的。
+Cookies are sent by a browser as an HTTP request header. Such a header has the
+name "cookie" and the value is the cookie name/value pair(s). Here is an example of
+a cookie header containing two cookies: userName and password.
+Cookie: userName=budi; password=pwd;
+
+### 5. 获取参数
+当用户需要参数时才解析。解析查询字符串或HTTP请求体来获得参数。
+
+Parameters can be found in the query string or in the request body. If the user
+requested the servlet using the GET method, all parameters are on the query string.
+If the POST method is used, you may find some in the request body too. All the
+name/value pairs are stored in a HashMap. Servlet programmers can obtain the
+parameters as a Map (by calling getParameterMap of HttpServletRequest) and the
+parameter name/value. There is a catch, though. Servlet programmers are not
+allowed to change parameter values. Therefore, a special HashMap is used:
+org.apache.catalina.util.ParameterMap.
+
+### Creating a HttpResponse Object
+From inside a servlet, you use a PrintWriter to write characters.
+You may use any encoding you desire, however the characters will be sent to the browser as byte
+streams. 
+在servlet中，可以使用PrintWriter对象向输出流中写字符。可以使用任意编码样式，
+但在向浏览器发送字符的时候，实际上都是字节流。
+
+We could instantiate the ResponseWriter class by passing an instance of
+ResponseStream object. However, we use a java.io.OutputStreamWriter object to
+serve as a bridge between the ResponseWriter object and the ResponseStream
+object.
+With an OutputStreamWriter, characters written to it are encoded into bytes using a
+specified charset. The charset that it uses may be specified by name or may be given
+explicitly, or the platform's default charset may be accepted. Each invocation of a
+write method causes the encoding converter to be invoked on the given character(s).
+The resulting bytes are accumulated in a buffer before being written to the
+underlying output stream. The size of this buffer may be specified, but by default it is
+large enough for most purposes. Note that the characters passed to the write
+methods are not buffered.
+
+
+
+

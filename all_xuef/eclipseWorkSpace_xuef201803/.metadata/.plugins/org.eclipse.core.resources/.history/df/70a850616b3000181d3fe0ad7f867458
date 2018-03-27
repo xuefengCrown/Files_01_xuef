@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuef.ssm.dao.EmployeeMapper">
+	<resultMap type="com.xuef.ssm.domain.Employee" id="empWithDept">
+	    <id column="e_no" jdbcType="INTEGER" property="eNo" />
+	    <result column="e_name" jdbcType="VARCHAR" property="eName" />
+	    <result column="e_gender" jdbcType="CHAR" property="eGender" />
+	    <result column="dept_no" jdbcType="INTEGER" property="deptNo" />
+	    <result column="e_job" jdbcType="VARCHAR" property="eJob" />
+	    <result column="e_salary" jdbcType="SMALLINT" property="eSalary" />
+	    <result column="hireDate" jdbcType="DATE" property="hiredate" />
+	    <association property="department" javaType="com.xuef.ssm.domain.Department">
+	        <id column="dNo" property="dNo"/>
+	    	<result column="dName" property="dName"/>
+	    	<result column="dLocation" property="dLocation"/>
+	    </association>
+	</resultMap>
+	<select id="getEmpById" resultType="empWithDept">
+		select * from employee where id=#{id}
+	</select>
+	
+	<!--public List<Employee> getEmps();  -->
+	<!-- <select id="getEmps" resultType="">
+		select * from tbl_employee
+	</select> -->
+</mapper>

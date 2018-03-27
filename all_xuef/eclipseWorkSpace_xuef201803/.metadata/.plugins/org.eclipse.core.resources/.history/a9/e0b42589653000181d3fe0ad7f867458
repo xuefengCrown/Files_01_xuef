@@ -1,0 +1,9 @@
+package com.xuef.ssm.domain;
+
+public class Department {
+	private Integer dNo;
+	private String dName;
+	private String dLocation;
+	
+	
+}

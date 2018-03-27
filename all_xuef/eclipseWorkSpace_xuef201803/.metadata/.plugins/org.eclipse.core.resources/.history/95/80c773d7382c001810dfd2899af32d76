@@ -1,0 +1,28 @@
+package org.smart4j.framework.utils;
+
+import java.lang.reflect.Method;
+
+/**
+ * 反射工具类
+ * @author moveb
+ *
+ */
+public class ReflectionUtil {
+	/**
+	 * 创建实例
+	 * @param cls
+	 * @return
+	 */
+	public static Object newInstance(Class<?> cls){
+		Object instance = null;
+		try{
+			instance = cls.newInstance();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return instance;
+	}
+	public static Object invokeMethod(Object o, Method m, Object... args){
+		
+	}
+}

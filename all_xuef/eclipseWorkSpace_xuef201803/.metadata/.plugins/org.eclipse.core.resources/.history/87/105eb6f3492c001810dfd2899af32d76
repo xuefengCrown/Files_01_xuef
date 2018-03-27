@@ -1,0 +1,10 @@
+package org.smart4j.framework.bean;
+
+/**
+ * 封装请求信息
+ * @author moveb
+ *
+ */
+public class Request {
+
+}

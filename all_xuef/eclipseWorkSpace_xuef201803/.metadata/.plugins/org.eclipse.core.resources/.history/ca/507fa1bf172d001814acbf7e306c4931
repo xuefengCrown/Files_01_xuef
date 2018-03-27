@@ -1,0 +1,18 @@
+package com.xuef2018.bookstore.dbUtils;
+
+
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class HibernateUtils {
+	private static SessionFactory sessionFactory;
+	private Configuration config = new Configuration().configure();
+	private HibernateUtils(){}
+	
+	public static SessionFactory getInstance(){
+		if(sessionFactory == null){
+			//
+		}
+		return sessionFactory;
+	}
+}

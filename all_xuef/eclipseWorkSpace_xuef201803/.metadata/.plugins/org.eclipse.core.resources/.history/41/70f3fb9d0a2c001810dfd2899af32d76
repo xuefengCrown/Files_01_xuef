@@ -1,0 +1,14 @@
+package org.smart4j.framework;
+/**
+ * 提供相关配置项常量
+ * @author moveb
+ *
+ */
+public interface ConfigConstant {
+	String CONFIG_FILE = "smart.properties";
+	String JDBC_DRIVER = "smart.properties";
+	String JDBC_URL = "smart.properties";
+	String JDBC_URL = "smart.properties";
+	String CONFIG_FILE = "smart.properties";
+	String CONFIG_FILE = "smart.properties";
+}

@@ -1,0 +1,12 @@
+package org.smart4j.framework.utils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+/**
+ * 处理 JSON 与 POJO之间的转换; 基于 Jackson 实现
+ * @author moveb
+ *
+ */
+public class JsonUtil {
+	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+}

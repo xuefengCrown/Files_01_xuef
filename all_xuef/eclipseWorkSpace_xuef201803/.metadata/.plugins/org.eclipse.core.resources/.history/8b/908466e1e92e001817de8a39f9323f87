@@ -1,0 +1,7 @@
+package com.xuef2018.bookstore.dao;
+
+public interface TradeDao {
+	/**
+	 * 插入记录
+	 */
+}

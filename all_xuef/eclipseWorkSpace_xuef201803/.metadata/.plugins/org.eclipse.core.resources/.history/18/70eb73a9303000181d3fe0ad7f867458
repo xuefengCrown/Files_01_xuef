@@ -1,0 +1,19 @@
+package com.xuef.ssm.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.xuef.ssm.dao.EmployeeMapper;
+
+public class EmployeeDaoTest {
+	@Test
+	public void testselectByExample() {
+		// 获取IOC容器
+		ApplicationContext ioc = new ClassPathXmlApplicationContext();
+		// 得到mapper的实例
+	}
+
+}

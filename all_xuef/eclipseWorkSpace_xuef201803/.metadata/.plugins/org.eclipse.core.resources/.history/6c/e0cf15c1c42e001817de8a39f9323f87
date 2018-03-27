@@ -1,0 +1,16 @@
+<?xml version="1.0"?>    
+<!DOCTYPE hibernate-mapping PUBLIC     
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"    
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">    
+        
+<hibernate-mapping>    
+    <class name="com.xuef2018.bookstore.domain.Book" table="mybooks">    
+        <id name="id">  
+            <column name="Id" />  
+            <generator class="native"/>    
+        </id>    
+        <property name="author" column="author" />    
+        <property name="title" column="title"/>    
+    </class>    
+        
+</hibernate-mapping>

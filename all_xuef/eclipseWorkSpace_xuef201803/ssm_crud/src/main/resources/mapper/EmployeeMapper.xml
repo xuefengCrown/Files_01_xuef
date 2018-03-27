@@ -1,0 +1,294 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuef.ssm.dao.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.xuef.ssm.domain.Employee">
+    <id column="e_no" jdbcType="INTEGER" property="eNo" />
+    <result column="e_name" jdbcType="VARCHAR" property="eName" />
+    <result column="e_gender" jdbcType="CHAR" property="eGender" />
+    <result column="dept_no" jdbcType="INTEGER" property="deptNo" />
+    <result column="e_job" jdbcType="VARCHAR" property="eJob" />
+    <result column="e_salary" jdbcType="SMALLINT" property="eSalary" />
+    <result column="hireDate" jdbcType="DATE" property="hiredate" />
+  </resultMap>
+  <resultMap id="ResultMapWithDept" type="com.xuef.ssm.domain.Employee">
+    <id column="e_no" jdbcType="INTEGER" property="eNo" />
+    <result column="e_name" jdbcType="VARCHAR" property="eName" />
+    <result column="e_gender" jdbcType="CHAR" property="eGender" />
+    <result column="dept_no" jdbcType="INTEGER" property="deptNo" />
+    <result column="e_job" jdbcType="VARCHAR" property="eJob" />
+    <result column="e_salary" jdbcType="SMALLINT" property="eSalary" />
+    <result column="hireDate" jdbcType="DATE" property="hiredate" />
+    <association property="department" 
+        javaType="com.xuef.ssm.domain.Department">
+        <id column="dNo" property="dNo"/>
+    	<result column="dName" property="dName"/>
+    	<result column="dLocation" property="dLocation"/>
+    </association>
+    
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    e_no, e_name, e_gender, dept_no, e_job, e_salary, hireDate
+  </sql>
+  <sql id="Column_List_With_Dept">
+    e_no, e_name, e_gender, dept_no, e_job, e_salary, hireDate, 
+    d_no, d_name, d_location
+  </sql>
+  <!-- 查询所有员工，携带部门信息 -->
+  <select id="selectByExampleWithDept" parameterType="com.xuef.ssm.domain.EmployeeExample" 
+      resultMap="ResultMapWithDept">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Column_List_With_Dept" />
+    from employee e
+    left join dept d on
+    e.dept_no = d.d_no
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!-- 按主键查询员工，携带部门信息 -->
+  <select id="selectByPrimaryKeyWithDept" parameterType="java.lang.Integer" 
+      resultMap="ResultMapWithDept">
+    select 
+    <!-- <include refid="Column_List_With_Dept" /> -->
+    e.e_no, e.e_name, e.e_gender, e.dept_no, e.e_job, e.e_salary, e.hireDate, d.d_no, 
+    d.d_name, d.d_location
+    from employee e, dept d
+    where e.`dept_no` = d.`d_no` and e_no = #{eNo,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByExample" parameterType="com.xuef.ssm.domain.EmployeeExample" 
+      resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where e_no = #{eNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where e_no = #{eNo,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xuef.ssm.domain.EmployeeExample">
+    delete from employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xuef.ssm.domain.Employee">
+    insert into employee (e_no, e_name, e_gender, 
+      dept_no, e_job, e_salary, 
+      hireDate)
+    values (#{eNo,jdbcType=INTEGER}, #{eName,jdbcType=VARCHAR}, #{eGender,jdbcType=CHAR}, 
+      #{deptNo,jdbcType=INTEGER}, #{eJob,jdbcType=VARCHAR}, #{eSalary,jdbcType=SMALLINT}, 
+      #{hiredate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xuef.ssm.domain.Employee">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eNo != null">
+        e_no,
+      </if>
+      <if test="eName != null">
+        e_name,
+      </if>
+      <if test="eGender != null">
+        e_gender,
+      </if>
+      <if test="deptNo != null">
+        dept_no,
+      </if>
+      <if test="eJob != null">
+        e_job,
+      </if>
+      <if test="eSalary != null">
+        e_salary,
+      </if>
+      <if test="hiredate != null">
+        hireDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eNo != null">
+        #{eNo,jdbcType=INTEGER},
+      </if>
+      <if test="eName != null">
+        #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eGender != null">
+        #{eGender,jdbcType=CHAR},
+      </if>
+      <if test="deptNo != null">
+        #{deptNo,jdbcType=INTEGER},
+      </if>
+      <if test="eJob != null">
+        #{eJob,jdbcType=VARCHAR},
+      </if>
+      <if test="eSalary != null">
+        #{eSalary,jdbcType=SMALLINT},
+      </if>
+      <if test="hiredate != null">
+        #{hiredate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xuef.ssm.domain.EmployeeExample" resultType="java.lang.Long">
+    select count(*) from employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update employee
+    <set>
+      <if test="record.eNo != null">
+        e_no = #{record.eNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.eName != null">
+        e_name = #{record.eName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eGender != null">
+        e_gender = #{record.eGender,jdbcType=CHAR},
+      </if>
+      <if test="record.deptNo != null">
+        dept_no = #{record.deptNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.eJob != null">
+        e_job = #{record.eJob,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eSalary != null">
+        e_salary = #{record.eSalary,jdbcType=SMALLINT},
+      </if>
+      <if test="record.hiredate != null">
+        hireDate = #{record.hiredate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update employee
+    set e_no = #{record.eNo,jdbcType=INTEGER},
+      e_name = #{record.eName,jdbcType=VARCHAR},
+      e_gender = #{record.eGender,jdbcType=CHAR},
+      dept_no = #{record.deptNo,jdbcType=INTEGER},
+      e_job = #{record.eJob,jdbcType=VARCHAR},
+      e_salary = #{record.eSalary,jdbcType=SMALLINT},
+      hireDate = #{record.hiredate,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuef.ssm.domain.Employee">
+    update employee
+    <set>
+      <if test="eName != null">
+        e_name = #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eGender != null">
+        e_gender = #{eGender,jdbcType=CHAR},
+      </if>
+      <if test="deptNo != null">
+        dept_no = #{deptNo,jdbcType=INTEGER},
+      </if>
+      <if test="eJob != null">
+        e_job = #{eJob,jdbcType=VARCHAR},
+      </if>
+      <if test="eSalary != null">
+        e_salary = #{eSalary,jdbcType=SMALLINT},
+      </if>
+      <if test="hiredate != null">
+        hireDate = #{hiredate,jdbcType=DATE},
+      </if>
+    </set>
+    where e_no = #{eNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuef.ssm.domain.Employee">
+    update employee
+    set e_name = #{eName,jdbcType=VARCHAR},
+      e_gender = #{eGender,jdbcType=CHAR},
+      dept_no = #{deptNo,jdbcType=INTEGER},
+      e_job = #{eJob,jdbcType=VARCHAR},
+      e_salary = #{eSalary,jdbcType=SMALLINT},
+      hireDate = #{hiredate,jdbcType=DATE}
+    where e_no = #{eNo,jdbcType=INTEGER}
+  </update>
+</mapper>

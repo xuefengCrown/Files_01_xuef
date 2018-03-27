@@ -1,0 +1,5 @@
+package com.xuef.example.service;
+
+public class EmployeeService {
+
+}

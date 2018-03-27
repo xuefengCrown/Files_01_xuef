@@ -1,0 +1,21 @@
+package com.xuef2018.bookstore.service;
+
+import antlr.collections.List;
+
+import com.xuef2018.bookstore.dao.BookDao;
+import com.xuef2018.bookstore.dao.daoImpl.BookDaoImpl;
+import com.xuef2018.bookstore.domain.Book;
+import com.xuef2018.bookstore.servlet.CriteriaBook;
+import com.xuef2018.bookstore.servlet.Page;
+
+public class BookService {
+	private BookDao bookService;
+	
+	public void setBookService(BookDao bookService) {
+		this.bookService = bookService;
+	}
+	
+	public List<Book> getAllBooks(){
+		return 
+	}
+}

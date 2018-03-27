@@ -1,0 +1,5 @@
+package com.xuef.ssm.dao;
+
+public class EmployeeMapper {
+
+}

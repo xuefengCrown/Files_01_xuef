@@ -1,0 +1,42 @@
+## 1. 创建Maven Project
+	在Maven的配置文件中设置：
+	1）mirror 下添加从aliyun下载
+	2）profiles 下设置使用 java1.7
+   window--Maven--User settings 下可以找到maven和配置文件位置，还有仓库位置。
+      1）在settings.xml中指定，例如
+<profiles>      
+    <profile>  
+        <id>JDK1.7</id>  
+        <activation>  
+            <activeByDefault>true</activeByDefault>  
+        </activation>  
+        <properties>  
+            <maven.compiler.source>1.7</maven.compiler.source>  
+            <maven.compiler.target>1.7</maven.compiler.target>  
+            <encoding>UTF-8</encoding>  
+        </properties>  
+    </profile>  
+</profiles>
+
+## 2. 引入 jar包
+spring
+springmvc
+mybatis
+数据库连接池，驱动
+其他(jstl, servlet-api, junit)
+
++++++++++++++++++++++++++++++++
+spring-webmvc
+spring-jdbc <!-- 事务 -->
+spring-aspect <!--面向切面-->
+mybatis spring 适配包
+
+
++++++++++++++++++++++++++++++++
+## 3. 引入 bootstrap
+参照官方文档（注意版本）
+
+## 4. 编写配置文件
+web.xml，spring，springmvc，mybatis
+
+ 

@@ -1,6 +1,5 @@
 package com.xuef2018.bookstore.dao.impl;
 
-import com.xuef2018.bookstore.dao.BaseDao;
 import com.xuef2018.bookstore.dao.UserDAO;
 import com.xuef2018.bookstore.domain.User;
 

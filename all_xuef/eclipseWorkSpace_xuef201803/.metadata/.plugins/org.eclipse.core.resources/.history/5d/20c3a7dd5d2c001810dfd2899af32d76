@@ -1,0 +1,9 @@
+package org.smart4j.framework.utils;
+/**
+ * 编码与解码操作工具类
+ * @author moveb
+ *
+ */
+public class CodecUtil {
+
+}

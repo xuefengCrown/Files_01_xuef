@@ -1,0 +1,22 @@
+
+.book-detail{
+	background-color:silver;
+	margin-top: 1%;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.emphasis {
+	color: blue;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+a{
+	text-decoration: none;
+}
+
+
+
+
+

@@ -1,0 +1,5 @@
+package com.xuef2018.bookstore.dbUtils;
+import javax.sql.*;
+public class HibernateUtils {
+	private static SessionFactory sessionFactory;
+}

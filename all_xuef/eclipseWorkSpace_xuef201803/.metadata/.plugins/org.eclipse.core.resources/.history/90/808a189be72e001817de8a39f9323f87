@@ -1,0 +1,16 @@
+<?xml version="1.0"?>    
+<!DOCTYPE hibernate-mapping PUBLIC     
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"    
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">    
+        
+<hibernate-mapping>    
+    <class name="com.xuef2018.bookstore.domain.TradeItem" table="tradeitem">    
+        <id name="tradeid">  
+            <column name="tradeid" />  
+            <generator class="native"/>    
+        </id>    
+        <property name="userid" column="userid" />
+        <property name="tradetime" column="tradetime" />
+    </class>    
+        
+</hibernate-mapping>

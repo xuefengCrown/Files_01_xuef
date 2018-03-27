@@ -1,0 +1,34 @@
+package org.smart4j.framework.helper;
+
+import java.security.Provider.Service;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.smart4j.framework.utils.ClassUtil;
+import org.smart4j.framework.utils.ConfigHelper;
+
+public class ClassHelper {
+	/**
+	 * 定义类集合（用于存放所加载的类）
+	 */
+	private static final Set<Class<?>> CLASS_SET;
+	static{
+		String basePackage = ConfigHelper.getAppBasePackage();
+		CLASS_SET = ClassUtil.getClassSet(basePackage);
+	}
+	/**
+	 * 获取应用包下的所有类
+	 * @return
+	 */
+	public static Set<Class<?>> getClassSet(){
+		return CLASS_SET;
+	}
+	public static Set<Class<?>> getServiceClassSet(){
+		Set<Class<?>> classSet = new HashSet<Class<?>>();
+		for(Class<?> cls:CLASS_SET){
+			if(cls.isAnnotationPresent(Service.class)){
+				classSet.add(cls);
+			}
+		}
+	}
+}

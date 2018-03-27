@@ -1,0 +1,13 @@
+package com.xuef.example.service;
+
+import java.util.List;
+
+import com.xuef.example.domain.Employee;
+
+public class EmployeeService {
+
+	public List<Employee> getEmpList() {
+		return null;
+	}
+
+}

@@ -1,0 +1,17 @@
+package com.xuef2018.bookstore.service;
+
+import java.util.List;
+
+import com.xuef2018.bookstore.dao.BookDao;
+import com.xuef2018.bookstore.domain.Book;
+
+public class BookService {
+	private BookDao bookDao;
+	
+	public void setBookDao(BookDao bookDao) {
+		this.bookDao = bookDao;
+	}
+	public List<Book> getAllBooks(){
+		return bookDao.getAllBooks();
+	}
+}

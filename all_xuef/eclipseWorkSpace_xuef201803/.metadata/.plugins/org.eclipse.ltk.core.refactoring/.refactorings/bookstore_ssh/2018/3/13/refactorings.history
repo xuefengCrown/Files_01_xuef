@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 elements to &apos;ssm_crud/src/main/resources&apos;&#x0D;&#x0A;- Original project: &apos;bookstore_ssh&apos;&#x0D;&#x0A;- Destination element: &apos;ssm_crud/src/main/resources&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     applicationContext-beans.xml&#x0D;&#x0A;     applicationContext.xml&#x0D;&#x0A;     db.properties" description="Copy files" destination="=ssm_crud/src\/main\/resources" element1="src/main/resources/applicationContext-beans.xml" element2="src/main/resources/applicationContext.xml" element3="src/main/resources/db.properties" files="3" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1521955341486" units="0" version="1.0"/>
+</session>

@@ -1,0 +1,5 @@
+package com.xuef.ssm.service;
+
+public class EmployeeService {
+
+}

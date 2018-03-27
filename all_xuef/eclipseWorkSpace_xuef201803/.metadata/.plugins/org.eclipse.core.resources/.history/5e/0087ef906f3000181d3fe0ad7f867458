@@ -1,0 +1,23 @@
+package com.xuef.ssm.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.xuef.ssm.service.EmployeeService;
+
+@Controller
+public class EmpController {
+	@Autowired
+	private EmployeeService employeeService;
+	/**
+	 * 查询所有员工数据
+	 * @return
+	 */
+	@RequestMapping
+	public String getEmps(@RequestParam(value="pageNo", defaultValue="1")){
+		employeeService.getEmps();
+		return "emps-list";
+	}
+}

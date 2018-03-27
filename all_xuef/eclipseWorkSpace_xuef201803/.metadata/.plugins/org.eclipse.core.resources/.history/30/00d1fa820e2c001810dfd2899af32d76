@@ -1,0 +1,10 @@
+package org.smart4j.framework.utils;
+
+import java.util.Properties;
+
+import org.smart4j.framework.ConfigConstant;
+
+public class ConfigHelper {
+	private Properties CONFIG_PROS = 
+				PropsUtil.loadPro(ConfigConstant.CONFIG_FILE);
+}

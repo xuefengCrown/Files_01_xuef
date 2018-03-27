@@ -1,0 +1,60 @@
+package com.xuef.example.controller;
+
+import java.util.List;
+
+import org.smart4j.framework.annotation.Action;
+import org.smart4j.framework.annotation.Controller;
+import org.smart4j.framework.annotation.Inject;
+import org.smart4j.framework.bean.Data;
+import org.smart4j.framework.bean.Param;
+import org.smart4j.framework.bean.View;
+
+import com.xuef.example.domain.Employee;
+import com.xuef.example.service.EmployeeService;
+
+/**
+ * 处理员工管理相关请求
+ * @author moveb
+ */
+@Controller
+public class EmployeeController {
+	@Inject
+	private EmployeeService employeeService;
+	
+	/**
+	 * 进入员工列表页面
+	 * @param param
+	 * @return
+	 */
+	@Action("get:/emps")
+	public View index(Param param){
+		List<Employee> empList = employeeService.getEmpList();
+		return new View("emps.jsp").addModel("emp-list", empList);
+	}
+	
+	/**
+	 * 显示员工详细信息
+	 * @param param
+	 * @return
+	 */
+	@Action("get:/emp_show")
+	public View show(Param param){
+		long id = param.getLong("id");
+		Employee emp = employeeService.getEmp(id);
+		return new View("emp-detail.jsp").addModel("emp", emp);
+	}
+	
+	/**
+	 * 进入员工创建 页面
+	 * @param param
+	 * @return
+	 */
+	@Action("get:/emp_create")
+	public View create(Param param){
+		return new View("emp-create.jsp");
+	}
+	
+	public Data createSubmit(Param param){
+		param.getMap();
+	}
+}

@@ -1,7 +1,0 @@
-package com.xuef2018.bookstore.utils.webutil;
-
-public class WebUtil {
-	public ShopCart getShopCart(){
-		
-	}
-}

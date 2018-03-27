@@ -1,0 +1,50 @@
+
+@Aspect
+public class LoggingAspect {
+
+    @Before("execution(* com.qcc.beans.aop.*.*(..))")
+    public void beforeMethod(JoinPoint jp){
+        String methodName = jp.getSignature().getName();
+        System.out.println("the method " + methodName + " 
+        						begins with " + Arrays.asList(jp.getArgs()));
+    }
+
+    @AfterReturning(value="execution(* com.qcc.beans.aop.*.*(..))",
+    			returning="result")
+    public void afterReturningMethod(JoinPoint jp, Object result){
+        String methodName = jp.getSignature().getName();
+        System.out.println("the method " + methodName + " ends with " + 
+        						result);
+    }
+
+    @After("execution(* com.qcc.beans.aop.*.*(..))")
+    public void afterMethod(JoinPoint jp){
+        System.out.println("this is a afterMethod advice...");
+    }
+
+    @AfterThrowing(value="execution(* com.qcc.beans.aop.*.*(..))",
+    					throwing="e")
+    public void afterThorwingMethod(JoinPoint jp, NullPointerException e){
+        String methodName = jp.getSignature().getName();
+        System.out.println("the method " + methodName + " occurs exception: " + e);
+    }
+
+//  @Around(value="execution(* com.qcc.beans.aop.*.*(..))")
+//  public Object aroundMethod(ProceedingJoinPoint jp){
+//      String methodName = jp.getSignature().getName();
+//      Object result = null;
+//      try {
+//          System.out.println("the method " + methodName + " begins with " 
+							+ Arrays.asList(jp.getArgs()));
+//          //执行目标方法
+//          result = jp.proceed();
+//          System.out.println("the method " + methodName + " ends with " 
+										+ result);
+//      } catch (Throwable e) {
+//          System.out.println("the method " + methodName + " occurs exception " + e);
+//      }
+//      
+//      System.out.println("-----------------end---------------------");
+//      return result;
+//  }
+}

@@ -1,0 +1,9 @@
+package org.smart4j.framework.helper;
+/**
+ * ÒÀÀµ×¢Èë ÖúÊÖÀà
+ * @author moveb
+ *
+ */
+public class IocHelper {
+
+}

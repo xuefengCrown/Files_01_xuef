@@ -1,0 +1,7 @@
+package com.xuef.ssm.dao;
+
+import com.xuef.ssm.domain.Department;
+
+public interface DepartmentMapper {
+	public Department getDeptById(Integer deptNo);
+}

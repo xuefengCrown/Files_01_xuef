@@ -1,0 +1,15 @@
+
+
+1. 类的静态代码块没有执行
+详细的要研究《Java编程思想》，静态代码块何时被执行？
+1). clazz = Class.forName(className, isInitialized, getClassLoader()); // isInitialized需要为true
+
+2). Parameters: className - the fully qualified name of the desired class
+className 需要是全路径的 如(com.xuef.ssm.Employee)
+
+2. @WebServlet 注解无效
+// 通过注解配置 项目启动时被加载; 拦截所有请求 ??? 注解无效
+@WebServlet(urlPatterns="/*", loadOnStartup=0)
+public class DispatcherServlet extends HttpServlet
+
+3. DispatcherServlet 会拦截一切请求，怎么配置让 tomcat 处理静态资源？

@@ -1,0 +1,75 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.xuef2018.bookstore.domain.Book" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>'()-xuef</title>
+<link rel="stylesheet" type="text/css" href="styles/basic.css" />
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+	})
+
+</script>
+</head>
+<body>
+	<br><br><br>
+	<input type="hidden" value="${param.minPrice}" name="minPrice" />
+	<input type="hidden" value="${param.maxPrice}" name="maxPrice" />
+	
+	<center>
+		<s:if test="#session.cart != null">
+			<a class="emphasis" href="book-seeCart.action">查看购物车</a><br><br>
+		</s:if>
+		
+		<form action="" method="POST">
+		Price: <input type="text" size="2" name="minPrice" />---
+		<input type="text" size="2" name="maxPrice" /> 
+		<input type="submit" value="查询" />
+		</form>
+		<br><br>
+		<s:if test="#request.allbooks == null">
+			'()
+		</s:if>
+		<s:else>
+			<table>
+				<tr>
+					<td>ID</td>
+					<td>AUTHOR</td>
+					<td>TITLE</td>
+				</tr>
+				<s:iterator value="#request.allbooks.list">
+					<tr>
+						<td>${id}</td>
+						<td>${author}</td>
+						<td><a href="book-detail?id=${id}">${title}</a></td>
+						<td><a href="book-add2cart.action?id=${id}">加入购物车</a></td>
+					</tr>
+				</s:iterator>
+			</table>
+		</s:else>
+		共 ${requestScope.allbooks.totalPageNumber} 页&nbsp;
+		当前 第${requestScope.allBooks.pageNo}页 &nbsp;
+		<s:if test="#request.allBooks.hasPre">
+			<a href="pageNo=1">首页</a>
+			 &nbsp;
+			<a href="pageNo=${allBooks.prePage}">上一页</a>
+		</s:if>
+		
+		<s:if test="#request.allBooks.hasNext}">
+			<a href="getBooks&pageNo=${allBooks.nextPage}">下一页</a>
+			 &nbsp;
+			<a href="getBooks&pageNo=${allBooks.totalPageNumber}">末页</a>
+		</s:if>
+		&nbsp;&nbsp;跳到&nbsp;<input id="pageNoForTurn" type="text" size="1" />&nbsp;页
+		<br><br>
+		<br><br>
+		您已将 <span class="emphasis"> ${newBook.title}</span> 加入购物车 <br>
+		购物车中有 <span class="emphasis"> ${cart.totalNum}</span> 本书<br>
+		<a href="book-getBooks.action">继续购物</a><br>
+	</center>
+</body>
+</html>

@@ -156,6 +156,8 @@ public class HttpRequest implements HttpServletRequest {
     }
 
     // Parse any parameters specified in the input stream
+    // contentType 作为request的成员变量; 在HttpProcessor中的parseHeaders()被设置进来了
+    // contentType 包含在请求头中;(也可能没有; 如果post方法提交请求的话，浏览器会设置contentType的)
     String contentType = getContentType();
     if (contentType == null)
       contentType = "";

@@ -1,0 +1,5 @@
+package com.xuef2018.bookstore.dao;
+
+public class BaseDao implements Dao4DBUtils<T> {
+
+}

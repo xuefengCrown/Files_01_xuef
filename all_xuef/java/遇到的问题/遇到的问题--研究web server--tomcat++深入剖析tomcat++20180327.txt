@@ -1,0 +1,10 @@
+
+
+1. StringManager
+org.apache.catalina.util.StringManager 类
+是处理错误，国际化，单例模式的很好例子。值得研究
+
+2. 类路径下
+指的是 wtpwebapps\example\WEB-INF\classes 下
+
+3. out 向客户端write消息时。先要 out.write("HTTP/1.1 200 Ok")

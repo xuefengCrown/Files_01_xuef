@@ -1,0 +1,17 @@
+package org.smart4j.framework.helper;
+
+import java.util.Set;
+
+import org.smart4j.framework.utils.ConfigHelper;
+
+import com.fasterxml.jackson.databind.util.ClassUtil;
+public class ClassHelper {
+	/**
+	 * 定义类集合（用于存放所加载的类）
+	 */
+	private static final Set<Class<?>> CLASS_SET;
+	static{
+		String basePackage = ConfigHelper.getAppBasePackage();
+		CLASS_SET = ClassUtil
+	}
+}

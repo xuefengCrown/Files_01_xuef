@@ -1,0 +1,30 @@
+package com.xuef201803.dynamicProxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+public class DynamicProxy implements InvocationHandler {
+
+	@Override
+	public Object invoke(Object obj, Method method, Object[] args)
+			throws Throwable {
+		before();
+		Object result = method.invoke(obj, args);
+		after();
+		return result;
+	}
+	public <T> T getProxy(){
+		Proxy.newProxyInstance(this.getClass().getClassLoader(), 
+				this.getClass().getInterfaces(), 
+				this);
+		return null;
+	}
+	public void before(){
+		System.out.println("before...");
+	}
+	
+	public void after(){
+		System.out.println("after...");
+	}
+}

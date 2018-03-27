@@ -6,12 +6,24 @@ import ex03.pyrmont.StaticResourceProcessor;
 import java.net.Socket;
 import java.io.OutputStream;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 
 import org.apache.catalina.util.RequestUtil;
+import org.apache.catalina.util.StringManager;
 //import org.apache.catalina.util.StringManager;
 
+/**
+ * 为每个请求：
+ * 1. 创建一个 HttpRequest对象
+ * 2. 创建一个 HttpResponse对象
+ * 3. 解析HTTP请求的第一行内容和请求头信息，填充 HttpRequest 对象
+ * 4. 将HttpRequest对象和HttpResponse对象传给
+ * 	  servletProcessor 或 StaticResourceProcessor 的 process()方法
+ * @author moveb
+ *
+ */
 /* this class used to be called HttpServer */
 public class HttpProcessor {
 
@@ -31,8 +43,9 @@ public class HttpProcessor {
 
   /**
    * The string manager for this package.
+   * 处理错误信息
    */
-  //protected StringManager sm = StringManager.getManager("ex03.pyrmont.connector.http");
+  protected StringManager sm = StringManager.getManager("ex03.pyrmont.connector.http");
 
   public void process(Socket socket) {
     SocketInputStream input = null;
@@ -50,7 +63,8 @@ public class HttpProcessor {
 
       response.setHeader("Server", "Pyrmont Servlet Container");
 
-      parseRequest(input, output);
+      // 解析请求行; 获取一些值，赋给HttpRequest的实例:request
+      parseRequest(input, output); 
       parseHeaders(input);
 
       //check if this is a request for a servlet or a static resource
@@ -136,7 +150,15 @@ public class HttpProcessor {
     } //end while
   }
 
-
+  /**
+   * 解析请求行:(such as)
+   * GET /myApp/ModernServlet?userName=tarzan&password=pwd HTTP/1.1
+   * 
+   * @param input
+   * @param output
+   * @throws IOException
+   * @throws ServletException
+   */
   private void parseRequest(SocketInputStream input, OutputStream output)
     throws IOException, ServletException {
 
@@ -157,6 +179,7 @@ public class HttpProcessor {
     // Parse any query parameters out of the request URI
     int question = requestLine.indexOf("?");
     if (question >= 0) {
+    	// 获取查询字符串，填充request
       request.setQueryString(new String(requestLine.uri, question + 1,
         requestLine.uriEnd - question - 1));
       uri = new String(requestLine.uri, 0, question);
@@ -181,7 +204,8 @@ public class HttpProcessor {
         }
       }
     }
-
+    
+    // 检查是否包含会话标识符
     // Parse any requested session ID out of the request URI
     String match = ";jsessionid=";
     int semicolon = uri.indexOf(match);

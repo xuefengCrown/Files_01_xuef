@@ -1,0 +1,10 @@
+package com.xuef.ssm.service;
+
+public class EmployeeService {
+
+	public List<Employee> getEmps() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

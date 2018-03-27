@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuef.ssm.dao.EmployeeMapper">
+	<resultMap type="com.xuef.ssm.domain.Employee" id="empWithDept">
+	    <id column="e_no" jdbcType="INTEGER" property="eNo" />
+	    <result column="e_name" jdbcType="VARCHAR" property="eName" />
+	    <result column="e_gender" jdbcType="CHAR" property="eGender" />
+	    <result column="dept_no" jdbcType="INTEGER" property="deptNo" />
+	    <result column="e_job" jdbcType="VARCHAR" property="eJob" />
+	    <result column="e_salary" jdbcType="SMALLINT" property="eSalary" />
+	    <result column="hireDate" jdbcType="DATE" property="hiredate" />
+	    <association property="department" javaType="com.xuef.ssm.domain.Department">
+	        <id column="d_no" property="dNo"/>
+	    	<result column="d_name" property="dName"/>
+	    	<result column="d_location" property="dLocation"/>
+	    </association>
+	</resultMap>
+	<sql id="Base_Column_List">
+    	e_no, e_name, e_gender, dept_no, e_job, e_salary, hireDate
+    </sql>
+    <sql id="Column_List_With_Dept">
+    	e_no, e_name, e_gender, dept_no, e_job, e_salary, hireDate, 
+    	d_no, d_name, d_location
+    </sql>
+	<select id="getEmpById" parameterType="java.lang.Integer" resultMap="empWithDept">
+		select
+	    <include refid="Column_List_With_Dept" />
+	    from employee e, dept d
+	    where e.`dept_no` = d.`d_no` and e_no = #{eNo}
+	</select>
+	
+	<!--public List<Employee> getEmps();  -->
+	<select id="getEmps" resultMap="empWithDept">
+	    select
+	    <include refid="Column_List_With_Dept" />
+	    from employee e, dept d
+	    where e.`dept_no` = d.`d_no`
+	</select>
+</mapper>

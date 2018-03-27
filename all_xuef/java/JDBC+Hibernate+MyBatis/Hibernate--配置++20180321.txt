@@ -1,0 +1,11 @@
+
+javax.servlet-api
+jsp-api
+jstl
+junit
+mysql
+c3p0
+commons-dbutils
+hibernate
+
+

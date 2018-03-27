@@ -1,0 +1,18 @@
+
+.book-detail{
+	background-color:silver;
+	margin-top: 1%;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.emphasis {
+	color: red;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+
+
+
+

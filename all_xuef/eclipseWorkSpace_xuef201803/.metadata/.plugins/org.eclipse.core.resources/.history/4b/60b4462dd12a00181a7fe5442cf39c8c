@@ -1,7 +1,0 @@
-package com.xuef2018.bookstore.dao.impl;
-
-import com.xuef2018.bookstore.dao.UserDAO;
-
-public class UserDaoImpl implements UserDAO{
-
-}

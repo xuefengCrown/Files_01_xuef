@@ -1,0 +1,12 @@
+package org.smart4j.framework.helper;
+
+/**
+ * 控制器助手类
+ * @author moveb
+ *
+ */
+public class ControllerHelper {
+	/**
+	 * 用于存放请求与处理器的映射关系（简称 Action Map）
+	 */
+}

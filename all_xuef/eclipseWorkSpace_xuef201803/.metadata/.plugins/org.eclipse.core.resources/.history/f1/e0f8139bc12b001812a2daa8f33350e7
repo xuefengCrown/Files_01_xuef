@@ -1,0 +1,8 @@
+package com.xuef2018.bookstore.dao;
+
+import java.util.List;
+
+public class BaseDao<T> implements Dao4DBUtils<T> {
+
+
+}

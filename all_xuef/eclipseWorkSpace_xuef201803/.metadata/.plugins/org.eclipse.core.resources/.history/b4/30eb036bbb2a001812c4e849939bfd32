@@ -1,6 +1,0 @@
-package com.xuef2018.server_version2;
-
-public class Constants {
-	private static final String WEB_ROOT = 
-			"";
-}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuef.ssm.dao.DepartmentMapper">
+
+	<select id="getDeptById" resultType="com.xuef.ssm.domain.Department">
+		select d_no dNo, d_name dName, d_location dLocation
+		from dept where d_no=#{dNo}
+	</select>
+	
+	<select id="getDepts" resultType="com.xuef.ssm.domain.Department">
+		select d_no, d_name, d_location from dept
+	</select>
+</mapper>

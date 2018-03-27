@@ -1,5 +1,0 @@
-package com.xuef2018.dao;
-
-public interface BookDao {
-
-}

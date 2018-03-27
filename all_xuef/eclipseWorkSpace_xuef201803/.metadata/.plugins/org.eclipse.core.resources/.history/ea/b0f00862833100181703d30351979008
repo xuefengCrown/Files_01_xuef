@@ -1,0 +1,14 @@
+package com.xuef.ssm.domain;
+
+import java.util.HashMap;
+
+/**
+ * 包装返回数据和信息
+ * @author moveb
+ */
+public class ResWithMSG {
+	// 状态码 0:失败 1:成功
+	private int status;
+	private String msg;
+	private Map<String, Object> res = new HashMap();
+}

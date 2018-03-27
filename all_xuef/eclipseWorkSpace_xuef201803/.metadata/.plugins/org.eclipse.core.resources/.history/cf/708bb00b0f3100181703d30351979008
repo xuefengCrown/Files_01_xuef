@@ -1,0 +1,12 @@
+package com.xuef.example.controller;
+
+import org.smart4j.framework.annotation.Controller;
+
+/**
+ * 处理员工管理相关请求
+ * @author moveb
+ */
+@Controller
+public class EmployeeController {
+	
+}
