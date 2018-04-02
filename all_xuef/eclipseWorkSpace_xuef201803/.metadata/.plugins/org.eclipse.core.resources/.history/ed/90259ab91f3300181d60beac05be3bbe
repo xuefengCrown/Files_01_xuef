@@ -1,0 +1,10 @@
+package org.smart4j.framework.proxy;
+
+/**
+ * 代理管理器
+ * @author moveb
+ *
+ */
+public class ProxyManager {
+	
+}

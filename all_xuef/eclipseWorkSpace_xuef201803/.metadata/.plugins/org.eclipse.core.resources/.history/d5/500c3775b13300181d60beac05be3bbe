@@ -1,0 +1,10 @@
+package org.smart4j.framework.annotation;
+
+public class Test {
+
+}
+
+@Aspect(Controller.class)
+class Target{
+	
+}

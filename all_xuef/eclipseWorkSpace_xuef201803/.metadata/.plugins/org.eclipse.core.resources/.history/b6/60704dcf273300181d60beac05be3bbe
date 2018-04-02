@@ -1,0 +1,13 @@
+package org.smart4j.framework.proxy;
+
+import org.smart4j.framework.annotation.Aspect;
+import org.smart4j.framework.annotation.Controller;
+
+/**
+ * 拦截 controller 所有方法
+ * @author moveb
+ */
+@Aspect(Controller.class)
+public class ControllerAspect extends AspectProxy {
+
+}

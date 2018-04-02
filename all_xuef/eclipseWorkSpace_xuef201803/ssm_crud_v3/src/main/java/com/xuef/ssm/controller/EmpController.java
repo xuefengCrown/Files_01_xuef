@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,6 +40,18 @@ public class EmpController {
 		return success;
 	}
 	
+	/**
+	 * 修改后保存员工信息
+	 * @param emp
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/emp/{eNo}", method=RequestMethod.PUT)
+	public ResWithMSG saveEmp(Employee emp){
+		System.out.println("save emp: " + emp);
+		employeeService.saveEmp(emp);
+		return ResWithMSG.success();
+	}
 	/**
 	 * 查询部门信息
 	 * @return

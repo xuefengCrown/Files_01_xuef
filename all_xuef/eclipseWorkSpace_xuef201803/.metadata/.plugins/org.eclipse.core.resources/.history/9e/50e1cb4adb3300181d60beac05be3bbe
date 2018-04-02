@@ -1,0 +1,9 @@
+
+当在一个类中使用了static成员变量的时候，一定要多问问自己，这个static成员变量
+需要考虑“线程安全”吗？也就是说，多个线程需要独享自己的static成员变量吗？
+如果需要，不妨使用ThreadLocal
+
+## ThreadLocal 使用案例
+1. 使用ThreadLocal 存放 JDBC Connection，以达到事务控制的能力。
+
+

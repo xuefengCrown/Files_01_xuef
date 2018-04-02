@@ -1,0 +1,10 @@
+package multi_thread.thread.safe.extthread;
+
+public class Alogin extends Thread {
+
+	@Override
+	public void run() {
+		super.run();
+	}
+	
+}

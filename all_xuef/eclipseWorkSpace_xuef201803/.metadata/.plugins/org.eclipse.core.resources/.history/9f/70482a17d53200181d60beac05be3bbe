@@ -1,0 +1,15 @@
+package com.xuef201803.command.concreteCommand;
+
+import com.xuef201803.command.Command;
+
+public class StereoOnCommand implements Command {
+	private Stereo stereo;
+	public StereoOnCommand(){
+		
+	}
+	@Override
+	public void execute() {
+
+	}
+
+}

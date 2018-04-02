@@ -1,0 +1,18 @@
+package org.smart4j.framework.helper;
+
+import java.lang.annotation.Annotation;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.smart4j.framework.annotation.Aspect;
+
+public class AopHelper {
+
+	private static Set<Class<?>> createTargetClassSet(Aspect aspect)
+		throws Exception{
+		Set<Class<?>> targetClassSet = new HashSet<>();
+		Class<? extends Annotation> annotation = aspect.value();
+		
+		return targetClassSet;
+	}
+}

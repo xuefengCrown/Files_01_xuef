@@ -1,0 +1,34 @@
+package org.smart4j.framework.proxy;
+
+import java.lang.reflect.Method;
+
+/**
+ * ÇÐÃæ´úÀí
+ * @author moveb
+ *
+ */
+public abstract class AspectProxy implements Proxy {
+	@Override
+	public Object doProxy(ProxyChain proxyChain) throws Throwable {
+		Object result = null;
+		
+		Class<?> cls = proxyChain.getTargetClass();
+		Method method = proxyChain.getTargetMethod();
+		Object[] params = proxyChain.getMethodParams();
+		
+		begin();
+		
+		try{
+			if(intercept(cls, method, params)){
+				before(cls, method, params);
+				result = proxyChain.doProxyChain();
+				after(cls, method, params, result);
+			}else{}
+		} catch(){
+			
+		} finally{
+			
+		}
+		return null;
+	}
+}

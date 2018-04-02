@@ -1,0 +1,5 @@
+package multi_thread.thread.safe.extobject;
+
+public class MyObject {
+
+}

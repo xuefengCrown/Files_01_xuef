@@ -1,6 +1,0 @@
-package org.smart4j.framework.helper;
-
-import java.util.Set;
-public class ClassHelper {
-	private static final Set<Class<?>> CLASS_SET;
-}

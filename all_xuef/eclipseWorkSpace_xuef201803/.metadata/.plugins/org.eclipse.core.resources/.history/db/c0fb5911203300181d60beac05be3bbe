@@ -1,0 +1,19 @@
+package org.smart4j.framework.proxy;
+
+/**
+ * 代理管理器
+ * @author moveb
+ *
+ */
+public class ProxyManager {
+	/**
+	 * 创建代理对象
+	 * @param targetClass
+	 * @param proxyList
+	 * @return
+	 */
+	public static <T> T craeteProxy(final Class<?> targetClass,
+			final List<Proxy> proxyList){
+		
+	}
+}

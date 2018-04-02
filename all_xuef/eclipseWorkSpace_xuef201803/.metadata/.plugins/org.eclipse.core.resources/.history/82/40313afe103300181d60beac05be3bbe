@@ -1,0 +1,27 @@
+
+大数据 分布式 高并发
+
+# 只有共享资源的读写访问才需要同步。
+
+# 出现异常，该线程所持有的所自动释放
+
+# 同步不可以继承
+
+# synchronized
+1. 同步方法
+
+2. 同步代码块
+1) 一半异步，一半同步
+2) 当一个线程访问object的一个synchronized(this)代码块时，其他线程对
+同一个object中的所有其他synchronized(this)同步代码块的访问将被阻塞；
+这说明synchronized 使用的“对象监视器”是一个。
+3) synchronized(this) 锁定当前对象
+
+4) 使用类对象 Xxx.class 作为锁(此类的不同对象只有一份class)
+
+## 2.2.10 数据类型 String 的常量池特性
+String a = "a";
+String b = "b";
+a == b; // true
+
+### 

@@ -31,5 +31,8 @@ public class EmployeeService {
 	public List<Department> getDepts() {
 		return departmentMapper.getDepts();
 	}
+	public void saveEmp(Employee emp) {
+		employeeMapper.saveEmp(emp);
+	}
 
 }

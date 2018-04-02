@@ -1,0 +1,16 @@
+package org.smart4j.framework.proxy;
+
+import java.lang.reflect.Method;
+
+/**
+ * ¥˙¿Ì¡¥
+ * @author moveb
+ */
+public class ProxyChain {
+	private final Class<?> targetClass;
+	private final Object targetObject;
+	private final Method targetMethod;
+	private final MethodProxy methodProxy;
+	private final Object[] methodParams;
+	
+}

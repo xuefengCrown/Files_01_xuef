@@ -1,0 +1,9 @@
+package multi_thread.thread.threadLocal;
+
+/**
+ * 先不使用 ThreadLocal
+ * @author moveb
+ */
+public class ThreadA {
+
+}

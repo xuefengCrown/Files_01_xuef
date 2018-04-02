@@ -1,0 +1,10 @@
+package multi_thread.thread.threadLocal;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MyThreadLocal<T> {
+	private Map<Thread, T> container = 
+			Collections.synchronizedMap(new HashMap<Thread, T>());
+}

@@ -1,0 +1,12 @@
+package com.xuef201803.book_dp.maze;
+
+import java.util.List;
+
+public class Room {
+	private List<MapSite> sides;
+	private int rootNumber; // 当前房间号
+	
+	public MapSite getSide(int d){ // 枚举怎么用?
+		return sides.get(d);
+	}
+}

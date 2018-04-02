@@ -1,0 +1,17 @@
+package multi_thread.thread;
+
+public class Mythread2 extends Thread {
+	private int count = 5;
+	public Mythread2(String name){
+		super();
+		this.setName(name);
+	}
+
+	@Override
+	public void run() {
+		super.run();
+		count--;
+		System.out.println(this.currentThread().getName() + 
+				": count = " + count);
+	}
+}

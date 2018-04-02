@@ -1,0 +1,11 @@
+package org.smart4j.framework.proxy;
+
+/**
+ * ¥˙¿Ì¡¥
+ * @author moveb
+ */
+public class ProxyChain {
+	private final Class<?> targetClass;
+	private final Object targetObject;
+	
+}

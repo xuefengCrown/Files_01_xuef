@@ -1,5 +1,0 @@
-package org.smart4j.framework.helper;
-
-public class BeanHelper {
-	private static final Map<Class<?>, Object> BEAN_MAP=new HashMap();
-}

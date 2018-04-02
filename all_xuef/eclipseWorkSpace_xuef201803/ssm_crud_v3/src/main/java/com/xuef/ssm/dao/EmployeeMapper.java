@@ -16,4 +16,10 @@ public interface EmployeeMapper {
 	 * @return
 	 */
 	public List<Employee> getEmps();
+	
+	/**
+	 * 修改后保存员工
+	 * @param emp
+	 */
+	public void saveEmp(Employee emp);
 }

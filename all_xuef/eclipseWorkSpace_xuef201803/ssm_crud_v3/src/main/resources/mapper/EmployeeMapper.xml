@@ -37,5 +37,15 @@
 	    <include refid="Column_List_With_Dept" />
 	    from employee e, dept d
 	    where e.`dept_no` = d.`d_no`
+	    order by e.e_no
 	</select>
+	
+	<update id="saveEmp" parameterType="com.xuef.ssm.domain.Employee">  
+        UPDATE employee  
+            SET e_name = #{eName},   
+                e_gender = #{eGender},  
+                e_job = #{eJob},  
+                dept_no = #{department.dNo}
+        WHERE e_no = #{eNo}   
+	</update> 
 </mapper>

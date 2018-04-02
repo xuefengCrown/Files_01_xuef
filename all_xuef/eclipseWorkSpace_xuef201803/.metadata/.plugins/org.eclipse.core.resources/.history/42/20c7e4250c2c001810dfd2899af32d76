@@ -1,7 +1,0 @@
-package org.smart4j.framework.utils;
-
-public class PropsUtil {
-	public static Properties loadPro(String fileName){
-		
-	}
-}

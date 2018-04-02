@@ -1,6 +1,0 @@
-package com.xuef2018.bookstore.dbUtils;
-
-import org.hibernate
-public class HibernateUtils {
-	private static SessionFactory sessionFactory;
-}

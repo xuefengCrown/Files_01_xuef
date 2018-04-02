@@ -7,6 +7,9 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 public class CGLibProxy implements MethodInterceptor {
+	/**
+	 * CGLibProxy 是单例的
+	 */
 	private static CGLibProxy cgproxy = new CGLibProxy();
 	public CGLibProxy() {}
 	public static CGLibProxy getInstance(){
@@ -17,6 +20,14 @@ public class CGLibProxy implements MethodInterceptor {
 	public <T> T getProxy(Class<?> cls){
 		return (T)Enhancer.create(cls, this);
 	}
+
+	/**
+	 * 横切逻辑
+	 * obj ?
+	 * method ?
+	 * args 参数列表
+	 * proxy ?
+	 */
 	@Override
 	public Object intercept(Object obj, Method method, Object[] args,
 			MethodProxy proxy) throws Throwable {

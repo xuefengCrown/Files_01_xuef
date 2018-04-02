@@ -1,0 +1,12 @@
+package com.xuef201803.book_dp.maze.abstractFactory;
+
+import com.xuef201803.book_dp.maze.Maze;
+
+/**
+ * 工厂可以创建迷宫的各种组件
+ * @author moveb
+ *
+ */
+public abstract class MazeFactory {
+	public Maze createMaze();
+}

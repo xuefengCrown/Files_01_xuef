@@ -1,8 +1,0 @@
-package com.xuef2018.bookstore.dao;
-
-public interface AccountDao {
-	/**
-	 * 更新账户余额
-	 */
-	
-}

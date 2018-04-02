@@ -1,0 +1,20 @@
+
+
+>  与  >>
+覆盖   追加
+
+1) ls -l > a.txt
+
+2) ls -al >> a.txt
+
+3) cat a.txt > b.txt
+
+4) echo "content" >> b.txt
+
+
+
+
+
+
+
+

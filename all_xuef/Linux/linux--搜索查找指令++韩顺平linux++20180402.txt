@@ -1,0 +1,36 @@
+一旦找到它，你就可以嘿嘿嘿
+
+find  locate  grep
+
+
+# find
+find [搜索范围] [选项]
+-name
+-user
+-size
+
+find /home -name *.txt
+
+find /opt -user nobody
+
+find / -size +20M
+
+
+# locate  (快速定位文件路径)
+第一次 updatedb
+
+locate 搜索文件
+
+# grep (对文件内容检索)
+管道符 | 表示将前一个命令的处理结果输出传递给后面的命令处理。
+
+grep [选项] 查找内容 源文件
+-n 显示匹配及行号
+-i 忽略到消协
+
+cat a.txt | grep -n sync
+
+
+
+
+

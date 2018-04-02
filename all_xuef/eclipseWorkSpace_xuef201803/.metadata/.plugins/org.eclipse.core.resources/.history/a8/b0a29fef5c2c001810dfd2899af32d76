@@ -1,9 +1,0 @@
-package org.smart4j.framework.utils;
-/**
- * 流操作工具类
- * @author moveb
- *
- */
-public class StreamUtil {
-
-}

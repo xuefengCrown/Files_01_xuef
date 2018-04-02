@@ -1,5 +1,6 @@
 package org.smart4j.framework;
 
+import org.smart4j.framework.helper.AopHelper;
 import org.smart4j.framework.helper.BeanHelper;
 import org.smart4j.framework.helper.ClassHelper;
 import org.smart4j.framework.helper.ControllerHelper;
@@ -16,6 +17,7 @@ public class HelperLoader {
 		Class<?>[] classList = {
 				ClassHelper.class,
 				BeanHelper.class,
+				AopHelper.class,
 				IocHelper.class, // 类被加载时，其静态代码块就会被执行; 切只被执行一次;
 				ControllerHelper.class
 		};

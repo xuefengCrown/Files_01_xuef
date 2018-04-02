@@ -1,0 +1,22 @@
+package com.xuef201803.book_dp.maze.abstractFactory;
+
+import com.xuef201803.book_dp.maze.Door;
+import com.xuef201803.book_dp.maze.Maze;
+import com.xuef201803.book_dp.maze.Room;
+
+public class MazeGameWithFactory {
+
+	public static Maze createMaze(MazeFactory mazeFactory){
+		
+		Maze aMaze = mazeFactory.createMaze();
+		Room r1 = mazeFactory.makeRoom();
+		Room r2 = mazeFactory.makeRoom();
+		Door aDoor = mazeFactory.makeDoor(r1, r2);
+		
+		aMaze.addRoom(r1);
+		aMaze.addRoom(r2);
+		
+		
+		return aMaze;
+	}
+}

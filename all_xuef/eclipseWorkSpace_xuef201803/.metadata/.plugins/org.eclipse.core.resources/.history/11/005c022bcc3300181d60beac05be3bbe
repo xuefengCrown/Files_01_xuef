@@ -1,0 +1,9 @@
+package multi_thread.thread.threadLocal;
+
+/**
+ * 一个序列号生成器，可能会有多个线程并发访问它
+ * @author moveb
+ */
+public interface Sequence {
+	public int getNumber();
+}

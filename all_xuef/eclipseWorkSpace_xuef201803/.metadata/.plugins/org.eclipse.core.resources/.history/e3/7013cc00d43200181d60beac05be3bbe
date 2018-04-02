@@ -1,0 +1,10 @@
+package com.xuef201803.command.receiver;
+
+public class Light {
+	public void on(){
+		
+	}
+	public void off(){
+		
+	}
+}

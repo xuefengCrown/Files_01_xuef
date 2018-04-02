@@ -1,0 +1,9 @@
+package com.xuef201803.command;
+
+/**
+ * Ò£¿ØÆ÷
+ * @author moveb
+ */
+public class RemoteControl {
+	
+}

@@ -1,7 +1,0 @@
-package com.xuef2018.bookstore.dao.daoImpl;
-
-import com.xuef2018.bookstore.dao.BaseDao;
-
-public class BookDaoHibImpl extends BaseDao implements BookDao {
-
-}

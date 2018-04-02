@@ -1,0 +1,10 @@
+package com.xuef201803.book_dp.maze.abstractFactory;
+
+/**
+ * 施了魔法的迷宫工厂
+ * @author moveb
+ *
+ */
+public class EnchantedMazeFactory extends MazeFactory {
+	
+}

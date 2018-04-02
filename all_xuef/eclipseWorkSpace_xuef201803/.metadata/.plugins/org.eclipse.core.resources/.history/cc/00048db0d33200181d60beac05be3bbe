@@ -1,0 +1,6 @@
+package com.xuef201803.command.concreteCommand;
+
+public class LightOnCommand {
+	private Light light;
+	
+}

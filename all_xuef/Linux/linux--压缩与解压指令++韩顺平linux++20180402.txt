@@ -1,0 +1,43 @@
+
+
+#
+gzip fname  (*.gz)
+gunzip *.gz
+
+
+# zip  unzip
+zip [选项] xxx.zip 文件or目录
+-r 递归压缩
+zip -r mypackage.zip /home/
+
+unzip [选项] xxx.zip 
+-d 解压到的目录
+unzip -d /opt/tmp/ mypackage.zip
+
+# 打包指令
+tar  (tar.gz)
+tar [选项] xxx.tar.gz 打包的内容
+-c 产生.tar打包文件
+-v 显示详细信息
+-f 指定压缩后的文件名
+-z 打包同时压缩
+-x 解包.tar文件
+
+1、打包多个文件
+tar -zcvf a.tar.gz a1.txt a2.txt
+
+2、打包目录下文件
+tar -zcvf myhome.tar.gz /home/
+
+3、解压到当前目录
+tar -zxvf a.tar.gz
+
+4、解压到指定目录
+tar -zcvf myhome.tar.gz -C /opt/tmp2/  (目录得存在)
+
+
+
+
+
+
+

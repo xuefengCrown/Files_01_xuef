@@ -1,8 +1,0 @@
-package snippet;
-
-public class Snippet {
-	public static void main(String[] args) {
-		com.xuef2018.bookstore.servlet.BookServlet
-	}
-}
-

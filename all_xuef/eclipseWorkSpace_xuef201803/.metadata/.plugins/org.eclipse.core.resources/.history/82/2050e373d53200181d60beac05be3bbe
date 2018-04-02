@@ -1,0 +1,13 @@
+package com.xuef201803.command.receiver;
+/**
+ * ÒôÏì½Ó¿Ú
+ * @author moveb
+ */
+public interface Stereo {
+	public void on();
+	public void off();
+	public void setCd();
+	public void setDvd();
+	public void setRadio();
+	public void setVolume(int volume);
+}

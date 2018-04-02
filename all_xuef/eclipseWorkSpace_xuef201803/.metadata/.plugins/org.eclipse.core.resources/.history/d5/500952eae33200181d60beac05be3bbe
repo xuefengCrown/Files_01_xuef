@@ -1,0 +1,6 @@
+package multi_thread.thread.safe;
+
+// 模拟一个 Servlet 组件
+public class LoginServlet {
+
+}

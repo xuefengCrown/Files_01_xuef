@@ -1,8 +1,0 @@
-package com.xuef2018.server_version3.startup;
-
-public final class Bootstrap {
-	public static void main(String[] args) {
-		HttpConnector connector = new HttpConnector();
-		
-	}
-}

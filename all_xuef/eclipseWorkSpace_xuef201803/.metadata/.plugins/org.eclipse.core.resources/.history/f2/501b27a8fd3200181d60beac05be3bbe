@@ -1,0 +1,18 @@
+package multi_thread.thread.safe.dirtRead;
+
+public class PublicVar {
+	public String username = "A";
+	public String password = "AA";
+	
+	synchronized private void setValue(String u, String p) {
+		
+		try {
+			this.username = u;
+			Thread.sleep(5000);
+			this.password = p;
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+	}
+}

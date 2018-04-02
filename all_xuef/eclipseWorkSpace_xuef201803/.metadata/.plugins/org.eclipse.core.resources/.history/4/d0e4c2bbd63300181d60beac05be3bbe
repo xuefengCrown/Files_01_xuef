@@ -1,0 +1,19 @@
+package multi_thread.thread.threadLocal;
+
+/**
+ * สนำร ThreadLocal
+ * @author moveb
+ */
+public class SequenceB implements Sequence {
+	
+	new ThreadLocal<Integer>(){
+		@Override
+		protected Integer initialValue(){
+			return 0;
+		}
+	}
+	
+	@Override
+	public int getNumber() {
+	}
+}

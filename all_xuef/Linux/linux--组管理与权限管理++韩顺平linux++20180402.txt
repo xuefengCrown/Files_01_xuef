@@ -1,0 +1,25 @@
+
+
+
+# 文件
+owner group others
+
+## 查看文件所有者
+ls -ahl   (all--human--list?)
+
+## 改变文件所有者
+chown uname fname
+
+## 修改文件所在组
+chgrp 组名 fname
+
+## 改变用户所在组(root权限)
+usermod -g 组名 uname
+usermod -d dirname uname (改变该用户登录的初始目录)
+
+
+
+
+
+
+

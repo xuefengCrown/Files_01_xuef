@@ -26,10 +26,72 @@
 		  	<div class="col-md-12"><h1>EmpsAdmS</h1></div>
 		</div>
 		
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+					aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" 
+		        		aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">新增员工</h4>
+		      </div>
+		      
+		      <div class="modal-body">
+		        <form class="form-horizontal">
+				  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+				    <div class="col-sm-10">
+				      <input type="email" class="form-control" id="inputEmail3" placeholder="name">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">岗位</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="e_job" placeholder="Developer">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">性别</label>
+				    <div class="col-sm-10 radio">
+				    	<label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios1" 
+						    		value="m" checked>
+						  		男
+						</label>
+					    <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios2" 
+						    		value="f">
+						  		女
+					    </label>
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">部门</label>
+				    <div class="col-sm-10">
+				    	<select class="form-control" id="add_depts" name="deptNo">
+						</select>
+				    </div>
+				  </div>
+				</form>
+		      </div>
+		      
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
 		<!-- 标题一般操作 -->
 		<div class="row">
 		  	<div class="col-md-4 col-md-offset-9">
-		  		<button type="button" class="btn btn-primary"> 
+		  		<button type="button" class="btn btn-primary btn-md" id="add_emp"
+		  				data-toggle="modal" data-target="#myModal"> 
 		  			 Add <span class="glyphicon glyphicon-plus"></span></button>
 		  		<button type="button" class="btn btn-danger"> 
 		  			 DelALL<span class="glyphicon glyphicon-remove"></span></button>
@@ -71,37 +133,72 @@
 	</div>
 	<!-- 页面加载完成后执行 -->
 	<script type="text/javascript">
+		var all_depts = {};
+		
 		$(function(){
-			to_page(1)
-		})
+			// 初始化时，查询一次所有部门
+			getDepts();
+			// 到达第一页
+			to_page(1);;
+		});
+		
 		function to_page(pageNo){
 			$.ajax({
 				url: "${emp_path}/emps",
 				type: "get",
 				data: "pageNo="+pageNo,
 				success: function(emps){
-					console.log(emps)
-					getDepts(emps);
+					console.log(emps);
+					// 构建员工信息列表，需要员工信息和部门信息
+					build_emps(emps, all_depts);
+					build_page_info(emps, all_depts);
+					build_page_nav(emps, all_depts);
 				}
-			})
+			});
 		}
+		
+		// 添加员工
+		$(function(){
+			//getDepts
+			$("#add_emp").click(function(){
+				// 在add弹出框中显示部门下拉列表
+				$.each(all_depts.res.depts, function(index, item){
+					$("#add_depts").append("<option value='"+ item.dNo + "'>" + item.dName +"</option>")
+				});
+			});
+		});
+		
 		// 查询所有部门信息
-		function getDepts(emps){
+		function getDepts(){
 			$.ajax({
 				url: "${emp_path}/depts",
-				type: "get",
+				type: "GET",
 				success: function(depts){
-					console.log(depts)
-					build_emps(emps, depts)
-					build_page_info(emps, depts)
-					build_page_nav(emps, depts)
+					console.log(depts);
+					// 只在页面初始化时 查询一次部门信息
+					all_depts = depts;
+				}
+			});
+		}
+		// edit后保存员工
+		function saveEmp(params){
+			params._method="PUT";
+			$.ajax({
+				url: "${emp_path}/emp/"+params.eNo,
+				type: "POST",
+				contentType: "application/x-www-form-urlencoded",
+				//contentType: "application/json",
+				data: params,
+				success: function(result){
+					console.log(result);
 				}
 			});
 		}
 		// 构建员工列表
 		function build_emps(res, depts){
-			$("#emps_table tbody").empty()
-			var emps = res.res.pageInfo.list
+			$("#emps_table tbody").empty();
+			// 从返回的msg中拿到员工列表; 此处的res 命名很不合理
+			var emps = res.res.pageInfo.list;
 			$.each(emps, function(index, item){
 				var eNoInput = $("<input></input>")
 											.attr("type", "text")
@@ -120,29 +217,28 @@
 													.attr("size", "1")
 													.attr("name", "eGender")
 													.append("<option value='m'>男</option>")
-													.append("<option value='f'>女</option>")
+													.append("<option value='f'>女</option>");
 				
 				var eJobInput = $("<input />").attr("type", "text")
 											  .attr("readonly", "true")
 											  .attr("name", "eJob")
 											.addClass("form-control")
-											.attr("size", "5")
+											.attr("size", "5");
 											
 				var dNameInput = $("<select></select>").addClass("form-control")
 													.attr("readonly", "true")
 													.attr("size", "1")
-													.attr("name", "dNo")
+													.attr("name", "department.dNo");
 				
 				$.each(depts.res.depts, function(index, item){
-					//console.log(item.dNo)
 					dNameInput.append("<option value='"+ item.dNo + "'>" + item.dName +"</option>")
 				});
 				
 				var dLocInput = $("<input />").attr("type", "text")
 												.attr("readonly", "true")
-												.attr("name", "dLocation")
+												.attr("name", "department.dLocation")
 											.addClass("form-control")
-											.attr("size", "4")
+											.attr("size", "4");
 				
 				var eNoTd = $("<td></td>").append(eNoInput.val(item.eNo))
 				var eNameTd = $("<td></td>").append(eNameInput.val(item.eName))
@@ -175,13 +271,14 @@
 											//alert("为save绑定事件");
 											$(this).click(function(){
 												// 是save操作时才执行
-												var newEmp = {};
+												var paramJson = {};
 												if(!$(this).hasClass("btn-warning")){
 													$.each(records, function(idx, item){
-														alert($(item).attr("name") + " : " + $(item).val());
-														
+														// 拼接请求串
+														paramJson[$(item).attr("name")] = $(item).val()
 													})
-													alert("save emp");
+													//alert("saveemp: " + paramJson.eNo);
+													saveEmp(paramJson)
 												}
 											});
 											saveClickBind = true;
@@ -218,16 +315,16 @@
 							  .append(eJobTd).append(deptNameTd).append(deptLocTd)
 							  .append(opeTd)
 							  .appendTo("#emps_table tbody")
-			})
+			});
 		}
-		// 分页信息
+		// 构建分页信息
 		function build_page_info(res){
 			$("#page_info").empty()
 			var page_info_json = res.res.pageInfo
 			$("#page_info").append("当前第 "+ page_info_json.pageNum + 
 					" 页 共 " + page_info_json.pages + " 页 " + page_info_json.total + " 条记录")
 		}
-		// 分页导航
+		// 构建分页导航
 		function build_page_nav(res){
 			$("#page_nav").empty()
 			var page_info_json = res.res.pageInfo
@@ -254,34 +351,34 @@
 			var last = $("<li></li>").append($("<a></a>").append("末页"));
 			// 没有后一页时，禁用末页和next链接
 			if(page_info_json.hasNextPage == false){
-				next.addClass("disabled")
-				last.addClass("disabled")
+				next.addClass("disabled");
+				last.addClass("disabled");
 			}else{
 				next.click(function(){
-					to_page(page_info_json.pageNum+1)
+					to_page(page_info_json.pageNum+1);
 				});
 				
 				last.click(function(){
-					to_page(page_info_json.pages)
+					to_page(page_info_json.pages);
 				});
 			}
 				
-			par_ul.append(first).append(pre)
+			par_ul.append(first).append(pre);
 			
 			$.each(page_info_json.navigatepageNums, function(index, item){
 				var cur = $("<li></li>").append($("<a></a>").append(item)
 													.click(function(){
-														to_page(item)
+														to_page(item);
 													}));
 				// 高亮当前页
 				if(page_info_json.pageNum == item){
 					cur.addClass("active");
 				}
-				par_ul.append(cur)
-				par_ul.append(next).append(last)
-			})
-			nav.append(par_ul)
-			$("#page_nav").append(nav)
+				par_ul.append(cur);
+				par_ul.append(next).append(last);
+			});
+			nav.append(par_ul);
+			$("#page_nav").append(nav);
 		}
 	</script>
 </body>
