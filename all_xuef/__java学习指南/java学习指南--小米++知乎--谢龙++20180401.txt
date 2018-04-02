@@ -32,7 +32,7 @@ Linux 的基本使用可以通过《鸟哥的Linux私房菜：基础学习篇（
 
 4、掌握 JDK 以外的常用类库和工具包。JDK 原生 API 在很多场景下使用并不方便。你需要掌握社区贡献的优秀类库和工具包，
 比如 apache commons、google guava 等，具体可以翻阅 服务端技术选型 的Utility 篇。
-
+ 
 5、掌握 Web 开发框架。我们使用 Spring(或Rose) + Ibatis(或Jade) 开发 web 服务，你需要熟练掌握它们。
 
 ps: 学习web
