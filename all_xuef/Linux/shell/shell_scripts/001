@@ -72,4 +72,15 @@ let result=no1+no2   # no space!!!
 echo $result
 
 
+# Playing with file descriptors and redirection
+
+> is equivalent to 1>
+ and similarly it applies for 
+>> (equivalent to 1>>).
+
+$ ls + 2> out.txt # works
+
+
+
+
 
