@@ -1,0 +1,75 @@
+
+++++++++++++++ env ++++++++++++++++
+#!/bin/bash
+#Filename :variables.sh
+fruit=apple
+count=5
+echo "We have $count ${fruit}(s)"
+
+
+Environment variables are variables that are not defined in the current process, but are 
+received from the parent processes. For example, 
+HTTP_PROXY
+ is an environment variable. 
+This variable defines which proxy server should be used for an Internet connection.
+Usually, it is set as:
+HTTP_PROXY=http://192.168.0.2:3128
+export HTTP_PROXY
+
+
+$ PATH="$PATH:/home/user/bin"
+$ export PATH
+
+
+Some of the well-known environment variables are: 
+HOME
+PWD 
+USER
+UID
+SHELL
+, and so on.
+
+
+xuef@xuef-E402SA:~$ var=helloyou,xuef
+xuef@xuef-E402SA:~$ length=${#var}
+xuef@xuef-E402SA:~$ echo $length 
+
+
+UID
+
+# Check for super user
+UID is an important environment variable that can be used to check whether the current script 
+has been run as root user or regular user. For example:
+if [ $UID -ne 0 ]; then
+echo Non root user. Please run as root.
+else
+echo "Root user"
+fi
+
+The UID for the root user is 0.
+
+xuef@xuef-E402SA:~$ echo $UID
+1000
+xuef@xuef-E402SA:~$ whoami
+xuef
+xuef@xuef-E402SA:~$ id xuef
+uid=1000(xuef) gid=1000(xuef) 组=1000(xuef),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),121(lpadmin),132(sambashare)
+
+++++++++++++++ env ++++++++++++++++
+
+
+
+++++++++++++++ Doing math calculations with the shell ++++++++++++++
+let, (( )), and []. The two utilities expr and bc are also very helpful in performing 
+advanced operations.
+
+++++++++++++++++ let +++++++++++++++
+#!/bin/bash
+no1=4;
+no2=5;
+
+let result=no1+no2   # no space!!!
+echo $result
+
+
+
