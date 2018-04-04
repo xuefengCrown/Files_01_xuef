@@ -1,0 +1,22 @@
+
+#!/bin/bash
+
+target=$(expr $RANDOM % 1000)  # no space of =
+TIMES=0
+echo $target
+
+while true
+do
+read -p "enter your guess(0-999): " GUESS
+let TIMES++
+if [ $GUESS -eq $target ];
+then
+echo "great, youre right! your guess times is $TIMES..."
+exit 0              # dont forget exit
+elif [ $GUESS -gt $target ]; then
+echo "too big"
+else
+echo "too small"
+fi
+
+done
