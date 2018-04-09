@@ -1,5 +1,0 @@
-package multi_thread.thread.threadLocal;
-
-public class ThreadA {
-
-}

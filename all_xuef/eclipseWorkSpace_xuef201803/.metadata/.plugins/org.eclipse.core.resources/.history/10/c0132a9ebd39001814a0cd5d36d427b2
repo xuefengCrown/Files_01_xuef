@@ -1,0 +1,14 @@
+package com.xuef.architect.customermgr.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.xuef.architect.customermgr.service.CustomerService;
+
+@Controller(value="/customer")
+public class CustomerController {
+	@Autowired
+	private CustomerService customerService;
+	
+	
+}

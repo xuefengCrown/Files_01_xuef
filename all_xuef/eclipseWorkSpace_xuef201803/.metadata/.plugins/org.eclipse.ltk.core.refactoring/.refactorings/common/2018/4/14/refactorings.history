@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;common/src/main/java/com/xuef/architect/common/service/BaseService.java&apos; to &apos;IBaseService.java&apos;" description="Rename resource &apos;BaseService.java&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/java/com/xuef/architect/common/service/BaseService.java" name="IBaseService.java" stamp="1523025144842" updateReferences="true"/>
+</session>

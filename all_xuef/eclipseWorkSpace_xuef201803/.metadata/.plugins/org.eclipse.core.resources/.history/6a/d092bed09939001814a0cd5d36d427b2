@@ -1,0 +1,12 @@
+package com.xuef.architect.customermgr.vo;
+
+import com.xuef.pageutil.Page;
+
+
+/**
+ * 封装查询条件 
+ * @author moveb
+ */
+public class CustomerQueryModel extends CustomerModel {
+//	private Page<CustomerModel> page = new Page<CustomerModel>();
+}

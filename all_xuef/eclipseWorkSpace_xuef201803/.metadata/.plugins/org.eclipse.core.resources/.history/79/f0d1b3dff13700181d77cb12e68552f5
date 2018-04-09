@@ -1,0 +1,14 @@
+package com.xuef201803.book_dp.simpleFactory;
+
+public class SimpleFac {
+	public static Api getInstance(int flag){
+		/**
+		 * 工厂并不自己制造对象，它只是做出选择。
+		 */
+		if(1==flag){
+			return new ApiImplA();
+		}else{
+			return new ApiImplB();
+		}
+	}
+}

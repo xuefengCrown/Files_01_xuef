@@ -1,0 +1,26 @@
+package $#modulePackge#.business.serviceimpl;
+
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+import cn.javass.framework.basemodule.business.BaseServiceImpl;
+import $#modulePackge#.business.service.$#moduleNameSuperCase#Service;
+import $#modulePackge#.dao.dao.$#moduleNameSuperCase#DAO;
+import $#modulePackge#.vo.$#moduleNameSuperCase#Model;
+import $#modulePackge#.vo.$#moduleNameSuperCase#QueryModel;
+@Service
+public class $#moduleNameSuperCase#ServiceImpl extends BaseServiceImpl<$#moduleNameSuperCase#Model,$#moduleNameSuperCase#QueryModel> implements $#moduleNameSuperCase#Service {
+	private $#moduleNameSuperCase#DAO $#moduleName#DAO = null;
+	@Autowired
+	public void set$#moduleNameSuperCase#DAO ($#moduleNameSuperCase#DAO $#moduleName#DAO){
+		this.$#moduleName#DAO = $#moduleName#DAO;
+		super.setBaseDAO($#moduleName#DAO);
+	}
+}

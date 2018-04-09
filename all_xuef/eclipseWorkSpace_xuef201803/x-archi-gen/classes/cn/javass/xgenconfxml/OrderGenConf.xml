@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ModuleGenConf id="OrderConf">
+	<NeedGenTypes>
+		<NeedGenType id="GenVo">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenQueryModel">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenDaoDao">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenDaoMapper">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenBusinessService">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenBusinessServiceImpl">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenWebController">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenWebModel">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+		<NeedGenType id="GenAddPage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenUpdatePage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenDeletePage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenQueryPage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenListPage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+	</NeedGenTypes>
+	
+	<ExtendConfs>
+		<ExtendConf id="codeOutPath" isSingle="true">build</ExtendConf>
+		<ExtendConf id="moduleName" isSingle="true">order</ExtendConf>
+		<ExtendConf id="moduleNameSuperCase" isSingle="true">Order</ExtendConf>
+		<ExtendConf id="modulePackge" isSingle="true">${gm.getMapConstants().get("prePackage");}.${gm.getMapConstants().get("projectName");}.${moduleName}mgr</ExtendConf>
+		<ExtendConf id="listViewNum" isSingle="true">5</ExtendConf>
+		<ExtendConf id="voFields" isSingle="false">customerUuid,orderTime,totalMoney,saveMoney,state</ExtendConf>
+		<ExtendConf id="voFieldsTypes" isSingle="false">Integer,String,Float,Float,Integer</ExtendConf>
+		<ExtendConf id="voFieldsNames" isSingle="false">客户编号,下订单时间,总金额,节省金额,状态</ExtendConf>
+		<ExtendConf id="qmVoFields" isSingle="false"></ExtendConf>
+		<ExtendConf id="qmVoFieldsTypes" isSingle="false"></ExtendConf>
+		<ExtendConf id="qmVoFieldsNames" isSingle="false"></ExtendConf>
+		
+		<ExtendConf id="moduleTypePre" isSingle="true">OM</ExtendConf>
+		<ExtendConf id="queryModuleTypePre" isSingle="true">OQM</ExtendConf>
+		
+		<ExtendConf id="tblName" isSingle="true">tbl_order</ExtendConf>
+		
+		<ExtendConf id="moduleName_CN" isSingle="true">主订单</ExtendConf>
+	</ExtendConfs>
+</ModuleGenConf>

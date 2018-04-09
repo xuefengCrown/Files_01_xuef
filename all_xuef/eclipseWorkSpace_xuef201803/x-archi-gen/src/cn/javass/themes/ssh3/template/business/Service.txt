@@ -1,0 +1,11 @@
+package $#modulePackge#.business.service;
+
+import java.util.List;
+
+import cn.javass.framework.basemodule.business.BaseService;
+import $#modulePackge#.vo.$#moduleNameSuperCase#Model;
+import $#modulePackge#.vo.$#moduleNameSuperCase#QueryModel;
+
+public interface $#moduleNameSuperCase#Service extends BaseService<$#moduleNameSuperCase#Model,$#moduleNameSuperCase#QueryModel>{
+	
+}

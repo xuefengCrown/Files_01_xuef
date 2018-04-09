@@ -1,0 +1,12 @@
+
+理解技术的本质最重要
+读英文注释文档，有耐心
+
+《Expert one on one J2EE design and development》
+
+
+BeanFactory
+BeanDefinition
+
+
+

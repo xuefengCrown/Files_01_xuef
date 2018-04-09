@@ -1,0 +1,17 @@
+package com.xuef201803.book_dp.bridge;
+
+public class SpecialUrgencyMessage extends AbstractMessage {
+
+	public SpecialUrgencyMessage(MessageImplementor messageImpl) {
+		super(messageImpl);
+	}
+	
+	public void hurry(String messageId){
+		// 执行催促的业务，发出催促的消息
+	}
+
+	@Override
+	public void sendMessage(String message, String toUser) {
+		super.sendMessage(message, toUser);
+	}
+}

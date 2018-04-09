@@ -1,0 +1,11 @@
+package com.xuef201803.book_dp.simpleFactory;
+
+public class SimpleFac {
+	public static Api getInstance(int flag){
+		if(1==flag){
+			return new ApiImplA();
+		}else{
+			return new ApiImplB();
+		}
+	}
+}

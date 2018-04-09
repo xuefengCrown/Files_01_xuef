@@ -1,9 +1,0 @@
-package multi_thread.thread.threadLocal;
-
-/**
- * 
- * @author moveb
- */
-public class ThreadA {
-
-}

@@ -1,0 +1,28 @@
+
+
+1. 解压到/opt
+
+1.1 修改URIEncoding
+conf/server.xml
+
+2. 启动 tomcat
+cd bin
+./startup.sh
+
+3. 开放端口
+vim /etc/sysconfig/iptables
+
+
+## 访问
+先要在阿里云服务器中设置，开放 8080端口
+tomcat虽然在8080监听了，但是外面的防火墙却封死了这些端口。
+只需要 vim /etc/sysconfig/iptables，开放8080端口。
+重启防火墙：service iptables restart
+然后外网才能访问8080。
+
+http://47.97.197.165:8080/
+
+
+
+
+

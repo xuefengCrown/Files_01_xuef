@@ -1,8 +1,0 @@
-package com.xuef201803.book_dp.maze;
-
-public class Door {
-	
-	public Door(Room roomA, Room roomB){
-		
-	}
-}

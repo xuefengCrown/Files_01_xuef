@@ -1,0 +1,12 @@
+package $#modulePackge#.service;
+
+
+import com.sishuok.architecture1.common.service.IBaseService;
+
+import $#modulePackge#.vo.$#moduleNameSuperCase#Model;
+import $#modulePackge#.vo.$#moduleNameSuperCase#QueryModel;
+
+public interface I$#moduleNameSuperCase#Service extends IBaseService<$#moduleNameSuperCase#Model,$#moduleNameSuperCase#QueryModel>{
+	
+}
+

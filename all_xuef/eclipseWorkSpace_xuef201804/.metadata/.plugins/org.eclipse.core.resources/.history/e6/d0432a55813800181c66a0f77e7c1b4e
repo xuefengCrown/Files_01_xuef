@@ -1,0 +1,13 @@
+package cn.javass.xgen.genconf.vo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ThemeModel {
+	private String themeId;
+	private String location;
+	
+	private Map<String, GenTypeModel> genTypes = new HashMap<String, GenTypeModel>();
+	private Map<String, String> genOutTypes = new HashMap<>();
+	private Map<String, String> providers = new HashMap<>();
+}

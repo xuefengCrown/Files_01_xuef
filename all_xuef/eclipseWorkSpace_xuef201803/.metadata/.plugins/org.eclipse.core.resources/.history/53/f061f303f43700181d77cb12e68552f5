@@ -1,0 +1,29 @@
+package com.xuef201803.book_dp.factoryByReflect;
+
+import java.io.InputStream;
+import java.util.Properties;
+
+import com.xuef201803.book_dp.simpleFactory.Api;
+
+/**
+ * 反射 + 配置文件
+ * 据说反射的性能比较低 
+ * @author moveb
+ */
+public class FactoryByReflect {
+	public static Api getInstance(){
+		Properties properties = new Properties();
+		InputStream in = null;
+		try{
+			// 加载配置文件
+			in = FactoryByReflect.class.getClassLoader()
+								  .getResourceAsStream("factory.properties");
+			properties.load(in);
+		} catch(Exception e){
+			e.printStackTrace();
+			System.out.println();
+		}
+		
+		return null;
+	}
+}

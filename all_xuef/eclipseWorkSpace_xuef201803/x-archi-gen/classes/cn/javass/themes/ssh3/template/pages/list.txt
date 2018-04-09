@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="s" uri="/struts-tags" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="${pageContext.request.contextPath }/$#moduleName#!toAdd.action">新增</a> |
+	<a href="${pageContext.request.contextPath }/$#moduleName#!toQuery.action">查询</a>
+	<table border="1" width="98%">
+		<tr>
+			<td colspan=${$#listViewNum#+1} align=center>$#mouduleName_CN#列表</td>
+		</tr>
+		<tr>
+			$[cn.javass.themes.ssh3.visitors.ListJspHeadFields]
+			<td>操作</td>
+		</tr>
+			
+		<s:iterator value="wm.list">
+		  <tr>
+			$[cn.javass.themes.ssh3.visitors.ListJspValueFields]
+		   </tr>
+		</s:iterator>
+				
+	    <tr>
+			<td colspan=${$#listViewNum#+1}>
+				共有${wm.totalRecords}条记录，共分${wm.totalPage }页，每页显示${wm.pageShow }条，当前是第${wm.nowPage }页  
+	    	</td>
+	    </tr>	
+	    
+		<tr>
+			<td colspan=${$#listViewNum#+1}>
+			<s:if test="wm.nowPage > 1">	
+				<a href='${pageContext.request.contextPath}/$#moduleName#!toList.action?wm.nowPage=1'>首页</a>
+				<a href='${pageContext.request.contextPath}/$#moduleName#!toList.action?wm.nowPage=${wm.nowPage - 1}'>上一页</a>
+			</s:if>	
+			
+			<s:if test="wm.nowPage < wm.totalPage">		
+				<a href='${pageContext.request.contextPath}/$#moduleName#!toList.action?wm.nowPage=${wm.nowPage + 1}'>下一页</a>
+				<a href='${pageContext.request.contextPath}/$#moduleName#!toList.action?wm.nowPage=${wm.totalPage}'>末页</a>
+			</s:if>
+	    	</td>
+	    </tr>
+	</table>
+</body>
+</html>

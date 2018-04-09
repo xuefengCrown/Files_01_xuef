@@ -1,0 +1,36 @@
+
+# 目前只是基本，后面根据需要，可能调整。(目前专注架构，而不是业务)
+
+## 客户管理
+uuid,customerId,pwd,showName,trueName,registerTime
+(本来pwd要加密存储，地址)
+
+## 商品管理
+uudi,name,imgPath,description
+(实际场景，很麻烦的。商品有类别，有规格)
+
+## 购物车
+uuid,customerId,goodsUuid,buyNum
+(分布式系统，所以要去session化)
+
+## 订单管理--主订单
+uuid,customerUuid,orderTime,totalMoney,saveMoney,state
+(本来订单处理很麻烦的，这里只是演示)
+
+## 订单管理--子订单
+uuid,orderUuid,goodsUuid,orderNum,price,money,saveMoney
+
+## 库存管理
+uuid,goodsUuid,storeNum
+
+
+整个环境：
+1. windows上用eclipse
+2. 数据库mysql，先部署在本地，开发好了再部署到Linux服务器上
+3. 具体技术：maven+springMVC+spring+mybatis
+4. front-end:jQuery+html+css+ajax
+5. 版本管理:Git
+6. 后面再加入encache来缓存mybatis的查询结果
+7. 等一个模块开发好后，加入X-gen来进行代码生成，以生成其余模块的基础部分
+
+使用maven搭建基础开发环境

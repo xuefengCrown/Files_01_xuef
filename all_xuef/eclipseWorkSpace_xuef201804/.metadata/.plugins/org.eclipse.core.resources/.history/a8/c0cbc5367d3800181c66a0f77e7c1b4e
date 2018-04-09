@@ -1,0 +1,7 @@
+package cn.javass.xgen.genconf.vo;
+
+public class ModuleConfModel {
+	private String moduleId = "";
+	private String useTheme = "";
+	
+}

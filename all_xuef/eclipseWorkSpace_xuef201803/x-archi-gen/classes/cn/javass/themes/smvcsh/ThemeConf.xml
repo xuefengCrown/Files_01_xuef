@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Theme id="smvcsh">
+	<GenTypes>
+		<GenType id="GenEntity" type="cn.javass.themes.smvcsh.actions.GenEntityAction">
+			<Params>
+				<Param id="relativePath">entity</Param>
+				<Param id="mbPathFile">entity/Entity.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">.java</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenRepository" type="cn.javass.themes.smvcsh.actions.GenRepositoryAction">
+			<Params>
+				<Param id="relativePath">repository</Param>
+				<Param id="mbPathFile">repository/Repository.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">Repository.java</Param>
+			</Params>			
+		</GenType>
+		<GenType id="GenService" type="cn.javass.themes.smvcsh.actions.GenServiceAction">
+			<Params>
+				<Param id="relativePath">service</Param>
+				<Param id="mbPathFile">service/Service.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">Service.java</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenController" type="cn.javass.themes.smvcsh.actions.GenControllerAction">
+			<Params>
+				<Param id="relativePath">web</Param>
+				<Param id="mbPathFile">web/Controller.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">Controller.java</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenEditFormJsp" type="cn.javass.themes.smvcsh.actions.GenEditFormJspAction">
+			<Params>
+				<Param id="relativePath">pages</Param>
+				<Param id="mbPathFile">pages/editForm.txt</Param>
+				<Param id="preGenFileName">NoModuleName</Param>
+				<Param id="afterGenFileName">editForm.jsp</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenListJsp" type="cn.javass.themes.smvcsh.actions.GenListJspAction">
+			<Params>
+				<Param id="relativePath">pages</Param>
+				<Param id="mbPathFile">pages/list.txt</Param>
+				<Param id="preGenFileName">NoModuleName</Param>
+				<Param id="afterGenFileName">list.jsp</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenListTableJsp" type="cn.javass.themes.smvcsh.actions.GenListTableJspAction">
+			<Params>
+				<Param id="relativePath">pages</Param>
+				<Param id="mbPathFile">pages/listTable.txt</Param>
+				<Param id="preGenFileName">NoModuleName</Param>
+				<Param id="afterGenFileName">listTable.jsp</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenSearchFormJsp" type="cn.javass.themes.smvcsh.actions.GenSearchFormJspAction">
+			<Params>
+				<Param id="relativePath">pages</Param>
+				<Param id="mbPathFile">pages/searchForm.txt</Param>
+				<Param id="preGenFileName">NoModuleName</Param>
+				<Param id="afterGenFileName">searchForm.jsp</Param>
+			</Params>
+		</GenType>
+	</GenTypes>
+	<GenOutTypes>
+		<GenOutType id="Console" type="cn.javass.xgen.output.types.OutputToConsole"></GenOutType>
+		<GenOutType id="File" type="cn.javass.xgen.output.types.OutputToFile"></GenOutType>
+	</GenOutTypes>
+	<Providers>
+		<Provider id="XmlGenConf" type="cn.javass.xgen.genconf.implementors.xmlimpl.GenConfXmlImpl"></Provider>
+		<Provider id="XmlModuleGenConf" type="cn.javass.xgen.genconf.implementors.xmlimpl.ModuleGenConfXmlImpl"></Provider>
+		<Provider id="XmlThemeConf" type="cn.javass.xgen.genconf.implementors.xmlimpl.ThemeXmlImpl"></Provider>
+	</Providers>	
+</Theme>

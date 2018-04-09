@@ -1,3 +1,4 @@
 #Tomcat publish data
-#Sun Apr 01 14:54:55 CST 2018
-org.eclipse.jst.j2ee.server\:smart-framework=WEB-INF/lib/smart-framework-0.0.1-SNAPSHOT.jar
+#Sat Apr 07 14:06:04 CST 2018
+org.eclipse.jst.j2ee.server\:common=WEB-INF/lib/common-0.0.1-SNAPSHOT.jar
+org.eclipse.jst.j2ee.server\:/binary\:C\:\\Users\\moveb\\.m2\\repository\\org\\springframework\\spring-web\\4.3.7.RELEASE\\spring-web-4.3.7.RELEASE.jar=WEB-INF/lib/spring-web-4.3.7.RELEASE.jar

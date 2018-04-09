@@ -1,0 +1,33 @@
+package com.xuef.architect.customermgr.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
+
+import com.xuef.architect.customermgr.dao.CustomerDAO;
+import com.xuef.architect.customermgr.vo.CustomerModel;
+
+// Test
+@Service(value="client")
+public class Client {
+	// 这个dao是怎么注入的???名字是否有什么要求???
+	@Autowired
+	private CustomerDAO customerDAO;
+	
+	// 是否需要???
+	public void setCustomerDAO(CustomerDAO customerDAO) {
+		this.customerDAO = customerDAO;
+	}
+	
+	public static void main(String[] args) {
+		ApplicationContext container = new ClassPathXmlApplicationContext("applicationContext.xml");
+		Client client = (Client) container.getBean("client");
+		client.getCusById(1);
+		
+	}
+
+	private CustomerModel getCusById(int i) {
+		return "cus";
+	}
+}

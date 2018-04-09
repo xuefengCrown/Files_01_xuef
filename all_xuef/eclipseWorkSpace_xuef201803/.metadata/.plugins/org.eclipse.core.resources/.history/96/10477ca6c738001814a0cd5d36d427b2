@@ -1,0 +1,5 @@
+package com.xuef201803.book_dp.bridge;
+
+public class UrgencyMessage extends AbstractMessage {
+
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModuleGenConf id="UserConf">
+    <NeedGenTypes>
+        <NeedGenType id="GenBusinessEbi">
+            <NeedGenOutType id="File"></NeedGenOutType>
+        </NeedGenType>
+    </NeedGenTypes>
+    <ExtendConfs>
+        <ExtendConf id="moduleName" isSingle="true">user</ExtendConf>
+    </ExtendConfs>
+</ModuleGenConf>

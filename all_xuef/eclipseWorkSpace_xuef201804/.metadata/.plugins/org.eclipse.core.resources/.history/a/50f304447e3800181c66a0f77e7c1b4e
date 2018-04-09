@@ -1,0 +1,14 @@
+package cn.javass.xgen.genconf.vo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ModuleConfModel {
+	private String moduleId = "";
+	private String useTheme = "";
+	
+	private Map<String, List<String>> needGenTypes = 
+			new Map<String, List<String>>();
+	private Map<String, ExtendConfModel> extds = 
+						new HashMap<String, ExtendConfModel>();
+}

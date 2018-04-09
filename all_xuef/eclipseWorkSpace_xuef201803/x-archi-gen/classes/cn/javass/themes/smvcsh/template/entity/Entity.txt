@@ -1,0 +1,15 @@
+package $#modulePackge#.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.sishuok.es.common.entity.BaseEntity;
+
+@Entity
+@Table(name="$#tableName#")
+public class $#moduleNameSuperCase# extends BaseEntity<$#keyDataType#>{
+	$[cn.javass.themes.smvcsh.visitors.EntityPropertiesDesign]
+	
+	$[cn.javass.themes.smvcsh.visitors.EntityGetterAndSetter]
+}

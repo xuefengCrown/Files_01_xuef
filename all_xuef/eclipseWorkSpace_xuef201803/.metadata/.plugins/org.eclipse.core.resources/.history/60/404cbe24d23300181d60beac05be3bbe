@@ -1,7 +1,0 @@
-package multi_thread.thread.threadLocal;
-
-public class Main {
-	public static void main(String[] args) {
-		
-	}
-}

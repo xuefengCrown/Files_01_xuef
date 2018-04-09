@@ -1,0 +1,17 @@
+INDEX VERSION 1.126+C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201804\.metadata\.plugins\org.eclipse.jdt.core
+3019204964.index
+1536049803.index
+3080202418.index
+2732619934.index
+2753488295.index
+3787110450.index
+1045220939.index
+1274306213.index
+728153334.index
+619783875.index
+3286163230.index
+1388752952.index
+2331961528.index
+203584781.index
+2801597666.index
+2926361562.index

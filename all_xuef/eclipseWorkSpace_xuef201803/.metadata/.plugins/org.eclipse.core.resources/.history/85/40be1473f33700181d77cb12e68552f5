@@ -1,0 +1,15 @@
+package com.xuef201803.book_dp.factoryByReflect;
+
+import com.xuef201803.book_dp.simpleFactory.Api;
+
+/**
+ * 反射 + 配置文件
+ * 据说反射的性能比较低 
+ * @author moveb
+ */
+public class FactoryByReflect {
+	public static Api getInstance(){
+		
+		return null;
+	}
+}

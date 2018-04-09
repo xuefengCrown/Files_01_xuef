@@ -1,0 +1,10 @@
+package com.xuef201803.book_dp.bridge;
+
+/**
+ * 扩充由Abstraction定义的接口功能
+ * @author moveb
+ *
+ */
+public class RefinedAbstraction extends Abstraction {
+
+}

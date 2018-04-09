@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	用户需要生成的模块的配置数据
+	如：用户想要生成一个模块内的CRUD的源代码，里面有每个功能的配置，而每个具体功能就是一个源代码文件。
+	这个也需要在每次使用的时候根据需要来配置，并注册到核心框架运行配置里去，每次生成主要配置的就是这类数据。
+ -->
+<ModuleGenConf id="UserConf">
+    <NeedGenTypes>
+        <NeedGenType id="GenBusinessEbi">
+            <NeedGenOutType id="File"></NeedGenOutType>
+        </NeedGenType>
+    </NeedGenTypes>
+    <ExtendConfs>
+        <ExtendConf id="moduleName" isSingle="true">user</ExtendConf>
+    </ExtendConfs>
+</ModuleGenConf>

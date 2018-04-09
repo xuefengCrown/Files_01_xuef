@@ -1,0 +1,32 @@
+package com.xuef.architect.common.service;
+
+import java.util.List;
+
+public class BaseService<M, CM> implements IBaseService<M, CM> {
+	
+	public void create(M m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void update(M m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public M getByUuid(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<M> getByCondition(CM cqm) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,8 @@
+package multi_thread.thread.runnable.strategy;
+/**
+ * 用个人所得税计算器的设计来说明Runnable接口的设计 
+ * @author moveb
+ */
+public class Target {
+
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModuleGenConf id="UserConf">
+    <NeedGenTypes>
+        <NeedGenType id="GenBusinessEbi">
+            <NeedGenOutType id="File"></NeedGenOutType>
+        </NeedGenType>
+        <NeedGenType></NeedGenType>
+    </NeedGenTypes>
+</ModuleGenConf>

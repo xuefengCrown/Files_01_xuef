@@ -1,0 +1,8 @@
+package cn.javass.xgen.genconf.vo;
+
+public class NeedGenModel {
+	private String id;
+	private String provider;
+	private String theme;
+	
+}

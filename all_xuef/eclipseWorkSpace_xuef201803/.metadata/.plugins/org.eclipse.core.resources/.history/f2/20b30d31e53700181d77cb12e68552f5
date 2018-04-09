@@ -1,0 +1,6 @@
+
+date:0403
+抽出DAO的父接口--BaseDAO
+Q: 因为是多模块，出现CustomerDAO无法引用(import)common包的类。
+A: 在pom.xml 中添加依赖即可。
+

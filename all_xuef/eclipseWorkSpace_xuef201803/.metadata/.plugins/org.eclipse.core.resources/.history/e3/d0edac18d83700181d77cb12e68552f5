@@ -1,0 +1,9 @@
+package com.xuef.architect.customermgr.service;
+
+import com.xuef.architect.customermgr.dao.CustomerDAO;
+
+// Test
+public class Client {
+	private CustomerDAO customerDAO;
+	
+}

@@ -1,0 +1,14 @@
+package com.xuef.architect.customermgr.dao;
+
+import com.xuef.architect.customermgr.vo.CustomerModel;
+
+public interface CustomerDAO {
+	public void create(CustomerModel cm);
+	public void update(CustomerModel cm);
+	public void delete(Integer id);
+		
+	/**
+	 * 根据 id 查询顾客
+	 */
+	public CustomerModel getByUuid(Integer id);
+}

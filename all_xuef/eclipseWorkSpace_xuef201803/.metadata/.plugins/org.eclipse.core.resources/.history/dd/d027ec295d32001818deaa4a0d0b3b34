@@ -1,9 +1,0 @@
-package com.xuef201803.book_dp.maze;
-/**
- * 这就是迷宫了
- * @author moveb
- *
- */
-public class Maze {
-	
-}

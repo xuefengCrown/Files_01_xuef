@@ -1,0 +1,5 @@
+package com.xuef.architect.customermgr.vo;
+
+public class CustomerQueryModel {
+
+}

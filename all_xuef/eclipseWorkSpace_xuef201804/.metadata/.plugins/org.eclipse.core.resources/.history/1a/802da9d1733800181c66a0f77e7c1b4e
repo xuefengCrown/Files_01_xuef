@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenConf>
+    <NeedGens>
+		<NeedGen id="UserGenConf" provider="XmlModuleGenConf" themeId="simple">
+		    <Params>
+		        <Param id="fileName"UserGenConf.xml></Param>
+		    </Params>
+		</NeedGen>        
+    </NeedGens>
+    <Themes>
+        
+    </Themes>
+    <Constants>
+        
+    </Constants>
+</GenConf>

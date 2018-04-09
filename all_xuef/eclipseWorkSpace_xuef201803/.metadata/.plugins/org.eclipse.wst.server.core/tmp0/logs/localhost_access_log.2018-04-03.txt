@@ -1,0 +1,15 @@
+127.0.0.1 - - [03/Apr/2018:18:28:48 +0800] "GET / HTTP/1.1" 404 955
+127.0.0.1 - - [03/Apr/2018:18:29:09 +0800] "GET /ssm_crud_v3/idx.jsp HTTP/1.1" 200 12365
+127.0.0.1 - - [03/Apr/2018:18:29:10 +0800] "GET /ssm_crud_v3/js/jquery-1.10.1.js HTTP/1.1" 304 -
+127.0.0.1 - - [03/Apr/2018:18:29:10 +0800] "GET /ssm_crud_v3/css/bootstrap-3.3.7-dist/css/bootstrap.min.css HTTP/1.1" 304 -
+127.0.0.1 - - [03/Apr/2018:18:29:10 +0800] "GET /ssm_crud_v3/css/bootstrap-3.3.7-dist/js/bootstrap.min.js HTTP/1.1" 304 -
+127.0.0.1 - - [03/Apr/2018:18:29:10 +0800] "GET /ssm_crud_v3/css/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 304 -
+127.0.0.1 - - [03/Apr/2018:18:29:10 +0800] "GET /favicon.ico HTTP/1.1" 404 988
+127.0.0.1 - - [03/Apr/2018:18:29:12 +0800] "GET /ssm_crud_v3/depts HTTP/1.1" 200 268
+127.0.0.1 - - [03/Apr/2018:18:29:12 +0800] "GET /ssm_crud_v3/emps?pageNo=1 HTTP/1.1" 200 897
+127.0.0.1 - - [03/Apr/2018:18:29:16 +0800] "GET /ssm_crud_v3/emps?pageNo=5 HTTP/1.1" 200 735
+127.0.0.1 - - [03/Apr/2018:18:29:51 +0800] "POST /ssm_crud_v3/emp/1015 HTTP/1.1" 200 48
+127.0.0.1 - - [03/Apr/2018:18:29:54 +0800] "GET /ssm_crud_v3/emps?pageNo=4 HTTP/1.1" 200 898
+127.0.0.1 - - [03/Apr/2018:18:29:55 +0800] "GET /ssm_crud_v3/emps?pageNo=5 HTTP/1.1" 200 742
+127.0.0.1 - - [03/Apr/2018:18:30:17 +0800] "POST /ssm_crud_v3/emp/1015 HTTP/1.1" 200 48
+127.0.0.1 - - [03/Apr/2018:18:31:07 +0800] "GET /ssm_crud_v3/emps?pageNo=1 HTTP/1.1" 200 897

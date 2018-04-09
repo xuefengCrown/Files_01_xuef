@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="cn.javass.xgen.genconf.GenConfFactory"/>
+<fullyQualifiedTypeName name="cn.javass.xgen.genconf.GenConfEbi"/>
+<fullyQualifiedTypeName name="cn.javass.xgen.genconf.GenConfEbo"/>
+<fullyQualifiedTypeName name="cn.javass.xgen.genconf.vo.GenConfModel"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="cn.javass.xgen.genconf.confmgr.ConfManager"/>
+</qualifiedTypeNameHistroy>

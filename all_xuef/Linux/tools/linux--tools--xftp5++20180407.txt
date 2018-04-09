@@ -1,0 +1,49 @@
+
+# 服务端要启动 sshd
+## service sshd restart
+CentOS 7 需要命令
+systemctl start sshd.service
+systemctl restart sshd.service
+systemctl status sshd.service
+
+# 客户端连接
+sftp 22
+
+
+# 安装jdk
+1. 把jdk...tar.gz 丢到/opt 下
+2. tar -zxvf jdk...
+3. 配置环境变量(vi /etc/profile)
+### 在末尾添加
+JAVA_HOME=/opt/jdk1.8.0_161
+PATH=/opt/jdk1.8.0_161/bin:$PATH
+export JAVA_HOME PATH
+
+source /etc/profile // 使得立即生效
+
++++++++++++++++++++++++
+1、直接用export命令：  
+#export PATH=$PATH:/opt/au1200_rm/build_tools/bin  
+查看是否已经设好，可用命令export查看
+
+2、修改profile文件：  
+#vi /etc/profile  
+在里面加入:  
+export PATH="$PATH:/opt/au1200_rm/build_tools/bin"  
+让环境变量立即生效需要执行如下命令：  
+#source /etc/profile 
+
+3. 修改.bashrc文件：  
+# vi /root/.bashrc  
+在里面加入：  
+export PATH="$PATH:/opt/au1200_rm/build_tools/bin" 
+
+方法2、3
+一般需要重新注销系统才能生效，最后可以通过echo命令测试一下：  
+# echo $PATH  
+看看输出里面是不是已经有了/my_new_path这个路径了。
+
++++++++++++++++++++++++
+
+
+351724

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuef.architect.customermgr.dao.CustomerDAO">
+	<sql id="Base_Column_List">
+    	uuid, customerId, pwd, showName, trueName, registerTime
+    </sql>
+    
+	<insert id="create" parameterType="CM">
+	    insert into tb_customer(customerId, pwd, showName, trueName, registerTime)
+	    values(#{customerId}, 
+	    		#{pwd}, #{showName}, #{trueName}, 
+	    		#{registerTime})
+	</insert>
+	<update id="update" parameterType="CM">
+	    update tb_customer set customerId=#{customerId}, 
+	    		pwd=#{pwd}, showName=#{showName}, trueName=#{trueName}, 
+	    		registerTime=#{registerTime}
+	    		where uuid=#{uuid}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+	    delete from tb_customer where uuid=#{id}
+	</delete>
+	
+	<select id="getByUuid" parameterType="java.lang.Integer" 
+	    resultType="CM">
+		select
+	    <include refid="Base_Column_List" />
+	    from tb_customer
+	    where uuid #{id}
+	</select>
+
+	<select id="getByCondition" parameterType="CQM" 
+	    resultType="CM">
+	    select
+	    <include refid="Base_Column_List" />
+	    from tb_customer
+	    <where>
+	        <if test="uuid != null &amp;&amp; uuid > 0">
+	            uuid = #{uuid}
+	        </if>
+	        <if test="customerId != null">
+	            customerId = #{customerId}
+	        </if>
+	        <if test="uuid != null &amp;&amp; uuid > 0">
+	            uuid = #{uuid}
+	        </if>
+	    </where>
+	</select>
+</mapper>

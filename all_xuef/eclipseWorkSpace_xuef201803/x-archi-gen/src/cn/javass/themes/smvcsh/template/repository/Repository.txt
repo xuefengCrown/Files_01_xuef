@@ -1,0 +1,9 @@
+package $#modulePackge#.repository;
+
+import com.sishuok.es.common.entity.search.Searchable;
+import com.sishuok.es.common.repository.BaseRepository;
+import $#modulePackge#.entity.$#moduleNameSuperCase#;
+
+public interface $#moduleNameSuperCase#Repository extends BaseRepository<$#moduleNameSuperCase#,$#keyDataType#>{
+
+}

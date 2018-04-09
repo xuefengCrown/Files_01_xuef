@@ -1,5 +1,0 @@
-package multi_thread.thread.safe;
-
-public class LoginServlet {
-
-}

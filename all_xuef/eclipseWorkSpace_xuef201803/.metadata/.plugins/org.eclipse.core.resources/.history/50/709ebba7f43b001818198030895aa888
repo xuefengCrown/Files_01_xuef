@@ -1,0 +1,6 @@
+package com.xuef201803.thinkinjava.chah7;
+
+//Using interfaces to create groups of constants
+public interface Months {
+
+}

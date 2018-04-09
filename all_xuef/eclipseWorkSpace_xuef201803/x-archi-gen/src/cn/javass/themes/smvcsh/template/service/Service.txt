@@ -1,0 +1,19 @@
+package $#modulePackge#.service;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sishuok.es.common.entity.search.Searchable;
+import com.sishuok.es.common.inject.annotation.BaseComponent;
+import com.sishuok.es.common.service.BaseService;
+import $#modulePackge#.repository.$#moduleNameSuperCase#Repository;
+import $#modulePackge#.entity.$#moduleNameSuperCase#;
+
+@Service
+public class $#moduleNameSuperCase#Service extends BaseService<$#moduleNameSuperCase#,$#keyDataType#>{
+	@Autowired
+	@BaseComponent
+	private $#moduleNameSuperCase#Repository rp;
+	
+}

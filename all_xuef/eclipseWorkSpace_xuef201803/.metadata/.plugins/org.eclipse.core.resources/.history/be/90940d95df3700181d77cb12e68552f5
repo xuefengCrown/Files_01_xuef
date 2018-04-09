@@ -1,0 +1,5 @@
+package com.xuef.architect.common;
+
+public interface BaseDAO {
+
+}

@@ -1,5 +1,13 @@
 
 
+本地(work dir)
+暂存区域 
+(add---> work dir 提交到暂存区域)
+(checkout--> 暂存区域覆盖掉本地)
+中央
+(commit: 暂存区域stage-->repo)
+(reset: 相反)
+
 1. 新建 工程目录(C:\xuef_projects\bookstore_v1)
 >> cd C:\xuef_projects\bookstore_v1
 >> git init
@@ -10,4 +18,46 @@
 
 2. 查看状态
 >> git status
+
+3. git log
+查看历史提交
+
+4. 回到过去
+reset
+
+
+5. 内容比较
+# 比较暂存区域与工作目录
+git diff
+
+
+出现bug或欲添加新功能; 于是开出一个分支，进行单独开发;
+开发完成，进行测试和讨论，确定无误后，merge
+6. 创建分支
+
+git branch bname
+
+git log --decorate
+
+# 切换分支
+git checkout bname
+
+git log --decorate --oneline --graph --all
+
+7. 合并与删除分支
+# 内容冲突
+有时两个分支存在同名但内容不同的文件，会发生冲突，需要先解决冲突，然后合并。
+# 树冲突
+修改了文件名，或删除文件
+#
+
+git merge bname
+
+# 删除分支
+git branch -d bname
+
+
+8. 创建里程碑(v_1.2)
+
+
 

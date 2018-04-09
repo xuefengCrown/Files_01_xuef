@@ -1,0 +1,12 @@
+package cn.javass.xgen.genconf.vo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class NeedGenModel {
+	private String id;
+	private String provider;
+	private String theme;
+	
+	private Map<String, String> mapParams = new HashMap<String, String>();
+}

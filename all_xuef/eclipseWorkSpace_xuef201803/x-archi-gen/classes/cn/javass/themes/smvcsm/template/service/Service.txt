@@ -1,0 +1,24 @@
+package $#modulePackge#.service;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.sishuok.architecture1.common.service.BaseService;
+
+import $#modulePackge#.dao.$#moduleNameSuperCase#DAO;
+import $#modulePackge#.vo.$#moduleNameSuperCase#Model;
+import $#modulePackge#.vo.$#moduleNameSuperCase#QueryModel;
+
+@Service
+@Transactional
+public class $#moduleNameSuperCase#Service extends BaseService<$#moduleNameSuperCase#Model,$#moduleNameSuperCase#QueryModel> implements I$#moduleNameSuperCase#Service{
+	private $#moduleNameSuperCase#DAO dao = null;
+	@Autowired
+	private void setDao($#moduleNameSuperCase#DAO dao){
+		this.dao = dao;
+		super.setDAO(dao);
+	}
+	
+}

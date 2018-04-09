@@ -1,0 +1,9 @@
+package com.xuef201803.book_dp.bridge;
+
+public interface Message {
+	/**
+	 * @param message 要发送的消息
+	 * @param toUser 发送给
+	 */
+	public void send(String message, String toUser);
+}

@@ -1,0 +1,37 @@
+package $#modulePackge#.web.action;
+
+import java.util.List;
+
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+
+import cn.javass.framework.basemodule.web.MyBaseAction;
+import $#modulePackge#.business.service.$#moduleNameSuperCase#Service;
+import $#modulePackge#.vo.$#moduleNameSuperCase#Model;
+import $#modulePackge#.vo.$#moduleNameSuperCase#QueryModel;
+import $#modulePackge#.web.vo.$#moduleNameSuperCase#WebModel;
+
+import com.opensymphony.xwork2.ActionContext;
+
+@Action(value="/$#moduleName#" ,
+		results={
+			@Result(name="toList",location="/WEB-INF/jsp/$#webModulePackge#/$#moduleNameSuperCase#List.jsp" ),
+			@Result(name="toAdd",location="/WEB-INF/jsp/$#webModulePackge#/$#moduleNameSuperCase#Add.jsp"),
+			@Result(name="toUpdate",location="/WEB-INF/jsp/$#webModulePackge#/$#moduleNameSuperCase#Update.jsp"),
+			@Result(name="toDelete",location="/WEB-INF/jsp/$#webModulePackge#/$#moduleNameSuperCase#Delete.jsp"),
+			@Result(name="toQuery",location="/WEB-INF/jsp/$#webModulePackge#/$#moduleNameSuperCase#Query.jsp"),
+			@Result(name="success",location="/WEB-INF/jsp/success.jsp"),
+			@Result(name="redirectToList",location="/$#moduleName#!toList.action",type="redirect")
+		}
+	)
+@Scope(value="prototype")
+public class $#moduleNameSuperCase#Action extends MyBaseAction<$#moduleNameSuperCase#Model,$#moduleNameSuperCase#QueryModel,$#moduleNameSuperCase#WebModel>{
+	private $#moduleNameSuperCase#Service $#moduleName#Service = null;
+	@Autowired
+	public void set$#moduleNameSuperCase#Service($#moduleNameSuperCase#Service $#moduleName#Service){
+		this.$#moduleName#Service = $#moduleName#Service;
+		super.setBaseService(this.$#moduleName#Service);
+	}
+}

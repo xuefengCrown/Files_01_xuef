@@ -1,0 +1,9 @@
+package cn.javass.xgen.genconf.confmgr;
+
+public class ConfManager {
+	private static ConfManager confmgr = new ConfManager();
+	private ConfManager(){}
+	public static ConfManager getInstance(){
+		return ConfManager;
+	}
+}

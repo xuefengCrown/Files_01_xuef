@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ModuleGenConf id="CartConf">
+	<NeedGenTypes>
+		<NeedGenType id="GenVo">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenQueryModel">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenDaoDao">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenDaoMapper">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenBusinessService">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenBusinessServiceImpl">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenWebController">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenWebModel">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+		<NeedGenType id="GenAddPage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenUpdatePage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenDeletePage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenQueryPage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenListPage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+	</NeedGenTypes>
+	
+	<ExtendConfs>
+		<ExtendConf id="codeOutPath" isSingle="true">build</ExtendConf>
+		<ExtendConf id="moduleName" isSingle="true">cart</ExtendConf>
+		<ExtendConf id="moduleNameSuperCase" isSingle="true">Cart</ExtendConf>
+		<ExtendConf id="modulePackge" isSingle="true">${gm.getMapConstants().get("prePackage");}.${gm.getMapConstants().get("projectName");}.${moduleName}mgr</ExtendConf>
+		<ExtendConf id="listViewNum" isSingle="true">3</ExtendConf>
+		<ExtendConf id="voFields" isSingle="false">customerUuid,goodsUuid,buyNum</ExtendConf>
+		<ExtendConf id="voFieldsTypes" isSingle="false">Integer,Integer,Integer</ExtendConf>
+		<ExtendConf id="voFieldsNames" isSingle="false">客户编号,商品编号,购买数量</ExtendConf>
+		<ExtendConf id="qmVoFields" isSingle="false"></ExtendConf>
+		<ExtendConf id="qmVoFieldsTypes" isSingle="false"></ExtendConf>
+		<ExtendConf id="qmVoFieldsNames" isSingle="false"></ExtendConf>
+		
+		<ExtendConf id="moduleTypePre" isSingle="true">CartM</ExtendConf>
+		<ExtendConf id="queryModuleTypePre" isSingle="true">CartQM</ExtendConf>
+		
+		<ExtendConf id="tblName" isSingle="true">tbl_cart</ExtendConf>
+		
+		<ExtendConf id="moduleName_CN" isSingle="true">购物车</ExtendConf>
+	</ExtendConfs>
+</ModuleGenConf>

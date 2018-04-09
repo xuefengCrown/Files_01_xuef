@@ -1,0 +1,9 @@
+package com.xuef201803.book_dp.bridge;
+/**
+ * 具体实现
+ * @author moveb
+ *
+ */
+public class ConcreteImplementorA {
+
+}

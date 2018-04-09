@@ -1,0 +1,24 @@
+package com.xuef201803.book_dp.singleton;
+
+public class LazyInitSingleton {
+	private static LazyInitSingleton singleton = null;
+	// 构造器 私有化
+	private LazyInitSingleton(){}
+	
+	// 其实只有第一次也即对象为空时，才有必要加锁
+	public synchronized static LazyInitSingleton newInstance(){
+		if(singleton==null){
+			singleton = new LazyInitSingleton();
+		}
+		return singleton;
+	}
+	
+	public static LazyInitSingleton newInstance2(){
+		synchronized(LazyInitSingleton.class){
+			if(singleton==null)
+				singleton = new LazyInitSingleton();
+		}
+		
+		return singleton;
+	}
+}

@@ -1,0 +1,12 @@
+package $#modulePackge#.vo;
+
+import com.sishuok.architecture1.common.vo.BaseModel;
+
+public class $#moduleNameSuperCase#Model extends BaseModel{
+	$[cn.javass.themes.smvcsm.visitors.VoProperty]
+	$[cn.javass.themes.smvcsm.visitors.VoPropertyGetterSetter]
+	
+	public String toString(){
+		return $[cn.javass.themes.smvcsm.visitors.VoToString];
+	}	
+}

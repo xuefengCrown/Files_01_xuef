@@ -1,0 +1,40 @@
+
+# mysql 配置
+
+1. 查看目前mysql的用户
+select user,host,password from mysql.user;
+
+
+2. 修改root密码
+set password for root@localhost=password("yourpassword");
+
+3. exit 退出
+
+4. 重新登录mysql: mysql -u root -p
+
+5. 删除匿名用户
+delete from mysql.user where user='';
+
+flush provileges; // 使以上操作立即生效
+
+6. 插入新用户
+insert into mysql.user(Host,User,Password) values("localhost","uname", password("yourpassword"));
+
+7. 创建新的database
+create database `imall` default character set utf8 collate utf8_general_ci;
+
+flush provileges; // 使以上操作立即生效
+
+8. 为本地用户赋予所有权限
+grant all provileges on mmall.* to uname@localhost identified by 'yourpassword'
+
+9. 给账号开通外网所有权限
+grant all provileges on mmall.* to uname@'%' identified by 'yourpassword'
+
+flush provileges; // 使以上操作立即生效
+
+
+## mysql 常用命令(linux下)
+service mysqld start
+service mysqld stop
+service mysqld restart

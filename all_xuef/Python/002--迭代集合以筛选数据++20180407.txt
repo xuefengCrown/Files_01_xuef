@@ -1,0 +1,21 @@
+
+
+python 的一致性让人印象深刻。
+
+广义sequence：[], {}, set
+即 list, dict, set
+
+1. filter
+
+2. 列表解析
+
+from random import randint
+>>> l = [randint(-100, 100) for _ in range(20)]
+>>> l
+[6, -55, 69, -23, 75, -7, 91, 7, 61, 55, -15, -73, 25, -41, -50, -30, 47, 81, 5, -18]
+>>> res = [i for i in l if i >= 0]
+
+# 迭代dict
+[k:v for k,v in data.iteritems() if v>0]
+
+

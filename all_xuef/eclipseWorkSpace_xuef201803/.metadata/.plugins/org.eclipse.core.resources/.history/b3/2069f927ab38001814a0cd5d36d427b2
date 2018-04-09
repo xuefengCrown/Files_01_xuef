@@ -1,0 +1,14 @@
+package com.xuef201803.book_dp.bridge;
+
+/**
+ * 以站内短消息的方式发送消息
+ * @author moveb
+ */
+public class CommonMessageSMS implements Message {
+
+	@Override
+	public void send(String message, String toUser) {
+		
+	}
+
+}

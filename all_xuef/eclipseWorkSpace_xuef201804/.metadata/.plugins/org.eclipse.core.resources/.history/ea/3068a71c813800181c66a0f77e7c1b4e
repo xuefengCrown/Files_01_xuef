@@ -1,0 +1,7 @@
+package cn.javass.xgen.genconf.vo;
+
+public class ThemeModel {
+	private String themeId;
+	private String location;
+	
+}

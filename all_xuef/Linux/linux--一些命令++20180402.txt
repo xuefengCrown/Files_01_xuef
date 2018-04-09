@@ -1,0 +1,14 @@
+
+
+1、下载网络文件
+wget ***.tar.gz
+
+2、查看后台 redis 服务有没有启动
+ps -ef|grep redis
+
+备份
+
+3、启动redis-server
+# redis-server /myredis/redis.conf
+
+# redis-cli -p 6379

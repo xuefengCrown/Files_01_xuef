@@ -1,0 +1,9 @@
+package com.xuef201803.book_dp.bridge;
+/**
+ * 发送消息的统一接口
+ * @author moveb
+ *
+ */
+public interface MessageImplementor {
+
+}

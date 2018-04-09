@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GenConf>
+	<NeedGens>
+		<!-- <NeedGen id="GoodsConf" provider="XmlModuleGenConf" themeId="smvcsm">
+			<Params>
+				<Param id="fileName">GoodsGenConf.xml</Param>
+			</Params>	
+		</NeedGen>
+		<NeedGen id="CartConf" provider="XmlModuleGenConf" themeId="smvcsm">
+			<Params>
+				<Param id="fileName">CartGenConf.xml</Param>
+			</Params>	
+		</NeedGen>
+		<NeedGen id="StoreConf" provider="XmlModuleGenConf" themeId="smvcsm">
+			<Params>
+				<Param id="fileName">StoreGenConf.xml</Param>
+			</Params>	
+		</NeedGen>
+		<NeedGen id="OrderConf" provider="XmlModuleGenConf" themeId="smvcsm">
+			<Params>
+				<Param id="fileName">OrderGenConf.xml</Param>
+			</Params>	
+		</NeedGen>
+		<NeedGen id="OrderDetailConf" provider="XmlModuleGenConf" themeId="smvcsm">
+			<Params>
+				<Param id="fileName">OrderDetailGenConf.xml</Param>
+			</Params>	
+		</NeedGen>
+		 -->
+		 <NeedGen id="FileConf" provider="XmlModuleGenConf" themeId="smvcsm">
+			<Params>
+				<Param id="fileName">FileGenConf.xml</Param>
+			</Params>	
+		</NeedGen>
+	</NeedGens>
+	<Themes>
+		<Theme id="smvcsm">cn/javass/themes/smvcsm</Theme>
+	</Themes>
+	<Constants>
+		<Constant id="prePackage">com.sishuok</Constant>
+		<Constant id="projectName">architecture1</Constant>
+	</Constants>
+</GenConf>

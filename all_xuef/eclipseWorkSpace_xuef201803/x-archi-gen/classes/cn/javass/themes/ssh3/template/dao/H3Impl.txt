@@ -1,0 +1,22 @@
+package $#modulePackge#.dao.impl;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.stereotype.Repository;
+
+import cn.javass.framework.basemodule.dao.BaseH3Impl;
+import $#modulePackge#.dao.dao.$#moduleNameSuperCase#DAO;
+import $#modulePackge#.vo.$#moduleNameSuperCase#Model;
+import $#modulePackge#.vo.$#moduleNameSuperCase#QueryModel;
+import cn.javass.util.StringUtil;
+
+@Repository
+public class $#moduleNameSuperCase#H3Impl extends BaseH3Impl<$#moduleNameSuperCase#Model,$#moduleNameSuperCase#QueryModel> implements $#moduleNameSuperCase#DAO {
+
+}

@@ -1,9 +1,0 @@
-package com.xuef.ssm.domain;
-
-/**
- * 包装返回信息
- * @author moveb
- */
-public class ResWithMSG {
-
-}

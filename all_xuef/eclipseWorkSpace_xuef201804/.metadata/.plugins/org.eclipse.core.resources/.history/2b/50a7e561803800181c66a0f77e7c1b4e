@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Theme id="simple">
+  	<GenTypes>
+  	    <GenType id="GenBusinessEbi" 
+  	      		 type="cn.javass.themes.simple.actions.GenBusinessEbiAction">
+  	        <Params>
+  	            <Param id="relativePath">business.ebi</Param>
+  	        </Params>
+  	    </GenType>
+  	</GenTypes>  
+</Theme>

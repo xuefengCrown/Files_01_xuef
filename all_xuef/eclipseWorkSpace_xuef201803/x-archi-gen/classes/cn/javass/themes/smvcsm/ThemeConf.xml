@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Theme id="smvcsm">
+	<GenTypes>
+		<GenType id="GenVo" type="cn.javass.themes.smvcsm.actions.GenVoAction">
+			<Params>
+				<Param id="relativePath">vo</Param>
+				<Param id="mbPathFile">vo/Model.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">Model.java</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenQueryModel" type="cn.javass.themes.smvcsm.actions.GenQueryModelAction">
+			<Params>
+				<Param id="relativePath">vo</Param>
+				<Param id="mbPathFile">vo/QueryModel.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">QueryModel.java</Param>
+			</Params>
+		</GenType>		
+		<GenType id="GenDaoDao" type="cn.javass.themes.smvcsm.actions.GenDaoDaoAction">
+			<Params>
+				<Param id="relativePath">dao</Param>
+				<Param id="mbPathFile">dao/DAO.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">DAO.java</Param>
+			</Params>
+		</GenType>
+		
+		<GenType id="GenDaoMapper" type="cn.javass.themes.smvcsm.actions.GenDaoMapperAction">
+			<Params>
+				<Param id="relativePath">dao</Param>
+				<Param id="mbPathFile">dao/Mapper.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">Mapper.xml</Param>
+			</Params>
+		</GenType>
+		
+		<GenType id="GenBusinessService" type="cn.javass.themes.smvcsm.actions.GenBusinessServiceAction">
+			<Params>
+				<Param id="relativePath">service</Param>
+				<Param id="mbPathFile">service/IService.txt</Param>
+				<Param id="preGenFileName">I</Param>
+				<Param id="afterGenFileName">Service.java</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenBusinessServiceImpl" type="cn.javass.themes.smvcsm.actions.GenBusinessServiceImplAction">
+			<Params>
+				<Param id="relativePath">service</Param>
+				<Param id="mbPathFile">service/Service.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">Service.java</Param>
+			</Params>			
+		</GenType>
+		<GenType id="GenWebController" type="cn.javass.themes.smvcsm.actions.GenWebControllerAction">
+			<Params>
+				<Param id="relativePath">web</Param>
+				<Param id="mbPathFile">web/Controller.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">Controller.java</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenWebModel" type="cn.javass.themes.smvcsm.actions.GenWebModelAction">
+			<Params>
+				<Param id="relativePath">web</Param>
+				<Param id="mbPathFile">web/WebModel.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">WebModel.java</Param>
+			</Params>
+		</GenType>
+
+		<GenType id="GenAddPage" type="cn.javass.themes.smvcsm.actions.GenAddPageAction">
+			<Params>
+				<Param id="relativePath">pages</Param>
+				<Param id="mbPathFile">pages/add.txt</Param>
+				<Param id="preGenFileName">use-after</Param>
+				<Param id="afterGenFileName">add.jsp</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenUpdatePage" type="cn.javass.themes.smvcsm.actions.GenUpdatePageAction">
+			<Params>
+				<Param id="relativePath">pages</Param>
+				<Param id="mbPathFile">pages/update.txt</Param>
+				<Param id="preGenFileName">use-after</Param>
+				<Param id="afterGenFileName">update.jsp</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenDeletePage" type="cn.javass.themes.smvcsm.actions.GenDeletePageAction">
+			<Params>
+				<Param id="relativePath">pages</Param>
+				<Param id="mbPathFile">pages/delete.txt</Param>
+				<Param id="preGenFileName">use-after</Param>
+				<Param id="afterGenFileName">delete.jsp</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenQueryPage" type="cn.javass.themes.smvcsm.actions.GenQueryPageAction">
+			<Params>
+				<Param id="relativePath">pages</Param>
+				<Param id="mbPathFile">pages/query.txt</Param>
+				<Param id="preGenFileName">use-after</Param>
+				<Param id="afterGenFileName">query.jsp</Param>
+			</Params>
+		</GenType>
+		<GenType id="GenListPage" type="cn.javass.themes.smvcsm.actions.GenListPageAction">
+			<Params>
+				<Param id="relativePath">pages</Param>
+				<Param id="mbPathFile">pages/list.txt</Param>
+				<Param id="preGenFileName">use-after</Param>
+				<Param id="afterGenFileName">list.jsp</Param>
+			</Params>
+		</GenType>		
+	</GenTypes>
+	<GenOutTypes>
+		<GenOutType id="Console" type="cn.javass.xgen.output.types.OutputToConsole"></GenOutType>
+		<GenOutType id="File" type="cn.javass.xgen.output.types.OutputToFile"></GenOutType>
+	</GenOutTypes>
+	<Providers>
+		<Provider id="XmlGenConf" type="cn.javass.xgen.genconf.implementors.xmlimpl.GenConfXmlImpl"></Provider>
+		<Provider id="XmlModuleGenConf" type="cn.javass.xgen.genconf.implementors.xmlimpl.ModuleGenConfXmlImpl"></Provider>
+		<Provider id="XmlThemeConf" type="cn.javass.xgen.genconf.implementors.xmlimpl.ThemeXmlImpl"></Provider>
+	</Providers>	
+</Theme>

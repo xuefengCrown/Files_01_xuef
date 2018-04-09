@@ -1,0 +1,7 @@
+package cn.javass.xgen.genconf;
+
+import cn.javass.xgen.genconf.vo.GenConfModel;
+
+public interface GenConfEbi {
+	public GenConfModel getGenConf();
+}

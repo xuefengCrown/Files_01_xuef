@@ -1,0 +1,8 @@
+
+
+1. 配置 vi /etc/sysconfig/iptables
+
+2. 重启防火墙
+service iptables restart
+
+

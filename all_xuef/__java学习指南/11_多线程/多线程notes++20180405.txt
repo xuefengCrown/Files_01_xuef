@@ -1,0 +1,89 @@
+
+main 线程
+守护线程
+
+多线程缺省同步 (有些情况下，JVM提供了同步)
+
+004 线程的生命周期
+new Thread() // 此时还不是一个线程，只是一个实例
+start() // 是一个线程，但不一定就 running(必须得到cpu执行权)
+
+
+start()源码
+
+Thread -- run()   模板方法
+我们覆写了run，为何要调用start()
+实际上用的是模板方法模式
+
+1. java 应用程序的main函数，会在JVM启动时被调用，线程为main
+2. JVM启动后，实际上有多个线程，但是至少有一个非守护线程
+3. 当你调用一个线程的start()时，此时至少有两个线程，一个是调用你的线程，还有一个执行run的线程
+4. 线程生命周期：new、runnable、running、block、terminate
+
+008
+ThreadGroup
+
+009
+--内存划分
+	栈  与  堆
+		栈(基本类型，引用类型[指针]) 线程栈(new Thread() 有个 statckSize 参数)
+
+与atguigu的JavaScript课程的内存分析比较，与《csapp》的第三章比较理解。
+
+011 守护线程
+t.setDaemon(true);
+
+012
+t.getId()
+t.getPriority() // 360的进程优先级很高
+
+如何写一个JVM线程监视器???
+httpserver
+ftpserver
+tomcat
+
+Interpretor(解释器)
+浏览器
+
+013 join()
+t1.join()
+t1.join(100， 10) // 等多长时间
+// 当前线程等待此线程(t1)运行结束再运行
+
+
+015 interrupt
+线程 block 时被 interrupt,会抛出 InterruptedException 异常，你可以在 catch中做些工作。
+
+
+019 synchronized
+t1.sleep(1000) // timed waiting
+没拿到锁的(没得到cpu)叫 block
+
+串行化运行
+
+查看 .class 的汇编代码: javap -c xxx.class
+javap --help
+
+
+020
+index++
+// get index
+// index + 1
+// put index
+必须得了解机器级的细节
+《csapp》
+
+022
+静态方法 xxx.class 锁
+
+
+023 分析死锁
+jps (查看进程id)如6764 
+jsatck 6764
+
+
+024 线程间通信
+
+
+
+

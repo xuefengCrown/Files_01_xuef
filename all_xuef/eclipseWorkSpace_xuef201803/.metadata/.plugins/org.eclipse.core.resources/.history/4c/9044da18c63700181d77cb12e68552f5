@@ -1,0 +1,10 @@
+package com.xuef.architect.customermgr.vo;
+
+public class CustomerModel {
+	private Integer uuid;
+	private String customerId;
+	private String pwd;
+	private String showName;
+	private String trueName;
+	private String registerTime;
+}

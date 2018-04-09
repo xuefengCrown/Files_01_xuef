@@ -1,0 +1,9 @@
+package $#modulePackge#.dao.dao;
+
+import cn.javass.framework.basemodule.dao.BaseDAO;
+import $#modulePackge#.vo.$#moduleNameSuperCase#Model;
+import $#modulePackge#.vo.$#moduleNameSuperCase#QueryModel;
+
+public interface $#moduleNameSuperCase#DAO extends BaseDAO<$#moduleNameSuperCase#Model,$#moduleNameSuperCase#QueryModel>{
+
+}

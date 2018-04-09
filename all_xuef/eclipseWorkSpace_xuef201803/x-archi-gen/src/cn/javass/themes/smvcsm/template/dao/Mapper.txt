@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="$#modulePackge#.dao.$#moduleNameSuperCase#DAO">  
+     <insert id="create" parameterType="$#moduleTypePre#">
+     	insert into $#tblName# ($#voFields#) 
+     	 values($[cn.javass.themes.smvcsm.visitors.InsertIntoValues])
+     </insert>
+     <update id="update" parameterType="$#moduleTypePre#">
+     	update $#tblName# set $[cn.javass.themes.smvcsm.visitors.UpdateSetSql]
+     	   	where uuid=#{uuid}
+     </update>
+     <delete id="delete" parameterType="int">
+     	delete from $#tblName# where uuid=#{uuid}
+     </delete>
+     
+    <select id="getByUuid" parameterType="int" resultType="$#moduleTypePre#">  
+        select * from $#tblName# where uuid=#{uuid}
+    </select>  
+    <select id="getByConditionPage" parameterType="$#queryModuleTypePre#" resultType="$#moduleTypePre#">  
+        select * from $#tblName#
+        <where>
+        	<if test="uuid!=null &amp;&amp; uuid > 0">
+        		and uuid=#{uuid}
+        	</if>  
+        	$[cn.javass.themes.smvcsm.visitors.GetByConditionSql]
+        </where>
+    </select> 
+</mapper>

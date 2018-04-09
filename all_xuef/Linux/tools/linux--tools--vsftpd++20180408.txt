@@ -1,0 +1,19 @@
+
+# vsftpd (linux)
+very secure ftp daemon
+
+1. 安装
+执行 yum -y install vsftpd
+
+注：
+1） 是否使用sudo权限执行根据你具体环境而定
+2） rmp -qa|grep vsftpd 检查是否安装 vsftpd
+3） 默认配置文件在 /etc/vsftpd/vsftpd.conf
+
+2. 创建虚拟用户
+1） 创建ftp文件夹 mkdir ftpfile
+2） 添加匿名用户 useradd ftpuser -d /ftpfile -s /bin/nologin
+3） 修改 ftpfile 权限 chown -R ftpuser.ftpuser /ftpfile
+4） 重设ftpuser密码 passwd ftpuser
+
+

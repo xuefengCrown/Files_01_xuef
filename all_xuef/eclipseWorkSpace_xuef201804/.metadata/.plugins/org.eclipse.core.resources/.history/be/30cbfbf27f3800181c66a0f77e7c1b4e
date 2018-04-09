@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenConf>
+    <NeedGens>
+		<NeedGen id="UserGenConf" provider="XmlModuleGenConf" themeId="simple">
+		    <Params>
+		        <Param id="fileName"UserGenConf.xml></Param>
+		    </Params>
+		</NeedGen>        
+    </NeedGens>
+    <Themes>
+        <Theme id="simple">cn/javass/themes/simple</Theme>
+    </Themes>
+    <Constants>
+        <Constant id="prePackage" value="cn.javass"></Constant>
+        <Constant id="projectName" value="framework"></Constant>
+    </Constants>
+</GenConf>

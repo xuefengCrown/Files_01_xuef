@@ -1,5 +1,0 @@
-package com.xuef.ssm.dao;
-
-public interface DepartmentMapper {
-
-}

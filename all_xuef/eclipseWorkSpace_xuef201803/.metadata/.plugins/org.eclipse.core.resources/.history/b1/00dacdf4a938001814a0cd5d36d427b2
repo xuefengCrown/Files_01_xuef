@@ -1,0 +1,10 @@
+package com.xuef201803.book_dp.bridge;
+
+public interface Message {
+	/**
+	 * 
+	 * @param message
+	 * @param toUser
+	 */
+	public void send(String message, String toUser);
+}

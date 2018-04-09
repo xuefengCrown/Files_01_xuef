@@ -1,0 +1,11 @@
+package cn.javass.xgen.genconf.vo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class GenTypeModel {
+	private String id;
+	private String genTypeClass;
+	private Map<String, String> mapParams = new HashMap<String, String>();
+	
+}

@@ -1,0 +1,5 @@
+package multi_thread.thread.runnable.strategy;
+
+public interface TaxCalcStrategy {
+
+}

@@ -1,0 +1,10 @@
+package $#modulePackge#.vo;
+
+public class $#moduleNameSuperCase#QueryModel extends $#moduleNameSuperCase#Model {
+	$[cn.javass.themes.smvcsm.visitors.QueryModelProperty]
+	$[cn.javass.themes.smvcsm.visitors.QueryModelPropertyGetterSetter]
+	
+	public String toString(){
+		return $[cn.javass.themes.smvcsm.visitors.QueryModelToString];
+	}
+}

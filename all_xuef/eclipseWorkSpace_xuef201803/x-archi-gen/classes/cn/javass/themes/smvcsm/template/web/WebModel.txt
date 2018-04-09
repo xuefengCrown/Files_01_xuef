@@ -1,0 +1,7 @@
+package $#modulePackge#.web;
+
+import com.sishuok.architecture1.common.web.BaseWebModel;
+
+public class $#moduleNameSuperCase#WebModel extends BaseWebModel{
+	
+}

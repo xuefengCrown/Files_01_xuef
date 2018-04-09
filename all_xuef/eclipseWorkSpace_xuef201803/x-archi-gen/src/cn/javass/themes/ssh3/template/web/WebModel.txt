@@ -1,0 +1,8 @@
+package $#modulePackge#.web.vo;
+
+import cn.javass.framework.basemodule.web.BaseWebModel;
+import $#modulePackge#.vo.$#moduleNameSuperCase#Model;
+
+public class $#moduleNameSuperCase#WebModel extends BaseWebModel<$#moduleNameSuperCase#Model>{
+	
+}
