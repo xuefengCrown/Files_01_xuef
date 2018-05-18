@@ -1,0 +1,10 @@
+<div class="container" th:object="${catalog}">
+ <form id="catalogForm">
+	<input type="hidden" name="id" th:value="*{id}" id="catalogId">
+	<div class="form-group">
+		<input type="text" class="form-control" id="catalogName" name="name" th:value="*{name}" maxlength="30" placeholder="类别名称，2-30字符" >
+	</div>
+ </form>
+</div>
+<!-- /.container -->
+ 

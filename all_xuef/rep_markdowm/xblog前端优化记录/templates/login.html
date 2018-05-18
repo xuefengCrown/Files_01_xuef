@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<!-- Bootstrap CSS -->
+<link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="../../css/signin.css" th:href="@{/css/signin.css}"  rel="stylesheet">
+</head>
+    <body class="text-center">
+	<!--
+    <div class="container blog-content-container">-->
+		<form class="form-signin" th:action="@{/authentication/require}" method="post">
+			<h1 class="h3 mb-3 font-weight-normal">plea sign in</h1>
+			<div class="col-md-12" th:if="${loginError}">
+				<p class="isa_error" th:text="${errorMsg}"></p>
+			</div>
+			<label for="username" class="sr-only">Username</label>
+			<input type="username" id="username" name="username" class="form-control" placeholder="User Name" required autofocus>
+			<label for="password" class="sr-only">Password</label>
+			<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+			<div class="checkbox mb-3">
+				<label>
+					<input type="checkbox" value="remember-me"> Remember me
+				</label>
+			</div>
+			<label>
+				<a class="float-left" href="/register">go2 Register</a>
+			</label>
+			<button class="btn btn-lg btn-primary btn-block" id="login-submit" type="submit">Sign in</button>
+
+		</form>
+	<!--</div>  /container -->
+    </body>
+</html>

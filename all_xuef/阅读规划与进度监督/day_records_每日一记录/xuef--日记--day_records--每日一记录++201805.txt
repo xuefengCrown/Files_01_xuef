@@ -1,0 +1,174 @@
+
+
+0501
+《网易云课堂---尚观shell》至13
+http://study.163.com/course/courseMain.htm?courseId=1004098018
+
+imall 门户的login接入，add2cart
+
+《信息乌托邦》
+
+
+0502
+《维特根斯坦传：天才之为责任》
+
+0505
+mark 《sed 101 hacks》
+《vim 101 hacks》
+Linux基础 http://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html
+
+0506
+Spring Data
+mark马克思《1844经济学哲学手稿》
+每天读一篇毛选文章
+马克思文章
+
+
++ itema
++ itemb
+# h1
+## h2
+### h3
+
+**加粗**
+***
+*斜体*
+`var text = $("#xx").val()`
+<www.baidu.com>
+
+
+
+
+2018-05-08 22:10:16.935  INFO 12120 --- [nio-8080-exec-6] com.xuef.controller.UserspaceController  : 
+授权信息： org.springframework.security.authentication.UsernamePasswordAuthenticationToken@4163ed99: 
+Principal: User{authorities=[Authority{id=1, name='ROLE_ADMIN'}], 
+				id=1, name='xuef', email='movebeyondfear@gmail.com', 
+				username='xuef1991', password='$2a$10$N/4kOIj02iatVr04tHG9Jut/vhjJKJFeseAACqJeXVH1qAgrEJDlq', 
+				avatar='null'}; 
+Credentials: [PROTECTED]; 
+Authenticated: true; 
+Details: org.springframework.security.web.authentication.WebAuthenticationDetails@b364: 
+RemoteIpAddress: 0:0:0:0:0:0:0:1; 
+SessionId: null; 
+Granted Authorities: ROLE_ADMIN
+
+{
+    "authorities": [
+        {
+            "authority": "ROLE_ADMIN"
+        }
+    ],
+    "details": {
+        "remoteAddress": "0:0:0:0:0:0:0:1",
+        "sessionId": "BFEDB59D1624979447CC53B4C3285E29"
+    },
+    "authenticated": true,
+    "principal": {
+        "id": 1,
+        "name": "xuef",
+        "email": "movebeyondfear@gmail.com",
+        "username": "xuef1991",
+        "password": "$2a$10$N/4kOIj02iatVr04tHG9Jut/vhjJKJFeseAACqJeXVH1qAgrEJDlq",
+        "avatar": null,
+        "authorities": [
+            {
+                "authority": "ROLE_ADMIN"
+            }
+        ],
+        "enabled": true,
+        "accountNonLocked": true,
+        "credentialsNonExpired": true,
+        "accountNonExpired": true
+    },
+    "credentials": null,
+    "name": "xuef1991"
+}
+
+通过不断优化你的项目来学习
+
+一个web项目能够不断做哪些优化?
+
+
+# 通过实践真实项目来学习
+# web项目可优化的地方
+## 更优雅的RESTFul API设计
+## 应对更复杂的业务
+1. 比如登录，可以应对不同客户端，各种环境和场景
+2. 更加复杂的搜索服务
+
+## 提高应用的速度
+1. 让前端页面飞起来
+
+## 更加通用的模块
+1. js模块化
+2. 页面和样式的层次
+3. 更加通用的模块，易于扩展和修改
+## 安全性
+
+## 不断重构你的项目
+
+
+0508
+《信息乌托邦》 Stack Overflow 如何得到最佳解决方案
+让尽可能多的人参与投票
+
+民主与讨论——>论坛的质量
+优秀的论坛必须是民主式的、精英式的、自由的
+
+
+0510
+《社会分工论》
+现代西方学术文库
+
+SELECT DATE_FORMAT(create_time, '%Y-%m') submit_date, count(*) bcount FROM  blog GROUP BY DATE_FORMAT(create_time, '%Y-%m') 
+
+
+
+
+0514
+《functional JavaScript》
+《land of lisp》
+《how2design program》
+《on lisp》
+《successful lisp》
+《sicp》
+《A Little Java, A Few Patterns》
+
+http://www.yinwang.org/
+
+开智青年故事会书单
+https://www.douban.com/doulist/36847674/
+
+
+http://www.htdp.org/2018-01-06/Book/
+
+0515
+苏珊桑塔格《轮摄影》
+罗兰巴特《明室》
+
+社会学
+人类学
+心理学
+战略
+
+陈虎平 书单
+
+Lisp说穿了就是一个以s-expression为输入的eval()函数而已。
+真正发挥它的威力是靠你自己在eval()之上构建最适合自己的“编程世界”，
+然后用这个“编程世界”的元素去给目标域编程。
+对于没学过其他编程语言的人来说，见识过的编程概念太少，
+所以无法形成自己的编程世界观，更不要说“最适合”了
+
+lisp 资料
+https://www.zhihu.com/question/19711404
+
+# 当基础足够，一定要通过项目来学习，迅速扩充和构建编程世界。
+当你读过这些书之后，基本上已经对Lisp有一个较深的了解，
+这时你可以自己写个项目练练手，或者直接到github上clone一个。
+
+https://github.com/search?utf8=%E2%9C%93&q=Lisp&type=
+
+C:/code_dxf/xuefgit/Files_01_xuef/all_xuef/code/land_of_lisp
+  
+
+

@@ -1,0 +1,136 @@
+ping -c1 45.97.197.165 &> /dev/null && echo "45.97.197.165 is up" || echo "45.97.197.165 is down"
+# which bash
+/usr/bin/bash
+[root@izbp18496tukjehdhp0n6zz ~]# which python
+/usr/bin/python
+[root@izbp18496tukjehdhp0n6zz ~]# which perl
+/usr/bin/perl
+#!/usr/bin/env bash
+# 寻找历史命令
+!sys
+# 别名
+type -a cp
+\cp
+# 快捷键
+^A 到首
+^E 尾
+^K 删除至尾部
+^U 删除至头部
+# shell 下的元字符
+## 通配符（注意与正则表达式中元字符区分开）
+* 匹配任意多个字符 ls *.txt
+[a-z0-9]
+() 开启subshell执行 (cd /home; ls)
+# 当不想对当前shell产生影响时，使用()
+如： (umask 077; touch filetmp)
+{}
+1. touch file{1,2,3}
+{1..254}
+cp -rvf /etc/sysconfig/network-scripts/{ifcfg-enp2s0,ifctf-enp2s0.bak}
+\ # 转义
+ls --help | grep "\-t"
+
+
+# 变量
+read -p "pls input an ip: " host_ip
+
+host_ip=$1
+
+命令替换
+touch `date +%F`_log
+$()
+
+整数运算
+let val2=1+2
+$(())
+
+小数运算
+echo "2^4" | bc
+echo "scale=2; 3/4" | bc
+
+echo "print 5.0/2" | python
+
+# python<<EOF
+> print 5.0/3
+> EOF
+1.66666666667
+
+[ ~]# url=www.google.com
+[ ~]# echo ${url}
+www.google.com
+[ ~]# echo ${url#*.*.}
+com
+[ ~]# echo ${url##*.}
+com
+
+## 索引及切片
+echo ${url:1:3}
+
+## 设置变量默认值
+echo ${path-/tmp/}
+- #无值时替换
+:-
++ #有值时替换
+:+
+=
+:=
+
+
+# 条件测试
+type -a [
+
+# id xuef
+uid=1000(xuef) gid=1000(xuef) groups=1000(xuef)
+
+man test
+
+[]
+[[]] # 支持正则表达式
+[[[]]]
+
+## 数值比较
+参数个数
+磁盘使用空间是否超过80%
+
+### 避免嵌套测试，而是使用提早检查尽早退出原则。(python 工匠)
+
+for ip in `cat $1`
+
+磁盘使用率
+# disk_use = $( df -P | grep "/$" | awk '{print $(NF-1)}' | awk -F"%" '{print $1}' )
+# echo "$(date +%F) disk: $(disk_use)%" | mail -s "disk war..." xuef
+#
+# mail -s "mem warn..." < /tmp/mem.txt
+#
+定时任务
+内存使用监控(free -m)
+IO 监控
+网卡流量监控
+
+vim install_xxx.sh
+1. check 是否是root
+$UID -eq 0
+
+[[ $UID =~ ^ro ]]
+
+## 批量创建用户
+输入要创建的用户数量 num
+对num进行数字校验
+校验通过后
+for i in `seq $num`
+
+# 用户是否存在
+if id $user &>/dev/null; then
+
+
+# 系统版本
+~]# cat /etc/redhat-release 
+CentOS Linux release 7.4.1708 (Core) 
+
+
+
+
+
+
+
+

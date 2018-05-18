@@ -1,0 +1,51 @@
+!!! 学习先抓重点
+
+$0 脚本全路径名
+
+dirname $0
+basename $0
+
+vim /etc/init.d/portmap 结尾看看$0用法
+$# 参数个数
+
+$?
+
+$$ # 取当前shell的今进程号
+
+$@ # 所有参数
+for i in "$@"
+
+shift # 参数整体向前移动
+vim ssh-copy-id
+
+### 13 Shell变量的子串应用技术实践详解w
+# 串长度
+${#oldboy}
+# 取子串
+${oldboy:2:2}
+
+实例：一批文件，删除文件名结尾。
+stu_10299_1_finished.jpg
+# 首先生成文件
+for f in `cat filename`
+do
+  touch $f
+done
+
+# man rename
+rename .txt .htm *.txt
+
+
+# 变量替换
+${var-val} # 当var不存在，用val替代
+要提防，变量没了会发生什么
+对变量路径操作前，最好先判断变量是否为空。特别是删除操作，一定小心。
+path1="/server/bakeup"
+find ${path1:=/tmp/} -type f -name "*.tar.gz" | xargs rm -f
+
+
+seq -s " " 100
+
+尽量使用内置操作，效率更高。
+man bash # 尽量看一手资料
+

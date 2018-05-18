@@ -1,0 +1,11 @@
+package com.xuef201803.book_dp.factory_method;
+
+public class ConnectMysqlDB extends ConnectDatabase {
+
+	@Override
+	protected DriveManager_ factoryMathod() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

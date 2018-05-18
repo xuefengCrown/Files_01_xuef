@@ -1,5 +1,0 @@
-package cn.javass.xgen.genconf;
-
-public interface GenConfEbi {
-	public GenConfModel getGenConf();
-}

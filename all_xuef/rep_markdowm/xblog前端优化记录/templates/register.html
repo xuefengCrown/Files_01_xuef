@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<!-- Bootstrap CSS -->
+<link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="../../css/signin.css" th:href="@{/css/signin.css}"  rel="stylesheet">
+
+<script src="../../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script src="../../js/util.js" th:src="@{/js/util.js}"></script>
+</head>
+    <body class="text-center">
+	<!--
+    <div class="container blog-content-container">-->
+		<form id="reg-form" class="form-signin" method="post" th:action="@{/register}">
+			<h1 class="h3 mb-3 font-weight-normal">register</h1>
+			<div class="col-md-12">
+				<p id="registerError" class="isa_error"></p>
+			</div>
+			<label for="username" class="sr-only">Username</label>
+			<input type="text" id="username" name="username" class="form-control" placeholder="Username 用于登录" required autofocus>
+
+			<label for="email" class="sr-only">email</label>
+			<input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
+
+			<label for="name" class="sr-only">name</label>
+			<input type="text" id="name" name="name" class="form-control" placeholder="Name" required autofocus>
+
+			<label for="password" class="sr-only">Password</label>
+			<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+			<button class="btn btn-lg btn-primary btn-block" id="register-submit" type="button">Register</button>
+		</form>
+	<!--</div>  /container -->
+    </body>
+
+<script type="text/javascript">
+	// 模块化的js
+	$(function () {
+		page.init();
+//		_util.test("xuef");
+	});
+
+	var page = {
+		init: function(){
+			// 页面初始化
+			// ??? 必须加this ???
+			this.bindEvent();
+		},
+		bindEvent: function(){
+			var _this = this;
+			// 绑定事件
+			$("#register-submit").click(function (event) {
+				// 校验账号或邮箱是否已经存在
+				var username = $("#username").val();
+				var email = $("#email").val();
+				_this.validate(username, email, event);
+				// 如果账号或邮箱已经存在，取消表单提交，并给出提示信息。
+			});
+		},
+		validate: function (u, e) {
+			var _this = this;
+
+			var data = {
+				username: u,
+				email: e
+			};
+			var url = "/check";
+			var type = "POST";
+			var success = _this.requestSuccess;
+			var error = _this.requestFail;
+
+			// 校验动作
+			_util.ajaxRequest(url,
+					type,	 // type
+					data,
+					function (responseMsg) { // success
+						console.log(responseMsg);
+						// 用户名或者email已经存在
+                		if(responseMsg.success){
+							$("#registerError").text("账号或者邮箱已经存在");
+                		}else{
+							$("#reg-form").submit();
+						}
+					},
+					error);  // error
+		},
+		submit: function () {
+			// 提交
+		},
+		// 请求失败
+		requestFail: function (){
+
+		}
+	};
+
+	/*
+	$(function () {
+		$("#register-submit").click(function (e) {
+			// 校验账号或邮箱是否已经存在
+			$.ajax({
+
+			});
+			e.preventDefault();
+		});
+	});
+	*/
+</script>
+</html>

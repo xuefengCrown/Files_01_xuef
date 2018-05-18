@@ -1,9 +1,0 @@
-package com.xuef201803.book_dp.bridge;
-
-public class CommonMessage extends AbstractMessage {
-
-	public CommonMessage(MessageImplementor messageImpl) {
-		super(messageImpl);
-	}
-
-}

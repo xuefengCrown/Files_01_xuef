@@ -1,8 +1,0 @@
-package com.xuef201803.book_dp.singleton;
-
-public class LazyInitSingleton {
-	private LazyInitSingleton singleton = null;
-	// 构造器 私有化
-	private LazyInitSingleton(){}
-	
-}

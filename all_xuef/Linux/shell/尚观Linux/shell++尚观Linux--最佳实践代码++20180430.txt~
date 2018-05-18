@@ -1,0 +1,52 @@
+ 
+ping -c1 45.97.197.165 &> /dev/null && echo "45.97.197.165 is up" || echo "45.97.197.165 is down"
+
+# which bash
+/usr/bin/bash
+[root@izbp18496tukjehdhp0n6zz ~]# which python
+/usr/bin/python
+[root@izbp18496tukjehdhp0n6zz ~]# which perl
+/usr/bin/perl
+
+#!/usr/bin/env bash
+
+
+# 寻找历史命令
+!sys
+
+# 别名
+type -a cp
+\cp
+
+# 快捷键
+^A 到首
+^E 尾
+^K 删除至尾部
+^U 删除至头部
+
+# 通配符（注意与正则表达式中元字符区分开）
+* 匹配任意多个字符 ls *.txt
+[a-z0-9]
+
+() 开启subshell执行 (cd /home; ls)
+# 当不想对当前shell产生影响时，使用()
+如： (umask 077; touch filetmp)
+
+{}
+1. touch file{1,2,3}
+{1..254}
+cp -rvf /etc/sysconfig/network-scripts/{ifcfg-enp2s0,ifctf-enp2s0.bak}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

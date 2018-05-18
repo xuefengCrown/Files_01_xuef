@@ -1,0 +1,13 @@
+
+
+cat -A echo_color.sh
+
+# man echo
+NAME
+       cat - concatenate(连接) files and print on the standard output
+
+-A show all
+
+
+
+

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;multi_process/src/books/concurrency_core/chap2/t99_volatile&apos; to &apos;t9_volatile&apos;" description="Rename resource &apos;t99_volatile&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/books/concurrency_core/chap2/t99_volatile" name="t9_volatile" stamp="1523343166932" updateReferences="true"/>
+</session>

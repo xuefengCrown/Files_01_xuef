@@ -1,7 +1,0 @@
-package com.xuef.architect.customermgr.service;
-
-import com.xuef.architect.common.service.IBaseService;
-
-public interface ICustomService extends IBaseService<M, CM> {
-
-}

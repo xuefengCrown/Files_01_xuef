@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/simple-nav :: nav}">
+</head>
+
+<link href="../../css/custom/blog-article-display.css" th:href="@{/css/custom/blog-article-display.css}" rel="stylesheet">
+<body>
+<!-- Page Content -->
+<div class="container blog-content-container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div id="mainContainer">
+                        <!--博客列表-->
+                        <div id="mainContainerRepleace">
+                            <div class="card mb-4" th:each="blog : ${blogList}">
+                                <div class="card-block">
+                                    <h2 class="card-title">
+                                        <a href="/space/xuef1991/blogs/1" class="card-link" title="xuef1991"
+                                           th:href="'/space/' + ${user.username} + '/blogs/'+ ${blog.id}"
+                                           th:title="${user.username}" th:text="${blog.title}">
+                                            title
+                                        </a>
+                                    </h2>
+                                    <p class="card-text" th:text="${blog.summary}">
+                                        summary
+                                    </p>
+                                    <div class="card-text">
+                                        发表于 [[${#dates.format(blog.createTime, 'yyyy-MM-dd HH:mm')}]]
+                                        <i class="fa fa-eye" aria-hidden="true">[[${blog.readSize}]]</i>
+                                        <i class="fa fa-heart-o" aria-hidden="true">[[${blog.voteSize}]]</i>
+                                        <i class="fa fa-comment-o" aria-hidden="true">[[${blog.commentSize}]]</i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div th:replace="~{fragments/page :: page}">...</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- 右侧栏 -->
+        <div class="col-md-4">
+            <div class="card text-left">
+                <h5 class="card-header">
+                    搜索
+                </h5>
+                <div class="card-body">
+                    <input class="form-control mr-sm-2" id="search-keyword" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success col-md-12 my-2 my-sm-0" type="submit" id="search4an-user">Search</button>
+                </div>
+            </div>
+            </br>
+            <div class="card text-left" id="catalogMain">
+                <div class="card-body" id="catalogReplace">
+                    <h5 class="card-header">
+					<i class="fa fa-bars" aria-hidden="true"></i> 分类
+					<a href="javascript:void(0)" th:if="${isCatalogsOwner}" th:text="add"
+					   class="blog-add-catalog blog-right" data-toggle="modal"
+                       data-target="#flipFlop" role="button">
+					添加</a>
+				</h5>
+                    <ul class="list-group" th:each="catalog : ${catalogs}" th:object="${catalog}">
+                        <div class="blog-list-group-item">
+                            <a href="javascript:void(0)" th:attr="catalogid=*{id}" class="blog-query-by-catalog">
+                                [[*{name}]]
+                            </a>
+                            <span class="blog-right">
+                                <a href="javascript:void(0)" th:if="${isCatalogsOwner}" th:text="edit"
+                                   class="blog-edit-catalog" data-toggle="modal"
+                                   data-target="#flipFlop" role="button" th:attr="catalogid=*{id}">
+                                </a>
+                                <a href="javascript:void(0)" th:if="${isCatalogsOwner}" th:text="del"
+                                   class="blog-delete-catalog" th:attr="catalogid=*{id}">
+                                    </a>
+                            </span>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            </br>
+            <div class="card text-left">
+                <div class="card-header">
+                    标签
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-lg-12" >
+                                <a th:each="tag, tagStat : ${tags}" th:object="${tag}" href="/space/xuef1991/blogs?keyword=1"
+                                   th:href="'/space/' + ${user.username} + '/blogs?keyword=' +  *{name}">
+                                    <!--此处只是彩色了前三个标签-->
+                                    <span class="badge" th:classappend="${tagStat.index} eq 0 ? 'badge-danger':
+                                (${tagStat.index} eq 1 ? 'badge-warning':(${tagStat.index} eq 2 ? 'badge-success':'badge-default'))"th:text="*{name}">vim</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </br>
+            <div class="card text-left">
+                <div class="card-header">
+                    归档
+                </div>
+                <div class="card-body">
+                    <div class="blog-list-group-item" th:each="tdoc:${timeDoc}" th:object="${tdoc}">
+                        <a  href="#" th:href="'/space/'+ ${user.username} +'/blogs?keyword=' + *{yearMonth} + '&type=yymm'">
+                            <span th:text="*{yearMonth} + '  (- ' + *{count} + ' -)'">nil</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog"
+     aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalLabel">新增/编辑</h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="catalogFormContainer"></div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal" id="submitEditCatalog">提交</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}">...</div>
+
+<!-- JavaScript -->
+<script th:inline="javascript">
+        // 高亮当前tab标签
+        $(function () {
+            // 必须使用 +"" 把url转为string类型，不然就是object类型，没有indexOf方法
+            var url = window.location + "";
+            var tmp = $("#my").attr("href");
+            //alert(typeof url);
+            var seps = url.split("/");
+            // 从地址栏地址中析取 请求的博客主页 用户名
+            var url_name = seps[seps.length-2];
+            if(url.indexOf(tmp) == -1){
+                $("#blogs-list").addClass("active");
+            }else{
+                if(tmp+"" == "/space/"+url_name) {
+                    $("#my-blogs-list").addClass("active");
+                }
+            }
+        });
+var username = [[${user.username}]];
+var catalogId = [[${catalogId}]];
+</script>
+<script src="../../js/userspace/u.js" th:src="@{/js/userspace/u.js}"></script>
+</body>
+</html>

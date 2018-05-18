@@ -1,0 +1,10 @@
+
+df
+# man df
+df - report file system disk space usage
+# 
+磁盘使用率
+# df -P | grep "/$" | awk '{print $(NF-1)}' | awk -F"%" '{print $1}'
+
+
+

@@ -1,9 +1,0 @@
-package com.xuef.architect.customermgr.vo;
-
-/**
- * 包装返回数据和信息
- * @author moveb
- */
-public class Msg {
-	
-}

@@ -1,8 +1,0 @@
-package com.xuef201803.thinkinjava.chap8;
-
-//Initialization & re-assignment of arrays
-public class ArraySize {
-
-}
-
-class Weeble {} // A small mythical creature

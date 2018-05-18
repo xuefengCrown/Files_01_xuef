@@ -1,0 +1,53 @@
+
+微服务
+https://martinfowler.com/articles/microservices.html
+
+软件工程，从哲学 生物学 物理学借鉴
+关于部署，罗素说，世间的事情分成两类，把物体从一个地方移动到另一个地方，还有就是阻止这种移动
+
+++ 环境
+jdk-1.8
+IDEA 2017
+Maven 3.5
+springboot 1.5.9
+
+// maven/conf/settings.xml
+<profiles>
+	<profile>
+		<id>jdk-1.8</id>
+		<activation>
+			<activeByDefault>true</activeByDefault>
+			<jdk>1.8</jdk>
+		</activation>
+		<properties>
+			<maven.compiler.source>1.8</<maven.compiler.source>
+			<maven.compiler.target>1.8</maven.compiler.target>
+			<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+		</properties>
+	</profile>
+</profiles>
+
+// 集成进IDEA (主要使用自己的 settings.xml 和 仓库)
+
+
+## 快速开发
+https://projects.spring.io/spring-boot/
+1. new maven project
+2. pom.xml 添加依赖
+3. MainApplication
+4. Controller
+
+## 快速部署(打成可运行的独立jar)
+https://docs.spring.io/spring-boot/docs/1.5.12.RELEASE/reference/htmlsingle/#getting-started-first-application-executable-jar
+
+
+## 场景启动器
+13.5 Starters
+
+
+
+
+
+
+
+

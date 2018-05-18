@@ -1,6 +1,0 @@
-package multi_thread.thread.runnable.strategy;
-
-public interface TaxCalcStrategy {
-	// 可以使用泛型和Object... 来改进
-	double calcTax(double salary, double bonus);
-}

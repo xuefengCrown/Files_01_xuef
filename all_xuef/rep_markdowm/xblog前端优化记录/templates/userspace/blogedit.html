@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/simple-nav :: nav}">
+
+</head>
+
+<body>
+<div th:object="${blogModel.blog}">
+    <div class="container blog-edit-par">
+        <input type="hidden" name="id" th:value="*{id}" id="blogId">
+        <input id="title" name="title" type="text" class="form-control" th:value="*{title}" placeholder="标题">
+        <textarea id="summary" name="summary" class="form-control" rows="3" th:text="*{summary}" placeholder="摘要"></textarea>
+    </div>
+    <!-- blog edit zone -->
+    <div class="container blog-edit-par">
+
+        <div class="blog-content" id="edit-blog">
+            <!--cols="66" rows="20"-->
+            <textarea id="md-content" name="content" th:text="*{content}"></textarea>
+        </div>
+        <div class="blog-content" id="sync-display">
+        </div>
+
+    </div>
+
+    <div class="container blog-edit-par">
+        <!-- 文章类别 -->
+        <select id="catalogSelect" name="catalogSelect" class="form-control" data-placeholder="选择分类">
+            <!-- 当编辑某篇博客时，自动为其把类别填充 -->
+            <option th:value="*{id}" th:text="${catalog.name}" th:each="catalog : ${blogModel.catalogs}" th:object="${catalog}"
+                    th:selected="${catalog eq blogModel.blog.catalog }">Java</option>
+        </select>
+        <!--为文章添加标签-->
+        <p><input id="tags_1" type="text" class="tags" value="Lisp, Java" th:value="${blogModel.blog.tags}" /></p>
+        <button type="button" id="submitBlog" class="btn btn-primary btn-sm btn-block"
+                th:attr="username=${blogModel.username_authenticated}">发布</button>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}">...</div>
+
+<script type="text/javascript">
+    $(function () {
+        // 高亮当前tab标签
+        $(function () {
+            $("#write").addClass("active");
+        });
+
+        $("#edit-blog").keyup(function () {
+            parser();
+        });
+        /*
+        $('#tags_2').tagsInput({
+            width: 'auto',
+            onChange: function(elem, elem_tags)
+            {
+                var languages = ['php','ruby','javascript'];
+                $('.tag', elem_tags).each(function()
+                {
+                    if($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+                        $(this).css('background-color', 'yellow');
+                });
+            }
+        });*/
+        $('#tags_1').tagsInput({
+            //'autocomplete_url': url_to_autocomplete_api,
+            //'autocomplete': { option: value, option: value},
+            'height':'100px',
+            'width':'auto',
+            'interactive':true,
+            'defaultText':'add a tag',
+            //'onAddTag':callback_function,
+            //'onRemoveTag':callback_function,
+            //'onChange' : callback_function,
+            //'delimiter': [',',';'],   // Or a string with a single delimiter. Ex: ';'
+            'removeWithBackspace' : true,
+            //'minChars' : 0,
+            //'maxChars' : 0, // if not provided there is no limit
+            'placeholderColor' : '#666666'
+        });
+    });
+    // 解析markdown文本--->html,然后填充到右侧div
+    function parser(){
+        var text = $("#md-content").val();
+        var converter = new showdown.Converter();
+        var html = converter.makeHtml(text);
+        //console.log(html);
+        $("#sync-display").html(html);
+    }
+</script>
+
+<script src="../../js/userspace/blogedit.js" th:src="@{/js/userspace/blogedit.js}"></script>
+</body>
+</html>

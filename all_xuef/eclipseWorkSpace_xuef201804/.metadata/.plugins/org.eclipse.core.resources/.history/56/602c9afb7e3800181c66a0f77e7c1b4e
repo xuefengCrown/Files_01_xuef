@@ -1,8 +1,0 @@
-package cn.javass.xgen.genconf.vo;
-
-public class ExtendConfModel {
-	private String extendId;
-	private String value;
-	private String[] values;
-	private boolean isSingle = true;
-}

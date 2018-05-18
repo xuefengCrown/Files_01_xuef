@@ -1,0 +1,14 @@
+package com.xuef201803.book_dp.factory_method;
+/**
+ * 连接数据库
+ * @author moveb
+ *
+ */
+public abstract class ConnectDatabase {
+	
+	/**
+	 * 返回一个具体实现，由子类完成。
+	 * @return
+	 */
+	protected abstract DriveManager_ factoryMathod();
+}

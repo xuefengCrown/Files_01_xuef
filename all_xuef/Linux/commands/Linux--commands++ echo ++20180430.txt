@@ -1,0 +1,17 @@
+
+echo -e "a\nc"
+
+# man echo
+ -e     enable interpretation of backslash escapes 开启转义解释
+ 
+
+# vim 
+:set list 
+
+
+
+
+ 
+
+
+

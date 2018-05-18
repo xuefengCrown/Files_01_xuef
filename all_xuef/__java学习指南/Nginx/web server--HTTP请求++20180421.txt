@@ -1,0 +1,8 @@
+
+模拟浏览器 curl
+
+curl -v http://www.baidu.com > /dev/null
+
+
+学习使用 chrome debug
+

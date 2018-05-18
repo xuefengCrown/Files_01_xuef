@@ -1,0 +1,353 @@
+尼玛，中文版太坑爹。命令都翻错。
+
+\w   ===  [A-Za-z0-9_]
+\W
+\s
+\S
+\d
+\b  
+
+### 重复的表示
+*
++
+?
+\{n.m\}
+
+'^r.*'  # .* 任意字符串 [a-z]*
+### 逻辑
+|
+
+003 正则表达式
+
+1. 替换
+:1,$s/tom/david/g
+从第一行到末尾，用David 替换tom
+
+2. 元字符
+shell元字符，正则表达式元字符
+
+\< \>
+
+3. 测试简单正则
+vim picnic.txt
+
+/love/
+/^love/
+/love$/
+/l.ve/
+/o*ve/  # * 零或多个前字符 0或多个o
+# 匹配其中一个
+/[Ll]ove/
+# 匹配范围字符(其实是匹配单个字符的某种简便记法)
+/ove[a-z]/
+# 不在组内的字符
+/ove[^a-zA-Z0-9]/ # ove 后跟着一个特殊字符
+
+
+4. 其他正则元字符
+# 词首 词尾
+/\<fourth\>/
+# \< 定位词首， \> 定位词尾。单词的存在形式可以是，以空格分割、由标点终结、开始于行首、结束于行尾等。
+
+5. 记录模式 \( \)
+:1,$s/\([0o]ccur\)ence/\1rence/
+
+:s/\(square\) and \(fair\)/\2 and \1
+
+6. 模式的重复
+\{n\}
+
+
+chap4 grep
+1. grep 的含义
+:g/pattern/p # p 代表print (打印匹配行)
+:g/RE/p
+It means "globally search for the regular expression (RE) and print out the line." 
+The nice part of using grep is that you do not have to invoke an editor to perform a search, 
+and you do not need to enclose the regular expression in forward slashes. It is much faster 
+than using ex or vi.
+
+2. 如何工作
+# 如果找到了要查找的模式，grep返回的退出状态为0
+grep -n tom /home/xuef/shell_scripts/letter
+
+grep程序的输入可以来自标准输入或管道，而不仅仅是文件。
+ps -ef | grep root
+
+# 元字符
+The grep command supports a number of regular expression metacharacters (see Table 4.1) to help further 
+define the search pattern. It also provides a number of options (see Table 4.2) to modify the way it does its search or 
+displays lines. For example, you can provide options to turn off case sensitivity, display line numbers, 
+display errors only, and so on.
+
+grep -n '^xuef:' /etc/passwd
+23:xuef:x:1000:1000::/home/xuef:/bin/bash
+
+-i 忽略大小写
+-n
+-v 反向查找
+
+# 退出状态
+$?
+$status
+# 上一条命令执行后的退出状态
+
+
+# 实例
+## vim datafile
+northwest NW Charles Main 3.0 .98 3 34
+western WE Sharon Gray 5.3 .97 5 23
+southwest SW Lewis Dalsass 2.7 .8 2 18
+southern SO Suan Chin 5.1 .95 4 15
+southeast SE Patricia Hemenway 4.0 .7 4 17 
+eastern EA TB Savage 4.4 .84 5 20
+northeast NE AM Main Jr. 5.1 .94 3 13
+north NO Margot Weber 4.5 .89 5 9
+central CT Ann Stephens 5.7 .94 5 13
+ 
+
+% grep TB Savage datafile
+
+% grep 'TB Savage' datafile
+
+
+4.3 grep的选项
+grep -v 'Suan Chin' datafile > temp
+mv temp datafile
+
+% grep  –w 'north' datafile
+north              NO       Margot Weber             4.5   .89     5     9
+
+The –w option causes grep to find the pattern only if it is a word,[a] not part of a word. 
+Only the line containing the word north is printed, not northwest, northeast, etc.
+
+% echo $LOGNAME
+lewis
+% grep -i "$LOGNAME" datafile
+southwest             SW        Lewis Dalsass           2.7   .8    2     18
+
+
+4.4. grep with Pipes
+Instead of taking its input from a file, grep often gets its input from a pipe.
+
+Example 4.29. 
+
+% ls -l
+drwxrwxrwx  2  ellie    2441 Jan 6 12:34    dir1
+-rw-r--r--  1  ellie    1538 Jan 2 15:50    file1
+-rw-r--r--  1  ellie    1539 Jan 3 13:36    file2
+drwxrwxrwx  2  ellie    2341 Jan 6 12:34    grades
+
+% ls -l | grep '^d'
+drwxrwxrwx  2  ellie    2441 Jan 6 12:34    dir1
+drwxrwxrwx  2  ellie    2341 Jan 6 12:34    grades
+
+EXPLANATION
+
+The output of the ls command is piped to grep. All lines of output that begin with a d are printed; 
+that is, all directories are printed.
+
+
+4.4.1 grep Review
+grep '^Tommy' file
+ Prints lines if Tommy is at the beginning of the line.
+ 
+grep '\.bak$' file
+ Prints lines ending in .bak. Single quotes protect the dollar sign ($) from interpretation.
+ 
+grep '[Pp]yramid' *
+ Prints lines from all files containing pyramid or Pyramid in the current working directory.
+ 
+grep '[A–Z]' file
+ Prints lines containing at least one capital letter.
+ 
+grep '[0–9]' file
+ Prints lines containing at least one number.
+ 
+grep '[A–Z]...[0–9]' file
+ Prints lines containing five-character patterns starting with a capital letter and ending with a number.
+ 
+grep –w '[tT]est' files
+ Prints lines with the word Test and/or test.
+ 
+grep –s 'Mark Todd' file
+ Finds lines containing Mark Todd, but does not print the lines. Can be used when checking grep's exit status.
+ 
+grep –v 'Mary' file
+ Prints all lines not containing Mary.
+ 
+grep –i 'sam' file
+ Prints all lines containing sam, regardless of case (e.g., SAM, sam, SaM, sAm).
+ 
+grep –l 'Dear Boss' *
+ Lists all filenames containing Dear Boss.
+ 
+grep –n 'Tom' file
+ Precedes matching lines with line numbers.
+ 
+grep "$name" file
+ Expands the value of variable name and prints lines containing that value. Must use double quotes.
+ 
+grep '$5' file
+ Prints lines containing literal $5. Must use single quotes.
+ 
+ps –ef| grep '^ *user1'
+ Pipes output of ps –ef to grep, searching for user1 at the beginning of a line, even if it is preceded by zero or more spaces.
+ 
+
+
+chap5 sed
+# 应用场景
+自动处理文件
+分析日志文件
+修改配置文件
+
+# sed如何工作
+1. 行处理
+2. 模式空间(临时缓冲区)
+
+# sed文本处理
+1. 正则选定文本
+2. sed进行处理
+
+# 使用sed
+## 命令行格式
+sed [options] 'command' files 
+	options: -e, -n
+	commands: '正则(定位)+sed命令(处理)'
+
+# 实例
+1. 基本
+nl passwd | sed -n '10p'   # 打印第10行
+	
+sed -n '/xuef/p' passwd    # 正则匹配
+
+## 定位几行
+nl passwd | sed -n '10,20p'   # 打印第10-20行
+## 排除行
+10!
+## 定位间隔几行(python range 思想一致)
+first~step
+
+2. 基本---增删改
+-a
+-i
+-d
+-c (替代)
+
+nl passwd | sed '5a ########################'   # 第5行后增加
+
+nl passwd | sed '5i ########################'   # 第5行前插入
+
+nl passwd | sed '/mooc/d'                       # 源文件不会改变
+
+
+使用sed来编辑文件是不需要打开文件就能进行的。
+
+# 案例
+## 案例1 优化服务器配置
+	在 ssh 的配置中添加相应文本
+sed '$a \    port52223 \n    permitrootlogin no ' ssh_config   # 在文件末尾添加
+
+## 案例2 文本处理
+	删除文件中空行
+sed '/^$/d' filename
+
+## 服务器日志处理
+	服务器log中找出error报错
+sed -n '/[Ee]rror/p' new.log
+
+3. 基本---替换(是 sed的核心)
+-s(替换) :分隔符/,#等
+sed 's/false/true' passwd
+
+sed 's/false/true/g' passwd   # g(全局替换，即替换每行匹配的所有)
+# 案例4 数据筛选
+	获取网卡中的ip
+ifconfig
+]# ifconfig eth0 | sed -n '/inet /p' | sed 's/inet //' | sed 's/net.*$//'
+        172.16.95.174  
+
+5. sed 高级操作
+{}  多个命令
+nl passwd | sed '{20,30d;s/false/true/}'
+
+&   替换固定字符串
+sed 's/^[a-z_-]\+/&    /' passwd   # 将用户名后统一加上空格
+## 将用户名的首字母转换为大(小)写
+sed 's/^[a-z_-]\+/\u&/' passwd
+## 将文件夹下的.txt文件名转换为大写
+ls *.txt | sed 's/^\w+/\U&/'
+
+\( \)  \1 \2
+案例3： 数据筛选
+	获取passwd中 USER UID GI
+替换后形成统一格式的文件，可进一步用于批处理
+
+案例：数据筛选
+	获取网卡 ip
+
+
+## 文件互操作
+r	
+w	
+
+
+## 退出 q
+nl passwd | sed '10q'
+
+
+
+
+++++++++++++++++++++++++++++++++++++++
+## awk
+1. 格式
+awk [options] command files
+command: pattern {awk命令}
+
+2. awk内置变量
+$0: 整个当前行
+$1: 每行第一个字段
+
+awk内置参数：分隔符
+awk -F ':' '{print $3}' /etc/passwd
+
+NR: 每行的记录号
+NF: 字段数量变量
+FILENAME
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

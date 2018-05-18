@@ -1,0 +1,59 @@
+
+
+# 使用 sed 进行文本替换
+sed 是 (stream editor)的缩写。能够配合reg使用，功能不同凡响。
+sed一个重要用法是进行文本替换。
+
+## sed可以替换给定文本中的字符串
+> sed 's/pattern/replace_str' file
+or
+> cat file | sed 's/pattern/replace_str/'
+
+## 保存修改
+> sed -i 's/text/replace/' file
+
+## 之前的sed命令会将每一行中第一处符合模式的内容替换掉。
+但是如果要替换所有匹配项，我们需要在尾部加上参数g
+> sed 's/pattern/replace_str/g' file
+
+sed命令包含大量可用于文本处理的选项。将这些选项以合理的次序组合，可以只用一行命令就能
+解决很多复杂的问题。
+1. 移除空白行
+> sed '/^\s*$/d' file
+vim  中 :g/^\s*$/d
+
+
+# cat sed_data.txt 
+aa abc 111 this 9 file contains 111 11 88 numbers 0000
+# sed -i 's/\b[0-9]\{3\}\b/NUMBERS/g' sed_data.txt 
+\b 单词分界
+
+# cat sed_data.txt 
+aa abc NUMBERS this 9 file contains NUMBERS 11 88 numbers 0000
+
+
+3. 已匹配字符串标记(&)
+# echo this is an example | sed 's/\w\+/[&]/g'
+[this] [is] [an] [example]
+正则表达式\w\+ 匹配每一个单词，然后我们用[&]替换它。&对应于之前所匹配到的单词。
+
+4. 子串匹配标记 (\1)
+& 代表匹配给定样式的字符串。但我们也可以匹配给定样式的其中一部分。
+# echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
+this is 7 in a number
+
+5. 组合多个表达式
+echo abc | sed 's/a/A/' | sed 's/c/C/'
+
+6. 引用
+sed表达式通常用单引号来引用。不过也可以使用双引号。双引号会通过对表达式求值
+来对其进行扩展。
+当我们想在sed表达式中使用一些变量时，双引号就派上用场了。
+$ text=hello
+$ echo hello world | sed "s/$text/HELLO/"
+
+
+http://localhost:8088/product-detail.jsp?productId=47
+
+
+

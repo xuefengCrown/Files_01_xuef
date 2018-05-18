@@ -1,5 +1,0 @@
-package com.xuef.architect.customermgr.dao;
-
-public interface CustomerDAO {
-
-}

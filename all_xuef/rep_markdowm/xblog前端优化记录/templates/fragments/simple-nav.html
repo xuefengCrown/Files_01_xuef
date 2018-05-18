@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      data-th-fragment="nav">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <link href="../../css/blog.css" th:href="@{/css/blog.css}" rel="stylesheet">
+    <link href="../../css/markdown_blog.css" th:href="@{/css/markdown_blog.css}" rel="stylesheet">
+    <!--tag input-->
+    <link href="../../css/jquery.tagsinput.css" th:href="@{/css/jquery.tagsinput.css}" rel="stylesheet">
+    <link href="../../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}"  rel="stylesheet">
+
+    <link href="../../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+</head>
+<body>
+<!--
+
+-->
+<nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md fixed-top">
+    <div class="container">
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li id="all" class="nav-item">
+                    <a class="nav-link" th:href="@{/index}">ALL</span></a>
+                </li>
+                <li id="blogs-list" class="nav-item">
+                    <a id="ta" class="nav-link" th:href="'/space/' + ${user.username}">TaBlogS</a>
+                </li>
+                <li id="my-blogs-list" class="nav-item">
+                <a id="my" class="nav-link" th:if="${username_authenticated} != 'nil'"
+                   th:href="'/space/' + ${username_authenticated}">
+                    MyBlogS
+                </a>
+                </li>
+                <li id="write" class="nav-item">
+                    <a class="nav-link" th:href="'/space/' + ${username_authenticated} + '/blogs/edit'">WritE</a>
+                </li>
+                <li id="tobeAdded" class="nav-item">
+                    <a class="nav-link" href="#">{-|-}</a>
+                </li>
+                <li id="whoseblog" class="nav-item">
+                    <a class="nav-link" href="#" th:text="${user.username}+'~blog~'">who's blog</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <a class="nav-link active btn btn-primary btn-sm" href="/login" th:if="${username_authenticated} == 'nil'">
+                    登录
+                </a>
+
+                <a class="nav-link active" href="javascript:;" th:if="${username_authenticated} != 'nil'"
+                    th:text="'你好, ~' + ${username_authenticated}">
+                    欢迎
+                </a>
+                <a class="nav-link active btn btn-primary btn-sm" th:href="@{/logout}" th:text="Logout"
+                   th:if="${username_authenticated} != 'nil'">logout</a>
+
+            </form>
+        </div>
+    </div>
+</nav>
+</body>
+
+</html>

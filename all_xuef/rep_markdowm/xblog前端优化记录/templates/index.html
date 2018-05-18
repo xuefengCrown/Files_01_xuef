@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/index-nav :: nav}">
+</head>
+
+<link href="../../css/custom/blog-article-display.css" th:href="@{css/custom/blog-article-display.css}" rel="stylesheet" />
+<body>
+<!-- Page Content -->
+<div class="container blog-content-container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div id="mainContainer">
+                        <!--博客列表-->
+                        <div id="mainContainerRepleace">
+                            <div class="card text-left">
+                                <div class="card-header">
+                                    标签
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-lg-12" >
+                                                <a th:each="tag, tagStat : ${tags}" th:object="${tag}"
+                                                   th:href="'/blogs?keyword=' +  *{name}">
+                                                    <!--此处只是彩色了前三个标签-->
+                                    <span class="badge" th:classappend="${tagStat.index} eq 0 ? 'badge-danger': (${tagStat.index} eq 1 ? 'badge-warning':(${tagStat.index} eq 2 ? 'badge-success':'badge-default'))"
+                                          th:text="*{name}">vim</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4" th:each="blog : ${blogList}">
+                                <div class="card-block">
+                                    <h5 class="card-title">
+                                        <a class="card-link" title="xuef1991"
+                                           th:href="'/space/' + ${blog.username} + '/blogs/'+ ${blog.blogId}"
+                                           th:title="${blog.username}" th:text="${blog.title}">
+                                            title
+                                        </a>
+                                        ~~~[[${#dates.format(blog.createTime, 'yyyy-MM-dd HH:mm')}]]
+                                    </h5>
+                                </div>
+                            </div>
+
+                            <div th:replace="~{fragments/page :: page}">...</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- 右侧栏 -->
+        <div class="col-md-4">
+            <div class="card text-left">
+                <h5 class="card-header">
+                    搜索
+                </h5>
+                <div class="card-body">
+                    <input class="form-control mr-sm-2" id="index-search-keyword" type="text" placeholder="Search" aria-label="Search" />
+                    <button class="btn btn-outline-success col-md-12 my-2 my-sm-0" type="submit"
+                            id="index-search-btn">Search</button>
+                </div>
+            </div>
+            </br>
+            </br>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+<div th:replace="~{fragments/footer :: footer}">...</div>
+
+<!-- JavaScript -->
+<script th:inline="javascript">
+        // 高亮当前tab标签
+        $(function () {
+            $("#all").addClass("active");
+        });
+</script>
+<script src="../../js/index.js" th:src="@{/js/index.js}"></script>
+</body>
+</html>

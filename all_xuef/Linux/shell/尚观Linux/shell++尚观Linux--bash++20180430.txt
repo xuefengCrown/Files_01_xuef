@@ -1,0 +1,17 @@
+> test.sh
+command not found
+# test.sh 所在目录 不在PATH中
+
+# 以下两种执行方式会开一个 subshell
+> ./test.sh
+> bash test.sh
+
+# 在当前shell执行
+> . test.sh
+> source test.sh
+> source /etc/profile # 会影响当前shell环境
+
+## debug
+sh -vx test.sh
+
+

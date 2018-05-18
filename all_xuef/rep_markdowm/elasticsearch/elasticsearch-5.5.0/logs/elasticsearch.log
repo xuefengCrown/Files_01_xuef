@@ -1,0 +1,60 @@
+[2018-05-05T23:35:31,479][INFO ][o.e.n.Node               ] [] initializing ...
+[2018-05-05T23:35:32,364][INFO ][o.e.e.NodeEnvironment    ] [FNC5lAz] using [1] data paths, mounts [[OS (C:)]], net usable_space [95.3gb], net total_space [392.7gb], spins? [unknown], types [NTFS]
+[2018-05-05T23:35:32,364][INFO ][o.e.e.NodeEnvironment    ] [FNC5lAz] heap size [494.9mb], compressed ordinary object pointers [unknown]
+[2018-05-05T23:35:32,374][INFO ][o.e.n.Node               ] node name [FNC5lAz] derived from node ID [FNC5lAzAR7utujpIRkHyFA]; set [node.name] to override
+[2018-05-05T23:35:32,374][INFO ][o.e.n.Node               ] version[5.5.0], pid[4776], build[260387d/2017-06-30T23:16:05.735Z], OS[Windows 10/10.0/x86], JVM[Oracle Corporation/Java HotSpot(TM) Server VM/1.8.0_161/25.161-b12]
+[2018-05-05T23:35:32,374][INFO ][o.e.n.Node               ] JVM arguments [-Xms512m, -Xmx512m, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+DisableExplicitGC, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -Djdk.io.permissionsUseCanonicalPath=true, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Dlog4j.skipJansi=true, -XX:+HeapDumpOnOutOfMemoryError, -Delasticsearch, -Des.path.home=C:\Users\moveb\Documents\rep_markdowm\elasticsearch\elasticsearch-5.5.0]
+[2018-05-05T23:35:35,711][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [aggs-matrix-stats]
+[2018-05-05T23:35:35,711][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [ingest-common]
+[2018-05-05T23:35:35,711][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [lang-expression]
+[2018-05-05T23:35:35,721][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [lang-groovy]
+[2018-05-05T23:35:35,721][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [lang-mustache]
+[2018-05-05T23:35:35,721][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [lang-painless]
+[2018-05-05T23:35:35,721][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [parent-join]
+[2018-05-05T23:35:35,731][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [percolator]
+[2018-05-05T23:35:35,731][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [reindex]
+[2018-05-05T23:35:35,731][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [transport-netty3]
+[2018-05-05T23:35:35,731][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [transport-netty4]
+[2018-05-05T23:35:35,731][INFO ][o.e.p.PluginsService     ] [FNC5lAz] no plugins loaded
+[2018-05-05T23:35:42,562][INFO ][o.e.d.DiscoveryModule    ] [FNC5lAz] using discovery type [zen]
+[2018-05-05T23:35:44,053][INFO ][o.e.n.Node               ] initialized
+[2018-05-05T23:35:44,053][INFO ][o.e.n.Node               ] [FNC5lAz] starting ...
+[2018-05-05T23:35:48,093][INFO ][o.e.t.TransportService   ] [FNC5lAz] publish_address {127.0.0.1:9300}, bound_addresses {127.0.0.1:9300}, {[::1]:9300}
+[2018-05-05T23:35:51,283][INFO ][o.e.c.s.ClusterService   ] [FNC5lAz] new_master {FNC5lAz}{FNC5lAzAR7utujpIRkHyFA}{YMqfNt91SUuKQT51fPeZJA}{127.0.0.1}{127.0.0.1:9300}, reason: zen-disco-elected-as-master ([0] nodes joined)
+[2018-05-05T23:35:51,387][INFO ][o.e.g.GatewayService     ] [FNC5lAz] recovered [0] indices into cluster_state
+[2018-05-05T23:35:53,789][INFO ][o.e.h.n.Netty4HttpServerTransport] [FNC5lAz] publish_address {127.0.0.1:9200}, bound_addresses {127.0.0.1:9200}, {[::1]:9200}
+[2018-05-05T23:35:53,789][INFO ][o.e.n.Node               ] [FNC5lAz] started
+[2018-05-05T23:36:04,096][INFO ][o.e.n.Node               ] [FNC5lAz] stopping ...
+[2018-05-05T23:36:04,217][INFO ][o.e.n.Node               ] [FNC5lAz] stopped
+[2018-05-05T23:36:04,218][INFO ][o.e.n.Node               ] [FNC5lAz] closing ...
+[2018-05-05T23:36:04,247][INFO ][o.e.n.Node               ] [FNC5lAz] closed
+[2018-05-05T23:36:40,706][INFO ][o.e.n.Node               ] [] initializing ...
+[2018-05-05T23:36:40,971][INFO ][o.e.e.NodeEnvironment    ] [FNC5lAz] using [1] data paths, mounts [[OS (C:)]], net usable_space [95.3gb], net total_space [392.7gb], spins? [unknown], types [NTFS]
+[2018-05-05T23:36:40,974][INFO ][o.e.e.NodeEnvironment    ] [FNC5lAz] heap size [494.9mb], compressed ordinary object pointers [unknown]
+[2018-05-05T23:36:40,988][INFO ][o.e.n.Node               ] node name [FNC5lAz] derived from node ID [FNC5lAzAR7utujpIRkHyFA]; set [node.name] to override
+[2018-05-05T23:36:40,990][INFO ][o.e.n.Node               ] version[5.5.0], pid[15420], build[260387d/2017-06-30T23:16:05.735Z], OS[Windows 10/10.0/x86], JVM[Oracle Corporation/Java HotSpot(TM) Server VM/1.8.0_161/25.161-b12]
+[2018-05-05T23:36:40,991][INFO ][o.e.n.Node               ] JVM arguments [-Xms512m, -Xmx512m, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+DisableExplicitGC, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -Djdk.io.permissionsUseCanonicalPath=true, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Dlog4j.skipJansi=true, -XX:+HeapDumpOnOutOfMemoryError, -Delasticsearch, -Des.path.home=C:\Users\moveb\Documents\rep_markdowm\elasticsearch\elasticsearch-5.5.0]
+[2018-05-05T23:36:46,559][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [aggs-matrix-stats]
+[2018-05-05T23:36:46,560][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [ingest-common]
+[2018-05-05T23:36:46,563][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [lang-expression]
+[2018-05-05T23:36:46,565][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [lang-groovy]
+[2018-05-05T23:36:46,570][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [lang-mustache]
+[2018-05-05T23:36:46,573][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [lang-painless]
+[2018-05-05T23:36:46,576][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [parent-join]
+[2018-05-05T23:36:46,578][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [percolator]
+[2018-05-05T23:36:46,579][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [reindex]
+[2018-05-05T23:36:46,580][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [transport-netty3]
+[2018-05-05T23:36:46,588][INFO ][o.e.p.PluginsService     ] [FNC5lAz] loaded module [transport-netty4]
+[2018-05-05T23:36:46,591][INFO ][o.e.p.PluginsService     ] [FNC5lAz] no plugins loaded
+[2018-05-05T23:36:57,121][INFO ][o.e.d.DiscoveryModule    ] [FNC5lAz] using discovery type [zen]
+[2018-05-05T23:36:59,026][INFO ][o.e.n.Node               ] initialized
+[2018-05-05T23:36:59,027][INFO ][o.e.n.Node               ] [FNC5lAz] starting ...
+[2018-05-05T23:37:03,536][INFO ][o.e.t.TransportService   ] [FNC5lAz] publish_address {127.0.0.1:9300}, bound_addresses {127.0.0.1:9300}, {[::1]:9300}
+[2018-05-05T23:37:06,707][INFO ][o.e.c.s.ClusterService   ] [FNC5lAz] new_master {FNC5lAz}{FNC5lAzAR7utujpIRkHyFA}{GpqhYh0YQs-76ZY6yhpXkw}{127.0.0.1}{127.0.0.1:9300}, reason: zen-disco-elected-as-master ([0] nodes joined)
+[2018-05-05T23:37:06,823][INFO ][o.e.g.GatewayService     ] [FNC5lAz] recovered [0] indices into cluster_state
+[2018-05-05T23:37:09,339][INFO ][o.e.h.n.Netty4HttpServerTransport] [FNC5lAz] publish_address {127.0.0.1:9200}, bound_addresses {127.0.0.1:9200}, {[::1]:9200}
+[2018-05-05T23:37:09,340][INFO ][o.e.n.Node               ] [FNC5lAz] started
+[2018-05-05T23:41:02,353][INFO ][o.e.n.Node               ] [FNC5lAz] stopping ...
+[2018-05-05T23:41:02,420][INFO ][o.e.n.Node               ] [FNC5lAz] stopped
+[2018-05-05T23:41:02,421][INFO ][o.e.n.Node               ] [FNC5lAz] closing ...
+[2018-05-05T23:41:02,452][INFO ][o.e.n.Node               ] [FNC5lAz] closed

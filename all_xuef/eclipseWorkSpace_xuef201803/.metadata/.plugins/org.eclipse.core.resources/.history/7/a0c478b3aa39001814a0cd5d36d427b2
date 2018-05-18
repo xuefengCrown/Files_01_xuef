@@ -1,8 +1,0 @@
-package com.xuef.architect.customermgr.service;
-
-import com.xuef.architect.common.service.BaseService;
-
-public class CustomService extends 
-	BaseService<M, CM> implements ICustomService {
-
-}

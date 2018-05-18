@@ -1,8 +1,0 @@
-package com.xuef201803.thinkinjava.chah7;
-
-//Dynamically changing the behavior of
-//an object via composition.
-
-public class Transmogrify {
-
-}

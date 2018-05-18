@@ -1,0 +1,41 @@
+
+
+grep 用于文本搜索，生成各种格式的输出。
+
+grep "pattern" filename
+
+ls ./ | grep "pattern"
+ls | grep "^test"
+
+# 多文件搜索
+grep "match.txt" file1 file2 file3 ...
+
+# 使用正则
+grep -E "[a-z]+" file
+或者 egrep
+
+-o # 输出匹配部分
+-v # 反
+-n # 带行号输出
+
+# 找出位于哪个文件中
+grep -l linux sample.txt sample2.txt
+
+-r # 递归
+grep "test_function()" . -R -n
+
+-i # 忽略大小写
+
+# 指定多个样式
+grep -e "pattern1" -e "pattern2"
+
+
+| xargs -0 rm
+
+
+
+
+
+
+
+

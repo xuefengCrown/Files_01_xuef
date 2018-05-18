@@ -1,0 +1,19 @@
+
+
+# cut 按列切分文件
+cut -f1 -d":" /etc/passwd
+
+
+## cut 有一些选项可以将一串指定的字符作为列来显示
+-b 表示字节
+-c 表示字符
+-f 用于定义字段
+
+> cat range_fields.txt
+abcdefghijklmnopqrstuvwxyz
+
+
+
+
+
+

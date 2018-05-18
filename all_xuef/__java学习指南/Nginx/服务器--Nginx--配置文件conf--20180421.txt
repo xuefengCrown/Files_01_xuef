@@ -1,0 +1,22 @@
+
+1. 主配置文件
+/etc/nginx/nginx.conf
+2. 从配置
+
+
+# 检测配置
+nginx -tc /etc/nginx/nginx.conf
+
+
+Normal NGINX configuration starts with the nginx.conf file (ie /etc/nginx/nginx.conf) which declares the user, 
+process id, and other necessary stuff followed by an http { } branch. the server {} branches that are typically 
+held in the conf.d directory or else where are typically included at the end of this http{} branch in nginx.conf. 
+so even though they start with server as the out node, it's not really the outer node. it's inside the http node.
+
+if you are loading a config file directly maybe make sure it contains a full nginx config, including these missing parts?
+
+
+
+### 静态web资源服务器
+
+http://47.97.197.165/CSAPP.jpg

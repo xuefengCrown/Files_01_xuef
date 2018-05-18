@@ -1,0 +1,30 @@
+
+# 递归创建目录
+mkdir -p /japan/cang
+
+# 显示所有(.当前目录 .. 父目录)
+ls -a
+
+# 删除
+rm -rf /temp/dir (-f 强制删除)
+
+# cp
+cp -r japan /tmp/movie/  # -r 复制目录
+
+# mv (剪切或重命名)
+mv japan /tmp/movie/
+
+# 重要目录
+## 外接存储设备的盘符
+media
+mnt
+misc
+## sys proc
+内容是写入内存的
+
+# 文件链接
+ln [-s] 源 目的 
+软链接(类似于Windows的快捷方式)(有自己的i节点和block存储块,块中存储源文件索引;)源文件一定要写绝对路径
+硬链接(拥有相同的i节点和相同的block存储块; 不可跨分区; 不能针对目录) 不建议硬链接
+## 文件索引表--->文件存储块
+

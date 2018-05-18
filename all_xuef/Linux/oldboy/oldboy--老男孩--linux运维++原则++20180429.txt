@@ -1,0 +1,112 @@
+1. 学习工作中操作习惯
+1）操作前备份
+2）操作后比对检查
+3）服务重新启动前测试语法
+4）服务重新加载，加载后及时检查
+5）使用find代替rm
+
+2.学习方法
+1）使用中记忆，要理解背后的原理，7-8次以上
+2）靠多实践去记忆
+3）重复练习，多思考为什么是掌握技术的关键
+4）通过案例去学习
+
+多动手，多总结。第一时间总结
+主动学习
+
+
+cp -a # 复制目录，相当于-pdr
+
+find 删除
+find /root/data -type f|xargs rm -f
+
+# 删除某文件夹下所有文件，保留某个指定文件
+find /root/data -type f ! -name "remain.txt" | xargs rm -f
+
+grep -v "xuef" /etc/passwd
+
+sed '/oldboy/d' filename
+sed -n '/过滤的内容/处理的命令' filename 
+	-n 取消sed的默认输出
+命令: p print; d delete; s 替换; i insert; 
+sed stream editor
+
+mkdir -p /maindir/subdir
+
+yum -y install tree
+
+## alias 别名
+which cp # 会发现是一个别名 cp -i
+使用非别名 \cp
+
+别名存在 /root/.bashrc # 针对root用户
+所有用户都生效: /etc/bashrc 或 /etc/profile 中定义
+source /etc/profile
+
+多练!!!企业要的是效率，是生产力，这要求你非常熟悉，熟练。
+
+
+~ 用户家目录
+
+
+11. 查看ett.txt 文件的 第20-30行内容
+seq --- sequence
+seq命令比较常用，在需要做循环的时候用于产生一个序列是再合适不过的工具了
+seq start step end # seq 1 2 10
+-s ')' # 指定分隔符
+
+sed -n '20,30p'
+
+
+# awk 可编程 过滤内容(列)
+awk -F ":" '{print $1" "$2" "$3}' /etc/passwd
+# $NF 最后一列 $(NF-1)
+
+awk '{if(NR<31 && NR>19) printf $1"\n"}' ett.txt
+# NR 代表行号 (内置变量)
+
+grep 擅长过滤
+sed  擅长取行、替换
+awk  擅长取列
+
+sed 替换
+sed 's#oldboy#oldgirl#g' file # -i 改变文件内容
+
+
+# find + sed 批量修改文件指定内容
+
+# 生成序列(seq 可以)
+echo {1..10}
+echo {a..z}
+
+echo stu{001..100}
+
+## 批量生成目录
+mkdir stu{01..10}
+## 删除指定目录
+find ./ -type d -name "stu*" | xargs rm -rf
+
+ctrl + l # 清屏
+
+
+
+
+91 查看Linux基本信息命令 uname hostname
+cat /etc/redhat-release
+uname -r # 内核
+uname -m # 位数
+hostname # 主机
+
+whoami # 当前用户
+
+[root@izbp18496tukjehdhp0n6zz shell_scripts]# echo $PS1
+[\u@\h \W]\$
+
+# 切换用户
+su - root # -参数切换用户环境变量
+env | grep xuef
+
+# 清空日志
+> test.log
+cat /dev/null > test.log
+

@@ -1,0 +1,33 @@
+/*
+博客文章显示页
+*/
+body{
+    font-family: Georgia, "Times New Roman",
+    "Microsoft YaHei", "微软雅黑",
+    STXihei, "华文细黑",
+    serif;
+}
+h1{
+    font-size: 24px;
+}
+h2{
+    font-size: 21px;
+}
+h3{
+    font-size: 18px;
+}
+h4{
+    font-size: 16px;
+}
+h5{
+    font-size: 14px;
+}
+#blog-article{
+    position: relative;
+}
+.table-of-contents{
+    position: fixed;
+    width: 320px;
+    top: 87px;
+    left: 66%;
+}
