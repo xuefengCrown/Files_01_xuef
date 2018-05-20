@@ -1,0 +1,29 @@
+
+# 学习目标
+1. 如何设计和封装无限层级的树状数据结构
+2. 递归算法的设计思想
+3. 如何处理复杂对象排重
+4. 重写 hashcode 和 equals 的注意事项
+
+# 数据表设计
+
+# 功能接口
+1. 获取品类子节点(平级)
+/manage/category/get_category.do?categoryId=0
+
+2. 增加节点
+add_category.do
+
+3. 修改品类名字
+
+4. 获取当前分类id及递归子节点 categoryId
+
+
+
+
+
+
+
+
+
+

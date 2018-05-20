@@ -1,0 +1,23 @@
+
+
+RESTFul API
++++ 登录
+	获取登录界面	/login GET
+	登录			/login POST
+	
++++ 注册
+	获取注册界面	/register GET
+	提交注册		/register POST
+
++++ 编辑个人主页（/profile）
+
++++ 博客（/blog）
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+# 进到 imall
+
+$ git init
+$ git add .
+
+// 提交到本地仓库
+$ git commit -am '1st commit inii pro'
+
+// 到远程仓库
+$ git remote add origin git@gitee.com:DongXuefeng/imall.git
+github-- https://github.com/xuefengCrown/Files_01_xuef.git
+
+# 如果 fatal: remote origin already exists.
+git remote rm origin
+
+# 查看目前所在分支
+$ git branch
+
+# 提交到远程仓库
+$ git push -u origin master(/v1.0 分支)
+# 如果源仓库有改变，需要先pull
+git pull origin master --allow-unrelated-histories
+
+# 开分支
+git checkout -b v1.0 origin/master
+
+## 分支推送到远程
+git push origin HEAD -u
+
+
+## 配置
+git config --global user.name "Essense"
+git config --global user.email "643472092@qq.com"
+
+ssh-keygen -t rsa -C "643472092@qq.com"
+ssh-add ~/.ssh/id_rsa  (eval `ssh-agent`)
+## 查看公钥
+cat ~/.ssh/id_rsa.pub

@@ -1,0 +1,149 @@
+
+
+1. 源配置
+
+2. install jdk
+wget url后需要加token
+
+## 配置环境变量
+# /etc/profile 
+
+export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar 
+export MAVEN_HOME=/developer/apache-maven-3.0.5 
+export NODE_HOME=/usr/local/node-v4.4.7-linux-x64 
+export RUBY_HOME=/usr/local/ruby 
+export CATALINA_HOME=/developer/apache-tomcat-7.0.73 
+export PATH=$PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin:$MAVEN_HOME/bin:$NODE_HOME/bin:/usr/local/bin:$RUBY_HOME/bin
+
+### 生效
+source /etc/profile
+
+
+
+3. tomcat
+ps -ef|grep tomcat
+
+
+
+4. mysql
+首先CentOS7 已经不支持mysql，因为收费了你懂得，所以内部集成了mariadb，而安装mysql的话会和mariadb的文件冲突，所以需要先卸载掉mariadb，以下为卸载mariadb，安装mysql的步骤。
+
+#列出所有被安装的rpm package 
+rpm -qa | grep mariadb
+
+#卸载
+rpm -e mariadb-libs-5.5.37-1.el7_0.x86_64
+错误：依赖检测失败：
+libmysqlclient.so.18()(64bit) 被 (已安裝) postfix-2:2.10.1-6.el7.x86_64 需要
+libmysqlclient.so.18(libmysqlclient_18)(64bit) 被 (已安裝) postfix-2:2.10.1-6.el7.x86_64 需要
+
+#强制卸载，因为没有--nodeps
+rpm -e --nodeps mariadb-libs-5.5.37-1.el7_0.x86_64
+
+#安装mysql依赖
+yum install vim libaio net-tools
+
+其他情况：
+
+1、centos下yum暂时没有mysql-server直接安装包；
+MariaDB是MySQL社区开发的分支，也是一个增强型的替代品;
+
+2、安装MariaDB
+yum -y install mariadb-server mariadb mariadb-devel
+systemctl start mariadb
+systemctl enable mariadb
+mysql_secure_installation
+firewall-cmd --permanent --add-service mysql
+systemctl restart firewalld.service
+iptables -L -n|grep 3306
+
+CentOS7的yum源中默认好像是没有mysql的。为了解决这个问题，我们要先下载mysql的repo源。
+
+1. 下载mysql的repo源
+
+$ wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+
+2. 安装mysql-community-release-el7-5.noarch.rpm包
+
+$ sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+
+安装这个包后，会获得两个mysql的yum repo源：/etc/yum.repos.d/mysql-community.repo，/etc/yum.repos.d/mysql-community-source.repo。
+
+3. 安装mysql
+
+$ sudo yum install mysql-server
+
+根据步骤安装就可以了，不过安装完成后，没有密码，需要重置密码。
+
+4. 重置密码
+
+重置密码前，首先要登录
+
+$ mysql -u root
+
+登录时有可能报这样的错：ERROR 2002 (HY000): Can‘t connect to local MySQL server through socket ‘/var/lib/mysql/mysql.sock‘ (2)，原因是/var/lib/mysql的访问权限问题。下面的命令把/var/lib/mysql的拥有者改为当前用户：
+
+$ sudo chown -R openscanner:openscanner /var/lib/mysql
+
+然后，重启服务：
+
+$ service mysqld restart
+
+接下来登录重置密码：
+
+$ mysql -u root
+
+mysql > use mysql;
+
+mysql > update user set password=password("newpass") where user="root";
+
+mysql > exit;
+
+5. 开放3306端口
+
+$ sudo vim /etc/sysconfig/iptables
+
+添加以下内容：
+
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 3306 -j ACCEPT
+
+保存后重启防火墙：
+
+$ sudo service iptables restart
+
+这样从其它客户机也可以连接上mysql服务了。
+
+MYSQL启动后报：ERROR! The server quit without updating PID file错误的问题解决
+MYSQL日志：Can't find file: './mysql/plugin.frm' (errno: 13 - Permission denied)
+
+1、权限不够：chown -R mysql:mysql /home/mysql/data” “chmod -R 755 /home/mysql/data
+2、centos7的selinux问题：打开/etc/selinux/config，把SELINUX=enforcing改为SELINUX=disabled后存盘退出重启机器。
+
+更多CentOS相关信息见CentOS 专题页面 http://www.linuxidc.com/topicnews.aspx?tid=14
+
+本文永久更新链接地址：http://www.linuxidc.com/Linux/2016-03/129683.htm
+
+
+
+update user set password=password("newpass") where user="root"
+
+
+
+
+## git
+git config --global core.quotepath off
+
+********************************
+cd IdeaProjects/new/xuefimall
+git add .
+git commit -am 'product module'
+git remote rm origin
+git remote add origin git@gitee.com:DongXuefeng/xuefimall.git
+git push -u origin v1.0
+
+********************************
+
+cd /develop_web/git-rep/
+git clone git@gitee.com:DongXuefeng/xuefimall.git
+### 编译打包发布脚本
+bash /opt/work/deploy/deploy.sh

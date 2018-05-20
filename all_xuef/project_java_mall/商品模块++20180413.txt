@@ -1,0 +1,70 @@
+
+# 功能介绍
+
+
+# 学习目标
+1. FTP 服务的对接
+2. SpringMVC文件上传
+3. 流读取Properties配置文件
+4. 抽象POJO、BO、VO对象之间的转换关系及解决思路
+5. joda-time快速入门
+6. 静态块
+7. Mtbatis-PageHelper 高效准确地分页及动态排序
+8. Mybatis对List遍历的实现方法
+9. Mybatis对where语句动态拼接的几个版本演变
+
+# 数据表设计
+
+
+# (功能)接口设计
+
+## 前台功能
+1. 产品搜索
+2. 动态排序列表(带有分页)
+/product/list.do?keyword=&categoryid=1&orderBy=price_desc
+pageNum(default=1)
+pageSize(default=5)
+orderBy(排序参数)
+
+3. 商品详情
+/product/detail.do?productId=2
+
+4. 。。。
+
+## 后台功能
+1. 商品列表
+/manage/product/list.do
+
+2. 商品搜索
+/manage/product/search.do?productName=pn&productId=12
+
+3. 图片上传
+/manage/product/upload.do
+
+4. 富文本上传(使用 SimEditor)
+/manage/product/richtext_upload.do
+
+5. 商品详情
+/manage/product/detail.do
+
+6. 商品上下架
+/manage/product/set_sale_status.do
+
+7. 增加商品
+/manage/product/add_pro.do
+
+8. 更新商品
+
+9. 。。。
+
+ 
+
+
+
+
+
+
+
+
+
+
