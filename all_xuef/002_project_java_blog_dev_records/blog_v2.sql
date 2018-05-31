@@ -40,7 +40,17 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
-insert into user(name, username, head_url, password, email) values('xuef', 'xuef1991', '...', '121314', '643472092@qq.com');
+insert into user(name, username, head_url, password, email, status, create_time) 
+values('xuef', 'xuef1991', '...', '$2a$10$0g4nHeqflzlFwevOnN8GQOl3b/SSe8tA.5HyPBGzZ74FWTsA7NkBO', '643472092@qq.com', 0, now());
+
+insert into user(name, username, head_url, password, email, status, create_time) 
+values('drop', 'drop1991', '...', '$2a$10$0g4nHeqflzlFwevOnN8GQOl3b/SSe8tA.5HyPBGzZ74FWTsA7NkBO', 'drop@163.com', 0, now());
+
+insert into user(name, username, head_url, password, email, status, create_time) 
+values('leaf', 'leaf1991', '...', '$2a$10$0g4nHeqflzlFwevOnN8GQOl3b/SSe8tA.5HyPBGzZ74FWTsA7NkBO', 'leaf@163.com', 0, now());
+
+insert into user(name, username, head_url, password, email, status, create_time) 
+values('breeze', 'breeze1991', '...', '$2a$10$0g4nHeqflzlFwevOnN8GQOl3b/SSe8tA.5HyPBGzZ74FWTsA7NkBO', 'breeze@163.com', 0, now());
 
 -- ----------------------------
 --  Table structure for `role`(权限)
@@ -93,7 +103,8 @@ CREATE TABLE `comment` (
   `status` int(1),
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  INDEX entity_index(entity_id, entity_type)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------

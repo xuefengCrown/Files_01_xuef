@@ -1,6 +1,0 @@
-
-
-cd c/Users/moveb/IdeaProjects/new/blog_v2
-git add .
-git commit -am '...'
-git push -u origin master

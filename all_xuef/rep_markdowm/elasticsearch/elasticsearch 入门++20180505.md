@@ -223,6 +223,8 @@ curl -XPOST 'http://47.97.197.165:9200/blog/articles/'
 // PUT 必须指定具体的资源
 curl -XPUT 'http://47.97.197.165:9200/blog/articles/12' 
 
+curl -XDELETE 'http://47.97.197.165:9200/blog/blog/5'
+
 http://47.97.197.165:9200/blog/blog/_search?pretty
 
 http://47.97.197.165:9200/blog/blog/_search?q=username:xuef1991&pretty
