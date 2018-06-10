@@ -1,0 +1,26 @@
+
+Redefining Env as a Class
+We see that every procedure has three components: a list of parameter names, a body expression, and an environment 
+that tells us what other variables are accessible from the body. For a procedure defined at the top level this will 
+be the global environment, but it is also possible for a procedure to refer to the local variables of the environment 
+in which it was defined (and not the environment in which it is called).
+每个过程(Procedure)有三个部分：一个参数列表，一个表达式体，一个环境来提供变量查找。对于定义在顶层的过程，就是全局
+环境，但一个过程也能引用在这个环境中定义的局部变量（不是它被调用时所处的环境）
+
+An environment is a subclass of dict, so it has all the methods that dict has. In addition there are two methods: 
+the constructor __init__ builds a new environment by taking a list of parameter names and a corresponding list of 
+argument values, and creating a new environment that has those {variable: value} pairs as the inner part, and also 
+refers to the given outer environment. The method find is used to find the right environment for a variable: either 
+the inner one or an outer one.
+环境（environment）是dict的子类，所以它具有dict有的所有方法。此外还有两个方法：构造器 __init__ 接受一个参数列表和
+对应的值列表来构建一个新环境，它创造一个具有{variable: value}对的新环境作为内部部分，另可引用外部环境（out）。
+find方法用来寻找一个变量所处的环境：或为内部环境或为外部的那个环境。
+To see how these all go together, here is the new definition of eval. Note that the clause for variable reference has 
+changed: we now have to call env.find(x) to find at what level the variable x exists; then we can fetch the value of x 
+from that level. (The clause for define has not changed, because a define always adds a new variable to the innermost environment.) 
+There are two new clauses: for set!, we find the environment level where the variable exists and set it to a new value. 
+With lambda, we create a new procedure object with the given parameter list, body, and environment.
+通过重新定义的eval，我们来看一下把这些组合起来。注意到，变量引用部分发生了变化：我们现在需要调用env.find(x)来得到x所在的环境；
+然后我们能从该环境中拿到x的值。（define分支没有变化，因为define总是将一个新变量注入最内部的环境）有两个新分支：对于 set!，我们找到该变量
+所存在的环境，然后将之赋予一个新值。使用lambda，我们用一个参数列表，函数体以及某个环境来创造一个新的过程对象（procedure object）。
+

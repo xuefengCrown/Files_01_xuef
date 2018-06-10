@@ -23,7 +23,7 @@
   `(defun ,func-name ,parameters
     (let ((*test-name* (append *test-name* (list ',func-name))))
 	  ,@body)))
-	  
+	
 (deftest test-+_v2 ()
   (check
 	(= (+ 1 2) 3)
@@ -43,6 +43,10 @@
   (test-arithmetic))	
 	
 	
-	
-	
+(defun range-h(n m nums)
+  (cond 
+    ((> n m) nums)
+    (t (range-h n (1- m) (cons m nums)))))	
+(defun range(n m)
+  (range-h n m nil))
 	
