@@ -4,5 +4,6 @@ cd ./IdeaProjects/new/blog_v2
 git add .
 git commit -am 'v2基本功能完成'
 git remote rm origin
-git remote add origin git@gitee.com:DongXuefeng/blog_v2.git
+git remote add origin https://github.com/xuefengCrown/BearMaps2018.git
+//git@gitee.com:DongXuefeng/blog_v2.git
 git push -u origin master
