@@ -1,0 +1,49 @@
+
+
+Diffusing your bomb
+objdump -t bomb: examines the symbol table
+objdump -d bomb: disassembles all bomb code
+strings bomb: prints all printable strings
+gdb bomb will open GNU Debugger
+	Examine while stepping through your program
+		registers
+		the stack
+		contents of program memory
+		instruction stream
+
+help
+break explode_bomb
+break phrase_1
+run
+到达断点处
+	disas
+(gdb) info registers
+(gdb) print $rsp
+(gdb) stepi
+(gdb) nexti
+(gdb) x $rsp
+(gdb) x/4wd $rsp
+
+
+GDB 介绍
+gdb bomb
+# 获取帮助
+help
+# 设置断点
+break explode_bomb
+break phase_1
+# 开始运行
+run
+# 检查汇编 会给出对应的代码的汇编
+disas 
+# 查看寄存器内容
+info registers
+# 打印指定寄存器
+print $rsp
+# 每步执行
+stepi
+# 检查寄存器或某个地址
+x/4wd $rsp
+
+用 ctl+c 可以退出，每次进入都要设置断点（保险起见），炸弹会用 sscanf 来读取字符串，
+了解清楚（感谢网友十六夜砕月指正）到底需要输入什么。

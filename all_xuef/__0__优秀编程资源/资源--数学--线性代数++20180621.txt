@@ -1,0 +1,13 @@
+
+给它一个名字，你就有了支配它的力量。
+
+1. MIT--线性代数
+https://www.bilibili.com/video/av4042095
+
+2. 3BLUE1BROWN
+
+3. 孟岩--理解矩阵1、2、3
+https://blog.csdn.net/myan/article/details/647511
+
+4. 当然还有经典教材 
+《离散数学及其应用》

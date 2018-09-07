@@ -1,0 +1,44 @@
+
+472. Concatenated Words
+
+dp, dfs, trie, 图
+
+### 学习 trie解法
+http://bookshadow.com/weblog/2016/12/18/leetcode-concatenated-words/
+
+
+看了discussion里面的优化，感觉很好，思路是一个word要想被其他词组成，其他词的长度必然是<这个词的。所以事先对words排序。
+
+
+
+我们首先按字符串长度由小到大排列words. 然后构造一个set, 依次加入set中。对于具体的字符串word，
+如果word可以由至少set中的两个word构成，则该word加入结果集中。这种字符串的prefix问题，很明显要用dynamic programming来解。
+
+
+考察点：dp，看是否一个string可以由其他string组成的变种； 
+思路：首先要会一个string可以由其他string组成这道题。
+
+
+Input: ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
+
+Output: ["catsdogcats","dogcatsdog","ratcatdogcat"]
+
+
+["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
+1. 按长度排序
+['cat', 'dog', 'rat', 'cats', 'dogcatsdog', 'catsdogcats', 'ratcatdogcat', 'hippopotamuses']
+
+2. 考虑 'catsdogcats'
+cat, cats 两个前缀
+
+
+### 图的角度
+https://leetcode.com/problems/concatenated-words/discuss/95647/Python-Explanation
+
+Let's discuss whether a word should be included in our answer.
+Consider the word as a topologically sorted directed graph, where each node is a letter, and an edge exists from i to j 
+if word[i:j] is in our wordlist, [and there is no edge from i=0 to j=len(word)-1]. We want to know if there is a path 
+from beginning to end. If there is, then the word can be broken into concatenated parts from our wordlist. To answer 
+this question, we DFS over this graph.
+
+

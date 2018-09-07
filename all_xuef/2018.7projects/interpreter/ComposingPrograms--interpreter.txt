@@ -1,0 +1,176 @@
+
+
+However, many interpreters have an elegant common structure: two mutually recursive functions. 
+The first evaluates expressions in environments; the second applies functions to arguments.
+
+
+These functions are recursive in that they are defined in terms of each other: applying a function requires 
+evaluating the expressions in its body, while evaluating an expression may involve applying one or more functions.
+
+3.2 Functional Programming
+Our object of study, a subset of the Scheme language, employs a very similar model of computation to Python's, 
+but uses only expressions (no statements), specializes in symbolic computation, and employs only immutable values.
+
+
+3.2.1  Expressions
+Scheme programs consist of expressions, which are either call expressions or special forms.
+
+A call expression consists of an operator expression followed by zero or more operand sub-expressions, as in Python. 
+
+
+3.2.2   Definitions
+Values can be named using the define special form
+(define pi 3.14)
+
+(define (square x) (* x x))
+
+Scheme supports local definitions with the same lexical scoping rules as Python. 
+
+
+Anonymous functions are created using the lambda special form. Lambda is used to create procedures 
+in the same way as define, except that no name is specified for the procedure:
+(lambda (<formal-parameters>) <body>)
+
+3.2.3   Compound values
+Pairs are built into the Scheme language. 
+cons car cdr pair?
+构造器 选择器 谓词
+list 的闭包性质
+谓词 (null? lst)
+
+
+3.2.4   Symbolic Data
+
+All the compound data objects we have used so far were constructed ultimately from numbers. 
+One of Scheme's strengths is working with arbitrary symbols as data.
+抑制求值
+quote '
+say, your neme
+say, 'your neme
+
+;; 生成代码的能力 
+> (list 'define 'list)
+(define list)
+
+
+The full Scheme language contains additional features, such as mutation operations, vectors, and maps. 
+However, the subset we have introduced so far provides a rich functional programming language capable 
+of implementing many of the ideas we have discussed so far in this text.
+
+
+## 有空认真研究下
+3.2.5   Turtle graphics
+
+
+3.4   Interpreters for Languages with Combination
+
+The interpreter we create will be complete in the sense that it will allow us to write fully general programs in Scheme. 
+To do so, it will implement the same environment model of evaluation that we introduced for Python programs in Chapter 1.
+
+3.4.1
+We will implement an interpreter for the Calculator language in Python. That is, we will write a Python program that 
+takes string lines as input and returns the result of evaluating those lines as a Calculator expression. 
+Our interpreter will raise an appropriate exception if the calculator expression is not well formed.
+
+
+3.4.2   Expression Trees
+
+represent expression trees as data in our programs. In order to write an interpreter, we must operate on expressions as data.
+
+
+A primitive expression is just a number or a string in Calculator: either an int or float or an operator symbol. 
+All combined expressions are call expressions. A call expression is a Scheme list with a first element (the operator) 
+followed by zero or more operand expressions.
+
+
+This example demonstrates that all Calculator expressions are nested Scheme lists. 
+Our Calculator interpreter will read in nested Scheme lists, convert them into expression trees represented 
+as nested Pair instances (Parsing expressions below), and then evaluate the expression trees to produce 
+values (Calculator evaluation below).
+
+
+
+
+
+3.5   Interpreters for Languages with Abstraction
+The Calculator language provides a means of combination through nested call expressions. 
+However, there is no way to define new operators, give names to values, 
+or express general methods of computation. 
+
+Calculator does not support abstraction in any way. As a result, it is not a particularly 
+powerful or general programming language. We now turn to the task of defining a general 
+programming language that supports abstraction by binding names to values and defining new operations.
+
+3.5.1   Structure
+This section describes the general structure of a Scheme interpreter. Completing that project will produce 
+a working implementation of the interpreter described here.
+
+An interpreter for Scheme can share much of the same structure as the Calculator interpreter. 
+A parser produces an expression that is interpreted by an evaluator. The evaluation function 
+inspects the form of an expression, and for call expressions it calls a function to apply a 
+procedure to some arguments. Much of the difference in evaluators is associated with special forms, 
+user-defined functions, and implementing the environment model of computation.
+
+### Parsing. 
+The scheme_reader and scheme_tokens modules from the Calculator interpreter are nearly sufficient 
+to parse any valid Scheme expression. However, it does not yet support quotation or dotted lists. 
+A full Scheme interpreter should be able to parse the following input expression.
+
+>>> read_line("(car '(1 . 2))")
+Pair('car', Pair(Pair('quote', Pair(Pair(1, 2), nil)), nil))
+Your first task in implementing the Scheme interpreter will be to extend scheme_reader to correctly 
+parse dotted lists and quotation.
+
+
+### Evaluation
+The scheme_eval function evaluates the different forms of expressions in Scheme: primitives, special forms, 
+and call expressions. The form of a combination in Scheme can be determined by inspecting its first element. 
+Each special form has its own evaluation rule.
+
+
+### Procedure application
+a PrimtiveProcedure or a LambdaProcedure
+
+
+### Eval/apply recursion
+
+
+3.5.3   Data as Programs
+
+Evaluating expressions that are constructed as a part of execution is a common and powerful feature 
+in dynamic programming languages. In few languages is this practice as common as in Scheme, but the
+ability to construct and evaluate expressions during the course of execution of a program can prove 
+to be a valuable tool for any programmer.
+
+3.5.4   Macros
+
+Because expressions in the language are structured data, it is convenient to write Scheme expressions 
+that build other Scheme expressions. Scheme programs are just lists of expressions, and so it is possible 
+to write programs that output and even execute other programs.
+
+Macros are procedures that take expressions as input and return Scheme expressions as output. 
+Macros exist in many programming languages but are particularly powerful in Scheme and other 
+Lisp dialects because Scheme expressions are lists, and Scheme has good built-in procedures 
+for manipulating lists. 
+
+(define-macro (for sym vals expr)
+	(list 'map (list 'lambda (list sym) expr) vals))
+	
+(for x '(1 2 3 4) (* x x))
+
+(define-macro (for sym vals expr)
+	`(map (lambda (,sym) ,expr) vals))
+
+
+
+
+
+
+
+
+
+
+
+
+
+

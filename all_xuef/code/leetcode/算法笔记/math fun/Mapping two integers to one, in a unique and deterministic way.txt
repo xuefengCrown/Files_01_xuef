@@ -1,0 +1,18 @@
+
+Imagine two positive integers A and B. I want to combine these two into a single integer C.
+
+There can be no other integers D and E which combine to C. So combining them with the addition operator doesn't work. 
+Eg 30 + 10 = 40 = 40 + 0 = 39 + 1 Neither does concatination work. Eg "31" + "2" = 312 = "3" + "12"
+
+This combination operation should also be deterministic (always yield the same result with the same inputs) and should 
+always yield an integer on either the positive or the negative side of integers.
+
+
+	You should clarify if you mean integers in software or integers in math. In software, you pick any integer type and it will have a size, 
+	so you have a finite number of them, so there is no solution (unless, of course, your input data is guaranteed to be within some range 
+	and your output can be any integer). In math see ASk's solution.
+	
+You're looking for a bijective NxN -> N mapping. These are used for e.g. dovetailing. Have a look at this PDF for an introduction to 
+so-called pairing functions. Wikipedia introduces a specific pairing function, namely the Cantor pairing function:
+
+https://stackoverflow.com/questions/919612/mapping-two-integers-to-one-in-a-unique-and-deterministic-way

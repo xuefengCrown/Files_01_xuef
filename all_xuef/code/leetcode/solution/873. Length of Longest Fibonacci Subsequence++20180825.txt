@@ -1,0 +1,38 @@
+
+873. Length of Longest Fibonacci Subsequence
+Example 1:
+
+Input: [1,2,3,4,5,6,7,8]
+Output: 5
+Explanation:
+The longest subsequence that is fibonacci-like: [1,2,3,5,8].
+Example 2:
+
+Input: [1,3,7,11,12,14,18]
+Output: 3
+Explanation:
+The longest subsequence that is fibonacci-like:
+[1,11,12], [3,11,14] or [7,11,18].
+
+
+## dp[y][x + y] 表示原来的值
+dp[y][x + y] = max(dp[y][x + y], dp[x][y] + 1)
+上式中, dp[x][y]表示以(x, y)为结尾的类斐波那契数列的长度
+
+这个dp的状态定义很好, 包含了数列的概念。我之前的那道等差数列题的dp状态定义就不好。
+dp(5,8) = dp(3,5) + 1 if dp(3,5) >= 2 else dp(5,8)
+
+
+1. 初始化 所有二元序对
+
+2. dp
+
+
+
+
+
+
+
+
+
+

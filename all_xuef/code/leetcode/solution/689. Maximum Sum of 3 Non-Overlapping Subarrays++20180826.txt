@@ -1,0 +1,41 @@
+
+https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/solution/
+
+689. Maximum Sum of 3 Non-Overlapping Subarrays
+
+这道题给了我们一个只包含正数的数组，让我们找三个长度为k的不重叠的子数组，使得所有子数组的数字之和最大。
+
+
+
+思路：看到带3的题目，首先要想到利用3。3代表着可以构成左中右结构，也就是说只要能知道当前
+位置符合要求的左边最大值，右边最大值就知道了答案。
+
+
+### Intuition
+It is natural to consider an array W of each interval's sum, where each interval is the given length K. 
+
+To create W, we can either use prefix sums, or manage the sum of the interval as a window slides along the array.
+
+From there, we approach the reduced problem: Given some array W and an integer K, what is the lexicographically(字典序)
+smallest tuple of indices (i, j, m) with i + K <= j and j + K <= m that maximizes W[i] + W[j] + W[m]?
+
+
+
+Algorithm
+
+Suppose we fixed j. We would like to know on the intervals i \in [0, j-K]i∈[0,j−K] and k \in [j+K, \text{len}(W)-1]k∈[j+K,len(W)−1], where the largest value of W[i]W[i] (and respectively W[k]W[k]) occurs first. (Here, first means the smaller index.)
+
+We can solve these problems with dynamic programming. For example, if we know that ii is where the largest value of W[i]W[i] occurs first on [0, 5][0,5], then on [0, 6][0,6] the first occurrence of the largest W[i]W[i] must be either ii or 66. If say, 66 is better, then we set best = 6.
+
+At the end, left[z] will be the first occurrence of the largest value of W[i] on the interval i \in [0, z]i∈[0,z], and right[z] will be the same but on the interval i \in [z, \text{len}(W) - 1]i∈[z,len(W)−1]. This means that for some choice j, the candidate answer must be (left[j-K], j, right[j+K]). We take the candidate that produces the maximum W[i] + W[j] + W[k].
+
+
+
+
+
+
+
+
+
+
+

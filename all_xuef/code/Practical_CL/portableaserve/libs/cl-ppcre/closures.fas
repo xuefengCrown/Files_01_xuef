@@ -1,0 +1,984 @@
+(|SYSTEM|::|VERSION| '(20080430.))
+#0Y_ #0Y |CHARSET|::|UTF-8|
+#Y(#:|1 33 (IN-PACKAGE #:CL-PPCRE)-1|
+   #17Y(00 00 00 00 00 00 00 00 20 01 DA 31 F6 0F 01 19 01)
+   ("CL-PPCRE" |COMMON-LISP|::|*PACKAGE*|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|35 35 (DECLAIM (INLINE *STRING*= *STRING*-EQUAL))-2|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|*STRING*=|
+     |CL-PPCRE|::|*STRING*-EQUAL|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|37 51 (DEFUN *STRING*= (STRING2 START1 END1 ...) ...)-3|
+   #25Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 32 A2 DA DE 32 9C C5 19
+        01)
+   (|CL-PPCRE|::|*STRING*=| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    |SYSTEM|::|INLINE-EXPANSION|
+    ((|CL-PPCRE|::|STRING2| |CL-PPCRE|::|START1| |CL-PPCRE|::|END1|
+      |CL-PPCRE|::|START2| |CL-PPCRE|::|END2|)
+     #1="Like STRING=, i.e. compares the special string *STRING* from START1\n
+to END1 with STRING2 from START2 to END2. Note that there's no\n
+boundary check - this has to be implemented by the caller."
+     (|COMMON-LISP|::|DECLARE| (|SYSTEM|::|IN-DEFUN| |CL-PPCRE|::|*STRING*=|)
+      (|COMMON-LISP|::|OPTIMIZE| |COMMON-LISP|::|SPEED|
+       (|COMMON-LISP|::|SAFETY| 0.) (|COMMON-LISP|::|SPACE| 0.)
+       (|COMMON-LISP|::|DEBUG| 0.) (|COMMON-LISP|::|COMPILATION-SPEED| 0.))
+      (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|START1|
+       |CL-PPCRE|::|END1| |CL-PPCRE|::|START2| |CL-PPCRE|::|END2|))
+     (|COMMON-LISP|::|BLOCK| |CL-PPCRE|::|*STRING*=|
+      (|COMMON-LISP|::|LOOP| |CL-PPCRE|::|FOR| |CL-PPCRE|::|STRING1-IDX|
+       |CL-PPCRE|::|OF-TYPE| |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|FROM|
+       |CL-PPCRE|::|START1| |CL-PPCRE|::|BELOW| |CL-PPCRE|::|END1|
+       |CL-PPCRE|::|FOR| |CL-PPCRE|::|STRING2-IDX| |CL-PPCRE|::|OF-TYPE|
+       |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|FROM| |CL-PPCRE|::|START2|
+       |CL-PPCRE|::|BELOW| |CL-PPCRE|::|END2| |CL-PPCRE|::|ALWAYS|
+       (|COMMON-LISP|::|CHAR=|
+        (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*|
+         |CL-PPCRE|::|STRING1-IDX|)
+        (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|STRING2|
+         |CL-PPCRE|::|STRING2-IDX|)))))
+    #Y(|CL-PPCRE|::|*STRING*=|
+       #54Y(00 00 00 00 05 00 00 00 26 06 B0 DA 63 A2 F9 A1 F8 1B 14 00 19 09
+            6B 01 AF 71 32 B5 AF 71 32 91 01 07 70 85 02 85 01 AE B3 90 01 34
+            06 AD AD 91 01 34 63 02 19 09)
+       (0. |CL-PPCRE|::|*STRING*|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|STRING2| |CL-PPCRE|::|START1| |CL-PPCRE|::|END1|
+        |CL-PPCRE|::|START2| |CL-PPCRE|::|END2|)
+       #1# 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|53 67 (DEFUN *STRING*-EQUAL (STRING2 START1 END1 ...) ...)-4|
+   #25Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 32 A2 DA DE 32 9C C5 19
+        01)
+   (|CL-PPCRE|::|*STRING*-EQUAL| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    |SYSTEM|::|INLINE-EXPANSION|
+    ((|CL-PPCRE|::|STRING2| |CL-PPCRE|::|START1| |CL-PPCRE|::|END1|
+      |CL-PPCRE|::|START2| |CL-PPCRE|::|END2|)
+     #1="Like STRING-EQUAL, i.e. compares the special string *STRING* from\n
+START1 to END1 with STRING2 from START2 to END2. Note that there's no\n
+boundary check - this has to be implemented by the caller."
+     (|COMMON-LISP|::|DECLARE|
+      (|SYSTEM|::|IN-DEFUN| |CL-PPCRE|::|*STRING*-EQUAL|)
+      (|COMMON-LISP|::|OPTIMIZE| |COMMON-LISP|::|SPEED|
+       (|COMMON-LISP|::|SAFETY| 0.) (|COMMON-LISP|::|SPACE| 0.)
+       (|COMMON-LISP|::|DEBUG| 0.) (|COMMON-LISP|::|COMPILATION-SPEED| 0.))
+      (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|START1|
+       |CL-PPCRE|::|END1| |CL-PPCRE|::|START2| |CL-PPCRE|::|END2|))
+     (|COMMON-LISP|::|BLOCK| |CL-PPCRE|::|*STRING*-EQUAL|
+      (|COMMON-LISP|::|LOOP| |CL-PPCRE|::|FOR| |CL-PPCRE|::|STRING1-IDX|
+       |CL-PPCRE|::|OF-TYPE| |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|FROM|
+       |CL-PPCRE|::|START1| |CL-PPCRE|::|BELOW| |CL-PPCRE|::|END1|
+       |CL-PPCRE|::|FOR| |CL-PPCRE|::|STRING2-IDX| |CL-PPCRE|::|OF-TYPE|
+       |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|FROM| |CL-PPCRE|::|START2|
+       |CL-PPCRE|::|BELOW| |CL-PPCRE|::|END2| |CL-PPCRE|::|ALWAYS|
+       (|COMMON-LISP|::|CHAR-EQUAL|
+        (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*|
+         |CL-PPCRE|::|STRING1-IDX|)
+        (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|STRING2|
+         |CL-PPCRE|::|STRING2-IDX|)))))
+    #Y(|CL-PPCRE|::|*STRING*-EQUAL|
+       #54Y(00 00 00 00 05 00 00 00 26 06 B0 DA 63 A2 F9 A1 F8 1B 14 00 19 09
+            6B 01 AF 71 32 B5 AF 71 32 91 01 0D 70 85 02 85 01 AE B3 90 01 34
+            06 AD AD 91 01 34 63 02 19 09)
+       (0. |CL-PPCRE|::|*STRING*|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|STRING2| |CL-PPCRE|::|START1| |CL-PPCRE|::|END1|
+        |CL-PPCRE|::|START2| |CL-PPCRE|::|END2|)
+       #1# 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|69 78 (DEFGENERIC CREATE-MATCHER-AUX (REGEX NEXT-FN) ...)-5|
+   #120Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DA
+         6F 04 2D 03 05 6B 06 99 07 DA E2 AF E3 E4 E5 E6 E7 E8 E9 EA EB 01 03
+         BC 6F 12 1B 24 AF 38 01 80 A9 03 14 AD 31 B8 16 02 1B 14 94 00 94 00
+         9E 5C 5C 78 76 00 7B 02 A1 21 63 9D FC FB 16 02 83 00 AC 8D 9F 66 16
+         01 9E 16 01 F8 ED 6B 14 EF BE F0 DA 6E 03 17 F2 63 6E 03 19 7B 04 33
+         02 23 9B 0D 02)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1| |CLOS|::|DEFGENERIC| |SYSTEM|::|FBOUND-STRING|
+    |SYSTEM|::|CHECK-REDEFINITION| |CLOS|::|<STANDARD-GENERIC-FUNCTION>|
+    |CLOS|::|ENSURE-GENERIC-FUNCTION| :|GENERIC-FUNCTION-CLASS| :|LAMBDA-LIST|
+    (|CL-PPCRE|::|REGEX| |CL-PPCRE|::|NEXT-FN|) :|ARGUMENT-PRECEDENCE-ORDER|
+    (|CL-PPCRE|::|REGEX| |CL-PPCRE|::|NEXT-FN|) :|DOCUMENTATION|
+    "Creates a closure which takes one parameter,\n
+START-POS, and tests whether REGEX can match *STRING* at START-POS\n
+such that the call to NEXT-FN after the match would succeed."
+    :|DECLARATIONS|
+    ((|COMMON-LISP|::|OPTIMIZE| |COMMON-LISP|::|SPEED|
+      (|COMMON-LISP|::|SAFETY| 0.) (|COMMON-LISP|::|SPACE| 0.)
+      (|COMMON-LISP|::|DEBUG| 0.) (|COMMON-LISP|::|COMPILATION-SPEED| 0.)))
+    |CLOS|::|METHODS| |CLOS|::|CLASS-DEFAULT-INITARGS| :|METHOD-CLASS|
+    |CLOS|::|<STANDARD-METHOD>| :|METHOD-COMBINATION| :|NAME|
+    |CLOS|::|MAKE-GENERIC-FUNCTION-PROTOTYPE| |CLOS|::|STANDARD|
+    |CLOS|::|FIND-METHOD-COMBINATION|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|80 87 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-6|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|80 87 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-6-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|80 87 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-6-1-1|
+           #47Y(00 00 00 00 02 00 00 00 20 03 AE 6F 00 72 63 01 03 AF 8C 9F 17
+                87 03 02 A2 F9 1B 05 87 03 02 9D F9 AE AE 30 01 F8 83 03 14 8D
+                9F 70 15 19 06)
+           (|CL-PPCRE|::|ELEMENTS| |CL-PPCRE|::|CREATE-MATCHER-AUX|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST| (|CL-PPCRE|::|SEQ| |CL-PPCRE|::|NEXT-FN|)
+    |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|SEQ| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|89 99 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-7|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|89 99 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-7-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|89 99 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-7-1-1|
+           #51Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 63 B0 6F 00 1B 0C 94 00
+                AC B2 70 01 84 02 16 01 83 00 AC 8D 9F 70 16 01 AC 31 B1 16 01
+                0B 00 00 AC 2C 02 01 19 04)
+           (|CL-PPCRE|::|CHOICES| |CL-PPCRE|::|CREATE-MATCHER-AUX|
+            #Y(#:|89 99 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-7-1-1-1|
+               #36Y(00 00 00 00 01 00 00 00 20 02 69 00 01 63 1B 0D 19 04 87 01
+                    00 14 B0 36 01 1E 75 83 01 AD 8D 9F 71 00 19 04)
+               (|COMMON-LISP|::|NIL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST|
+    (|CL-PPCRE|::|ALTERNATION| |CL-PPCRE|::|NEXT-FN|) |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|ALTERNATION| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|101 137 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-8|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|101 137 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-8-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|101 137 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-8-1-1|
+           #48Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 9D 2B 01 B0
+                2F 00 0B 00 00 AC 6D 01 01 9E 2B 01 B2 6F 02 AE 30 03 0B 00 00
+                AC 2C 04 01 19 07)
+           (|CL-PPCRE|::|NUM|
+            #Y(|CL-PPCRE|::|STORE-END-OF-REG|
+               #46Y(00 00 00 00 01 00 00 00 26 02 6B 01 69 00 01 6B 02 07 00 01
+                    5F 14 AE 9F 60 16 02 6B 03 69 00 01 AF AE 9F 60 16 02 69 01
+                    01 AE 36 01 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*REG-STARTS*|
+                |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+               (|CL-PPCRE|::|START-POS|) |COMMON-LISP|::|NIL| 1)
+            |CL-PPCRE|::|REGEX| |CL-PPCRE|::|CREATE-MATCHER-AUX|
+            #Y(#:|101 137 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-8-1-1-1|
+               #87Y(00 00 00 00 01 00 00 00 20 02 6B 01 07 01 01 5F 14 6B 02 07
+                    01 01 5F 14 6B 03 07 01 01 5F 14 6B 02 69 01 01 B2 AE 9F 60
+                    16 02 69 00 01 B1 76 01 92 00 21 6B 01 69 01 01 B1 AE 9F 60
+                    16 02 6B 02 69 01 01 B0 AE 9F 60 16 02 6B 03 69 01 01 AF AE
+                    9F 60 16 02 15 19 05)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*REG-STARTS*|
+                |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST| (|CL-PPCRE|::|REGISTER| |CL-PPCRE|::|NEXT-FN|)
+    |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|REGISTER| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|139 154 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-9|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|139 154 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-9-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|139 154 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-9-1-1|
+           #45Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 9D 2B 01 B0
+                6F 00 DB 30 02 0B 00 00 B0 88 03 06 AC 2C 05 01 19 05 AC 2C 04
+                01 19 05)
+           (|CL-PPCRE|::|REGEX| #.#'|COMMON-LISP|::|IDENTITY|
+            |CL-PPCRE|::|CREATE-MATCHER-AUX| |CL-PPCRE|::|POSITIVEP|
+            #Y(#:|139 154 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-9-1-1-1|
+               #28Y(00 00 00 00 01 00 00 00 20 02 69 00 01 AE 36 01 1F 08 69 01
+                    01 AE 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|139 154 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-9-1-1-2|
+               #29Y(00 00 00 00 01 00 00 00 20 02 69 00 01 AE 36 01 59 1F 08 69
+                    01 01 AE 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST|
+    (|CL-PPCRE|::|LOOKAHEAD| |CL-PPCRE|::|NEXT-FN|) |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|LOOKAHEAD| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|156 177 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-10|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|156 177 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-10-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|156 177 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-10-1-1|
+           #51Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 9D 2B 02 B0
+                2F 00 0B 00 00 B0 6F 01 DC 30 03 0B 00 01 B0 88 04 06 AC 2C 06
+                01 19 05 AC 2C 05 01 19 05)
+           (|CL-PPCRE|::|LEN| |CL-PPCRE|::|REGEX| #.#'|COMMON-LISP|::|IDENTITY|
+            |CL-PPCRE|::|CREATE-MATCHER-AUX| |CL-PPCRE|::|POSITIVEP|
+            #Y(#:|156 177 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-10-1-1-1|
+               #48Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 73 01 38 69 00 01 33
+                    01 34 1F 16 69 00 02 AE 69 00 01 73 01 38 36 01 1F 08 69 01
+                    01 AE 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*START-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|156 177 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-10-1-1-2|
+               #43Y(00 00 00 00 01 00 00 00 20 02 AD 69 00 01 90 01 31 0F 69 00
+                    02 AE 69 00 01 73 01 38 36 01 59 1F 08 69 01 01 AE 36 01 19
+                    02 19 02)
+               (|COMMON-LISP|::|NIL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST|
+    (|CL-PPCRE|::|LOOKBEHIND| |CL-PPCRE|::|NEXT-FN|) |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|LOOKBEHIND| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|179 290 (DEFMACRO INSERT-CHAR-CLASS-TESTER (# &BODY BODY) ...)-11|
+   #23Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 72 4C 32 9C C5 19 01)
+   (|CL-PPCRE|::|INSERT-CHAR-CLASS-TESTER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|INSERT-CHAR-CLASS-TESTER|
+       #287Y(00 00 00 00 02 00 00 00 26 03 AE DA DA 64 2D 04 01 1D 80 F8 00 2B
+             01 A0 5C 78 AC DA DA 63 2D 04 01 1D 80 ED AC 94 00 9E 5C 78 A4 5C
+             5C 0B 04 00 E4 72 AA B1 6D 0B 01 E6 AE B1 7B 02 E7 E7 B1 7B 02 7B
+             02 D3 5D 7A E9 EA EB EC ED EE EF F0 B7 7B 02 7B 03 03 17 5D 7A F2
+             F3 F4 F5 F6 BA 03 1D 5D 7A A9 34 5D 7A 7B 02 65 1E F4 65 1F F4 65
+             20 BC 7B 02 7B 01 03 21 5D 7A AA 34 5D 7A 7B 02 65 22 B8 7B 02 65
+             23 BA 7B 02 A9 34 7A 65 24 64 AA 34 7A 65 25 F4 65 20 BD 7B 02 7B
+             01 03 26 5D 7A AB 34 7A 65 27 F4 65 20 BE 7B 02 7B 01 03 28 5D 7A
+             04 0F 34 7A 65 29 65 2A 65 2B BF 03 2C 5D 5D 7A 04 10 34 7A 65 2D
+             F4 65 20 C0 7B 02 7B 01 03 2E 5D 7A 04 11 34 7A 65 2F F4 65 20 C1
+             7B 02 7B 01 03 30 5D 7A 04 12 34 7A 65 2B 65 31 65 2B C2 03 32 5D
+             5D 7A 04 13 34 7A 64 65 33 C2 03 34 5D 7A 04 14 34 7A 7B 0C 7B 05
+             61 04 19 0A AE 2F 02 19 03 DD DE B2 DF B0 E0 6F 07 E2 B3 E3 33 07
+             1F)
+       (2. |SYSTEM|::|LIST-LENGTH-IN-BOUNDS-P| |SYSTEM|::|MACRO-CALL-ERROR|
+        |EXT|::|SOURCE-PROGRAM-ERROR| :|FORM| :|DETAIL|
+        "~S: ~S does not match lambda list element ~:S" |SYSTEM|::|TEXT|
+        |CL-PPCRE|::|INSERT-CHAR-CLASS-TESTER|
+        #1=(|CL-PPCRE|::|CHAR-CLASS| |CL-PPCRE|::|CHR-EXPR|) "%CHAR-CLASS"
+        #Y(|CL-PPCRE|::|INSERT-CHAR-CLASS-TESTER-SUBSTITUTE-CHAR-CLASS-TESTER|
+           #22Y(00 00 00 00 01 00 00 00 26 02 AD DB 69 00 01 DC 38 02 31 B9 19
+                02)
+           (|COMMON-LISP|::|NIL| (|CL-PPCRE|::|CHAR-CLASS-TEST|)
+            #.#'|COMMON-LISP|::|EQUALP|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|CL-PPCRE|::|NEW|) |COMMON-LISP|::|NIL| 1)
+        |COMMON-LISP|::|LET*| |CL-PPCRE|::|HASH|
+        ((|COMMON-LISP|::|COUNT|
+          (|COMMON-LISP|::|IF| |CL-PPCRE|::|HASH|
+           (|COMMON-LISP|::|HASH-TABLE-COUNT| |CL-PPCRE|::|HASH|)
+           |COMMON-LISP|::|MOST-POSITIVE-FIXNUM|))
+         (|CL-PPCRE|::|KEY-LIST|
+          (|COMMON-LISP|::|IF| (|COMMON-LISP|::|<=| |COMMON-LISP|::|COUNT| 2.)
+           (|COMMON-LISP|::|LOOP| |CL-PPCRE|::|FOR| |CL-PPCRE|::|CHR|
+            |CL-PPCRE|::|BEING| |COMMON-LISP|::|THE| |CL-PPCRE|::|HASH-KEYS|
+            |CL-PPCRE|::|OF| |CL-PPCRE|::|HASH| |CL-PPCRE|::|COLLECT|
+            |CL-PPCRE|::|CHR|)
+           |COMMON-LISP|::|NIL|))
+         |CL-PPCRE|::|DOWNCASEDP|)
+        (|COMMON-LISP|::|DECLARE|
+         (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM|
+          |COMMON-LISP|::|COUNT|))
+        |COMMON-LISP|::|MULTIPLE-VALUE-BIND|
+        (|CL-PPCRE|::|MIN1| |CL-PPCRE|::|MAX1| |CL-PPCRE|::|MIN2|
+         |CL-PPCRE|::|MAX2| |CL-PPCRE|::|MIN3| |CL-PPCRE|::|MAX3|)
+        (|CL-PPCRE|::|CREATE-RANGES-FROM-HASH| |CL-PPCRE|::|HASH|)
+        |COMMON-LISP|::|WHEN| |COMMON-LISP|::|AND|
+        (|COMMON-LISP|::|NOT| |CL-PPCRE|::|MIN1|)
+        |CL-PPCRE|::|CASE-INSENSITIVE-P|
+        ((|COMMON-LISP|::|MULTIPLE-VALUE-SETQ|
+          (|CL-PPCRE|::|MIN1| |CL-PPCRE|::|MAX1| |CL-PPCRE|::|MIN2|
+           |CL-PPCRE|::|MAX2| |CL-PPCRE|::|MIN3| |CL-PPCRE|::|MAX3|)
+          (|CL-PPCRE|::|CREATE-RANGES-FROM-HASH| |CL-PPCRE|::|HASH|
+           :|DOWNCASEP| |COMMON-LISP|::|T|))
+         (|COMMON-LISP|::|SETQ| |CL-PPCRE|::|DOWNCASEDP| |COMMON-LISP|::|T|))
+        |COMMON-LISP|::|COND| (|COMMON-LISP|::|=| |COMMON-LISP|::|COUNT| 1.)
+        |COMMON-LISP|::|LET|
+        ((|CL-PPCRE|::|CHR1| (|COMMON-LISP|::|FIRST| |CL-PPCRE|::|KEY-LIST|)))
+        |COMMON-LISP|::|CHAR=| (|CL-PPCRE|::|CHR1|)
+        (|COMMON-LISP|::|=| |COMMON-LISP|::|COUNT| 2.)
+        ((|CL-PPCRE|::|CHR1| (|COMMON-LISP|::|FIRST| |CL-PPCRE|::|KEY-LIST|))
+         (|CL-PPCRE|::|CHR2| (|COMMON-LISP|::|SECOND| |CL-PPCRE|::|KEY-LIST|)))
+        |CL-PPCRE|::|CHR|
+        ((|COMMON-LISP|::|OR|
+          (|COMMON-LISP|::|CHAR=| |CL-PPCRE|::|CHR| |CL-PPCRE|::|CHR1|)
+          (|COMMON-LISP|::|CHAR=| |CL-PPCRE|::|CHR| |CL-PPCRE|::|CHR2|)))
+        |CL-PPCRE|::|WORD-CHAR-CLASS-P| |CL-PPCRE|::|WORD-CHAR-P|
+        (|COMMON-LISP|::|=| |COMMON-LISP|::|COUNT|
+         |CL-PPCRE|::|*REGEX-CHAR-CODE-LIMIT*|)
+        (|COMMON-LISP|::|AND| |CL-PPCRE|::|DOWNCASEDP| |CL-PPCRE|::|MIN1|
+         |CL-PPCRE|::|MIN2| |CL-PPCRE|::|MIN3|)
+        ((|COMMON-LISP|::|OR|
+          (|COMMON-LISP|::|CHAR-NOT-GREATERP| |CL-PPCRE|::|MIN1|
+           |CL-PPCRE|::|CHR| |CL-PPCRE|::|MAX1|)
+          (|COMMON-LISP|::|CHAR-NOT-GREATERP| |CL-PPCRE|::|MIN2|
+           |CL-PPCRE|::|CHR| |CL-PPCRE|::|MAX2|)
+          (|COMMON-LISP|::|CHAR-NOT-GREATERP| |CL-PPCRE|::|MIN3|
+           |CL-PPCRE|::|CHR| |CL-PPCRE|::|MAX3|)))
+        (|COMMON-LISP|::|AND| |CL-PPCRE|::|DOWNCASEDP| |CL-PPCRE|::|MIN1|
+         |CL-PPCRE|::|MIN2|)
+        ((|COMMON-LISP|::|OR|
+          (|COMMON-LISP|::|CHAR-NOT-GREATERP| |CL-PPCRE|::|MIN1|
+           |CL-PPCRE|::|CHR| |CL-PPCRE|::|MAX1|)
+          (|COMMON-LISP|::|CHAR-NOT-GREATERP| |CL-PPCRE|::|MIN2|
+           |CL-PPCRE|::|CHR| |CL-PPCRE|::|MAX2|)))
+        (|COMMON-LISP|::|AND| |CL-PPCRE|::|DOWNCASEDP| |CL-PPCRE|::|MIN1|)
+        |COMMON-LISP|::|CHAR-NOT-GREATERP| |CL-PPCRE|::|MIN1|
+        (|CL-PPCRE|::|MAX1|)
+        (|COMMON-LISP|::|AND| |CL-PPCRE|::|MIN1| |CL-PPCRE|::|MIN2|
+         |CL-PPCRE|::|MIN3|)
+        ((|COMMON-LISP|::|OR|
+          (|COMMON-LISP|::|CHAR<=| |CL-PPCRE|::|MIN1| |CL-PPCRE|::|CHR|
+           |CL-PPCRE|::|MAX1|)
+          (|COMMON-LISP|::|CHAR<=| |CL-PPCRE|::|MIN2| |CL-PPCRE|::|CHR|
+           |CL-PPCRE|::|MAX2|)
+          (|COMMON-LISP|::|CHAR<=| |CL-PPCRE|::|MIN3| |CL-PPCRE|::|CHR|
+           |CL-PPCRE|::|MAX3|)))
+        (|COMMON-LISP|::|AND| |CL-PPCRE|::|MIN1| |CL-PPCRE|::|MIN2|)
+        ((|COMMON-LISP|::|OR|
+          (|COMMON-LISP|::|CHAR<=| |CL-PPCRE|::|MIN1| |CL-PPCRE|::|CHR|
+           |CL-PPCRE|::|MAX1|)
+          (|COMMON-LISP|::|CHAR<=| |CL-PPCRE|::|MIN2| |CL-PPCRE|::|CHR|
+           |CL-PPCRE|::|MAX2|)))
+        |COMMON-LISP|::|CHAR<=| (|CL-PPCRE|::|MAX1|) |COMMON-LISP|::|GETHASH|
+        (|CL-PPCRE|::|HASH|))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|)
+       "Utility macro to replace each occurence of '(CHAR-CLASS-TEST)\n
+within BODY with the correct test (corresponding to CHAR-CLASS)\n
+against CHR-EXPR."
+       1)
+    (#1# |COMMON-LISP|::|&BODY| |CL-PPCRE|::|BODY|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1|
+           #459Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 9D 2B 01 B0
+                 2F 00 0B 00 00 1C 80 EF C6 14 AC DC 91 01 33 25 68 01 00 71 74
+                 AC 31 75 42 03 01 02 93 04 11 A0 F9 14 84 00 B1 31 75 42 02 6A
+                 04 6A 04 92 04 6F AC 31 B1 16 06 14 63 68 03 00 2F 03 42 06 A6
+                 2B 06 7F 06 00 00 7F 05 00 01 7F 04 00 02 7F 03 00 03 7F 02 00
+                 04 7F 01 00 05 06 00 00 1C 28 BA 89 04 24 68 0A 00 DF 64 2D 03
+                 03 42 06 15 0B 05 05 15 0B 04 04 15 0B 03 03 15 0B 02 02 15 0B
+                 01 01 15 0B 00 00 7E 07 B5 E0 90 01 2F 80 76 B5 DC 90 01 2F 80
+                 87 BA 88 0C 80 A0 B5 6B 0F 90 01 2F 80 A5 93 07 10 06 00 00 1D
+                 0B 06 00 02 1D 06 06 00 04 1C 80 A2 93 07 0B 06 00 00 1D 06 06
+                 00 02 1C 80 A4 93 07 06 06 00 00 1C 80 AB 06 00 00 1D 0B 06 00
+                 02 1D 06 06 00 04 1C 80 AB 06 00 00 1D 06 06 00 02 1C 80 B0 06
+                 00 00 1C 80 BA BA 88 07 80 BF AC 2C 1F 01 19 0F 14 31 73 1B FF
+                 0C AC 2C 08 01 19 10 9D 2B 01 A6 5B 0B 00 00 BB 88 07 6E AC 2C
+                 09 01 19 10 AC 2C 0A 01 19 10 9D 2B 02 A6 5B 0B 00 00 A6 5C 5B
+                 0B 00 01 BB 88 07 68 AC 2C 0B 01 19 10 AC 2C 0D 01 19 0F BA 88
+                 07 76 AC 2C 0E 01 19 0F D5 19 0F BA 88 07 79 AC 2C 11 01 19 0F
+                 AC 2C 12 01 19 0F BA 88 07 76 AC 2C 13 01 19 0F AC 2C 14 01 19
+                 0F BA 88 07 76 AC 2C 15 01 19 0F AC 2C 16 01 19 0F BA 88 07 76
+                 AC 2C 17 01 19 0F AC 2C 18 01 19 0F BA 88 07 76 AC 2C 19 01 19
+                 0F AC 2C 1A 01 19 0F BA 88 07 76 AC 2C 1B 01 19 0F AC 2C 1C 01
+                 19 0F BA 88 07 76 AC 2C 1D 01 19 0F AC 2C 1E 01 19 0F)
+           (|CL-PPCRE|::|HASH| #.|COMMON-LISP|::|MOST-POSITIVE-FIXNUM| 2.
+            |CL-PPCRE|::|CREATE-RANGES-FROM-HASH|
+            |CL-PPCRE|::|CASE-INSENSITIVE-P| :|DOWNCASEP| 1.
+            |CL-PPCRE|::|INVERTEDP|
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-1|
+               #43Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 17 6B 02
+                    AE 71 32 69 00 01 33 01 07 59 1F 09 69 03 01 96 02 36 01 19
+                    02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-2|
+               #42Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 16 6B 02
+                    AE 71 32 69 00 01 33 01 07 1F 09 69 03 01 96 02 36 01 19 02
+                    19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-3|
+               #54Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 22 6B 02
+                    AE 71 32 AC 69 00 01 90 01 07 07 AC 69 00 02 33 01 07 16 01
+                    59 1F 09 69 03 01 96 02 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-4|
+               #59Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 27 6B 02
+                    AE 71 32 AC 69 00 01 91 01 07 0D 16 01 1F 16 69 03 01 96 02
+                    36 01 19 02 AC 69 00 02 33 01 07 16 01 1F 02 1B 6A 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            |CL-PPCRE|::|WORD-CHAR-CLASS-P|
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-5|
+               #48Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 1C 6B 02
+                    AE 71 32 AC 8C 27 05 AC DD 33 01 07 16 01 59 1F 09 69 02 01
+                    96 02 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*| #\_)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-6|
+               #53Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 21 6B 02
+                    AE 71 32 AC 8D 27 0D 16 01 1F 14 69 02 01 96 02 36 01 19 02
+                    AC DD 33 01 07 16 01 1F 02 1B 6C 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*| #\_)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            |CL-PPCRE|::|*REGEX-CHAR-CODE-LIMIT*|
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-7|
+               #23Y(00 00 00 00 01 00 00 00 20 02 AD 6B 00 33 01 31 1F 03 00 19
+                    02 19 02)
+               (|CL-PPCRE|::|*END-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-8|
+               #29Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 09 69 02
+                    01 96 02 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-9|
+               #71Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 33 6B 02
+                    AE 71 32 69 00 01 AD 69 00 02 90 02 11 15 69 00 03 AD 69 00
+                    04 90 02 11 0A 69 00 05 AD 69 00 06 33 02 11 16 01 59 1F 09
+                    69 02 01 96 02 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-10|
+               #76Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 38 6B 02
+                    AE 71 32 69 00 01 AD 69 00 02 90 02 11 0B 69 00 03 AD 69 00
+                    04 91 02 11 0D 16 01 1F 19 69 02 01 96 02 36 01 19 02 69 00
+                    05 AD 69 00 06 33 02 11 16 01 1F 02 1B 67 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-11|
+               #60Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 28 6B 02
+                    AE 71 32 69 00 01 AD 69 00 02 90 02 11 0A 69 00 03 AD 69 00
+                    04 33 02 11 16 01 59 1F 09 69 02 01 96 02 36 01 19 02 19
+                    02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-12|
+               #65Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 2D 6B 02
+                    AE 71 32 69 00 01 AD 69 00 02 91 02 11 0D 16 01 1F 19 69 02
+                    01 96 02 36 01 19 02 69 00 03 AD 69 00 04 33 02 11 16 01 1F
+                    02 1B 67 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-13|
+               #46Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 1A 69 00
+                    01 6B 02 AF 71 32 69 00 02 33 02 11 59 1F 09 69 02 01 96 02
+                    36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-14|
+               #45Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 19 69 00
+                    01 6B 02 AF 71 32 69 00 02 33 02 11 1F 09 69 02 01 96 02 36
+                    01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-15|
+               #71Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 33 6B 02
+                    AE 71 32 69 00 01 AD 69 00 02 90 02 0B 15 69 00 03 AD 69 00
+                    04 90 02 0B 0A 69 00 05 AD 69 00 06 33 02 0B 16 01 59 1F 09
+                    69 02 01 96 02 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-16|
+               #76Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 38 6B 02
+                    AE 71 32 69 00 01 AD 69 00 02 90 02 0B 0B 69 00 03 AD 69 00
+                    04 91 02 0B 0D 16 01 1F 19 69 02 01 96 02 36 01 19 02 69 00
+                    05 AD 69 00 06 33 02 0B 16 01 1F 02 1B 67 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-17|
+               #60Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 28 6B 02
+                    AE 71 32 69 00 01 AD 69 00 02 90 02 0B 0A 69 00 03 AD 69 00
+                    04 33 02 0B 16 01 59 1F 09 69 02 01 96 02 36 01 19 02 19
+                    02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-18|
+               #65Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 2D 6B 02
+                    AE 71 32 69 00 01 AD 69 00 02 91 02 0B 0D 16 01 1F 19 69 02
+                    01 96 02 36 01 19 02 69 00 03 AD 69 00 04 33 02 0B 16 01 1F
+                    02 1B 67 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-19|
+               #46Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 1A 69 00
+                    01 6B 02 AF 71 32 69 00 02 33 02 0B 59 1F 09 69 02 01 96 02
+                    36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-20|
+               #45Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 19 69 00
+                    01 6B 02 AF 71 32 69 00 02 33 02 0B 1F 09 69 02 01 96 02 36
+                    01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-21|
+               #44Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 18 6B 02
+                    AE 71 32 69 01 01 38 01 31 6E 59 1F 09 69 02 01 96 02 36 01
+                    19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|292 306 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-12-1-1-22|
+               #43Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 17 6B 02
+                    AE 71 32 69 01 01 38 01 31 6E 1F 09 69 02 01 96 02 36 01 19
+                    02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST|
+    (|CL-PPCRE|::|CHAR-CLASS| |CL-PPCRE|::|NEXT-FN|) |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|CHAR-CLASS| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13-1-1|
+           #149Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 9D 2B 05 B0
+                 2F 00 0B 00 00 B0 6F 01 B1 6F 02 B2 6F 03 B3 2F 04 0B 03 01 14
+                 DF 31 32 0B 03 02 0E 06 1C 33 0B 03 03 1D 03 14 32 62 0B 03 04
+                 93 01 03 92 02 2C 92 01 2F 92 00 32 68 03 00 E4 91 01 2F 03 92
+                 02 2D 68 03 00 E4 90 01 2F 2B 92 02 2E AF 2C 0E 01 19 08 14 2F
+                 04 0B 03 03 1D 4D 1B 48 AF 2C 07 01 19 08 AF 2C 08 01 19 08 AF
+                 2C 09 01 19 08 AF 2C 0B 01 19 08 AF 2C 0C 01 19 08 AF 2C 0D 01
+                 19 08)
+           (|CL-PPCRE|::|LEN| |CL-PPCRE|::|CASE-INSENSITIVE-P|
+            |CL-PPCRE|::|START-OF-END-STRING-P| |CL-PPCRE|::|SKIP|
+            |CL-PPCRE|::|STR| 0. |CL-PPCRE|::|END-STRING|
+            #Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13-1-1-1|
+               #62Y(00 00 00 00 01 00 00 00 20 02 AD 69 00 05 73 02 37 AE 6B 01
+                    90 01 2F 16 AC 6B 02 33 01 33 1F 1C 69 00 04 AF AE DD 69 00
+                    05 2D 05 04 1F 0E 69 01 01 AF 69 00 01 73 02 37 36 01 19 03
+                    19 03)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-STRING-POS*|
+                |CL-PPCRE|::|*END-POS*| 0. |CL-PPCRE|::|*STRING*-EQUAL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13-1-1-2|
+               #62Y(00 00 00 00 01 00 00 00 20 02 AD 69 00 05 73 02 37 AE 6B 01
+                    90 01 2F 16 AC 6B 02 33 01 33 1F 1C 69 00 04 AF AE DD 69 00
+                    05 2D 05 04 1F 0E 69 01 01 AF 69 00 01 73 02 37 36 01 19 03
+                    19 03)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-STRING-POS*|
+                |CL-PPCRE|::|*END-POS*| 0. |CL-PPCRE|::|*STRING*=|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13-1-1-3|
+               #24Y(00 00 00 00 01 00 00 00 20 02 69 01 01 AE 69 00 01 73 02 37
+                    36 01 19 02)
+               (|COMMON-LISP|::|NIL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            1.
+            #Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13-1-1-4|
+               #42Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 16 6B 02
+                    AE 71 32 69 00 03 33 01 0D 1F 09 69 01 01 96 02 36 01 19 02
+                    19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13-1-1-5|
+               #42Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 16 6B 02
+                    AE 71 32 69 00 03 33 01 07 1F 09 69 01 01 96 02 36 01 19 02
+                    19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13-1-1-6|
+               #49Y(00 00 00 00 01 00 00 00 20 02 AD 69 00 01 73 02 37 AC 6B 01
+                    33 01 33 1F 16 69 00 02 AF AE DC 69 00 01 2D 05 03 1F 08 69
+                    01 01 AD 36 01 19 03 19 03)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*| 0.
+                |CL-PPCRE|::|*STRING*-EQUAL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|308 396 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-13-1-1-7|
+               #49Y(00 00 00 00 01 00 00 00 20 02 AD 69 00 01 73 02 37 AC 6B 01
+                    33 01 33 1F 16 69 00 02 AF AE DC 69 00 01 2D 05 03 1F 08 69
+                    01 01 AD 36 01 19 03 19 03)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*| 0.
+                |CL-PPCRE|::|*STRING*=|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST| (|CL-PPCRE|::|STR| |CL-PPCRE|::|NEXT-FN|)
+    |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|STR| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|398 398 (DECLAIM (INLINE WORD-BOUNDARY-P))-14|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|WORD-BOUNDARY-P|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|400 424 (DEFUN WORD-BOUNDARY-P (START-POS) ...)-15|
+   #25Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 32 A2 DA DE 32 9C C5 19
+        01)
+   (|CL-PPCRE|::|WORD-BOUNDARY-P| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    |SYSTEM|::|INLINE-EXPANSION|
+    ((|CL-PPCRE|::|START-POS|)
+     #1="Check whether START-POS is a word-boundary within *STRING*."
+     (|COMMON-LISP|::|DECLARE|
+      (|SYSTEM|::|IN-DEFUN| |CL-PPCRE|::|WORD-BOUNDARY-P|)
+      (|COMMON-LISP|::|OPTIMIZE| |COMMON-LISP|::|SPEED|
+       (|COMMON-LISP|::|SAFETY| 0.) (|COMMON-LISP|::|SPACE| 0.)
+       (|COMMON-LISP|::|DEBUG| 0.) (|COMMON-LISP|::|COMPILATION-SPEED| 0.))
+      (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|START-POS|))
+     (|COMMON-LISP|::|BLOCK| |CL-PPCRE|::|WORD-BOUNDARY-P|
+      (|COMMON-LISP|::|LET|
+       ((|CL-PPCRE|::|1-START-POS|
+         (|COMMON-LISP|::|1-| |CL-PPCRE|::|START-POS|)))
+       (|COMMON-LISP|::|OR|
+        (|COMMON-LISP|::|AND|
+         (|COMMON-LISP|::|OR|
+          (|COMMON-LISP|::|=| |CL-PPCRE|::|START-POS| |CL-PPCRE|::|*END-POS*|)
+          (|COMMON-LISP|::|AND|
+           (|COMMON-LISP|::|<| |CL-PPCRE|::|START-POS| |CL-PPCRE|::|*END-POS*|)
+           (|COMMON-LISP|::|NOT|
+            (|CL-PPCRE|::|WORD-CHAR-P|
+             (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*|
+              |CL-PPCRE|::|START-POS|)))))
+         (|COMMON-LISP|::|AND|
+          (|COMMON-LISP|::|<| |CL-PPCRE|::|1-START-POS|
+           |CL-PPCRE|::|*END-POS*|)
+          (|COMMON-LISP|::|<=| |CL-PPCRE|::|*START-POS*|
+           |CL-PPCRE|::|1-START-POS|)
+          (|CL-PPCRE|::|WORD-CHAR-P|
+           (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|1-START-POS|))))
+        (|COMMON-LISP|::|AND|
+         (|COMMON-LISP|::|OR|
+          (|COMMON-LISP|::|=| |CL-PPCRE|::|START-POS|
+           |CL-PPCRE|::|*START-POS*|)
+          (|COMMON-LISP|::|AND|
+           (|COMMON-LISP|::|<| |CL-PPCRE|::|1-START-POS|
+            |CL-PPCRE|::|*END-POS*|)
+           (|COMMON-LISP|::|<=| |CL-PPCRE|::|*START-POS*|
+            |CL-PPCRE|::|1-START-POS|)
+           (|COMMON-LISP|::|NOT|
+            (|CL-PPCRE|::|WORD-CHAR-P|
+             (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*|
+              |CL-PPCRE|::|1-START-POS|)))))
+         (|COMMON-LISP|::|AND|
+          (|COMMON-LISP|::|<| |CL-PPCRE|::|START-POS| |CL-PPCRE|::|*END-POS*|)
+          (|CL-PPCRE|::|WORD-CHAR-P|
+           (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|START-POS|))))))))
+    #Y(|CL-PPCRE|::|WORD-BOUNDARY-P|
+       #167Y(00 00 00 00 01 00 00 00 26 02 97 01 AE 6B 00 90 01 2F 15 AE 6B 00
+             91 01 31 2B 6B 01 AF 71 32 AC 8D 27 80 66 16 01 1C 1D AC 6B 00 91
+             01 31 16 6B 03 AD 91 01 33 0F 6B 01 AD 71 32 AC 8D 27 80 57 16 01
+             1E 80 60 AE 6B 03 90 01 2F 25 AC 6B 00 33 01 31 1F 80 50 6B 03 AD
+             33 01 33 1F 80 47 6B 01 AD 71 32 AC 8C 27 05 AC DC 33 01 07 16 01
+             59 1F 34 AE 6B 00 33 01 31 1F 2C 6B 01 AF 71 32 AC 31 27 1E 20 AC
+             DC 33 01 07 19 04 AC DC 33 01 07 16 01 1D FF 94 1B FF AE AC DC 33
+             01 07 16 01 1E 05 1B FF A2 19 04 19 03)
+       (|CL-PPCRE|::|*END-POS*| |CL-PPCRE|::|*STRING*| #\_
+        |CL-PPCRE|::|*START-POS*|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|CL-PPCRE|::|START-POS|) #1# 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|426 434 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-16|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|426 434 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-16-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|426 434 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-16-1-1|
+           #33Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 AF 88 00 06
+                AC 2C 02 01 19 04 AC 2C 01 01 19 04)
+           (|CL-PPCRE|::|NEGATEDP|
+            #Y(#:|426 434 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-16-1-1-1|
+               #26Y(00 00 00 00 01 00 00 00 20 02 AD 2F 01 59 1F 08 69 00 01 AE
+                    36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|WORD-BOUNDARY-P|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|426 434 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-16-1-1-2|
+               #25Y(00 00 00 00 01 00 00 00 20 02 AD 2F 01 1F 08 69 00 01 AE 36
+                    01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|WORD-BOUNDARY-P|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST|
+    (|CL-PPCRE|::|WORD-BOUNDARY| |CL-PPCRE|::|NEXT-FN|) |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|WORD-BOUNDARY| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|436 451 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-17|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|436 451 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-17-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|436 451 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-17-1-1|
+           #33Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 AF 88 00 06
+                AC 2C 02 01 19 04 AC 2C 01 01 19 04)
+           (|CL-PPCRE|::|SINGLE-LINE-P|
+            #Y(#:|436 451 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-17-1-1-1|
+               #29Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 09 69 00
+                    01 96 02 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|436 451 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-17-1-1-2|
+               #40Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 31 1F 14 6B 02
+                    AE 71 32 DD 33 01 08 1F 09 69 00 01 96 02 36 01 19 02 19
+                    02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*| #\Newline)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST|
+    (|CL-PPCRE|::|EVERYTHING| |CL-PPCRE|::|NEXT-FN|) |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|EVERYTHING| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|453 505 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-18|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|453 505 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-18-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|453 505 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-18-1-1|
+           #69Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 AF 6F 00 B0
+                6F 01 B1 88 02 12 93 01 03 92 00 12 92 01 15 92 00 18 AE 2C 07
+                01 19 06 AE 2C 03 01 19 06 AE 2C 04 01 19 06 AE 2C 05 01 19 06
+                AE 2C 06 01 19 06)
+           (|CL-PPCRE|::|STARTP| |CL-PPCRE|::|MULTI-LINE-P|
+            |CL-PPCRE|::|NO-NEWLINE-P|
+            #Y(#:|453 505 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-18-1-1-1|
+               #28Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 33 01 2F 1F 08 69 00
+                    01 AE 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|453 505 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-18-1-1-2|
+               #62Y(00 00 00 00 01 00 00 00 20 02 0E 01 1C 02 0E 02 10 02 B0 6B
+                    02 90 01 2F 1C B0 6B 03 33 01 33 1F 1A B0 6B 02 33 01 32 1F
+                    12 DE 6B 05 97 06 71 32 33 01 07 1F 06 69 00 01 B1 36 01 11
+                    19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*REAL-START-POS*|
+                |CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|*END-POS*| #\Newline
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|453 505 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-18-1-1-3|
+               #33Y(00 00 00 00 01 00 00 00 20 02 AD 0E 01 1C 02 0E 02 14 33 01
+                    2F 1F 08 69 00 01 AE 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*REAL-START-POS*|
+                |CL-PPCRE|::|*START-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|453 505 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-18-1-1-4|
+               #46Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 90 01 2F 13 AD 6B 01
+                    33 01 31 1F 13 DC 6B 03 AF 71 32 33 01 07 1F 08 69 00 01 AE
+                    36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*| #\Newline
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|453 505 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-18-1-1-5|
+               #48Y(00 00 00 00 01 00 00 00 20 02 AD 6B 01 90 01 2F 15 AD 6B 01
+                    72 B2 33 01 2F 1F 13 DC 6B 03 AF 71 32 33 01 07 1F 08 69 00
+                    01 AE 36 01 19 02 19 02)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*| #\Newline
+                |CL-PPCRE|::|*STRING*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST| (|CL-PPCRE|::|ANCHOR| |CL-PPCRE|::|NEXT-FN|)
+    |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|ANCHOR| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|507 544 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-19|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|507 544 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-19-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|507 544 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-19-1-1|
+           #42Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 9D 2B 01 B0
+                2F 00 0B 00 00 B0 88 01 06 AC 2C 03 01 19 05 AC 2C 02 01 19 05)
+           (|CL-PPCRE|::|NUM| |CL-PPCRE|::|CASE-INSENSITIVE-P|
+            #Y(#:|507 544 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-19-1-1-1|
+               #67Y(00 00 00 00 01 00 00 00 20 02 6B 01 07 00 01 5F 14 6B 02 07
+                    00 01 5F 14 9E 1F 26 AF AD AF 73 01 38 73 02 37 AC 6B 03 33
+                    01 33 1F 13 6B 04 B1 AE B1 B1 2D 05 05 1F 08 69 01 01 AD 36
+                    01 19 05 19 05 19 04)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*REG-STARTS*|
+                |CL-PPCRE|::|*REG-ENDS*| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*| |CL-PPCRE|::|*STRING*-EQUAL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #Y(#:|507 544 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-19-1-1-2|
+               #67Y(00 00 00 00 01 00 00 00 20 02 6B 01 07 00 01 5F 14 6B 02 07
+                    00 01 5F 14 9E 1F 26 AF AD AF 73 01 38 73 02 37 AC 6B 03 33
+                    01 33 1F 13 6B 04 B1 AE B1 B1 2D 05 05 1F 08 69 01 01 AD 36
+                    01 19 05 19 05 19 04)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*REG-STARTS*|
+                |CL-PPCRE|::|*REG-ENDS*| |CL-PPCRE|::|*END-POS*|
+                |CL-PPCRE|::|*STRING*| |CL-PPCRE|::|*STRING*=|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST|
+    (|CL-PPCRE|::|BACK-REFERENCE| |CL-PPCRE|::|NEXT-FN|) |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|BACK-REFERENCE| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|546 564 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-20|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|546 564 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-20-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|546 564 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-20-1-1|
+           #67Y(00 00 00 00 02 00 00 00 20 03 00 2B 03 AF 2F 00 0B 00 00 AF 6F
+                01 AF 30 02 0B 00 01 AF 6F 03 AF 30 02 0B 00 02 68 00 00 8E 1A
+                12 9D 2B 01 68 01 00 DF 30 02 0B 00 00 AC 2C 06 01 19 05 AC 2C
+                04 01 19 04)
+           (|CL-PPCRE|::|TEST| |CL-PPCRE|::|THEN-REGEX|
+            |CL-PPCRE|::|CREATE-MATCHER-AUX| |CL-PPCRE|::|ELSE-REGEX|
+            #Y(#:|546 564 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-20-1-1-1|
+               #43Y(00 00 00 00 01 00 00 00 20 02 69 00 01 6B 01 72 62 91 01 31
+                    08 6B 01 07 00 01 5F 1C 09 07 00 03 14 AE 36 01 19 02 07 00
+                    02 1B 75)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*REG-STARTS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+            #.#'|COMMON-LISP|::|IDENTITY|
+            #Y(#:|546 564 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-20-1-1-2|
+               #32Y(00 00 00 00 01 00 00 00 20 02 69 00 01 AE 36 01 1C 09 07 01
+                    03 14 AE 36 01 19 02 07 01 02 1B 75)
+               (|COMMON-LISP|::|NIL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST| (|CL-PPCRE|::|BRANCH| |CL-PPCRE|::|NEXT-FN|)
+    |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|BRANCH| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|566 572 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-21|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|566 572 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-21-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|566 572 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-21-1-1|
+           #35Y(00 00 00 00 02 00 00 00 20 03 00 2B 01 7F 02 00 00 9D 2B 01 B0
+                6F 00 DB 30 02 0B 00 00 AC 2C 03 01 19 05)
+           (|CL-PPCRE|::|REGEX| #.#'|COMMON-LISP|::|IDENTITY|
+            |CL-PPCRE|::|CREATE-MATCHER-AUX|
+            #Y(#:|566 572 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-21-1-1-1|
+               #29Y(00 00 00 00 01 00 00 00 20 02 69 00 01 AE 76 01 9D 1F 08 69
+                    01 01 AD 36 01 19 03 19 03)
+               (|COMMON-LISP|::|NIL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST|
+    (|CL-PPCRE|::|STANDALONE| |CL-PPCRE|::|NEXT-FN|) |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|STANDALONE| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|574 576 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-22|
+   #48Y(00 00 00 00 00 00 00 00 20 01 DA DB 38 01 8F 9E 03 DA 2F 02 DA DD DE 63
+        DF E0 E1 E2 E3 E4 38 02 72 3A 64 38 02 72 3A 7B 02 7B 08 2D 03 0B 19
+        01)
+   (|CL-PPCRE|::|CREATE-MATCHER-AUX| |SYSTEM|::|TRACED-DEFINITION|
+    |SYSTEM|::|UNTRACE1|
+    #Y(#:|574 576 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-22-1|
+       #15Y(00 00 00 00 01 00 00 00 20 02 DA C6 5D 19 02)
+       (#Y(#:|574 576 (DEFMETHOD CREATE-MATCHER-AUX (# NEXT-FN) ...)-22-1-1|
+           #13Y(00 00 00 00 02 00 00 00 20 03 9E 19 03) ()
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+        (|COMMON-LISP|::|T|))
+       (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    :|QUALIFIERS| :|LAMBDA-LIST| (|CL-PPCRE|::|VOID| |CL-PPCRE|::|NEXT-FN|)
+    |CLOS|::|SIGNATURE|
+    #(2. 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+      |COMMON-LISP|::|NIL|)
+    :|SPECIALIZERS| |CL-PPCRE|::|VOID| |CLOS|::|DO-DEFMETHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))

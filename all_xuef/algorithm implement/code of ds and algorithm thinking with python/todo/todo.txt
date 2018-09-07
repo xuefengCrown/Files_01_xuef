@@ -1,0 +1,6 @@
+
+1. backtracking
+Problem-6  Finding  the  length  of  connected  cells  of  ls (regions)  in  an  matrix  of  Os  and  ls
+P45
+
+

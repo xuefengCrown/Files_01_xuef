@@ -1,0 +1,78 @@
+
+
+
+10 Lexical Structure
+The lexical units of Cool are 
+	1) integers, 
+		Integers are non-empty strings of digits 0-9. 
+	2) type identifiers, 
+	3) object identifiers, 
+		Identifiers are strings (other than keywords) consisting of letters, digits, and the underscore character. 
+			Type identifiers begin with a capital letter; 
+			object identifiers begin with a lower case letter. 
+			There are two other identifiers, self and SELF_TYPE that are treated specially by Cool but are not treated as keywords. 
+	4) special notation, 
+		The special syntactic symbols (e.g., parentheses, assignment operator, etc.) are given in Figure 1.
+		, { } ( ) ->
+	5) strings, 
+	6) keywords,
+	7) and white space.
+		
+	
+DARROW          =>
+DASSIGN         <-
+DLE             <=
+	
+DIGITS  [0-9]+
+LETTERS  [A-Za-z]+		(keywords)
+TYPE_ID  [A-Z][A-Za-z0-9_]*
+OBJ_ID  [a-z][A-Za-z0-9_]*
+OTHER_ID (self)|(SELF_TYPE)
+TRUE_BOOL   t[Rr][Uu][Ee]
+FALSE_BOOL  f[Aa][Ll][Ss][Ee]
+
+WHITE_SPACE_CHAR [ \n\f\r\t\v]
+
+
+10.2 Strings
+Strings are enclosed in double quotes "...". Within a string, a sequence ‘\c’ denotes the character ‘c’,
+with the exception of the following:
+\b backspace
+\t tab
+\n newline
+\f formfeed
+A non-escaped newline character may not appear in a string:
+"This \
+is OK"
+"This is not
+OK"
+A string may not contain EOF. A string may not contain the null (character \0). Any other character
+may be included in a string. Strings cannot cross file boundaries.
+
+
+
+
+
+
+
+
+
+整型常量
+字符常量
+	""引起来的字符，可以跨行但行尾必须以\结尾，中间可以包含转义字符 \r \n \f \t \\ \" \x
+操作符 
+	
+	.
+	@
+	~
+	isvoid
+	* /
+	+ -
+	<= < =
+	not
+	<-
+括号 () {} []
+分隔符 , ; :
+关键字
+标识符
+注释

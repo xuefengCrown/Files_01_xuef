@@ -1,0 +1,48 @@
+
+
+
+Key Points:
+	Generate unique answer once and only once, do not rely on Set.
+	Do not need preprocess.
+	Runtime 3 ms.
+Explanation:
+	We all know how to check a string of parentheses is valid using a stack. Or even simpler use a counter.
+	The counter will increase when it is ‘(‘ and decrease when it is ‘)’. 
+	Whenever the counter is negative, we have more ‘)’ than ‘(‘ in the prefix.
+
+	To make the prefix valid, we need to remove a ‘)’. The problem is: which one? The answer is any one in the prefix. 
+	However, if we remove any one, we will generate duplicate results, for example: s = ()), we can remove s[1] or s[2] 
+	but the result is the same (). Thus, we restrict ourself to remove the first ) in a series of concecutive )s.
+
+	After the removal, the prefix is then valid. We then call the function recursively to solve the rest of the string. 
+	However, we need to keep another information: the last removal position. If we do not have this position, 
+	we will generate duplicate by removing two ‘)’ in two steps only with a different order.
+	For this, we keep tracking the last removal position and only remove ‘)’ after that.
+
+	Now one may ask. What about ‘(‘? What if s = ‘(()(()’ in which we need remove ‘(‘?
+	The answer is: do the same from right to left.
+	However a cleverer idea is: reverse the string and reuse the code!
+1. 如何判断一个串是有效的
+2. 从左向右遍历, 遇到多余')', 怎么处理
+3. 如何避免重复结果
+4. 如何保证是最少删除?
+5. 如何处理'('
+
+BFS 到底是什么, 想想边枚举边过滤的 8-Queue
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+
+
+# PA1 词法分析器
+第一次作业是做一个词法分析器，lexical analyzer, also called a scanner。
+这其实是一件很琐碎的工作，而核心工作很单一：定义规则把源代码tokenize掉，所以大牛们做了一些工具来方便帮助你处理琐事，你可以专心写规则。
+
+1. 阅读 JLex: A lexical analyzer generator for Java
+http://www.cs.princeton.edu/~appel/modern/java/JLex/current/manual.html
+
+Jlex是一个辅助工具，你按照一定格式定义好规则，然后Jlex将你定义的规则转换为程序，这个自动生成的程序就是你的词法分析器，
+你把源代码喂给它，它就吐出一个一个的token，告诉你这个是关键字那个是标识符。
+
+词法分析器生成器将具有一组正则表达式和相应动作的规范作为输入。 它生成一个读取输入的程序（ 词法分析器 ），将输入与spec文件中的正则表达式
+进行匹配，并在正则表达式匹配时运行相应的操作。 Lexers通常是编译器中的第一个前端步骤，匹配关键字，注释，运算符等，并为解析器生成输入令牌流。 
+它们还可以用于许多其他目的。
+
+规则写在一个叫cool.lex的文本文件里，乍看上去格式很复杂，因为它居然还分四个区域，还带有各种稀奇古怪的形如%line的参数，
+细看其实不难，因为你的主要工作全部在"Rules"区完成，然后根据你的实现方式差异，你有可能需要在"Declarations"加上你的类/函数定义，
+可以在"Rules"区调用，然后在"Definitions"定义几个状态/正则别名。
+
+
+所谓规则，其实就是正则表达式了，这东西如果之前从来没用过也不用怕，因为Jlex的正则语法很简单。PA2要做的事就是用正则匹配Cool程序源码里各个不同的元素，
+然后处理成下一阶段需要的格式。在开始做作业之前，可以看看下面这个例子，你将来要实现的东西差不多就长这样。
+http://www.cs.princeton.edu/~appel/modern/java/JLex/current/sample.lex
+
+<YYINITIAL>";"          { return new Symbol(TokenConstants.SEMI);  }
+这是其中的一条规则，意思是在"YYINITIAL"这个状态下，如果遇到";"这个符号输入，那么就输出一个Symbol对象，{}保存你的处理策略。
+目测这个对象的constructor接受一个SEMI常量，跑到TokenConstants.java里面看了一下，这些常量都是int，形如
+public static final int MULT = 27;
+知道这个就很好办了，其他的规则都照葫芦画瓢，无非正则表达式复杂一点，有些情况换个类，加个参数。
+
+
+6 Notes for the Java Version of the Assignment
+1)  Each call on the scanner returns the next token and lexeme from the input. The value returned by the
+method CoolLexer.next_token is an object of class java_cup.runtime.Symbol. This object has
+a field representing the syntactic语法 category of a token (e.g., integer literal, semicolon分号, the if keyword,
+etc.). The syntactic codes for all tokens are defined in the file TokenConstants.java. The component,
+the semantic语义 value or lexeme (if any), is also placed in a java_cup.runtime.Symbol object. The
+documentation for the class java_cup.runtime.Symbol as well as other supporting code is available
+on the course web page. Examples of its use are also given in the skeleton.
+2)  For class identifiers, object identifiers, integers, and strings, the semantic value should be of type
+AbstractSymbol. For boolean constants, the semantic value is of type java.lang.Boolean. 
+Except for errors (see below), the lexemes for the other tokens do not carry any interesting information. Since
+the value field of class java_cup.runtime.Symbol has generic type java.lang.Object, you will need
+to cast it to a proper type before calling any methods on it.
+3) string table 
+We provide you with a string table implementation, which is defined in AbstractTable.java. For the
+moment, you only need to know that the type of string table entries is AbstractSymbol.
+4) 错误处理
+When a lexical error is encountered, the routine CoolLexer.next_token should return a
+java_cup.runtime.Symbol object whose syntactic category is TokenConstants.ERROR and
+whose semantic value is the error message string. See Section 4 for information on how to construct
+error messages.
+注意AbstractSymbol是个抽象类，你将来要用它的子类：IdSymbol, IntSymbol, StringSymbol，class identifiers, object identifiers要用IdSymbol，
+integer用IntSymbol，string用StringSymbol。文档在这里。
+
+其实就是告诉你，像上面那个例子一样，你的规则匹配中之后，要return一个Symbol对象，这个Symbol包含一个field代表你匹配中的token的分类或名字id，
+都在TokenConstants.java里定义好了，去找就是；另外一个field是semantic value，也要用Symbol来表示，但是
+对于2)里的这些token，semantic value要用AbstractSymbol类。注意Symbol和AbstractSymbol没有关系，甚至不在同一个包里，看文档就知道了。
+现在这些东西的关系不是很清楚无所谓，但再往后PA3等可能就要用到。
+
+
+
+
+# compile
+Compile: $ make lexer
+Execute: $ ./lexer good.cl
+
+李树花开
+https://github.com/lishuhuakai/CS/tree/master/CS143_Compiler
+https://blog.csdn.net/lishuhuakai/article/details/52075893
+
+https://github.com/Quexint/Assignment-Driven-Learning/tree/master/OCW/%5BStanford%5DCS143_Compilers/PA/PA2_Lexer
+CS143 compiler
+
+
+
+

@@ -1,0 +1,835 @@
+(|SYSTEM|::|VERSION| '(20080430.))
+#0Y_ #0Y |CHARSET|::|UTF-8|
+#Y(#:|1 33 (IN-PACKAGE #:CL-PPCRE)-1|
+   #17Y(00 00 00 00 00 00 00 00 20 01 DA 31 F6 0F 01 19 01)
+   ("CL-PPCRE" |COMMON-LISP|::|*PACKAGE*|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|35 52 (DEFMACRO BMH-MATCHER-AUX (&KEY CASE-INSENSITIVE-P) ...)-2|
+   #23Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 72 4C 32 9C C5 19 01)
+   (|CL-PPCRE|::|BMH-MATCHER-AUX| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|BMH-MATCHER-AUX|
+       #99Y(00 00 00 00 02 00 00 00 26 03 95 02 AC DA 63 72 9F AD DB 31 6A 92
+            00 80 46 C8 14 DE DF E0 E1 E2 63 E3 E4 E5 E6 E7 E8 E9 EA EB EC ED
+            EE EF F0 E3 E6 F1 E8 E9 F2 F3 E6 F4 E8 E9 F2 E7 EE F5 F6 66 24 03
+            1D 7A 7B 03 03 1E 5D 5D 5D 5D 5D 5D 5D 5D 5D 5D 5D 5D 5D 5D 7A 7B
+            0F 7B 04 61 04 19 06 C7 1B FF B7)
+       (:|CASE-INSENSITIVE-P| (:|CASE-INSENSITIVE-P|)
+        |COMMON-LISP|::|CHAR-EQUAL| |COMMON-LISP|::|CHAR=|
+        |COMMON-LISP|::|LAMBDA| (|CL-PPCRE|::|START-POS|)
+        (|COMMON-LISP|::|DECLARE|
+         (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM|
+          |CL-PPCRE|::|START-POS|))
+        |COMMON-LISP|::|IF|
+        (|COMMON-LISP|::|>|
+         (|COMMON-LISP|::|THE| |COMMON-LISP|::|FIXNUM|
+          (|COMMON-LISP|::|+| |CL-PPCRE|::|START-POS| |CL-PPCRE|::|M|))
+         |CL-PPCRE|::|*END-POS*|)
+        |COMMON-LISP|::|LOOP| |CL-PPCRE|::|NAMED| |CL-PPCRE|::|BMH-MATCHER|
+        |CL-PPCRE|::|FOR| |CL-PPCRE|::|K| |CL-PPCRE|::|OF-TYPE|
+        |COMMON-LISP|::|FIXNUM| |COMMON-LISP|::|=|
+        (|COMMON-LISP|::|+| |CL-PPCRE|::|START-POS| |CL-PPCRE|::|M| -1.)
+        |CL-PPCRE|::|THEN|
+        (|COMMON-LISP|::|+| |CL-PPCRE|::|K|
+         (|COMMON-LISP|::|MAX| 1.
+          (|COMMON-LISP|::|AREF| |CL-PPCRE|::|SKIP|
+           (|COMMON-LISP|::|CHAR-CODE|
+            (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*| |CL-PPCRE|::|K|)))))
+        |CL-PPCRE|::|WHILE|
+        (|COMMON-LISP|::|<| |CL-PPCRE|::|K| |CL-PPCRE|::|*END-POS*|)
+        |COMMON-LISP|::|DO| |CL-PPCRE|::|J| |CL-PPCRE|::|DOWNFROM|
+        (|COMMON-LISP|::|1-| |CL-PPCRE|::|M|) |CL-PPCRE|::|I|
+        |COMMON-LISP|::|AND| (|COMMON-LISP|::|>=| |CL-PPCRE|::|J| 0.)
+        ((|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*| |CL-PPCRE|::|I|)
+         (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|PATTERN| |CL-PPCRE|::|J|))
+        (|CL-PPCRE|::|FINALLY|
+         (|COMMON-LISP|::|IF| (|COMMON-LISP|::|MINUSP| |CL-PPCRE|::|J|)
+          (|COMMON-LISP|::|RETURN-FROM| |CL-PPCRE|::|BMH-MATCHER|
+           (|COMMON-LISP|::|1+| |CL-PPCRE|::|I|)))))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|)
+       "Auxiliary macro used by CREATE-BMH-MATCHER." 1)
+    (|COMMON-LISP|::|&KEY| |CL-PPCRE|::|CASE-INSENSITIVE-P|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|54 93 (DEFUN CREATE-BMH-MATCHER (PATTERN CASE-INSENSITIVE-P) ...)-3|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|CREATE-BMH-MATCHER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|CREATE-BMH-MATCHER|
+       #177Y(00 00 00 00 02 00 00 00 26 03 00 2B 01 7F 03 00 00 0E 00 1D 24 9D
+             2B 02 68 01 00 32 62 0B 00 00 6B 04 38 07 CA FD 06 08 00 FC 31 1D
+             0B 00 01 68 00 00 E0 1B 80 6A C6 1B 07 9D 2B 01 92 03 77 C7 0B 00
+             00 AC 2C 03 01 19 05 68 02 01 68 04 00 AE 71 32 71 2B 71 28 68 04
+             00 E1 B0 73 02 38 AE AE AE 33 01 02 16 03 68 02 01 68 04 00 AE 71
+             32 71 2C 71 28 68 04 00 CC 1B 18 AC 2C 08 01 19 05 92 05 47 68 02
+             01 68 04 00 AE 71 32 71 28 68 04 00 CC 14 B0 73 02 38 AE AE AE 33
+             01 02 16 03 85 00 AC AE 91 01 34 59 16 02 92 03 4E AC 2C 09 01 19
+             05)
+       (|CL-PPCRE|::|*USE-BMH-MATCHERS*| #.#'|COMMON-LISP|::|CHAR-EQUAL|
+        #.#'|COMMON-LISP|::|CHAR=|
+        #Y(|CL-PPCRE|::|CREATE-BMH-MATCHER-1|
+           #30Y(00 00 00 00 01 00 00 00 26 02 69 01 01 6B 01 38 08 A8 FD 0E 02
+                FC 07 00 01 F9 32 81 19 02)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|*END-POS*|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|CL-PPCRE|::|START-POS|) |COMMON-LISP|::|NIL| 1)
+        |CL-PPCRE|::|*REGEX-CHAR-CODE-LIMIT*| |COMMON-LISP|::|FIXNUM| 0. 1.
+        #Y(|CL-PPCRE|::|CREATE-BMH-MATCHER-2|
+           #114Y(00 00 00 00 01 00 00 00 26 02 AD 69 00 01 73 02 37 6B 01 90 01
+                 32 0D DC DD AF 69 00 01 82 03 37 00 1B 80 43 00 19 02 69 00 01
+                 72 B2 AD 1B 09 AC 32 B1 19 05 86 01 86 00 AD 8E AE 0F 6B 04 AD
+                 71 32 69 01 01 AF 71 32 90 01 0D 69 AD 8E AE 60 16 02 AC DF 69
+                 00 02 6B 04 B0 71 32 71 28 73 01 01 73 01 35 82 02 37 00 AC 6B
+                 01 90 01 31 FF B8 00 19 03)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*| 0. -1.
+            |CL-PPCRE|::|*STRING*| 1.)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|CL-PPCRE|::|START-POS|) |COMMON-LISP|::|NIL| 1)
+        #Y(|CL-PPCRE|::|CREATE-BMH-MATCHER-3|
+           #114Y(00 00 00 00 01 00 00 00 26 02 AD 69 00 01 73 02 37 6B 01 90 01
+                 32 0D DC DD AF 69 00 01 82 03 37 00 1B 80 43 00 19 02 69 00 01
+                 72 B2 AD 1B 09 AC 32 B1 19 05 86 01 86 00 AD 8E AE 0F 6B 04 AD
+                 71 32 69 01 01 AF 71 32 90 01 07 69 AD 8E AE 60 16 02 AC DF 69
+                 00 02 6B 04 B0 71 32 71 28 73 01 01 73 01 35 82 02 37 00 AC 6B
+                 01 90 01 31 FF B8 00 19 03)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*| 0. -1.
+            |CL-PPCRE|::|*STRING*| 1.)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|CL-PPCRE|::|START-POS|) |COMMON-LISP|::|NIL| 1))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|PATTERN| |CL-PPCRE|::|CASE-INSENSITIVE-P|)
+       "Returns a Boyer-Moore-Horspool matcher which searches the (special)\n
+simple-string *STRING* for the first occurence of the substring\n
+PATTERN. The search starts at the position START-POS within *STRING*\n
+and stops before *END-POS* is reached. Depending on the second\n
+argument the search is case-insensitive or not. If the special\n
+variable *USE-BMH-MATCHERS* is NIL, use the standard SEARCH function\n
+instead. (BMH matchers are faster but need much more space.)"
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|95 101 (DEFMACRO CHAR-SEARCHER-AUX (&KEY CASE-INSENSITIVE-P) ...)-4|
+   #23Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 72 4C 32 9C C5 19 01)
+   (|CL-PPCRE|::|CHAR-SEARCHER-AUX| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|CHAR-SEARCHER-AUX|
+       #55Y(00 00 00 00 02 00 00 00 26 03 95 02 AC DA 63 72 9F AD DB 31 6A 92
+            00 1C C8 14 DE DF E0 E1 E2 E3 E4 E5 E6 E7 E8 E9 EA EB BA D7 7A D8
+            5D 7A 7B 0B 61 04 19 06 C7 1B 62)
+       (:|CASE-INSENSITIVE-P| (:|CASE-INSENSITIVE-P|)
+        |COMMON-LISP|::|CHAR-EQUAL| |COMMON-LISP|::|CHAR=|
+        |COMMON-LISP|::|LAMBDA| (|CL-PPCRE|::|START-POS|)
+        (|COMMON-LISP|::|DECLARE|
+         (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM|
+          |CL-PPCRE|::|START-POS|))
+        |COMMON-LISP|::|LOOP| |CL-PPCRE|::|FOR| |CL-PPCRE|::|I|
+        |CL-PPCRE|::|OF-TYPE| |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|FROM|
+        |CL-PPCRE|::|START-POS| |CL-PPCRE|::|BELOW| |CL-PPCRE|::|*END-POS*|
+        |CL-PPCRE|::|THEREIS| |COMMON-LISP|::|AND|
+        ((|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*| |CL-PPCRE|::|I|)
+         |CL-PPCRE|::|CHR|)
+        (|CL-PPCRE|::|I|))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|)
+       "Auxiliary macro used by CREATE-CHAR-SEARCHER." 1)
+    (|COMMON-LISP|::|&KEY| |CL-PPCRE|::|CASE-INSENSITIVE-P|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|103 117 (DEFUN CREATE-CHAR-SEARCHER (CHR CASE-INSENSITIVE-P) ...)-5|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|CREATE-CHAR-SEARCHER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|CREATE-CHAR-SEARCHER|
+       #32Y(00 00 00 00 02 00 00 00 26 03 00 2B 01 7F 03 00 00 92 02 06 AC 2C
+            01 01 19 04 AC 2C 00 01 19 04)
+       (#Y(|CL-PPCRE|::|CREATE-CHAR-SEARCHER-1|
+           #43Y(00 00 00 00 01 00 00 00 26 02 AD 6B 01 1B 13 19 04 6B 02 AE 71
+                32 69 00 01 91 01 0D 03 9E 1E 6F 85 01 AD AD 91 01 34 69 00 19
+                04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*STRING*|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|CL-PPCRE|::|START-POS|) |COMMON-LISP|::|NIL| 1)
+        #Y(|CL-PPCRE|::|CREATE-CHAR-SEARCHER-2|
+           #43Y(00 00 00 00 01 00 00 00 26 02 AD 6B 01 1B 13 19 04 6B 02 AE 71
+                32 69 00 01 91 01 07 03 9E 1E 6F 85 01 AD AD 91 01 34 69 00 19
+                04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*STRING*|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|CL-PPCRE|::|START-POS|) |COMMON-LISP|::|NIL| 1))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|CL-PPCRE|::|CHR| |CL-PPCRE|::|CASE-INSENSITIVE-P|)
+       "Returns a function which searches the (special) simple-string\n
+*STRING* for the first occurence of the character CHR. The search\n
+starts at the position START-POS within *STRING* and stops before\n
+*END-POS* is reached. Depending on the second argument the search is\n
+case-insensitive or not."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|119 119 (DECLAIM (INLINE NEWLINE-SKIPPER))-6|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|NEWLINE-SKIPPER|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|121 133 (DEFUN NEWLINE-SKIPPER (START-POS) ...)-7|
+   #25Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 32 A2 DA DE 32 9C C5 19
+        01)
+   (|CL-PPCRE|::|NEWLINE-SKIPPER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    |SYSTEM|::|INLINE-EXPANSION|
+    ((|CL-PPCRE|::|START-POS|)
+     #1="Find the next occurence of a character in *STRING* which is behind\n
+a #Newline."
+     (|COMMON-LISP|::|DECLARE|
+      (|SYSTEM|::|IN-DEFUN| |CL-PPCRE|::|NEWLINE-SKIPPER|)
+      (|COMMON-LISP|::|OPTIMIZE| |COMMON-LISP|::|SPEED|
+       (|COMMON-LISP|::|SAFETY| 0.) (|COMMON-LISP|::|SPACE| 0.)
+       (|COMMON-LISP|::|DEBUG| 0.) (|COMMON-LISP|::|COMPILATION-SPEED| 0.))
+      (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|START-POS|))
+     (|COMMON-LISP|::|BLOCK| |CL-PPCRE|::|NEWLINE-SKIPPER|
+      (|COMMON-LISP|::|LOOP| |CL-PPCRE|::|FOR| |CL-PPCRE|::|I|
+       |CL-PPCRE|::|OF-TYPE| |COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|FROM|
+       |CL-PPCRE|::|START-POS| |CL-PPCRE|::|BELOW| |CL-PPCRE|::|*END-POS*|
+       |CL-PPCRE|::|THEREIS|
+       (|COMMON-LISP|::|AND|
+        (|COMMON-LISP|::|CHAR=|
+         (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*| |CL-PPCRE|::|I|)
+         #\Newline)
+        (|COMMON-LISP|::|1+| |CL-PPCRE|::|I|)))))
+    #Y(|CL-PPCRE|::|NEWLINE-SKIPPER|
+       #43Y(00 00 00 00 01 00 00 00 26 02 AD 6B 00 1B 13 19 04 6B 01 AE 71 32
+            DC 91 01 07 05 AD 32 B1 1E 6F 85 01 AD AD 91 01 34 69 00 19 04)
+       (|CL-PPCRE|::|*END-POS*| |CL-PPCRE|::|*STRING*| #\Newline)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|START-POS|) #1# 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|135 317 (DEFMACRO INSERT-ADVANCE-FN (ADVANCE-FN) ...)-8|
+   #23Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 72 4C 32 9C C5 19 01)
+   (|CL-PPCRE|::|INSERT-ADVANCE-FN| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|INSERT-ADVANCE-FN|
+       #37Y(00 00 00 00 02 00 00 00 26 03 AE DA DA 63 2D 04 01 1D 0D 9F 5C 78
+            AC DD DE DF 38 02 31 B9 19 04 AE 2F 02 19 03)
+       (2. |SYSTEM|::|LIST-LENGTH-IN-BOUNDS-P| |SYSTEM|::|MACRO-CALL-ERROR|
+        (|CL-PPCRE|::|ADVANCE-FN-DEFINITION|)
+        (|COMMON-LISP|::|LAMBDA|
+         (|COMMON-LISP|::|STRING| |CL-PPCRE|::|START| |CL-PPCRE|::|END|)
+         (|COMMON-LISP|::|BLOCK| |CL-PPCRE|::|SCAN|
+          (|COMMON-LISP|::|LET*|
+           ((|CL-PPCRE|::|*STRING*| |COMMON-LISP|::|STRING|)
+            (|CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|START|)
+            (|CL-PPCRE|::|*END-POS*| |CL-PPCRE|::|END|)
+            (|CL-PPCRE|::|*END-STRING-POS*|
+             (|COMMON-LISP|::|1-| |CL-PPCRE|::|*START-POS*|))
+            (|CL-PPCRE|::|*REPEAT-COUNTERS*| |CL-PPCRE|::|*REPEAT-COUNTERS*|)
+            (|CL-PPCRE|::|*LAST-POS-STORES*| |CL-PPCRE|::|*LAST-POS-STORES*|)
+            (|CL-PPCRE|::|*REG-STARTS*| |CL-PPCRE|::|*REG-STARTS*|)
+            (|CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REGS-MAYBE-START*|)
+            (|CL-PPCRE|::|*REG-ENDS*| |CL-PPCRE|::|*REG-ENDS*|)
+            (|CL-PPCRE|::|SCAN-START-POS| |CL-PPCRE|::|*START-POS*|)
+            (|CL-PPCRE|::|STARTS-WITH-STR|
+             (|COMMON-LISP|::|IF| |CL-PPCRE|::|START-STRING-TEST|
+              (|CL-PPCRE|::|STR| |CL-PPCRE|::|STARTS-WITH|)
+              |COMMON-LISP|::|NIL|))
+            (|CL-PPCRE|::|MAX-END-POS|
+             (|COMMON-LISP|::|-| |CL-PPCRE|::|*END-POS*|
+              |CL-PPCRE|::|MIN-LEN|)))
+           (|COMMON-LISP|::|DECLARE|
+            (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM|
+             |CL-PPCRE|::|SCAN-START-POS|)
+            (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FUNCTION|
+             |CL-PPCRE|::|MATCH-FN|))
+           (|COMMON-LISP|::|LABELS| ((|CL-PPCRE|::|ADVANCE-FN-DEFINITION|))
+            (|COMMON-LISP|::|DECLARE|
+             (|COMMON-LISP|::|INLINE| |CL-PPCRE|::|ADVANCE-FN|))
+            (|COMMON-LISP|::|WHEN|
+             (|COMMON-LISP|::|PLUSP| |CL-PPCRE|::|REP-NUM|)
+             (|COMMON-LISP|::|SETQ| |CL-PPCRE|::|*REPEAT-COUNTERS*|
+              (|COMMON-LISP|::|MAKE-ARRAY| |CL-PPCRE|::|REP-NUM|
+               :|INITIAL-ELEMENT| 0. :|ELEMENT-TYPE|
+               '|COMMON-LISP|::|FIXNUM|)))
+            (|COMMON-LISP|::|WHEN|
+             (|COMMON-LISP|::|PLUSP| |CL-PPCRE|::|ZERO-LENGTH-NUM|)
+             (|COMMON-LISP|::|SETQ| |CL-PPCRE|::|*LAST-POS-STORES*|
+              (|COMMON-LISP|::|MAKE-ARRAY| |CL-PPCRE|::|ZERO-LENGTH-NUM|
+               :|INITIAL-ELEMENT| |COMMON-LISP|::|NIL|)))
+            (|COMMON-LISP|::|WHEN|
+             (|COMMON-LISP|::|PLUSP| |CL-PPCRE|::|REG-NUM|)
+             (|COMMON-LISP|::|SETQ| |CL-PPCRE|::|*REG-STARTS*|
+              (|COMMON-LISP|::|MAKE-ARRAY| |CL-PPCRE|::|REG-NUM|
+               :|INITIAL-ELEMENT| |COMMON-LISP|::|NIL|)
+              |CL-PPCRE|::|*REGS-MAYBE-START*|
+              (|COMMON-LISP|::|MAKE-ARRAY| |CL-PPCRE|::|REG-NUM|
+               :|INITIAL-ELEMENT| |COMMON-LISP|::|NIL|)
+              |CL-PPCRE|::|*REG-ENDS*|
+              (|COMMON-LISP|::|MAKE-ARRAY| |CL-PPCRE|::|REG-NUM|
+               :|INITIAL-ELEMENT| |COMMON-LISP|::|NIL|)))
+            (|COMMON-LISP|::|WHEN| |CL-PPCRE|::|END-ANCHORED-P|
+             (|COMMON-LISP|::|LET|
+              ((|CL-PPCRE|::|END-TEST-POS|
+                (|COMMON-LISP|::|-| |CL-PPCRE|::|*END-POS*|
+                 (|COMMON-LISP|::|THE| |COMMON-LISP|::|FIXNUM|
+                  |CL-PPCRE|::|END-STRING-LEN|))))
+              (|COMMON-LISP|::|DECLARE|
+               (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM|
+                |CL-PPCRE|::|END-TEST-POS|)
+               (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FUNCTION|
+                |CL-PPCRE|::|END-STRING-TEST|))
+              (|COMMON-LISP|::|UNLESS|
+               (|COMMON-LISP|::|SETQ| |CL-PPCRE|::|*END-STRING-POS*|
+                (|COMMON-LISP|::|FUNCALL| |CL-PPCRE|::|END-STRING-TEST|
+                 |CL-PPCRE|::|END-TEST-POS|))
+               (|COMMON-LISP|::|WHEN|
+                (|COMMON-LISP|::|AND|
+                 (|COMMON-LISP|::|=| 1.
+                  (|COMMON-LISP|::|THE| |COMMON-LISP|::|FIXNUM|
+                   |CL-PPCRE|::|END-ANCHORED-P|))
+                 (|COMMON-LISP|::|CHAR=| #\Newline
+                  (|COMMON-LISP|::|SCHAR| |CL-PPCRE|::|*STRING*|
+                   (|COMMON-LISP|::|1-| |CL-PPCRE|::|*END-POS*|))))
+                (|COMMON-LISP|::|SETQ| |CL-PPCRE|::|*END-STRING-POS*|
+                 (|COMMON-LISP|::|FUNCALL| |CL-PPCRE|::|END-STRING-TEST|
+                  (|COMMON-LISP|::|1-| |CL-PPCRE|::|END-TEST-POS|))))))
+             (|COMMON-LISP|::|UNLESS|
+              (|COMMON-LISP|::|AND| |CL-PPCRE|::|*END-STRING-POS*|
+               (|COMMON-LISP|::|<=| |CL-PPCRE|::|*START-POS*|
+                |CL-PPCRE|::|*END-STRING-POS*|))
+              (|COMMON-LISP|::|RETURN-FROM| |CL-PPCRE|::|SCAN|
+               |COMMON-LISP|::|NIL|))
+             (|COMMON-LISP|::|WHEN| |CL-PPCRE|::|END-STRING-OFFSET|
+              (|COMMON-LISP|::|SETQ| |CL-PPCRE|::|SCAN-START-POS|
+               (|COMMON-LISP|::|MAX| |CL-PPCRE|::|SCAN-START-POS|
+                (|COMMON-LISP|::|-|
+                 (|COMMON-LISP|::|THE| |COMMON-LISP|::|FIXNUM|
+                  |CL-PPCRE|::|*END-STRING-POS*|)
+                 (|COMMON-LISP|::|THE| |COMMON-LISP|::|FIXNUM|
+                  |CL-PPCRE|::|END-STRING-OFFSET|))))))
+            (|COMMON-LISP|::|COND|
+             (|CL-PPCRE|::|START-ANCHORED-P|
+              (|COMMON-LISP|::|WHEN|
+               (|COMMON-LISP|::|OR|
+                (|COMMON-LISP|::|/=| |CL-PPCRE|::|*START-POS*|
+                 |CL-PPCRE|::|SCAN-START-POS|)
+                (|COMMON-LISP|::|<| |CL-PPCRE|::|MAX-END-POS|
+                 |CL-PPCRE|::|*START-POS*|))
+               (|COMMON-LISP|::|RETURN-FROM| |CL-PPCRE|::|SCAN|
+                |COMMON-LISP|::|NIL|))
+              (|COMMON-LISP|::|WHEN| |CL-PPCRE|::|STARTS-WITH-STR|
+               (|COMMON-LISP|::|LOCALLY|
+                (|COMMON-LISP|::|DECLARE|
+                 (|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM|
+                  |CL-PPCRE|::|STARTS-WITH-LEN|))
+                (|COMMON-LISP|::|COND|
+                 ((|COMMON-LISP|::|AND|
+                   (|CL-PPCRE|::|CASE-INSENSITIVE-P| |CL-PPCRE|::|STARTS-WITH|)
+                   (|COMMON-LISP|::|NOT|
+                    (|CL-PPCRE|::|*STRING*-EQUAL| |CL-PPCRE|::|STARTS-WITH-STR|
+                     |CL-PPCRE|::|*START-POS*|
+                     (|COMMON-LISP|::|+| |CL-PPCRE|::|*START-POS*|
+                      |CL-PPCRE|::|STARTS-WITH-LEN|)
+                     0. |CL-PPCRE|::|STARTS-WITH-LEN|)))
+                  (|COMMON-LISP|::|RETURN-FROM| |CL-PPCRE|::|SCAN|
+                   |COMMON-LISP|::|NIL|))
+                 ((|COMMON-LISP|::|AND|
+                   (|COMMON-LISP|::|NOT|
+                    (|CL-PPCRE|::|CASE-INSENSITIVE-P|
+                     |CL-PPCRE|::|STARTS-WITH|))
+                   (|COMMON-LISP|::|NOT|
+                    (|CL-PPCRE|::|*STRING*=| |CL-PPCRE|::|STARTS-WITH-STR|
+                     |CL-PPCRE|::|*START-POS*|
+                     (|COMMON-LISP|::|+| |CL-PPCRE|::|*START-POS*|
+                      |CL-PPCRE|::|STARTS-WITH-LEN|)
+                     0. |CL-PPCRE|::|STARTS-WITH-LEN|)))
+                  (|COMMON-LISP|::|RETURN-FROM| |CL-PPCRE|::|SCAN|
+                   |COMMON-LISP|::|NIL|))
+                 (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL|))))
+              (|COMMON-LISP|::|WHEN|
+               (|COMMON-LISP|::|AND| |CL-PPCRE|::|END-STRING-TEST|
+                (|COMMON-LISP|::|NOT| |CL-PPCRE|::|END-ANCHORED-P|))
+               (|COMMON-LISP|::|BLOCK| |CL-PPCRE|::|END-STRING-LOOP|
+                (|COMMON-LISP|::|SETQ| |CL-PPCRE|::|*END-STRING-POS*|
+                 |CL-PPCRE|::|*START-POS*|)
+                (|COMMON-LISP|::|LOOP|
+                 (|COMMON-LISP|::|UNLESS|
+                  (|COMMON-LISP|::|SETQ| |CL-PPCRE|::|*END-STRING-POS*|
+                   (|COMMON-LISP|::|FUNCALL|
+                    (|COMMON-LISP|::|THE| |COMMON-LISP|::|FUNCTION|
+                     |CL-PPCRE|::|END-STRING-TEST|)
+                    |CL-PPCRE|::|*END-STRING-POS*|))
+                  (|COMMON-LISP|::|RETURN-FROM| |CL-PPCRE|::|SCAN|
+                   |COMMON-LISP|::|NIL|))
+                 (|COMMON-LISP|::|UNLESS| |CL-PPCRE|::|END-STRING-OFFSET|
+                  (|COMMON-LISP|::|RETURN-FROM| |CL-PPCRE|::|END-STRING-LOOP|))
+                 (|COMMON-LISP|::|LET|
+                  ((|CL-PPCRE|::|MAYBE-START-POS|
+                    (|COMMON-LISP|::|-|
+                     (|COMMON-LISP|::|THE| |COMMON-LISP|::|FIXNUM|
+                      |CL-PPCRE|::|*END-STRING-POS*|)
+                     (|COMMON-LISP|::|THE| |COMMON-LISP|::|FIXNUM|
+                      |CL-PPCRE|::|END-STRING-OFFSET|))))
+                  (|COMMON-LISP|::|COND|
+                   ((|COMMON-LISP|::|=| |CL-PPCRE|::|MAYBE-START-POS|
+                     |CL-PPCRE|::|*START-POS*|)
+                    (|COMMON-LISP|::|RETURN-FROM|
+                     |CL-PPCRE|::|END-STRING-LOOP|))
+                   ((|COMMON-LISP|::|AND|
+                     (|COMMON-LISP|::|<| |CL-PPCRE|::|MAYBE-START-POS|
+                      |CL-PPCRE|::|*START-POS*|)
+                     (|COMMON-LISP|::|<|
+                      (|COMMON-LISP|::|+| |CL-PPCRE|::|*END-STRING-POS*|
+                       |CL-PPCRE|::|END-STRING-LEN|)
+                      |CL-PPCRE|::|*END-POS*|))
+                    (|COMMON-LISP|::|INCF| |CL-PPCRE|::|*END-STRING-POS*|))
+                   (|COMMON-LISP|::|T|
+                    (|COMMON-LISP|::|RETURN-FROM| |CL-PPCRE|::|SCAN|
+                     |COMMON-LISP|::|NIL|)))))))
+              (|COMMON-LISP|::|LET|
+               ((|CL-PPCRE|::|NEXT-POS|
+                 (|COMMON-LISP|::|FUNCALL| |CL-PPCRE|::|MATCH-FN|
+                  |CL-PPCRE|::|*START-POS*|)))
+               (|COMMON-LISP|::|WHEN| |CL-PPCRE|::|NEXT-POS|
+                (|COMMON-LISP|::|VALUES|
+                 (|COMMON-LISP|::|IF| |CL-PPCRE|::|NEXT-POS|
+                  |CL-PPCRE|::|*START-POS*| |COMMON-LISP|::|NIL|)
+                 |CL-PPCRE|::|NEXT-POS| |CL-PPCRE|::|*REG-STARTS*|
+                 |CL-PPCRE|::|*REG-ENDS*|))))
+             (|COMMON-LISP|::|T|
+              (|COMMON-LISP|::|LOOP| |CL-PPCRE|::|FOR| |CL-PPCRE|::|POS|
+               |COMMON-LISP|::|=|
+               (|COMMON-LISP|::|IF| |CL-PPCRE|::|STARTS-WITH-EVERYTHING|
+                |CL-PPCRE|::|SCAN-START-POS|
+                (|CL-PPCRE|::|ADVANCE-FN| |CL-PPCRE|::|SCAN-START-POS|))
+               |CL-PPCRE|::|THEN| (|CL-PPCRE|::|ADVANCE-FN| |CL-PPCRE|::|POS|)
+               |CL-PPCRE|::|WHILE|
+               (|COMMON-LISP|::|AND| |CL-PPCRE|::|POS|
+                (|COMMON-LISP|::|<=|
+                 (|COMMON-LISP|::|THE| |COMMON-LISP|::|FIXNUM|
+                  |CL-PPCRE|::|POS|)
+                 |CL-PPCRE|::|MAX-END-POS|))
+               |COMMON-LISP|::|DO|
+               (|COMMON-LISP|::|LET|
+                ((|CL-PPCRE|::|NEXT-POS|
+                  (|COMMON-LISP|::|FUNCALL| |CL-PPCRE|::|MATCH-FN|
+                   |CL-PPCRE|::|POS|)))
+                (|COMMON-LISP|::|WHEN| |CL-PPCRE|::|NEXT-POS|
+                 (|COMMON-LISP|::|RETURN-FROM| |CL-PPCRE|::|SCAN|
+                  (|COMMON-LISP|::|VALUES| |CL-PPCRE|::|POS|
+                   |CL-PPCRE|::|NEXT-POS| |CL-PPCRE|::|*REG-STARTS*|
+                   |CL-PPCRE|::|*REG-ENDS*|)))
+                (|COMMON-LISP|::|INCF|
+                 (|COMMON-LISP|::|THE| |COMMON-LISP|::|FIXNUM|
+                  |CL-PPCRE|::|POS|))))))))))
+        #.#'|COMMON-LISP|::|EQUALP|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|)
+       "Creates the actual closure returned by CREATE-SCANNER-AUX by\n
+replacing '(ADVANCE-FN-DEFINITION) with a suitable definition for\n
+ADVANCE-FN. This is a utility macro used by CREATE-SCANNER-AUX."
+       1)
+    (|CL-PPCRE|::|ADVANCE-FN|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|319 519 (DEFUN CREATE-SCANNER-AUX (MATCH-FN MIN-LEN START-ANCHORED-P ...) ...)-9|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|CREATE-SCANNER-AUX| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX|
+       #201Y(00 00 00 00 0C 00 00 00 26 00 00 2B 0C 7F 0D 00 00 7F 0C 00 01 7F
+             0B 00 02 7F 0A 00 03 7F 09 00 04 7F 08 00 05 7F 07 00 06 7F 06 00
+             07 7F 05 00 08 7F 04 00 09 7F 03 00 0A 7F 02 00 0B 9D 2B 02 68 01
+             03 DA 8F 3C 05 68 01 03 2F 01 0B 00 00 68 01 03 DC 32 3C 0B 00 01
+             06 01 04 1D 0A 06 01 06 1D 05 06 01 08 1C 38 06 00 01 1D 0A 06 01
+             06 1D 05 06 01 08 1C 2F 06 01 04 1D 05 06 01 06 1C 2B 06 00 01 1D
+             05 06 01 06 1C 27 06 01 04 1C 28 06 00 01 1C 29 06 01 06 1C 2A AC
+             2C 0A 01 19 0F AC 2C 03 01 19 0F AC 2C 04 01 19 0F AC 2C 05 01 19
+             0F AC 2C 06 01 19 0F AC 2C 07 01 19 0F AC 2C 08 01 19 0F AC 2C 09
+             01 19 0F)
+       (#.(|CLOS|::|FIND-CLASS| '|CL-PPCRE|::|STR|) |CL-PPCRE|::|LEN|
+        #.(|CLOS|::|FIND-CLASS| '|CL-PPCRE|::|EVERYTHING|)
+        #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-1|
+           #599Y(02 00 01 00 03 00 00 00 26 04 47 01 82 47 A3 10 02 A5 10 03 A7
+                 10 04 6B 03 32 B2 10 05 0E 06 10 06 0E 07 10 07 0E 08 10 08 0E
+                 09 10 09 0E 0A 10 0A 6B 03 07 01 05 1D 05 69 01 04 2F 0B 14 6B
+                 04 69 01 02 73 01 38 2A 14 66 21 6D 0C 02 69 01 0A 8F AD 0D 69
+                 01 0A 38 07 D2 FC D3 FD 31 1D 0F 06 69 01 0B 8F AD 0B 69 01 0B
+                 38 07 7D 04 31 1D 0F 07 69 01 0C 8E AD 80 5C 07 01 06 1D 80 45
+                 6B 04 69 01 08 73 01 38 69 01 07 AD 36 01 0F 05 1C 1E E9 69 01
+                 06 91 01 2F 16 EA 6B 02 6B 04 72 B2 71 32 91 01 07 09 69 01 07
+                 97 01 36 01 0F 05 16 01 0E 05 1D 81 0C 6B 03 6B 05 91 01 33 81
+                 03 07 01 09 1C 3A 07 01 03 1C 80 47 63 07 00 02 1C 81 56 B0 1B
+                 81 73 69 01 0C 38 07 7D 04 31 1D 0F 08 69 01 0C 38 07 7D 04 31
+                 1D 0F 09 69 01 0C 38 07 7D 04 31 1D 0F 0A 07 01 06 1D 49 1B FF
+                 81 AF 6B 05 69 01 09 73 01 38 82 01 35 03 07 01 03 1D FF B9 6B
+                 03 B0 90 01 30 80 A9 AD 6B 03 90 01 31 80 A1 93 02 80 69 69 01
+                 04 89 11 80 5B 6B 03 6B 03 69 00 01 73 02 37 69 00 01 AE E7 63
+                 D2 F9 A0 F8 1B 37 16 06 1B 80 7B 6B 03 6B 03 69 00 01 73 02 37
+                 69 00 01 AE E7 63 D2 F9 A0 F8 1B 80 47 16 06 07 01 07 1D 80 A6
+                 1B 2C 6B 02 AF 71 32 B5 AF 71 32 91 01 0D 4D 85 02 85 01 AE B1
+                 90 01 34 06 AD AD 91 01 34 63 16 06 69 01 04 89 11 FF B9 07 01
+                 07 1D 80 78 07 01 06 1C 80 72 0E 03 0F 05 1B 80 4A 85 02 85 01
+                 AE B1 90 01 34 FF B2 AD AD 90 01 34 FF AB 6B 02 AF 71 32 B5 AF
+                 71 32 90 01 07 61 16 06 00 16 04 1B 80 89 00 16 05 1B 80 83 AC
+                 6B 03 91 01 31 73 6B 05 69 01 08 73 02 37 6B 04 91 01 31 65 6B
+                 05 32 B1 0F 05 16 01 69 01 07 6B 05 36 01 0F 05 1D 4C 07 01 09
+                 1D 11 6B 05 69 01 09 73 01 38 AC 6B 03 91 01 2F 44 16 01 69 01
+                 01 6B 03 76 01 9D 1F 0D 6B 03 AD 6B 08 6B 0A 40 04 16 05 1B 2E
+                 16 05 1B 2A A1 1B 20 AD AD 6B 08 6B 0A 40 04 16 06 1B 1B 14 AF
+                 91 01 33 12 69 01 01 AD 76 01 92 00 65 85 01 F8 9F 34 F8 92 00
+                 68 00 16 05 12 09 48 19 04 19 04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|SCAN| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*END-STRING-POS*| |CL-PPCRE|::|*REPEAT-COUNTERS*|
+            |CL-PPCRE|::|*LAST-POS-STORES*| |CL-PPCRE|::|*REG-STARTS*|
+            |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|
+            |CL-PPCRE|::|STR|
+            #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-1-ADVANCE-FN|
+               #97Y(00 00 00 00 01 00 00 00 26 02 69 01 05 AE 36 01 F9 1D 16 AD
+                    6B 02 69 01 09 73 01 38 90 01 2F 0C AD 69 00 01 73 02 37 1B
+                    13 00 49 01 9E 19 02 00 49 01 A0 19 04 6B 02 81 B1 01 16 01
+                    69 01 07 AD 36 01 0F 02 1D 69 6B 02 69 01 09 73 01 38 AC B0
+                    90 01 2F 5E AC B0 91 01 32 5B 9D FB 16 02 1B FF A9)
+               (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+                |CL-PPCRE|::|*END-STRING-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+               (|CL-PPCRE|::|POS|) |COMMON-LISP|::|NIL| 1)
+            0. |COMMON-LISP|::|FIXNUM| 1. #\Newline
+            |CL-PPCRE|::|CASE-INSENSITIVE-P|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP|::|STRING| |CL-PPCRE|::|START| |CL-PPCRE|::|END|)
+           |COMMON-LISP|::|NIL| 1)
+        #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-2|
+           #599Y(02 00 01 00 03 00 00 00 26 04 47 01 82 47 A3 10 02 A5 10 03 A7
+                 10 04 6B 03 32 B2 10 05 0E 06 10 06 0E 07 10 07 0E 08 10 08 0E
+                 09 10 09 0E 0A 10 0A 6B 03 07 01 05 1D 05 69 01 04 2F 0B 14 6B
+                 04 69 01 02 73 01 38 2A 14 66 21 6D 0C 02 69 01 0A 8F AD 0D 69
+                 01 0A 38 07 D2 FC D3 FD 31 1D 0F 06 69 01 0B 8F AD 0B 69 01 0B
+                 38 07 7D 04 31 1D 0F 07 69 01 0C 8E AD 80 5C 07 01 06 1D 80 45
+                 6B 04 69 01 08 73 01 38 69 01 07 AD 36 01 0F 05 1C 1E E9 69 01
+                 06 91 01 2F 16 EA 6B 02 6B 04 72 B2 71 32 91 01 07 09 69 01 07
+                 97 01 36 01 0F 05 16 01 0E 05 1D 81 0C 6B 03 6B 05 91 01 33 81
+                 03 07 01 09 1C 3A 07 01 03 1C 80 47 63 07 00 02 1C 81 56 B0 1B
+                 81 73 69 01 0C 38 07 7D 04 31 1D 0F 08 69 01 0C 38 07 7D 04 31
+                 1D 0F 09 69 01 0C 38 07 7D 04 31 1D 0F 0A 07 01 06 1D 49 1B FF
+                 81 AF 6B 05 69 01 09 73 01 38 82 01 35 03 07 01 03 1D FF B9 6B
+                 03 B0 90 01 30 80 A9 AD 6B 03 90 01 31 80 A1 93 02 80 69 69 01
+                 04 89 11 80 5B 6B 03 6B 03 69 00 01 73 02 37 69 00 01 AE E7 63
+                 D2 F9 A0 F8 1B 37 16 06 1B 80 7B 6B 03 6B 03 69 00 01 73 02 37
+                 69 00 01 AE E7 63 D2 F9 A0 F8 1B 80 47 16 06 07 01 07 1D 80 A6
+                 1B 2C 6B 02 AF 71 32 B5 AF 71 32 91 01 0D 4D 85 02 85 01 AE B1
+                 90 01 34 06 AD AD 91 01 34 63 16 06 69 01 04 89 11 FF B9 07 01
+                 07 1D 80 78 07 01 06 1C 80 72 0E 03 0F 05 1B 80 4A 85 02 85 01
+                 AE B1 90 01 34 FF B2 AD AD 90 01 34 FF AB 6B 02 AF 71 32 B5 AF
+                 71 32 90 01 07 61 16 06 00 16 04 1B 80 89 00 16 05 1B 80 83 AC
+                 6B 03 91 01 31 73 6B 05 69 01 08 73 02 37 6B 04 91 01 31 65 6B
+                 05 32 B1 0F 05 16 01 69 01 07 6B 05 36 01 0F 05 1D 4C 07 01 09
+                 1D 11 6B 05 69 01 09 73 01 38 AC 6B 03 91 01 2F 44 16 01 69 01
+                 01 6B 03 76 01 9D 1F 0D 6B 03 AD 6B 08 6B 0A 40 04 16 05 1B 2E
+                 16 05 1B 2A A1 1B 20 AD AD 6B 08 6B 0A 40 04 16 06 1B 1B 14 AF
+                 91 01 33 12 69 01 01 AD 76 01 92 00 65 85 01 F8 9F 34 F8 92 00
+                 68 00 16 05 12 09 48 19 04 19 04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|SCAN| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*END-STRING-POS*| |CL-PPCRE|::|*REPEAT-COUNTERS*|
+            |CL-PPCRE|::|*LAST-POS-STORES*| |CL-PPCRE|::|*REG-STARTS*|
+            |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|
+            |CL-PPCRE|::|STR|
+            #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-2-ADVANCE-FN|
+               #88Y(00 00 00 00 01 00 00 00 26 02 AD 2F 02 F9 1D 10 AD 6B 03 69
+                    01 09 73 01 38 90 01 2F 06 AD 1B 13 00 49 01 9E 19 02 00 49
+                    01 A0 19 04 6B 03 81 B1 01 16 01 69 01 07 AD 36 01 0F 03 1D
+                    69 6B 03 69 01 09 73 01 38 AC B0 90 01 2F 5E AC B0 91 01 32
+                    5B 9D FB 16 02 1B FF B2)
+               (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+                |CL-PPCRE|::|NEWLINE-SKIPPER| |CL-PPCRE|::|*END-STRING-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+               (|CL-PPCRE|::|POS|) |COMMON-LISP|::|NIL| 1)
+            0. |COMMON-LISP|::|FIXNUM| 1. #\Newline
+            |CL-PPCRE|::|CASE-INSENSITIVE-P|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP|::|STRING| |CL-PPCRE|::|START| |CL-PPCRE|::|END|)
+           |COMMON-LISP|::|NIL| 1)
+        #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-3|
+           #599Y(02 00 01 00 03 00 00 00 26 04 47 01 82 47 A3 10 02 A5 10 03 A7
+                 10 04 6B 03 32 B2 10 05 0E 06 10 06 0E 07 10 07 0E 08 10 08 0E
+                 09 10 09 0E 0A 10 0A 6B 03 07 01 05 1D 05 69 01 04 2F 0B 14 6B
+                 04 69 01 02 73 01 38 2A 14 66 21 6D 0C 02 69 01 0A 8F AD 0D 69
+                 01 0A 38 07 D2 FC D3 FD 31 1D 0F 06 69 01 0B 8F AD 0B 69 01 0B
+                 38 07 7D 04 31 1D 0F 07 69 01 0C 8E AD 80 5C 07 01 06 1D 80 45
+                 6B 04 69 01 08 73 01 38 69 01 07 AD 36 01 0F 05 1C 1E E9 69 01
+                 06 91 01 2F 16 EA 6B 02 6B 04 72 B2 71 32 91 01 07 09 69 01 07
+                 97 01 36 01 0F 05 16 01 0E 05 1D 81 0C 6B 03 6B 05 91 01 33 81
+                 03 07 01 09 1C 3A 07 01 03 1C 80 47 63 07 00 02 1C 81 56 B0 1B
+                 81 73 69 01 0C 38 07 7D 04 31 1D 0F 08 69 01 0C 38 07 7D 04 31
+                 1D 0F 09 69 01 0C 38 07 7D 04 31 1D 0F 0A 07 01 06 1D 49 1B FF
+                 81 AF 6B 05 69 01 09 73 01 38 82 01 35 03 07 01 03 1D FF B9 6B
+                 03 B0 90 01 30 80 A9 AD 6B 03 90 01 31 80 A1 93 02 80 69 69 01
+                 04 89 11 80 5B 6B 03 6B 03 69 00 01 73 02 37 69 00 01 AE E7 63
+                 D2 F9 A0 F8 1B 37 16 06 1B 80 7B 6B 03 6B 03 69 00 01 73 02 37
+                 69 00 01 AE E7 63 D2 F9 A0 F8 1B 80 47 16 06 07 01 07 1D 80 A6
+                 1B 2C 6B 02 AF 71 32 B5 AF 71 32 91 01 0D 4D 85 02 85 01 AE B1
+                 90 01 34 06 AD AD 91 01 34 63 16 06 69 01 04 89 11 FF B9 07 01
+                 07 1D 80 78 07 01 06 1C 80 72 0E 03 0F 05 1B 80 4A 85 02 85 01
+                 AE B1 90 01 34 FF B2 AD AD 90 01 34 FF AB 6B 02 AF 71 32 B5 AF
+                 71 32 90 01 07 61 16 06 00 16 04 1B 80 89 00 16 05 1B 80 83 AC
+                 6B 03 91 01 31 73 6B 05 69 01 08 73 02 37 6B 04 91 01 31 65 6B
+                 05 32 B1 0F 05 16 01 69 01 07 6B 05 36 01 0F 05 1D 4C 07 01 09
+                 1D 11 6B 05 69 01 09 73 01 38 AC 6B 03 91 01 2F 44 16 01 69 01
+                 01 6B 03 76 01 9D 1F 0D 6B 03 AD 6B 08 6B 0A 40 04 16 05 1B 2E
+                 16 05 1B 2A A1 1B 20 AD AD 6B 08 6B 0A 40 04 16 06 1B 1B 14 AF
+                 91 01 33 12 69 01 01 AD 76 01 92 00 65 85 01 F8 9F 34 F8 92 00
+                 68 00 16 05 12 09 48 19 04 19 04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|SCAN| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*END-STRING-POS*| |CL-PPCRE|::|*REPEAT-COUNTERS*|
+            |CL-PPCRE|::|*LAST-POS-STORES*| |CL-PPCRE|::|*REG-STARTS*|
+            |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|
+            |CL-PPCRE|::|STR|
+            #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-3-ADVANCE-FN|
+               #45Y(00 00 00 00 01 00 00 00 26 02 69 01 05 AE 36 01 F9 1D 14 AD
+                    6B 02 90 01 33 0A 69 01 07 AE 36 01 0F 02 1D 06 9E 19 02 00
+                    49 01 00 49 01)
+               (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+                |CL-PPCRE|::|*END-STRING-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+               (|CL-PPCRE|::|POS|) |COMMON-LISP|::|NIL| 1)
+            0. |COMMON-LISP|::|FIXNUM| 1. #\Newline
+            |CL-PPCRE|::|CASE-INSENSITIVE-P|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP|::|STRING| |CL-PPCRE|::|START| |CL-PPCRE|::|END|)
+           |COMMON-LISP|::|NIL| 1)
+        #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-4|
+           #599Y(02 00 01 00 03 00 00 00 26 04 47 01 82 47 A3 10 02 A5 10 03 A7
+                 10 04 6B 03 32 B2 10 05 0E 06 10 06 0E 07 10 07 0E 08 10 08 0E
+                 09 10 09 0E 0A 10 0A 6B 03 07 01 05 1D 05 69 01 04 2F 0B 14 6B
+                 04 69 01 02 73 01 38 2A 14 66 21 6D 0C 02 69 01 0A 8F AD 0D 69
+                 01 0A 38 07 D2 FC D3 FD 31 1D 0F 06 69 01 0B 8F AD 0B 69 01 0B
+                 38 07 7D 04 31 1D 0F 07 69 01 0C 8E AD 80 5C 07 01 06 1D 80 45
+                 6B 04 69 01 08 73 01 38 69 01 07 AD 36 01 0F 05 1C 1E E9 69 01
+                 06 91 01 2F 16 EA 6B 02 6B 04 72 B2 71 32 91 01 07 09 69 01 07
+                 97 01 36 01 0F 05 16 01 0E 05 1D 81 0C 6B 03 6B 05 91 01 33 81
+                 03 07 01 09 1C 3A 07 01 03 1C 80 47 63 07 00 02 1C 81 56 B0 1B
+                 81 73 69 01 0C 38 07 7D 04 31 1D 0F 08 69 01 0C 38 07 7D 04 31
+                 1D 0F 09 69 01 0C 38 07 7D 04 31 1D 0F 0A 07 01 06 1D 49 1B FF
+                 81 AF 6B 05 69 01 09 73 01 38 82 01 35 03 07 01 03 1D FF B9 6B
+                 03 B0 90 01 30 80 A9 AD 6B 03 90 01 31 80 A1 93 02 80 69 69 01
+                 04 89 11 80 5B 6B 03 6B 03 69 00 01 73 02 37 69 00 01 AE E7 63
+                 D2 F9 A0 F8 1B 37 16 06 1B 80 7B 6B 03 6B 03 69 00 01 73 02 37
+                 69 00 01 AE E7 63 D2 F9 A0 F8 1B 80 47 16 06 07 01 07 1D 80 A6
+                 1B 2C 6B 02 AF 71 32 B5 AF 71 32 91 01 0D 4D 85 02 85 01 AE B1
+                 90 01 34 06 AD AD 91 01 34 63 16 06 69 01 04 89 11 FF B9 07 01
+                 07 1D 80 78 07 01 06 1C 80 72 0E 03 0F 05 1B 80 4A 85 02 85 01
+                 AE B1 90 01 34 FF B2 AD AD 90 01 34 FF AB 6B 02 AF 71 32 B5 AF
+                 71 32 90 01 07 61 16 06 00 16 04 1B 80 89 00 16 05 1B 80 83 AC
+                 6B 03 91 01 31 73 6B 05 69 01 08 73 02 37 6B 04 91 01 31 65 6B
+                 05 32 B1 0F 05 16 01 69 01 07 6B 05 36 01 0F 05 1D 4C 07 01 09
+                 1D 11 6B 05 69 01 09 73 01 38 AC 6B 03 91 01 2F 44 16 01 69 01
+                 01 6B 03 76 01 9D 1F 0D 6B 03 AD 6B 08 6B 0A 40 04 16 05 1B 2E
+                 16 05 1B 2A A1 1B 20 AD AD 6B 08 6B 0A 40 04 16 06 1B 1B 14 AF
+                 91 01 33 12 69 01 01 AD 76 01 92 00 65 85 01 F8 9F 34 F8 92 00
+                 68 00 16 05 12 09 48 19 04 19 04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|SCAN| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*END-STRING-POS*| |CL-PPCRE|::|*REPEAT-COUNTERS*|
+            |CL-PPCRE|::|*LAST-POS-STORES*| |CL-PPCRE|::|*REG-STARTS*|
+            |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|
+            |CL-PPCRE|::|STR|
+            #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-4-ADVANCE-FN|
+               #42Y(00 00 00 00 01 00 00 00 26 02 AD 2F 02 F9 1D 14 AD 6B 03 90
+                    01 33 0A 69 01 07 AE 36 01 0F 03 1D 06 9E 19 02 00 49 01 00
+                    49 01)
+               (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+                |CL-PPCRE|::|NEWLINE-SKIPPER| |CL-PPCRE|::|*END-STRING-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+               (|CL-PPCRE|::|POS|) |COMMON-LISP|::|NIL| 1)
+            0. |COMMON-LISP|::|FIXNUM| 1. #\Newline
+            |CL-PPCRE|::|CASE-INSENSITIVE-P|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP|::|STRING| |CL-PPCRE|::|START| |CL-PPCRE|::|END|)
+           |COMMON-LISP|::|NIL| 1)
+        #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-5|
+           #599Y(02 00 01 00 03 00 00 00 26 04 47 01 82 47 A3 10 02 A5 10 03 A7
+                 10 04 6B 03 32 B2 10 05 0E 06 10 06 0E 07 10 07 0E 08 10 08 0E
+                 09 10 09 0E 0A 10 0A 6B 03 07 01 05 1D 05 69 01 04 2F 0B 14 6B
+                 04 69 01 02 73 01 38 2A 14 66 21 6D 0C 02 69 01 0A 8F AD 0D 69
+                 01 0A 38 07 D2 FC D3 FD 31 1D 0F 06 69 01 0B 8F AD 0B 69 01 0B
+                 38 07 7D 04 31 1D 0F 07 69 01 0C 8E AD 80 5C 07 01 06 1D 80 45
+                 6B 04 69 01 08 73 01 38 69 01 07 AD 36 01 0F 05 1C 1E E9 69 01
+                 06 91 01 2F 16 EA 6B 02 6B 04 72 B2 71 32 91 01 07 09 69 01 07
+                 97 01 36 01 0F 05 16 01 0E 05 1D 81 0C 6B 03 6B 05 91 01 33 81
+                 03 07 01 09 1C 3A 07 01 03 1C 80 47 63 07 00 02 1C 81 56 B0 1B
+                 81 73 69 01 0C 38 07 7D 04 31 1D 0F 08 69 01 0C 38 07 7D 04 31
+                 1D 0F 09 69 01 0C 38 07 7D 04 31 1D 0F 0A 07 01 06 1D 49 1B FF
+                 81 AF 6B 05 69 01 09 73 01 38 82 01 35 03 07 01 03 1D FF B9 6B
+                 03 B0 90 01 30 80 A9 AD 6B 03 90 01 31 80 A1 93 02 80 69 69 01
+                 04 89 11 80 5B 6B 03 6B 03 69 00 01 73 02 37 69 00 01 AE E7 63
+                 D2 F9 A0 F8 1B 37 16 06 1B 80 7B 6B 03 6B 03 69 00 01 73 02 37
+                 69 00 01 AE E7 63 D2 F9 A0 F8 1B 80 47 16 06 07 01 07 1D 80 A6
+                 1B 2C 6B 02 AF 71 32 B5 AF 71 32 91 01 0D 4D 85 02 85 01 AE B1
+                 90 01 34 06 AD AD 91 01 34 63 16 06 69 01 04 89 11 FF B9 07 01
+                 07 1D 80 78 07 01 06 1C 80 72 0E 03 0F 05 1B 80 4A 85 02 85 01
+                 AE B1 90 01 34 FF B2 AD AD 90 01 34 FF AB 6B 02 AF 71 32 B5 AF
+                 71 32 90 01 07 61 16 06 00 16 04 1B 80 89 00 16 05 1B 80 83 AC
+                 6B 03 91 01 31 73 6B 05 69 01 08 73 02 37 6B 04 91 01 31 65 6B
+                 05 32 B1 0F 05 16 01 69 01 07 6B 05 36 01 0F 05 1D 4C 07 01 09
+                 1D 11 6B 05 69 01 09 73 01 38 AC 6B 03 91 01 2F 44 16 01 69 01
+                 01 6B 03 76 01 9D 1F 0D 6B 03 AD 6B 08 6B 0A 40 04 16 05 1B 2E
+                 16 05 1B 2A A1 1B 20 AD AD 6B 08 6B 0A 40 04 16 06 1B 1B 14 AF
+                 91 01 33 12 69 01 01 AD 76 01 92 00 65 85 01 F8 9F 34 F8 92 00
+                 68 00 16 05 12 09 48 19 04 19 04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|SCAN| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*END-STRING-POS*| |CL-PPCRE|::|*REPEAT-COUNTERS*|
+            |CL-PPCRE|::|*LAST-POS-STORES*| |CL-PPCRE|::|*REG-STARTS*|
+            |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|
+            |CL-PPCRE|::|STR|
+            #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-5-ADVANCE-FN|
+               #25Y(00 00 00 00 01 00 00 00 26 02 69 01 05 AE 36 01 F9 1D 03 9E
+                    19 02 00 49 01)
+               (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+               (|CL-PPCRE|::|POS|) |COMMON-LISP|::|NIL| 1)
+            0. |COMMON-LISP|::|FIXNUM| 1. #\Newline
+            |CL-PPCRE|::|CASE-INSENSITIVE-P|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP|::|STRING| |CL-PPCRE|::|START| |CL-PPCRE|::|END|)
+           |COMMON-LISP|::|NIL| 1)
+        #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-6|
+           #597Y(02 00 01 00 03 00 00 00 26 04 47 01 82 45 A3 10 02 A5 10 03 A7
+                 10 04 6B 03 32 B2 10 05 0E 06 10 06 0E 07 10 07 0E 08 10 08 0E
+                 09 10 09 0E 0A 10 0A 6B 03 07 01 05 1D 05 69 01 04 2F 0B 14 6B
+                 04 69 01 02 73 01 38 66 20 6D 0C 01 69 01 0A 8F AD 0D 69 01 0A
+                 38 07 D2 FC D3 FD 31 1D 0F 06 69 01 0B 8F AD 0B 69 01 0B 38 07
+                 7D 04 31 1D 0F 07 69 01 0C 8E AD 80 5C 07 01 06 1D 80 45 6B 04
+                 69 01 08 73 01 38 69 01 07 AD 36 01 0F 05 1C 1E E9 69 01 06 91
+                 01 2F 16 EA 6B 02 6B 04 72 B2 71 32 91 01 07 09 69 01 07 97 01
+                 36 01 0F 05 16 01 0E 05 1D 81 0C 6B 03 6B 05 91 01 33 81 03 07
+                 01 09 1C 3A 07 01 03 1C 80 47 63 07 00 02 1C 81 56 B0 1B 81 73
+                 69 01 0C 38 07 7D 04 31 1D 0F 08 69 01 0C 38 07 7D 04 31 1D 0F
+                 09 69 01 0C 38 07 7D 04 31 1D 0F 0A 07 01 06 1D 49 1B FF 81 AF
+                 6B 05 69 01 09 73 01 38 82 01 35 03 07 01 03 1D FF B9 6B 03 B0
+                 90 01 30 80 A9 AD 6B 03 90 01 31 80 A1 93 02 80 69 69 01 04 89
+                 11 80 5B 6B 03 6B 03 69 00 01 73 02 37 69 00 01 AE E7 63 D2 F9
+                 A0 F8 1B 37 16 06 1B 80 7B 6B 03 6B 03 69 00 01 73 02 37 69 00
+                 01 AE E7 63 D2 F9 A0 F8 1B 80 47 16 06 07 01 07 1D 80 A6 1B 2C
+                 6B 02 AF 71 32 B5 AF 71 32 91 01 0D 4D 85 02 85 01 AE B1 90 01
+                 34 06 AD AD 91 01 34 63 16 06 69 01 04 89 11 FF B9 07 01 07 1D
+                 80 78 07 01 06 1C 80 72 0E 03 0F 05 1B 80 4A 85 02 85 01 AE B1
+                 90 01 34 FF B2 AD AD 90 01 34 FF AB 6B 02 AF 71 32 B5 AF 71 32
+                 90 01 07 61 16 06 00 16 04 1B 80 89 00 16 05 1B 80 83 AC 6B 03
+                 91 01 31 73 6B 05 69 01 08 73 02 37 6B 04 91 01 31 65 6B 05 32
+                 B1 0F 05 16 01 69 01 07 6B 05 36 01 0F 05 1D 4C 07 01 09 1D 11
+                 6B 05 69 01 09 73 01 38 AC 6B 03 91 01 2F 44 16 01 69 01 01 6B
+                 03 76 01 9D 1F 0D 6B 03 AD 6B 08 6B 0A 40 04 16 05 1B 2E 16 05
+                 1B 2A A1 1B 20 AD AD 6B 08 6B 0A 40 04 16 06 1B 1B 14 AF 91 01
+                 33 12 69 01 01 AD 76 01 92 00 65 85 01 F8 9F 34 F8 92 00 68 00
+                 16 05 12 09 48 19 04 19 04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|SCAN| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*END-STRING-POS*| |CL-PPCRE|::|*REPEAT-COUNTERS*|
+            |CL-PPCRE|::|*LAST-POS-STORES*| |CL-PPCRE|::|*REG-STARTS*|
+            |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|
+            |CL-PPCRE|::|STR|
+            #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-6-ADVANCE-FN|
+               #22Y(00 00 00 00 01 00 00 00 26 02 AD 2F 01 F9 1D 03 9E 19 02 00
+                    49 00)
+               (|COMMON-LISP|::|NIL| |CL-PPCRE|::|NEWLINE-SKIPPER|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+               (|CL-PPCRE|::|POS|) |COMMON-LISP|::|NIL| 1)
+            0. |COMMON-LISP|::|FIXNUM| 1. #\Newline
+            |CL-PPCRE|::|CASE-INSENSITIVE-P|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP|::|STRING| |CL-PPCRE|::|START| |CL-PPCRE|::|END|)
+           |COMMON-LISP|::|NIL| 1)
+        #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-7|
+           #599Y(02 00 01 00 03 00 00 00 26 04 47 01 82 47 A3 10 02 A5 10 03 A7
+                 10 04 6B 03 32 B2 10 05 0E 06 10 06 0E 07 10 07 0E 08 10 08 0E
+                 09 10 09 0E 0A 10 0A 6B 03 07 01 05 1D 05 69 01 04 2F 0B 14 6B
+                 04 69 01 02 73 01 38 2A 14 66 21 6D 0C 02 69 01 0A 8F AD 0D 69
+                 01 0A 38 07 D2 FC D3 FD 31 1D 0F 06 69 01 0B 8F AD 0B 69 01 0B
+                 38 07 7D 04 31 1D 0F 07 69 01 0C 8E AD 80 5C 07 01 06 1D 80 45
+                 6B 04 69 01 08 73 01 38 69 01 07 AD 36 01 0F 05 1C 1E E9 69 01
+                 06 91 01 2F 16 EA 6B 02 6B 04 72 B2 71 32 91 01 07 09 69 01 07
+                 97 01 36 01 0F 05 16 01 0E 05 1D 81 0C 6B 03 6B 05 91 01 33 81
+                 03 07 01 09 1C 3A 07 01 03 1C 80 47 63 07 00 02 1C 81 56 B0 1B
+                 81 73 69 01 0C 38 07 7D 04 31 1D 0F 08 69 01 0C 38 07 7D 04 31
+                 1D 0F 09 69 01 0C 38 07 7D 04 31 1D 0F 0A 07 01 06 1D 49 1B FF
+                 81 AF 6B 05 69 01 09 73 01 38 82 01 35 03 07 01 03 1D FF B9 6B
+                 03 B0 90 01 30 80 A9 AD 6B 03 90 01 31 80 A1 93 02 80 69 69 01
+                 04 89 11 80 5B 6B 03 6B 03 69 00 01 73 02 37 69 00 01 AE E7 63
+                 D2 F9 A0 F8 1B 37 16 06 1B 80 7B 6B 03 6B 03 69 00 01 73 02 37
+                 69 00 01 AE E7 63 D2 F9 A0 F8 1B 80 47 16 06 07 01 07 1D 80 A6
+                 1B 2C 6B 02 AF 71 32 B5 AF 71 32 91 01 0D 4D 85 02 85 01 AE B1
+                 90 01 34 06 AD AD 91 01 34 63 16 06 69 01 04 89 11 FF B9 07 01
+                 07 1D 80 78 07 01 06 1C 80 72 0E 03 0F 05 1B 80 4A 85 02 85 01
+                 AE B1 90 01 34 FF B2 AD AD 90 01 34 FF AB 6B 02 AF 71 32 B5 AF
+                 71 32 90 01 07 61 16 06 00 16 04 1B 80 89 00 16 05 1B 80 83 AC
+                 6B 03 91 01 31 73 6B 05 69 01 08 73 02 37 6B 04 91 01 31 65 6B
+                 05 32 B1 0F 05 16 01 69 01 07 6B 05 36 01 0F 05 1D 4C 07 01 09
+                 1D 11 6B 05 69 01 09 73 01 38 AC 6B 03 91 01 2F 44 16 01 69 01
+                 01 6B 03 76 01 9D 1F 0D 6B 03 AD 6B 08 6B 0A 40 04 16 05 1B 2E
+                 16 05 1B 2A A1 1B 20 AD AD 6B 08 6B 0A 40 04 16 06 1B 1B 14 AF
+                 91 01 33 12 69 01 01 AD 76 01 92 00 65 85 01 F8 9F 34 F8 92 00
+                 68 00 16 05 12 09 48 19 04 19 04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|SCAN| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*END-STRING-POS*| |CL-PPCRE|::|*REPEAT-COUNTERS*|
+            |CL-PPCRE|::|*LAST-POS-STORES*| |CL-PPCRE|::|*REG-STARTS*|
+            |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|
+            |CL-PPCRE|::|STR|
+            #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-7-ADVANCE-FN|
+               #33Y(00 00 00 00 01 00 00 00 26 02 AD 6B 02 90 01 33 0A 69 01 07
+                    AE 36 01 0F 02 1D 03 9E 19 02 00 49 01)
+               (|COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|
+                |CL-PPCRE|::|*END-STRING-POS*|)
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+               (|CL-PPCRE|::|POS|) |COMMON-LISP|::|NIL| 1)
+            0. |COMMON-LISP|::|FIXNUM| 1. #\Newline
+            |CL-PPCRE|::|CASE-INSENSITIVE-P|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP|::|STRING| |CL-PPCRE|::|START| |CL-PPCRE|::|END|)
+           |COMMON-LISP|::|NIL| 1)
+        #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-8|
+           #585Y(00 00 00 00 03 00 00 00 26 04 A0 10 01 A2 10 02 A4 10 03 6B 02
+                 32 B2 10 04 0E 05 10 05 0E 06 10 06 0E 07 10 07 0E 08 10 08 0E
+                 09 10 09 6B 02 07 01 05 1D 05 69 01 04 2F 0A 14 6B 03 69 01 02
+                 73 01 38 69 01 0A 8F AD 0D 69 01 0A 38 07 D0 FC D1 FD 31 1D 0F
+                 05 69 01 0B 8F AD 0B 69 01 0B 38 07 7D 04 31 1D 0F 06 69 01 0C
+                 8E AD 80 5C 07 01 06 1D 80 45 6B 03 69 01 08 73 01 38 69 01 07
+                 AD 36 01 0F 04 1C 1E E7 69 01 06 91 01 2F 16 E8 6B 01 6B 03 72
+                 B2 71 32 91 01 07 09 69 01 07 97 01 36 01 0F 04 16 01 0E 04 1D
+                 81 0C 6B 02 6B 04 91 01 33 81 03 07 01 09 1C 3A 07 01 03 1C 80
+                 47 63 07 00 02 1C 81 56 AF 1B 81 73 69 01 0C 38 07 7D 04 31 1D
+                 0F 07 69 01 0C 38 07 7D 04 31 1D 0F 08 69 01 0C 38 07 7D 04 31
+                 1D 0F 09 07 01 06 1D 49 1B FF 81 AE 6B 04 69 01 09 73 01 38 82
+                 01 35 02 07 01 03 1D FF B9 6B 02 AF 90 01 30 80 A9 AC 6B 02 90
+                 01 31 80 A1 93 01 80 69 69 01 04 89 0F 80 5B 6B 02 6B 02 69 00
+                 01 73 02 37 69 00 01 AE E5 63 D0 F9 A0 F8 1B 37 16 06 1B 80 7B
+                 6B 02 6B 02 69 00 01 73 02 37 69 00 01 AE E5 63 D0 F9 A0 F8 1B
+                 80 47 16 06 07 01 07 1D 80 A6 1B 2C 6B 01 AF 71 32 B4 AF 71 32
+                 91 01 0D 4D 85 02 85 01 AE B1 90 01 34 06 AD AD 91 01 34 63 16
+                 06 69 01 04 89 0F FF B9 07 01 07 1D 80 78 07 01 06 1C 80 72 0E
+                 02 0F 04 1B 80 4A 85 02 85 01 AE B1 90 01 34 FF B2 AD AD 90 01
+                 34 FF AB 6B 01 AF 71 32 B4 AF 71 32 90 01 07 61 16 06 00 16 03
+                 1B 80 89 00 16 04 1B 80 83 AC 6B 02 91 01 31 73 6B 04 69 01 08
+                 73 02 37 6B 03 91 01 31 65 6B 04 32 B1 0F 04 16 01 69 01 07 6B
+                 04 36 01 0F 04 1D 4C 07 01 09 1D 11 6B 04 69 01 09 73 01 38 AC
+                 6B 02 91 01 2F 44 16 01 69 01 01 6B 02 76 01 9D 1F 0D 6B 02 AD
+                 6B 07 6B 09 40 04 16 04 1B 2E 16 04 1B 2A A0 1B 20 AD AD 6B 07
+                 6B 09 40 04 16 05 1B 1B 14 AE 91 01 33 12 69 01 01 AD 76 01 92
+                 00 65 85 01 F8 D5 34 F8 92 00 68 00 16 04 12 09 19 04)
+           (|COMMON-LISP|::|NIL| |CL-PPCRE|::|*STRING*|
+            |CL-PPCRE|::|*START-POS*| |CL-PPCRE|::|*END-POS*|
+            |CL-PPCRE|::|*END-STRING-POS*| |CL-PPCRE|::|*REPEAT-COUNTERS*|
+            |CL-PPCRE|::|*LAST-POS-STORES*| |CL-PPCRE|::|*REG-STARTS*|
+            |CL-PPCRE|::|*REGS-MAYBE-START*| |CL-PPCRE|::|*REG-ENDS*|
+            |CL-PPCRE|::|STR| 0. |COMMON-LISP|::|FIXNUM| 1. #\Newline
+            |CL-PPCRE|::|CASE-INSENSITIVE-P|
+            #Y(|CL-PPCRE|::|CREATE-SCANNER-AUX-8-ADVANCE-FN|
+               #13Y(00 00 00 00 01 00 00 00 26 02 9E 19 02) ()
+               (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+               (|CL-PPCRE|::|POS|) |COMMON-LISP|::|NIL| 1))
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|COMMON-LISP|::|STRING| |CL-PPCRE|::|START| |CL-PPCRE|::|END|)
+           |COMMON-LISP|::|NIL| 1))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|MATCH-FN| |CL-PPCRE|::|MIN-LEN|
+        |CL-PPCRE|::|START-ANCHORED-P| |CL-PPCRE|::|STARTS-WITH|
+        |CL-PPCRE|::|START-STRING-TEST| |CL-PPCRE|::|END-ANCHORED-P|
+        |CL-PPCRE|::|END-STRING-TEST| |CL-PPCRE|::|END-STRING-LEN|
+        |CL-PPCRE|::|END-STRING-OFFSET| |CL-PPCRE|::|REP-NUM|
+        |CL-PPCRE|::|ZERO-LENGTH-NUM| |CL-PPCRE|::|REG-NUM|)
+       "Auxiliary function to create and return a scanner (which is\n
+actually a closure). Used by CREATE-SCANNER."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))

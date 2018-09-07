@@ -1,0 +1,19 @@
+
+
+410. Split Array Largest Sum
+dp
+binary search ???
+
+
+说它革新了我的世界观在于它的解决问题思路刷新了我对算法的认识，我的解法典型的给你nums,m想办法去求解minMaxsum，
+而大神的思路是假设我们已经在解空间里有了一系列minMaxsums，去搜索一个minMaxsum使得符合m，这让我非常震撼。
+
+很简单，可能的minMaxsum有哪些，中间的哪些minMaxsum我们是不知道的，这是问题的关键！所以这个问题就假设最极端的两头情况：
+
+当 m = 1 时，这种情况，minMaxsum = 整个数组之和。
+当 m = 数组长度时，这种情况，minMaxsum = 数组中最大的那个元素。
+
+
+
+
+

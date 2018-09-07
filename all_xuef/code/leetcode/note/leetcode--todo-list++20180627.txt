@@ -1,0 +1,451 @@
+
+
+2018-6-27
+done:
+	813. Largest Sum of Averages (dp)
+	64. Minimum Path Sum (dp)
+	354. Russian DoLL EnveLopes
+	152. Maximum Product Subarray (dp)
+	
+2018-6-28
+done:
+	209. Minimum Size Subarray Sum (使用 2-pointers 方法) 找时间把BinarySearch 解法也实现了
+	287. Find the DupLicate Number
+	162. Find Peak ELement
+	78. subsets
+	77. Combinations
+
+2018-7-2
+done：
+	112. Path Sum (tree)
+	515. Find Largest VaLue in Each Tree Row (Tree)
+	199. Binary Tree Right Side View (bfs)
+
+2018-7-3
+done：	
+	491. Increasing Subsequences
+	129. Sum Root to Leaf Numbers
+	315. Count of SmaLLer Numbers After SeLf
+	783. MinDistance Between BST Nodes
+	230. Kth SmaLLest ELement in a BST
+	
+2018-7-4
+done:
+	114. FLatten Binary Tree to Linked List (没有理解)
+	113. Path Sum II
+	349. Intersections of Two Arrays (Binary Search)
+	394. Decode String (Stack)
+	442. Find ALL DupLicates in an Array (正负交替法, 位置变换法?)
+	238. Product Except SeLf
+	
+todo:
+	114. FLatten Binary Tree to Linked List
+	150. EvaLuate Reverse PoLish Notation (Stack)
+	385. Mini Parser (Stack)
+	328. Odd Even Linked List
+	827. Making A Large IsLand
+	
+2018-7-5
+done:
+	698. Partition to K EquaL Sum Subsets (有待优化)
+	2. Add Two Numbers
+	547. Friend CircLes (相当于计算--图的连通分量, 但是如果用显式图来处理的话，会很繁杂)
+	15. 3Sum
+todo：
+	
+2018-7-6
+done:
+	23. Merge k Sorted Lists (效率待改进)
+	22. Generate Parentheses (我的方法是--枚举，过滤交织着来; 待改进)
+	48. Rotate Image
+	39. Combination Sum (找时间用回溯法解决)
+	98. VaLidate Binary Search Tree
+	96. Unique Binary Search Trees
+todo:
+
+2018-7-7
+done:
+	10. ReguLar Expression Matching (dp) 正则匹配
+		1) 翻译过一篇讲正则表达式的文章, 里面有一段c的递归处理匹配的正则引擎
+		2) Norvig 讲过正则, 使用剩余集合的概念(消化所有可能情况后得到的匹配元素的集合)
+		3) <Java-aLgs>中使用状态转换图来实现正则表达式引擎
+		4) 这里使用dp来实现最简单的正则引擎
+	24. Swap Nodes in Pairs
+	49. Group Anagrams (Hash TabLe) 变位词归组
+		注意这里的 "签名" 的概念, 它代表着个体的某种身份; 
+		你可以根据你的目的来设计签名; 比如政府会对能够唯一标记某个人的签名比较感兴趣, 像身份证号, 以及天然的指纹、DNA;
+		说到本题, 只要你设计的签名能够让变位词具有相同的签名, 那之后的分组就比较容易了。
+	95. Unique Binary Search Trees II (可以大大增进对于树和递归的理解)
+	56. Merge IntervaLs (我用的是顺序扫描, 好像分治法会快点?!)
+	150. EvaLuate Reverse PoLish Notation (逆波兰表达式求值)
+todo：
+	224. Basic CaLcuLator (Hard)
+	55. Jump Game
+	59. SpiraL Matrix II
+	90. Subsets II
+	73. Set Matrix Zeroes
+	787. Cheapest FLights Within K Stops
+		1). dp
+		2). 搜索 + 剪枝
+2018-7-8
+done:
+	105. Construct Binary Tree from Preorder and Inorder TraversaL (Tree) 从先序和中序遍历序列构建二叉树
+	106. Construct Binary Tree from Inorder and Postorder TraversaL (Tree) 从中序和后序遍历序列构建二叉树
+	120. TriangLe (dp 值得多研究的一题)
+	121. Best Time to Buy and SeLL Stock
+	130. Surrounded Regions (FLood FiLL; bfs 我对代码不满意，有空查看discuss中的好代码)
+
+2018-7-9
+done:
+	138. Copy List with Random Pointer
+	139. Word Break (dp?)
+	140. Word Break II (写递归有一半靠直觉)
+	104. Maximum Depth of Binary Tree
+	110. BaLanced Binary Tree
+	147. Insertion Sort List (速度很慢, 待改进)
+todo:
+	127. Word Ladder (需要优化)
+	124. Binary Tree Maximum Path Sum
+	143. Reorder List
+	148. Sort List
+	122. Best Time to Buy and SeLL Stock II (Greedy)
+	131. PaLindrome Partitioning
+	116. PopuLating Next Right Pointers in Each Node
+
+2018-7-10
+done:
+	165. Compare Version Numbers
+	179. Largest Number
+		很多时候，太多的if判断说明你看问题的角度有问题，或者说没有全局观。
+		想起 Linus TorvaLds 说过的一段话：
+		有时候你可以换个角度看问题，重写代码以排除特例，完美覆盖所有情况，那才是好的代码，同时也是简单的代码。
+		其实这些都不重要，代码的细节不重要，重要的是你一定要有好的品味。
+		好的品味可以体现在更长的代码中，好的品味体现在能看清全局，甚至有一种直觉，知道怎么把事情做的更漂亮！--Linus TorvaLds
+todo:
+	236. Lowest Common Ancestor of a Binary Tree
+	
+2018-7-11
+done:
+	124. Binary Tree Maximum Path Sum (加深了我对后序遍历和 bottom-up 的理解)
+	
+2018-7-12
+done:
+	118. PascaL's TriangLe
+	404. Sum of Left Leaves
+	204. Count Primes    
+	257. Binary Tree Paths
+todo：
+	508. Most Frequent Subtree Sum
+	654. Maximum Binary Tree
+	
+2018-7-14
+done:
+	235. Lowest Common Ancestor of a Binary Search Tree
+	236. Lowest Common Ancestor of a Binary Tree
+	508. Most Frequent Subtree Sum
+	297. SeriaLize and DeseriaLize Binary Tree
+	100. Same Tree
+todo:
+	213. House Robber II
+	449. SeriaLize and DeseriaLize BST
+	50. Pow(x, n)
+
+2018-7-17
+done：
+	207. Course ScheduLe
+	327. Count of Range Sum
+		https://leetcode.com/problems/reverse-pairs/discuss/97268/general-principles-behind-problems-similar-to-reverse-pairs
+	210. Course ScheduLe II
+	
+2018-7-18
+done:
+
+todo：
+	99. Recover Binary Search Tree
+	
+2018-7-19
+done:
+	241. Different Ways to Add Parentheses
+	101. Symmetric Tree
+	198. House Robber (dp)
+	701. Insert into a Binary Search Tree (MutabLe Trees, Objects)
+		bst的 find, insert 比较简单; findAfterKey, deLete 稍微复杂点;
+	652. Find Duplicate Subtrees
+	662. Maximum Width of Binary Tree (代码不太简洁，不满意)
+	863. All Nodes Distance K in Binary Tree (加深对Graph的理解, 用图来建模)
+todo：
+	101. Symmetric Tree (迭代版本)
+	450. DeLete Node in a BST
+	449. Serialize and Deserialize BST
+	282. Expression Add Operators
+
+2018-7-20
+done：
+	337. House Robber III (dp on trees)
+	865. Smallest Subtree with all the Deepest Nodes
+	814. Binary Tree Pruning
+	589. N-ary Tree Preorder Traversal (easy one)
+	429. N-ary Tree Level Order Traversal
+		nodes, rs = [root], []
+        while nodes:
+            rs.append(list(map(lambda x:x.val, nodes)))
+            nodes = list(filter(lambda x:x, reduce(lambda x,y:x+y, [node.children for node in nodes], [])))
+        return rs
+	700. Search in a Binary Search Tree
+	
+todo：
+	654. Maximum Binary Tree
+
+2018-7-21
+done:
+	687. Longest Univalue Path
+	590. N-ary Tree Postorder Traversal
+	559. Maximum Depth of N-ary Tree
+	437. Path Sum III
+	572. Subtree of Another Tree
+	671. Second Minimum Node In a Binary Tree
+	543. Diameter of Binary Tree
+	108. Convert Sorted Array to Binary Search Tree
+	563. Binary Tree Tilt
+	538. Convert BST to Greater Tree
+	606. Construct String from Binary Tree
+	653. Two Sum IV - Input is a BST (2sum 要用hash, 另外要注意元素是否可以重用)
+	226. Invert Binary Tree
+	637. Average of Levels in Binary Tree
+	617. Merge Two Binary Trees
+	654. Maximum Binary Tree
+	
+	卷积神经网络
+
+2018-7-23
+done：
+	5. Longest Palindromic Substring
+	dp和栈都不好理解。
+		https://blog.csdn.net/liuwei0604/article/details/50414542
+	https://leetcode.com/problems/longest-valid-parentheses/discuss/14256/My-easy-O(n)-java-solution-with-explanation
+	真是聪明的转化！完美的将是否是连续的匹配括号转化成容易解决的形式！
+	Imaging we are coloring the original string, each substring that has valid parentheses is colored with '1' 
+	and other characters are colored by '0'. For example "( ) ( ( ) "would become "11011". 
+	Thus, the problem has converted to finding the longest subsequence that all elements are '1', 
+	which could be easily solved.
+	
+	303. Range Sum Query - Immutable
+	304. Range Sum Query 2D - Immutable (如何更好的处理边界 0,0)
+	115. Distinct Subsequences (去查查有没有更好的解法)
+	368. Largest Divisible Subset
+		这里有个很简单的数学性质，就是整除的传递性，如果a%b==0 且 b%c == 0，那么a%c == 0，说白了如果c是b的因子，b又是a的因子，
+		那么c肯定是a的因子。这样我们就可以在数组中找出很多整除链（a->b->c->d，其中b是a的因子，c是b的因子，d是c的因子），这样的链条
+		就满足两两整除的条件，题目就变成了求最长的链条。
+	dp解法我还想不明白，我这里是从enumeration的角度来实现的。
+	
+	376. Wiggle Subsequence ([0,0,0]输入)
+	377. Combination Sum IV
+todo：
+	673. Number of Longest Increasing Subsequence
+	不知道如何确定最长序列个数; 尤其是有重复数字的序列! [2,2,2,2,2]
+	
+	312. Burst Balloons
+		如果从思路上逐步分析是不是先考虑到devide & conquer，然后用memorised search更好理解一些呢，代码也好实现一些，最后简化成3重for循环。
+		像楼上说的基本就是matrix chain multiplication问题，clrs的dp章节里有更详细的思路，同学也可以看看那个﻿
+		https://leetcode.com/problems/burst-balloons/discuss/76228/share-some-analysis-and-explanations
+	322. Coin Change (TLE)
+	338. Counting Bits
+	
+	Remove Duplicate Letters
+	321. Create Maximum Number
+	44. Wildcard Matching (通配符匹配)	
+
+2018-7-25
+done：
+	403. Frog Jump 
+	(由哪个石头跳过来的不重要, last_steps 才重要。 我用了类似bfs, 从前到后不断enumerate。可能dfs会更快, 因为可能直接一顿跳就能到达最后一块, 
+	就可以停止检索了)
+	另外, 此题的dp体现在什么地方呢？
+	https://leetcode.com/problems/frog-jump/discuss/88824/Very-easy-to-understand-JAVA-solution-with-explanations
+	另外，知道了 collections.defaultdict
+	最重要的是，理解如何表示一种跳跃后的状态！光是位置是不够的，你还要加上 last_steps! 类似于权重是时间和路径的函数的有向图中的最短路径问题。
+	那里的顶点需要加入时间点才能完整描述。一个点不再只是一个点，它随着时间在改变！
+	40. Combination Sum II
+	
+	https://leetcode.com/problems/reverse-pairs/discuss/97268/general-principles-behind-problems-similar-to-reverse-pairs
+		
+2018-8-3
+done:
+	224. Basic Calculator (处理嵌套)
+		注意加减法运算的左结合性
+	227. Basic Calculator II (处理运算优先级)
+	341. Flatten Nested List Iterator (要调用人家给的接口)
+		受过《SICP》的递归训练，所以写起来比较简单。
+	17. Letter Combinations of a Phone Number (比较简单)
+todo：
+	173. Binary Search Tree Iterator
+	
+2018-8-5
+done:
+	131. Palindrome Partitioning
+	3. Longest Substring Without Repeating Characters
+	494. Target Sum
+	560. Subarray Sum Equals K (我们对 sums为target的数目感兴趣)
+	51. N-Queens (Hard)
+	90. Subsets II
+todo：
+	42. Trapping Rain Water
+
+2018-8-7
+done:	
+
+todo：
+	132. Palindrome Partitioning II (word break)
+	
+2018-8-11
+done:		
+	31. Next Permutation
+	86. Partition List
+	82. Remove Duplicates from Sorted List II (对目前代码不满意，但还不知道更好的解法)
+	19. Remove Nth Node From End of List (Two Pointers)
+	92. Reverse Linked List II (同 86. Partition List)
+	206. Reverse Linked List
+todo：
+
+2018-8-12
+done:
+	97. Interleaving String
+	5. Longest Palindromic Substring (O(N)的 Manacher 算法, 我还没弄懂)
+todo：
+	44. Wildcard Matching
+
+2018-8-13
+done:
+	55. Jump Game
+		1. 起始点弄错
+		2. dp 超时
+		3. 发现其实可以逐步确定
+		4. nums[i:] 内存超出
+		5. 加一个参数, 索引 i
+	45. Jump Game II (同 55)
+	42. Trapping Rain Water (使用栈的想法倒是自然)
+	214. Shortest Palindrome
+	174. Dungeon Game
+todo:
+	25. Reverse Nodes in k-Group
+	4. Median of Two Sorted Arrays
+	279. Perfect Squares
+	30. Substring with Concatenation of All Words
+	
+2018-8-14
+done:
+	322. Coin Change (dp of BFS)	
+		重复记忆化减慢了速度
+	518. Coin Change 2 (计算所有组合数)
+	87. Scramble String ('great', 'taerg')
+	132. Palindrome Partitioning II
+		dp有时对应着隐式图的bfs or dfs
+		想起了《算法竞赛入门经典》中的解答树
+	84. Largest Rectangle in Histogram (单调栈的应用)
+		https://zhuanlan.zhihu.com/p/26465701
+		brute force, dp, d&c, stack
+	85. Maximal Rectangle
+todo:
+	85. Maximal Rectangle
+		单调栈(转化为84) 或dp解法
+	72. Edit Distance
+	57. Insert Interval
+	736. Parse Lisp Expression
+		
+	746. Min Cost Climbing Stairs
+	
+提示7-9：在编写递归枚举程序之前，需要深入分析问题，对模型精雕细琢。一般还应
+对解答树的结点数有一个粗略的估计，作为评价模型的重要依据。
+8皇后问题的不同枚举规模源于模型选择的不同。
+	
+
+2018-8-15
+done：
+	57. Insert Interval
+	674. Longest Continuous Increasing Subsequence
+	11. Container With Most Water
+	301. Remove Invalid Parentheses
+	310. Minimum Height Trees
+		把树当作图来审视(没有根, 只是普通节点)
+		剥洋葱, bfs
+		https://stackoverflow.com/questions/11941817/how-to-avoid-runtimeerror-dictionary-changed-size-during-iteration-error
+		In Python 2.x calling keys makes a copy of the key that you can iterate over while modifying the dict:
+			for i in d.keys():
+		Note that this doesn't work in Python 3.x because keys returns an iterator instead of a list.
+	513. Find Bottom Left Tree Value (inorder)
+	
+todo:
+	802. Find Eventual Safe States
+	773. Sliding Puzzle
+	529. Minesweeper
+		
+2018-8-16
+done：
+	331. Verify Preorder Serialization of a Binary Tree
+	872. Leaf-Similar Trees (inorder)
+	239. Sliding Window Maximum (堆; 单调双端队列)
+	329. Longest Increasing Path in a Matrix 
+	216. Combination Sum III
+todo：
+	773. Sliding Puzzle
+	363. Max Sum of Rectangle No Larger Than K (dp)
+	
+2018-8-17
+done：
+	191. Number of 1 Bits
+	773. Sliding Puzzle (棋盘状态作为图节点, bfs)
+	
+todo：
+	410. Split Array Largest Sum (dp, TLE)
+	467. Unique Substrings in Wraparound String
+
+2018-8-18
+done：
+	467. Unique Substrings in Wraparound String
+	
+todo：
+	36. Valid Sudoku
+	37. Sudoku Solver
+	
+2018-8-19
+done：
+	413. Arithmetic Slices
+	
+2018-8-21
+done:
+	523. Continuous Subarray Sum
+	
+2018-8-23
+done:
+	474. Ones and Zeroes (dp)
+		dp[(i,m,n)] 表示 array[i:],m,n的ans
+		扫描 array,
+		如果不组装 array[0], dp[(i+1,m,n)]
+		如果组装(而且能够组装)   array[0], 1+dp[(i+1,m',n')]
+		
+		if m<=0 and n<=0, return 0
+		if i>=len(array), return 0
+
+		1) Submission Result: Memory Limit Exceeded 
+		2) bottom-up 解法还不是很理解
+2018-8-24
+done:
+	472. Concatenated Words
+	486. Predict the Winner (不是很明白)
+	
+2018-8-25
+done:
+	873. Length of Longest Fibonacci Subsequence
+	718. Maximum Length of Repeated Subarray
+	583. Delete Operation for Two Strings
+		开始时dp作为二维数组, TLE?! 好像是因为missed掉很多结果为0的计算。
+	746. Min Cost Climbing Stairs
+
+2018-8-26
+done：
+	740. Delete and Earn
+	91. Decode Ways
+todo:
+	689. Maximum Sum of 3 Non-Overlapping Subarrays
+	
+	

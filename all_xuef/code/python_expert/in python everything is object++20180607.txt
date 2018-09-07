@@ -1,0 +1,101 @@
+
+Critical Point #1
+## everything in python is a object
+integer
+string
+class
+metaclass
+function 
+
+它们都是object
+
+Critical Point #2
+everything in python can be grouped into a set.
+
+# category theory
+
+# the study of "morphisms".(it's a mapping)
+The transitions of sets to other sets.
+
+# Critical Point #3
+A "morphism" occurs when we apply a functor to a set 
+than transforms it into sth else.
+
+# Critical Point #4
+for any set we can apply some number of functors to arrive at any other set.
+
+The point is anything in python can be transformed into anything else by simply
+applying functors to sets.
+
+
+# List Comprehension
+
+# built-in function
+map filter reduce sum
+
+# act3 functional programming
+1. what is a closure?
+
+2. what's a decorator
+
+@ is syntatic sugar for closing over a function
+
+# Act4
+what's the difference between an iterator and a generator
+
+why use generators?
+1. work with large data sets.
+2. don't need to hold the entire list in memory.
+3. processing data in realtime.
+
+# Act5
+the "itertools" library
+from itertools import chain
+from itertools import combinations
+from itertools import permutation
+from itertools import compress
+count
+cycle
+groupby
+product
+
+# what's metaprogramming?
+code that writes code?
+
+	getattr, setattr, hasattr
+what's introspection?(内省，自省)
+
+type # god object
+type(class_name, parents[tuple], attributes[dict])
+
+
+what's a metaclass?
+a metaclass is any callable(function or class)
+that implements type's function signature
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

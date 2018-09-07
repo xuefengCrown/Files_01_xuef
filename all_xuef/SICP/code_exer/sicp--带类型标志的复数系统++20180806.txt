@@ -1,0 +1,104 @@
+
+
+
+
+(define (add-complex z1 z2)
+  (make-from-real-imag (+ (real-part z1) (real-part z2))
+                       (+ (imag-part z1) (imag-part z2))))
+(define (sub-complex z1 z2)
+  (make-from-real-imag (- (real-part z1) (real-part z2))
+                       (- (imag-part z1) (imag-part z2))))
+(define (mul-complex z1 z2)
+  (make-from-mag-ang (* (magnitude z1) (magnitude z2))
+                     (+ (angle z1) (angle z2))))
+(define (div-complex z1 z2)
+  (make-from-mag-ang (/ (magnitude z1) (magnitude z2))
+                     (- (angle z1) (angle z2))))
+
+(define (make-from-real-imag x y)
+  (make-from-real-imag-rectangular x y))
+(define (make-from-mag-ang r a)
+  (make-from-mag-ang-polar r a))
+  
+;; 通用型选择函数
+;;;; z = ('rectangular (3 4))
+;;;; 每个选择函数的定义行为依赖于它操作其上的特定的数据类型
+; 注意这里建立的不同表示之间的界面的一般性机制：在一种给定的表示实现中(如 Alyssa 的极坐标包)，
+; 复数是一种无类型的对偶(模, 幅角)。当通用型选择函数对一个polar类型的复数进行操作时, 它会剥去标志并将
+; 相应内容传递给 Alyssa 的代码。 于此相对应，当 Alyssa去构造一个供一般性使用的复数时，她会为其加上类型标志，
+; 使这个数据对象可以为高层过程所识别。
+; 在将数据对象从一个层次传到另一层次的过程中，这种剥去和加上标志的规范方式可以成为一种重要的组织策略。
+(define (real-part z)
+  (cond ((rectangular? z) 
+         (real-part-rectangular (contents z)))
+        ((polar? z)
+         (real-part-polar (contents z)))
+        (else (error "Unknown type -- REAL-PART" z))))
+(define (imag-part z)
+  (cond ((rectangular? z)
+         (imag-part-rectangular (contents z)))
+        ((polar? z)
+         (imag-part-polar (contents z)))
+        (else (error "Unknown type -- IMAG-PART" z))))
+(define (magnitude z)
+  (cond ((rectangular? z)
+         (magnitude-rectangular (contents z)))
+        ((polar? z)
+         (magnitude-polar (contents z)))
+        (else (error "Unknown type -- MAGNITUDE" z))))
+(define (angle z)
+  (cond ((rectangular? z)
+         (angle-rectangular (contents z)))
+        ((polar? z)
+         (angle-polar (contents z)))
+        (else (error "Unknown type -- ANGLE" z))))
+
+
+(define (attach-tag type-tag contents)
+  (cons type-tag contents))
+(define (type-tag datum)
+  (if (pair? datum)
+      (car datum)
+      (error "Bad tagged datum -- TYPE-TAG" datum)))
+(define (contents datum)
+  (if (pair? datum)
+      (cdr datum)
+      (error "Bad tagged datum -- CONTENTS" datum)))
+	  
+(define (rectangular? z)
+  (eq? (type-tag z) 'rectangular))
+(define (polar? z)
+  (eq? (type-tag z) 'polar))
+
+;; 复数的直角坐标表示  
+(define (real-part-rectangular z) (car z))
+(define (imag-part-rectangular z) (cdr z))
+(define (magnitude-rectangular z)
+  (sqrt (+ (square (real-part-rectangular z))
+           (square (imag-part-rectangular z)))))
+(define (angle-rectangular z)
+  (atan (imag-part-rectangular z)
+        (real-part-rectangular z)))
+(define (make-from-real-imag-rectangular x y)
+  (attach-tag 'rectangular (cons x y)))
+(define (make-from-mag-ang-rectangular r a) 
+  (attach-tag 'rectangular
+              (cons (* r (cos a)) (* r (sin a)))))
+			  
+;; 复数的极坐标表示			  
+(define (real-part-polar z)
+  (* (magnitude-polar z) (cos (angle-polar z))))
+(define (imag-part-polar z)
+  (* (magnitude-polar z) (sin (angle-polar z))))
+(define (magnitude-polar z) (car z))
+(define (angle-polar z) (cdr z))
+(define (make-from-real-imag-polar x y) 
+  (attach-tag 'polar
+               (cons (sqrt (+ (square x) (square y)))
+                     (atan y x))))
+(define (make-from-mag-ang-polar r a)
+  (attach-tag 'polar (cons r a)))			  
+			  
+			  
+			  
+			  

@@ -1,0 +1,548 @@
+
+This application can handle features such as query autocomplete responses, place searching, 
+map displaying, zooming in/out, and finding the shortest path between with user-inputted points.
+
+预备知识:
+1. QuadTree (四分树)
+2. A* 
+3. SAX parser, which is an “event-driven online algorithm for parsing XML documents”. 
+
+
+######
+1. zoom in/out
+
+2. shortest path
+
+3. search location
+
+C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\code\cs61b\
+
+find the best images
+1. 
+2. 单位距离必须有充足的像素
+### assignment 1
+getMapRaster
+
+参数: I want to see the region of the world (query box)
+params:
+Suppose params = {
+ullon=-122.241632, 
+lrlon=-122.24053, 
+w=892.0,
+h=875.0, 
+ullat=37.87655, 
+lrlat=37.87548}
+
+
+This means:
+● The user is requesting to see everything with longitude (a.k.a. x coordinates)
+-122.240053 and -122.241632, and latitude (a.k.a. y coordinates) 37.8765 and
+37.87548. This is our query box.
+● The user’s browser window display is 892 pixels wide by 875 pixels tall.
+
+经纬度分正负。因为数据表中不可能用东经北纬或者字母表示，因此用了正负，但正负各表示什么含义？
+	经度（正：东经　负：西经）
+	纬度（正：北纬　负：南纬）
+
+resolution 分辨率
+
+
+Application Structure
+Your job for this project is to implement the back end of a web server. To use your program, 
+a user will open an html file in their web browser that displays a map of the city of Berkeley, 
+and the interface will support scrolling, zooming, and route finding (similar to Google Maps). 
+We’ve provided all of the “front end” code. Your code will be the “back end” which does all the 
+hard work of figuring out what data to display in the web browser.
+
+At its heart, the project works like this: The user’s web browser provides a URL to your Java program, 
+and your Java program will take this URL and generate the appropriate output, which will displayed in the browser. 
+For example, suppose your program were running at bloopblorpmaps.com, the URL might be:
+
+bloopblorpmaps.com/raster&ullat=37.89&ullon=-122.29&lrlat=37.83&lrlon=-122.22&w=700&h=300
+The job of the back end server (i.e. your code) is take this URL and generate an image corresponding 
+to a map of the region specified inside the URL (more on how regions are specified later). 
+This image will be passed back to the front end for display in the web browser.
+
+We’ll not only be providing the front end (in the form of .html and javascript files), but we’ll also 
+provide a great deal of starter code (in the form of .java files) for the back end. This starter code 
+will handle all URL parsing and communication for the front end. This code uses the Java Spark as the 
+server framework. You don’t need to worry about the internals of this as our code handles all the messy 
+translation between web browser and your Java programs.
+
+这个项目的最大挑战在于，理解 Rastering 应该做什么; 以及搞清楚如何解析XML文件来得到 GraphDB。
+Assignment Overview
+You will implement three required classes for this project, in addition to any helper classes that 
+you decide to create. These three classes are Rasterer, GraphDB, and Router. They are described very 
+briefly below. More verbose descriptions follow.
+
+The Rasterer class will take as input an upper left latitude and longitude, a lower right latitude and longitude, 
+a window width, and a window height. Using these six numbers, it will produce a 2D array of filenames corresponding 
+to the files to be rendered.(渲染) Historically, this has been the hardest task to fully comprehend and most time consuming 
+part of the project.
+
+The GraphDB class will read in(读入) the Open Street Map dataset and store it as a graph. Each node in the graph will 
+represent a single intersection, and each edge will represent a road. How you store your graph is up to you. 
+This will be the strangest part of the project, since it involves using complex real world libraries to process 
+complex real world data.
+
+The Router class will take as input a GraphDB, a starting latitude and longitude, and a destination latitude 
+and longitude, and it will produce a list of nodes (i.e. intersections) that you get from the start point to 
+the end point. This part will be similar to the PuzzleSolver assignment, since you’ll be implementing A* again, 
+but now with an explicit graph object (that you build in GraphDB). As an additional feature, you will be taking 
+that list to generate a sequence of driving instructions that the server will then be able display.
+
+We’ve provided a nice set of html javadocs that you can use to browse and understand the API for the classes 
+you’ll be modifying.
+
+The biggest challenges in this assignment will be understanding what rastering is supposed to do, as well as 
+figuring out how to parse XML files for GraphDB.
+
+In the src/test/java folder, we’ve provided some client side JUnit tests that you can run for each part. 
+Make sure to use this to drive your development process.
+
+Raster
+A raster image, also called a bitmap, is a way to represent digital images. It can be created in a wide variety of formats, 
+including the familiar .gif, .jpg, and .bmp. The image is represented in a series of bits of information that translate into 
+pixels on the screen. These pixels form points of color that create an overall finished image.
+
+
+######
+Map Rastering (Part I Overview)
+Rastering is the job of converting information into a pixel-by-pixel image. In the Rasterer class you will take a user’s desired 
+viewing rectangle and generate an image for them.
+
+The user’s desired input will be provided to you as a Map<String, Double> params, and the main goal of your rastering code will 
+be to create a String[][] that corresponds to the files that should be displayed in response to this query.
+
+This means that the user wants the area of earth delineated by the rectangle between longitudes -122.2104604264636 
+and -122.30410170759153 and latitudes 37.870213571328854 and 37.8318576119893, and that they’d like them displayed 
+in a window roughly 1085 x 566 pixels in size (width x height). We call the user’s desired display location on earth the query box.
+
+
+To display the requested information, you need street map pictures, which we have provided in library-sp18. 
+All of the images provided are 256 x 256 pixels. Each image is at various levels of zoom. For example, the file 
+d0_x0_y0.png is the entire map, and covers the entire region. The files d1_x0_y0.png, d1_x0_y1.png, d1_x1_y0.png, 
+and d1_x1_y1.png are also the entire map, but at double the resolution, i.e. d1_x0_y0 is the northwest corner of the map, 
+d1_x1_y0 is the northeast corner, d1_x0_y1 is the southwest corner, and d1_x1_y1 is the southeast corner.
+
+More generally, at the Dth level of zoom, there are 4^D images, with names ranging from dD_x0_y0 to dD_xk_yk, 
+where k is 2^D - 1. As x increases from 0 to k, we move eastwards, and as y increases from 0 to k, we move southwards.
+
+The job of your rasterer class is decide, given a user’s query, which files to serve up.
+
+
+For the example above, your code should return the following 2D array of strings:
+
+[[d2_x0_y1.png, d2_x1_y1.png, d2_x2_y1.png, d2_x3_y1.png],
+[d2_x0_y2.png, d2_x1_y2.png, d2_x2_y2.png, d2_x3_y2.png],
+[d2_x0_y3.png, d2_x1_y3.png, d2_x2_y3.png, d2_x3_y3.png]]
+
+
+Our MapServer code will take your 2D array of strings and display the appropriate image in the browser. 
+If you’re curious how this works, see writeImagesToOutputStream.
+
+Since each image is 256 x 256 pixels, the overall image given above will be 1024 x 768 pixels. 
+
+
+Instead, to rigorously determine which images to use, we will define the longitudinal distance per pixel (LonDPP) as follows:
+
+
+I find it useful to think of LonDPP as “blurriness”(模糊程度)
+the d0 image is the blurriest
+
+
+
+###### 
+Another important constant in MapServer.java is TILE_SIZE. This is important because we need this to 
+compute the LonDPP of an image file. For the depth 0 tile, the LonDPP is just (ROOT_LRLON - ROOT_ULLON)/TILE_SIZE, 
+i.e. the number of units of longitude divided by the number of pixels.
+
+因为每个图片都是有序编号和命名的, 所以其坐标(覆盖的经纬度范围)可以通过计算得出。
+The bounding box given by an image can be mathematically computed using the information above. 
+For example, suppose we want to know the region of the world that d1_x1_y1.png covers. 
+We take advantage of the fact that we know that d0_x0_y0.png covers the region between 
+longitudes -122.29980468 and -122.21191406 and between latitudes 37.82280243 and 37.89219554. 
+Since d1_x1_y1.png is just the southeastern quarter of this region, we know that it covers the 
+region between longitudes -122.25585937 and -122.21191406 and between latitudes 37.82280243 and 37.85749898.
+
+longitudes 经度
+
+??????????
+东经正数，西经为负数。
+北纬为正数，南纬为负数。
+
+Similarly, we can compute the LonDPP in a similar way. Since d1_x1_y1.png is 256 x 256 pixels (as are all image tiles), 
+the LonDPP is (-122.21191406 - -122.25585937)/256 or 0.00017166.
+
+If you’ve fully digested the information described in the spec so far, you now know enough to figure out which files 
+to provide given a particular query box. See the project 3 slides and video for more hints if you’re stuck.
+
+
+Note: If someone is helping you who took 61B in the past, they might suggest using a Quadtree, 
+which was the previously recommended way of solving the tile identification problem.
+tile identification (定位所需图片块)
+
+
+四叉树的结构比较简单，是GIS中常用的空间索引之一。
+在这颗四叉树中，每一个节点都是一张地图瓦片，都有唯一的标识，通过标识可以快速找到它的父节点，子节点，
+相邻的节点等等，我们也可以通过标识快速计算出瓦片的空间坐标。
+
+当做移动或者缩放地图这种操作的时候，查询的区域发生了变化，根据新的区域范围以及当前地图等级计算出所需要的四叉树节点。
+
+这个查询相对于其他的空间查询要简单得多，因为地图等级是不变的，也就是说该查询是锁定了四叉树的level，并不需要进行递归，效率也要高很多。
+
+
+四叉树索引的基本思想是将地理空间递归划分为不同层次的树结构。它将已知范围的空间等分成四个相等的子空间，
+如此递归下去，直至树的层次达到一定深度或者满足某种要求后停止分割。四叉树的结构比较简单，并且当空间数据对象
+分布比较均匀时，具有比较高的空间数据插入和查询效率，因此四叉树是GIS中常用的空间索引之一。
+
+
+============================================================
+1. 如何建立 图片名字与位置的映射 
+d1_x0_y0, d1_x1_y0
+d1_x0_y1, d1_x1_y1
+可以为每一块映射出其四个children
+左上: 不变
+右上: x +2
+左下: y +2
+右下: x +2, y +2
+
+============================================================
+
+## assignment overview
+实现三个类以及任意辅助函数，三个类是: Rasterer, GraphDB, and Router
+
+The Rasterer class will take as input an upper left latitude and longitude, a lower right latitude and longitude, 
+a window width, and a window height. Using these six numbers, it will produce a 2D array of filenames corresponding 
+to the files to be rendered. Historically, this has been the hardest task to fully comprehend and most time consuming 
+part of the project.
+
+The GraphDB class will read in(读入) the Open Street Map dataset and store it as a graph. Each node in the graph will represent a 
+single intersection, and each edge will represent a road. How you store your graph is up to you. This will be the strangest 
+part of the project, since it involves using complex real world libraries to process complex real world data.
+GraphDB 构造图
+节点代表一个交叉口， 边代表一条路。
+
+The Router class will take as input a GraphDB, a starting latitude and longitude, and a destination latitude and longitude, 
+and it will produce a list of nodes (i.e. intersections) that you get from the start point to the end point. This part will 
+be similar to the PuzzleSolver assignment, since you’ll be implementing A* again, but now with an explicit graph object 
+(that you build in GraphDB). As an additional feature, you will be taking that list to generate a sequence of driving 
+instructions that the server will then be able display.
+Router类实现路径导航，将使用 A* 算法。 (显式图的 A*算法)
+
+
+=======================================================================================
+API
+GraphBuildingHandler	
+	Parses OSM XML files using an XML SAX parser.
+GraphDB	
+	Graph for storing all of the intersection (vertex) and road (edge) information.
+GraphDBLauncher	
+	This class provides a main method for experimenting with GraphDB construction.
+MapServer	
+	This MapServer class is the entry point for running the JavaSpark web server for the BearMaps application project, 
+	receiving API calls, handling the API call processing, and generating requested images and routes.
+Rasterer	
+	This class provides all code necessary to take a query box and produce a query result.
+Router	
+	This class provides a shortestPath method for finding routes between two points on the map.
+Router.NavigationDirection	
+	Class to represent a navigation direction, which consists of 3 attributes: a direction to go, a way, 
+	and the distance to travel for.
+
+Warning: Unlike prior assignments in your CS classes, we’ll be working with somewhat messy real world data. 
+This is going to be frustrating at times, but it’s an important skill and something that we think will serve 
+you well moving forwards.
+
+The biggest challenges in this assignment will be understanding what rastering is supposed to do, as well as 
+figuring out how to parse XML files for GraphDB.
+
+两个难点：
+1. 位图构建(简单说就是，如何组装所需的地图图片)
+2. 解析 XML 文件来构建对应的图对象
+Rastering is the job of converting information into a pixel-by-pixel image. 
+In the Rasterer class you will take a user’s desired viewing rectangle and generate an image for them.
+
+Each image is at various levels of zoom. 
+
+一共8个层次的图片， 每个层次的图片都能拼成一副 entire map(当然是某个范围的地图)
+
+More generally, at the Dth level of zoom, there are 4^D images, with names ranging from dD_x0_y0 to dD_xk_yk
+
+The job of your rasterer class is decide, given a user’s query, which files to serve up. 
+
+
+The images that you return as a String[][] when rastering must be those that:
+1. Include any region of the query box.
+2. Have the greatest LonDPP that is less than or equal to the LonDPP of the query box (as zoomed out as possible). 
+If the requested LonDPP is less than what is available in the data files, you should use the lowest LonDPP available 
+instead (i.e. depth 7 images).
+
+
+### Routing & Location Data (Part II)
+### 导航与定位
+In this part of the project, you’ll use a real world dataset combined with an industrial strength dataset parser to construct a graph. 
+真实世界数据 + 工业级的数据解析器 来构建图(graph)
+
+数据： Routing and location data is provided to you in the berkeley.osm file. 
+
+1. 要做什么
+
+The first step of this part of the project is to build a graph representation of the contents of berkeley.osm. 
+We have chosen to use a SAX parser, which is an “event-driven online algorithm for parsing XML documents”. 
+It works by iterating through the elements of the XML file. At the beginning and end of each element, it calls 
+the startElement and endElement callback methods with the appropriate parameters.
+
+Your job will be to override the startElement and endElement methods so that when the SAX parser has completed, 
+you have built a graph. Understanding how the SAX parser works is going to be tricky.
+
+2. 要理解什么预备知识才能做到这些
+
+
+在java中，原生解析xml文档的方式有两种，分别是：Dom解析和Sax解析
+
+Dom解析功能强大，可增删改查，操作时会将xml文档以文档对象的方式读取到内存中，因此适用于小文档
+
+Sax解析是从头到尾逐行逐个元素读取内容，修改较为不便，但适用于只读的大文档
+
+Sax采用事件驱动的方式解析文档。简单点说，如同在电影院看电影一样，从头到尾看一遍就完了，不能回退（Dom可来来回回读取）
+
+同样，在Sax的解析过程中，读取到文档开头、结尾，元素的开头和结尾都会触发一些回调方法，你可以在这些回调方法中进行相应事件处理
+
+这四个方法是：startDocument() 、 endDocument()、 startElement()、 endElement
+此外，光读取到节点处是不够的，我们还需要characters()方法来仔细处理元素内包含的内容
+
+将这些回调方法集合起来，便形成了一个类，这个类也就是我们需要的触发器
+
+一般从Main方法中读取文档，却在触发器中处理文档，这就是所谓的事件驱动解析方法
+
+现在我们开始创建触发器这个类，要创建这个类首先需要继承DefaultHandle
+
+## sax parser 流程
+startElement
+endElement
+
+At the beginning and end of each element, it calls the startElement and endElement callback methods 
+with the appropriate parameters.
+Your job will be to override the startElement and endElement methods so that when the SAX parser has completed, 
+you have built a graph. Understanding how the SAX parser works is going to be tricky.
+
+Read through the OSM wiki documentation on the various relevant elements: the idea of a tag, the highway key, 
+the way element, and the node element. You will need to use all of these elements, along with their attribute’s 
+values, to construct your graph for routing.
+
+## way validity
+"highway" and it's one of the ALLOWED_HIGHWAY_TYPES(giving in GraphBuildingHandler)
+如果不是这里的一种， 不加入图中。
+
+The way, pictured above, is a road or path and defines a list of nodes, with name nd and the attribute ref 
+referring to the node id, all of which are connected in linear order.
+
+Tags in the way will tell you what kind of road it is - if it has a key of “highway”, then the value 
+corresponds to the road type
+
+????????????????????????????
+You should ignore all one-way tags and pretend all roads are two-way 
+(this means your directions are not safe to use, but there are some inaccuracies(不准确，误差) in the OSM data anyway).
+
+?????????????
+清除所有不连通的节点是什么意思？ 孤立节点？？？
+Part of your job will be decide how to store the graph itself in your GraphDB class. 
+Note that the final step of graph construction is to “clean” the graph, i.e. to destroy all nodes that are disconnected. 
+Unlike the Princeton graph implementation, your GraphDB will need to permit the insertion and deletion of nodes.
+
+## 关于 maxSpeed
+Note: You don’t need to actually store the maxSpeed anywhere since we ignore the speed limits when calculating the route in part III. 
+
+
+
+## 要实现什么？
+helper class
+	Node class(Vertex)
+	Edge class
+## you may need some core graph methods
+addNode
+addEdge
+removeNode
+
+// if nothing is connecting to this vertex, then delete it from the map
+
+## before clean
+There are 399287 vertices in the graph.
+## after clean
+
+## 只要使用你的构造器后, 下面的6个方法符合要求即可
+vertices, adjacent, distance, closest, lon, lat
+
+
+???????
+bearing angle
+方位角
+从某点的指北方向线起，依顺时针方向到目标方向线之间的水平夹角，叫方位角。
+
+
+
+## 如何快速找到距离给定的点最近的10个点？(附近地点搜索)
+1、假设数据库里（mysql）有10w条记录，比如经纬度坐标
+2、给定某个点A，算出离A点最近的10个点。
+====================================
+补充下问题：
+10w条数据，记录的是用户登录后的地点，可能会经常变动。
+场景：
+比如 陌陌，微信等，打开某个功能（摇一摇之类的），会返回离他最近的N个用户。
+
+这里类似共享单车，对地图位置的查找功能算法。
+实际上已经很成熟了。
+最简单的是基于geohash的一些数据筛选。
+
+K-D tree
+
+划分成网格
+
+附近地点搜索
+https://wizardforcel.gitbooks.io/the-art-of-programming-by-july/content/a.14.html
+
+
+
+## sax parser
+访问者模式(Visitor Pattern)
+
+
+## 20180903
+### 
+?????????????????????????????????????????
+Ignore all one way tags, since many of them are wrong.
+
+?????????????????????????????????????????
+
+The name of nodes and ways are useful if you're doing AutoComplete.(查询的自动补全)
+
+Node 的名字很容易存储，但是 Way 的名字怎么存？
+
+
+
+### implement A*
+
+该算法综合了Best-First Search和Dijkstra算法的优点：在进行启发式搜索提高算法效率的同时，可以保证找到一条最优路径。
+
+#### 最短路径不是经历节点数最少的路径
+missing detail: length of roads
+
+1. Dijkstra's algorithm (权值非负)
+Problem: single source single target shortest path
+
+2. The problem with Dijkstra
+
+因为只有一个 target, 我们可以提出不同的算法。
+
+2.1 How can we do better?
+explore eastwards first?
+
+
+## Introducing A*
+Simple idea:
+1. visit vertices in order of d(Denver, v) + h(v), where h(v) is an estimate of the distance from v to NYC.
+
+////////////////////////////
+HW4
+Levenstein distance (编辑距离???)
+////////////////////////////
+## 评估函数(启发函数)
+:: heuristic: using experience to learn and improve
+:: 不需要 perfect
+
+as the crow flies distance 直线距离
+
+
+### 
+If edge weights are all equal, Dijkstra's algorithm is just bfs.
+
+
+启发式搜索就是在状态空间中的搜索对每一个搜索的位置进行评估，得到最好的位置，再从这个位置 进行搜索直到目标。
+这样可以省略大量无畏的搜索路径，提到了效率。在启发式搜索中，对位置的估价是 十分重要的。
+
+
+
+路径排序(Path Sorting)
+计算出组成路径的方格的关键是下面这个等式：
+
+F = G + H
+
+这里，
+
+G = 从起点 A 移动到指定方格的移动代价，沿着到达该方格而生成的路径。
+
+H = 从指定的方格移动到终点 B 的估算成本。这个通常被称为试探法，有点让人混淆。为什么这么叫呢，因为这是个猜测。
+直到我们找到了路径我们才会知道真正的距离，因为途中有各种各样的东西 ( 比如墙壁，水等 ) 。
+本教程将教你一种计算 H 的方法，你也可以在网上找到其他方法
+
+
+### A* 实现的关键
+1. 评估函数 h(v)
+
+2. 优先队列
+优先队列的更新操作然后恢复优先队列的性能
+java本身的PQ有哪些操作？其性能如何？《Effective Java》
+
+3. 路径记录
+ 
+ 
+d(s, v): best known distance from s to v
+path: 路径记录	
+	
+	
+great circle distance 大圆距离
+
+### Router
+/**
+ * This class provides a shortestPath method for finding routes between two points
+ * on the map. Start by using Dijkstra's, and if your code isn't fast enough for your
+ * satisfaction (or the autograder), upgrade your implementation by switching it to A*.
+ * Your code will probably not be fast enough to pass the autograder unless you use A*.
+ * The difference between A* and Dijkstra's is only a couple of lines of code, and boils
+ * down to the priority you use to order your vertices.
+ */
+
+
+### closest 的用处
+Return a List of longs representing the shortest path from the node
+closest to a start location and the node closest to the destination
+location.
+
+把起始点和目的点映射到图上!
+
+
+???????????????????	 
+Dijkstra’s is a Uniform-Cost search algorithm - you visit all nodes at a distance d or less from the start node.
+
+However, in cases like this, where we know the direction that we should be searching in, 
+we can employ that information as a heuristic.
+
+
+
+2->1
+3->2
+4->3
+
+??????
+如何保存 way name in a graph?
+
+??????????????????????????????????/
+Route Navigation Directions (路径导航指示)
+
+### Turn-by-turn Navigation
+As an optional feature, you can use your A* search route to generate a sequence of navigation instructions 
+that the server will then be able to display when you create a route.
+
+
+What direction a given NavigationDirection should have will be dependent on your previous node and your 
+current node along the computed route. Specifically, the direction will depend on the relative bearing 
+between the previous node and the current node, and should be as followed:
+	Between -15 and 15 degrees the direction should be “Continue straight”.
+	Beyond -15 and 15 degrees but between -30 and 30 degrees the direction should be “Slight left/right”.
+	Beyond -30 and 30 degrees but between -100 and 100 degrees the direction should be “Turn left/right”.
+	Beyond -100 and 100 degrees the direction should be “Sharp left/right”.
+
+	
+
+

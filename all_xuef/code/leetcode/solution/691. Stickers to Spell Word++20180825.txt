@@ -1,0 +1,58 @@
+
+
+
+
+691. Stickers to Spell Word
+题意
+给定一个字符串集合S,以及一个目标字符串T.求使用S中字符串的最小个数，能够满足T需要的字符数。类似于多目标优化的问题（弄清这一类问题如何求解）
+背包问题（变形）
+给定物品的特点
+给定背包的限制
+求最小的物品的数量。
+
+
+https://discuss.leetcode.com/topic/106368/rewrite-of-contest-winner-s-solution/7
+1. The big idea is to use number from 0 to 2^n-1 as bitmap to represent every subset of target;
+2. Then populate all of these subset from 0 to 2^n-1 by trying to apply 1 sticker at each time.
+3. Eventually you might or might not get the ultimate result 2^n-1, which is target, populated.
+
+
+
+There are three elegant ideas I appreciate most inside this solution
+
+Applying bits to represent the "status", by the help of restriction where target's size is smaller than 15. And if i is a subproblem of j, then must i < j holds.
+The dp solution here is bottom-up, so at each turn we can check whether dp[i] == -1 or not to skip useless status. I've written a similar solution after reading dreamoon's codes, but my version is top-down, at each turn I need to check many unreachable sub-situations.
+Using unsigned_int, so that we can always say "dp[now] = min(dp[now], dp[i]+1) ", because for uint, -1 is something like INT_MAX.
+
+
+多重背包问题
+
+
+我们使用一个一维的dp数组，其中dp[i]表示组成第i个子集合所需要的最少的sticker的个数，注意这里是子集合，而不是子串。
+长度为n的字符串共有2的n次方个子集合，比如字符串"ab"，就有4个子集合，分别是 "", "a", "b", "ab"。字符串"abc"就有8个子集合，
+如果我们用0到7来分别对应其子集合，就有：
+
+复制代码
+     abc   subset 
+0    000     ""
+1    001     c
+2    010     b
+3    011     bc
+4    100     a
+5    101     ac
+6    110     bb
+7    111     abc
+
+
+--------------------------------------------------------
+思路： 
+因为字母顺序无关，所以只需要统计target中每个字母出现的次数，接着对于给定的stickers，如果选择了某个sticker（当然你也可以不选），
+那么就从target中减去共同出现的字母频次（以sticker为准），这样一来，该问题就变成了重复子问题。
+ 
+
+
+
+
+
+
+

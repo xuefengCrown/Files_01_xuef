@@ -1,0 +1,10 @@
+
+
+
+给Lisp程序员的Python简介
+https://blog.csdn.net/zzljlu/article/details/7830259
+
+Python cookbook
+http://python3-cookbook-personal.readthedocs.io/zh_CN/latest/c02/p19_writing_recursive_descent_parser.html
+
+

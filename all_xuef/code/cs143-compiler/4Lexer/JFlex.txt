@@ -1,0 +1,293 @@
+
+????????
+1. yylex() 是逐个字符读取吗?
+
+
+
+2 Introduction to Flex/JLex
+Flex allows you to implement a lexical analyzer by writing rules that match on user-defined regular
+expressions and performing a specified action for each matched pattern. Flex compiles your rule file (e.g.,
+“lexer.l”) to C (or, if you are using JLex, Java) source code implementing a finite automaton recognizing
+the regular expressions that you specify in your rule file. Fortunately, it is not necessary to understand
+or even look at the automatically generated (and often very messy) file implementing your rules.
+	Rule files in flex are structured as follows:
+%{
+Declarations  -- 
+%}
+Definitions   -- very useful as definitions allow you to give names to regular expressions
+%%
+Rules		  -- 指定匹配的正则表达式以及匹配时采取的动作
+%%
+User subroutines
+
+The Declarations and User subroutines sections are optional and allow you to write declarations and
+helper functions in C (or for JLex, Java). The Definitions section is also optional, but often very useful
+as definitions allow you to give names to regular expressions.
+
+The most important part of your lexical analyzer is the rules section. A rule in Flex specifies an
+action to perform if the input matches the regular expression or definition at the beginning of the rule.
+The action to perform is specified by writing regular C (or Java) source code. For example, assuming
+that a digit represents a token in our language (note that this is not the case in Cool), the rule:
+{DIGIT} {
+	cool_yylval.symbol = inttable.add_string(yytext);
+	return DIGIT_TOKEN;
+}
+records the value of the digit in the global variable cool_yylval and returns the appropriate token code.
+(See Sections 5 and 6 for a more detailed discussion of the global variable cool_yylval and see Section
+4.2 for a discussion of the inttable used in the above code fragment.)
+
+### 尽量匹配和优先级
+An important point to remember is that if the current input (i.e., the result of the function call to
+yylex()) matches multiple rules, Flex picks the rule that matches the largest number of characters. For
+instance, if you define the following two rules
+	[0-9]+ { // action 1}
+	[0-9a-z]+ {// action 2}
+and if the character sequence 2a appears next in the file being scanned, then action 2 will be performed
+since the second rule matches more characters than the first rule. If multiple rules match the same
+number of characters, then the rule appearing first in the file is chosen.
+
+### 利用全局变量来跟踪状态
+When writing rules in Flex, it may be necessary to perform different actions depending on previously
+encountered tokens. For example, when processing a closing comment token, you might be interested
+in knowing whether an opening comment was previously encountered. One obvious way to track state
+is to declare global variables in your declaration section, which are set to true when certain tokens of
+interest are encountered. Flex also provides syntactic sugar for achieving similar functionality by using
+state declarations such as:
+%Start COMMENT
+which can be set to true by writing BEGIN(COMMENT). To perform an action only if an opening comment
+was previously encountered, you can predicate your rule on COMMENT using the syntax:
+<COMMENT> {
+	// the rest of your rule ...
+}
+
+### ???
+There is also a special default state called INITIAL which is active unless you explicitly indicate
+the beginning of a new state. You might find this syntax useful for various aspects of this assignment,
+such as error reporting. We strongly encourage you to read the documentation on Lex written by Lesk
+and Schmidt linked from the Project Resources section on the class wiki before writing your own lexical
+analyzer.
+
+
+对了，状态有必要多说一句。在"directives"区域，你可以定义状态。语法如
+%state COMMENT
+进入注释以后，你就使用yybegin(COMMENT)进行状态转换，转换完之后可以用
+<COMMENT>... {...}
+这样的方式使用状态，表示在这种状态下才匹配这条规则，出注释切记要用yybegin(YYINITIAL)把状态转回来。
+另外在一条规则里，状态不是必须的，可以忽略，相当于任意状态都适用此规则。
+
+YYINITIAL是Jlex隐含定义的常量，如果在lexer的整个运行过程中你没有进行过状态转换，那么全程都处于YYINITIAL状态下，详见Jlex文档第2.2.5节。
+
+对了还有，yytext()表示被当前规则匹配中的、预处理过的文本，可以用简单粗暴的方式查看...
+System.err.println("processing: "+yytext());
+
+这些例子举出来，这个作业可以被视为完成一半了，剩下的就是对照Cool_manual一个一个写规则。哪个TokenConstants对应哪个符号。
+
+
+
+
+2.2 JLex Directives指令
+2.2.1 Internal Code to Lexical Analyzer Class
+The %{...%} directive allows the user to write Java code to be copied into the lexical analyzer class. This directive is used as follows.
+%{ 
+	<code> 
+%} 
+To be properly recognized, the %{ and %} should each be situated at the beginning of a line. The specified Java code in <code> will be then 
+copied into the lexical analyzer class created by JLex.
+class Yylex { 
+... <code> ... 
+} 
+This permits the declaration of variables and functions internal to the generated lexical analyzer class. 
+变量名不要以 yy 开头！
+
+2.2.2 Initialization Code for Lexical Analyzer Class (词法分析器类的初始化代码)
+The %init{ ... %init} directive allows the user to write Java code to be copied into the constructor for the lexical analyzer class.
+
+2.2.3 End-of-File Code for Lexical Analyzer Class (到达文件末尾时要执行的代码)
+The %eof{ ... %eof} directive allows the user to write Java code to be copied into the lexical analyzer class for execution after 
+the end-of-file is reached.
+%eof{ 
+<code>
+%eof} 
+
+2.2.4 Macro Definitions
+为正则表达式起别名
+
+2.2.5 State Declarations (控制正则何时被匹配)
+Lexical states are used to control when certain regular expressions are matched. 
+These are declared in the JLex directives in the following way.
+%state state[0][, state[1], state[2], ...]
+
+A single lexical state is implicitly declared by JLex. This state is called YYINITIAL, and the generated lexer begins lexical analysis in this state.
+对了，状态有必要多说一句。在"directives"区域，你可以定义状态。语法如
+%state COMMENT
+进入注释以后，你就使用yybegin(COMMENT)进行状态转换，转换完之后可以用
+<COMMENT>... {...}
+这样的方式使用状态，表示在这种状态下才匹配这条规则，出注释切记要用yybegin(YYINITIAL)把状态转回来。另外在一条规则里，状态不是必须的，可以忽略，
+相当于任意状态都适用此规则。
+YYINITIAL是Jlex隐含定义的常量，如果在lexer的整个运行过程中你没有进行过状态转换，那么全程都处于YYINITIAL状态下，详见Jlex文档第2.2.5节。
+
+Rules of lexical analysis begin with an optional state list. If a state list is given, the lexical rule is matched only 
+when the lexical analyzer is in one of the specified指定的 states. If a state list is not given, the lexical rule is matched 
+when the lexical analyzer is in any state.
+
+
+2.2.6 Character Counting
+Character counting is turned off by default, but can be activated with the %char directive.
+%char
+The zero-based character index of the first character in the matched region of text is then placed in the integer variable yychar.
+
+
+2.2.7 Line Counting
+Line counting is turned off by default, but can be activated with the %line directive.
+%line
+The zero-based line index at the beginning of the matched region of text is then placed in the integer variable yyline.
+
+2.2.13 Newlines and Operating System Compatibility
+In UNIX operating systems, the character code sequence representing a newline is the single character ``\n''. Conversely, 
+in DOS-based operating systems, the newline is the two-character sequence ``\r\n'' consisting of the carriage return followed by the newline. 
+The %notunix directive results in either the carriage return or the newline being recognized as a newline.
+%notunix
+This issue of recognizing the proper sequence of characters as a newline is important in ensuring Java platform independence.
+
+
+2.2.16 Exceptions Generated by Lexical Actions
+
+2.2.17 Specifying the Return Value on End-of-File
+
+
+
+2.3 Regular Expression Rules
+The third part of the JLex specification consists of a series of rules for breaking the input stream into tokens. 
+These rules specify regular expressions, then associate these expressions with actions consisting of Java source code.
+
+The rules have three distinct parts: the optional state list, the regular expression, and the associated action. This format is represented as follows.
+[<states>] <expression> { <action> }
+### 最长匹配与按优先级匹配
+If more than one rule matches strings from its input, the generated lexer resolves conflicts between rules by greedily choosing the rule 
+that matches the longest string. If more than one rule matches strings of the same length, the lexer will choose the rule that is given first 
+in the JLex specification. Therefore, rules appearing earlier in the specification are given a higher priority by the generated lexer.
+### 规则应该能匹配所有可能输入
+The rules given in a JLex specification should match all possible input. If the generated lexical analyzer receives input that does not 
+match any of its rules, an error will be raised.
+### 要保证所有的输入至少能匹配一条规则
+Therefore, all input should be matched by at least one rule. This can be guaranteed by placing the following rule at the bottom of a JLex specification:
+. { java.lang.System.out.println("Unmatched input: " + yytext()); }
+The dot (.), as described below, will match any input except for the newline.
+
+2.3.1 Lexical States
+The state list specifies under which initial states the rule can be matched.
+
+For instance, if yylex() is called with the lexer at state A, the lexer will attempt to match the input only against those rules that 
+have A in their state list.
+
+If no state list is specified for a given rule, the rule is matched against in all lexical states.
+
+2.3.2 Regular Expressions
+Regular expressions should not contain any white space, as white space is interpreted as the end of the current regular expression. There is one exception; 
+
+The following characters are metacharacters, with special meanings in JLex regular expressions.
+? * + | ( ) ^ $ . [ ] { } " \
+
+Otherwise, individual characters stand for themselves.
+ef Consecutive regular expressions represents their concatenation.
+e|f The vertical bar (|) represents an option between the regular expressions that surround it, so matches either expression e or f.
+
+The following escape sequences are recognized and expanded:
+\b	Backspace
+\n	newline
+\t	Tab 
+\f	Formfeed 分页符
+\r	Carriage return 回车
+\ddd	The character code corresponding to the number formed by three octal digits ddd
+\xdd	The character code corresponding to the number formed by two hexadecimal digits dd
+\udddd	The Unicode character code corresponding to the number formed by four hexidecimal digits dddd.
+\^C	Control character
+\c	A backslash followed by any other character c matches itself
+
+
+$ The dollar sign ($) denotes the end of a line. If the dollar sign ends a regular expression, the expression is matched only at the end of a line.
+
+. The dot (.) matches any character except the newline, so this expression is equivalent to [^\n].
+
+"..." Metacharacters lose their meaning within double quotes and represent themselves. The sequence \" (which represents the single character ") 
+	is the only exception.
+
+{name} Curly braces denote a macro expansion, with name the declared name of the associated macro.
+
+* The star (*) represents Kleene closure and matches zero or more repetitions of the preceding regular expression.
+
++ The plus (+) matches one or more repetitions of the preceding regular expression, so e+ is equivalent to ee*.
+
+? The question mark (?) matches zero or one repetitions of the preceding regular expression.
+
+(...) Parentheses are used for grouping within regular expressions.
+
+[...] Square backets denote a class of characters and match any one character enclosed in the backets. 
+	If the first character following the left bracket ([) is the up arrow (^), the set is negated and 
+	the expression matches any character except those enclosed in the backets. 
+	Different metacharacter rules hold inside the backets, with the following expressions having special meanings:
+		{name}	Macro expansion
+		a - b	Range of character codes from a to b to be included in character set
+		"..."	All metacharacters within double quotes lose their special meanings. The sequence \" (which represents the single character ") 
+				is the only exception.
+		\	Metacharacter following backslash(\) loses its special meaning
+
+For example, [a-z] matches any lower-case letter, [^0-9] matches anything except a digit, and [0-9a-fA-F] matches any hexadecimal digit. 
+Inside character class brackets, a metacharacter following a backslash loses its special meaning. Therefore, [\-\\] matches a dash破折号 or a backslash.反斜线 
+Likewise ["A-Z"] matches one of the three characters A, dash, or Z. 双引号使得元字符失去原来的意义!!!
+Leading and trailing dashes in a character class also lose their special meanings, 
+so [+-] and [-+] do what you would expect them to (ie, match only '+' and '-').
+
+2.3.3 Associated Actions
+The action associated with a lexical rule consists of Java code enclosed inside block-delimiting curly braces.
+{ action } 
+The Java code action is copied, as given, into the state-driven lexical analyzer produced by JLex.
+
+All curly braces contained in action not part of strings or comments should be balanced.
+
+2.3.3.1 Actions and Recursion: ?????????????????????????????????????????
+If no return value is returned in an action, the lexical analyzer will loop, searching for the next match from the input stream 
+and returning the value associated with that match.
+
+The lexical analyzer can be made to recur explicitly with a call to yylex(), as in the following code fragment.
+{ ... 
+return yylex(); 
+... } 
+
+2.3.3.2 State Transitions:
+If lexical states are declared in the JLex directives section, transitions on these states can be declared within the 
+regular expression actions. State transitions are made by the following function call.
+yybegin(state);
+The void function yybegin() is passed the state name state and effects a transition to this lexical state.
+对了，状态有必要多说一句。在"directives"区域，你可以定义状态。语法如
+%state COMMENT
+进入注释以后，你就使用yybegin(COMMENT)进行状态转换，转换完之后可以用
+<COMMENT>... {...}
+这样的方式使用状态，表示在这种状态下才匹配这条规则，出注释切记要用yybegin(YYINITIAL)把状态转回来。另外在一条规则里，状态不是必须的，可以忽略，
+相当于任意状态都适用此规则。
+YYINITIAL是Jlex隐含定义的常量，如果在lexer的整个运行过程中你没有进行过状态转换，那么全程都处于YYINITIAL状态下，详见Jlex文档第2.2.5节。
+
+The state state must be declared within the JLex directives section, or this call will result in a compiler error in the generated source file. 
+The one exception to this declaration requirement is state YYINITIAL, the lexical state implicitly declared by JLex. 
+The generated lexer begins lexical analysis in state YYINITIAL and remains in this state until a transition is made.
+
+
+2.3.3.3 Available Lexical Values:
+The following values, internal to the Yylex class, are available within the action portion of the lexical rules.
+Variable or Method			ActivationDirective			Description
+java.lang.String yytext();	Always active.	Matched portion of the character input stream.
+int yychar;					%char			Zero-based character index of the first character in the matched portion of the input stream
+int yyline;					%line			Zero-based line number of the start of the matched portion of the input stream
+
+
+3. Generated Lexical Analyzers
+JLex will take a properly-formed specification and transform it into a Java source file for the corresponding lexical analyzer.
+
+The generated lexical analayzer resides in the class Yylex. There are two constructors to this class, 
+both requiring a single argument: the input stream to be tokenized. 
+
+The access function to the lexer is Yylex.yylex(), which returns the next token from the input stream. 
+The return type is Yytoken and the function is declared as follows.
+class Yylex { ... 
+public Yytoken yylex () {
+... } 

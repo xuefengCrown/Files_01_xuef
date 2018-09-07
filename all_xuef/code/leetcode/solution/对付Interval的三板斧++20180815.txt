@@ -1,0 +1,37 @@
+
+
+
+第一，排序。在一般情况下，按照interval的start升序排序，在必要情况下，对于start相同的interval，按照interval的end的降序排序。
+
+第二，greedy。有时候是两个interval之间的greedy，有时候是一群interval之间的greedy。
+
+第三，map。c++里的map，是用红黑树实现的，这里为了方便就叫map。当前两板斧都无法奏效的时候，可以试试这个。
+
+下面，我来演示一下，如何用这三板斧解决问题。
+
+
+最简单的例子，莫过于Leetcode 252 meeting rooms。
+
+然而排序常常和greedy一起使用。先排序，再greedy，是对付interval最常见的解法。当然这种套路远不仅限于interval类的题目。
+一个简单的题目是Leetcode 56. Merge Intervals.
+
+
+再来看一个同样是sort+greedy的题目。Leetcode 57. Insert Interval.
+
+再来一道类似的题目。Leetcode 435. Non-overlapping Intervals. 题目要求：
+
+Given a collection of intervals, find the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
+
+其实我本人在最早接触greedy算法的时候，学习的就是这个例子，可谓是非常经典。简单的逻辑就是，当有两个interval相互重叠的时候，
+我们一定要删去一个。那么删去哪一个呢？答案是删去end比较大的那个。这个可以用prove by contradiction轻松证明。
+来看一下借鉴自官方solution的code，其中pre记录的是目前为止保留的上一个interval。我这里把solution里面的compare function用lamda塞进去了。
+
+
+
+
+
+
+
+
+
+

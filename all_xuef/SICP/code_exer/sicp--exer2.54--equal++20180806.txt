@@ -1,0 +1,25 @@
+
+
+
+
+Exercise 2.54.  Two lists are said to be equal? if they contain equal elements arranged in the same order. For example,
+
+(equal?? '(this is a list) '(this is a list))
+
+is true, but
+
+(equal?? '(this is a list) '(this (is a) list))
+
+is false. To be more precise, we can define equal? recursively in terms of the basic eq? equality of symbols by saying 
+that a and b are equal? if they are both symbols and the symbols are eq?, or if they are both lists such that (car a) is 
+equal? to (car b) and (cdr a) is equal? to (cdr b). Using this idea, implement equal? as a procedure.
+
+(define (equal?? ele1 ele2)
+	(cond
+		((and (symbol? ele1) (symbol? ele2)) (eq? ele1 ele2))
+		((and (list? ele1) (list? ele2))
+			(or (and (null? ele1) (null? ele2))
+				(and (not (null? ele1)) (not (null? ele2)) (equal?? (car ele1) (car ele2)) (equal?? (cdr ele1) (cdr ele2)))))
+		(else #f)))
+
+;;;; 注意 (car lst) 的前置条件--> lst 不为空

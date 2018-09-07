@@ -1,0 +1,14 @@
+
+
+
+730. Count Different Palindromic Subsequences
+
+Input: 
+S = 'bccb'
+Output: 6
+Explanation: 
+The 6 different non-empty palindromic subsequences are 'b', 'c', 'bb', 'cc', 'bcb', 'bccb'.
+Note that 'bcb' is counted only once, even though it occurs twice.
+
+S的子序列指删除S的零个或多个字符得到的序列
+

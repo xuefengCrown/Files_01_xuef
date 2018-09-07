@@ -1,0 +1,98 @@
+
+
+
+MIT 6.046 10. Dynamic Programming: Advanced DP
+
+Guess Number Higher or Lower II
+
+
+v(i,j): max value we can definitely win if it's our turn and only coins Vi ... Vj remain.
+
+v(i,i) just pick i
+v(i, i+1): pick the big one
+v(i, i+2):
+
+
+Thanks for sharing your solution, and the video in MIT OCW is really helpful.
+
+I try to summarize what the video tell us.
+
+The goal here is that we want to maximize the amount of money we can get assuming we move first.
+
+Here your dp[i][j] means the max value we can get if it it's our turn and only coins between i and j remain.(Inclusively)
+
+So dp[i][i] means there is only one coin left, we just pick it, dp[i][i+1] means there are only two left, we then pick the max one.
+
+Now we want to derive the more general case. dp[i][j] = max( something + v[i], something + v[j]), since we either will pick the i or j coin. 
+The problem now turns to what "something" here will be.
+
+A quick idea may bedp[i][j] = max( dp[i + 1][j] + v[i], dp[i][j - 1] + v[j]), but here dp[i + 1][j] and dp[i][j - 1] are not the values directly 
+available for us, it depends on the move that our opponent make.
+
+Then we assume our opponent is as good as we are and always make optimize move. The worse case is that we will get the minimal value out of all 
+possible situation after our opponent make its move.
+
+so the correct dp formula would be dp[i][j] = max( min (dp[i + 1][j - 1], dp[i + 2][ j]) + v[i], min (dp[i][j - 2], dp[i + 1][ j - 1]) + v[j]}) .
+If we pick i, then our opponent need to deal with subproblem dp[i + 1][j], it either pick from i + 2 or j - 1. Similarly, If we pick j, then our 
+opponent need to deal with subproblem dp[i][j - 1] , it either pick from i + 1 or j - 2. We take the worse case into consideration so use min() here.
+
+Hope this is helpful, and point out if I make any mistake :-)
+
+
+博弈 dp
+【题目分析】
+
+给定一个正整数数组，选手1从数组的头部或者尾部选择一个数，选手2从剩下部分的头部或尾部选择一个数，循环往复，
+直到该数组中的数都被取完。判断选手1取的数的和值是否大于选手2.
+
+
+当前玩家赢返回true的条件就是递归调用下一个玩家输返回false。我们需要一个变量来标记当前是第几个玩家，
+还需要两个变量来分别记录两个玩家的当前数字和，在递归函数里面，如果当前数组为空了，我们直接比较两个
+玩家的当前得分即可，如果数组中只有一个数字了，我们根据玩家标识来将这个数字加给某个玩家并进行比较总得分。
+如果数组有多个数字，我们分别生成两个新数组，一个是去掉首元素，一个是去掉尾元素，然后根据玩家标识分别调用
+不同的递归，只要下一个玩家两种情况中任意一种返回false了，那么当前玩家就可以赢了。
+
+Minimax
+
+
+【思路】
+
+两人依次拿，如果Player1赢，则Player1拿的>Player2拿的。我们把Player1拿的视为"+"，把Player2拿的视为"-"，如果最后结果大于等于0则Player1赢。
+
+因此对于递归来说，beg ~ end的结果为max(nums[beg] - partition(beg + 1, end), nums[end] - partition(beg, end + 1))；
+对于非递归来说DP[beg][end]表示即为beg ~ end所取的值的大小（最终与零比较）。
+
+总结：
+
+1. 该问题没有直接比较一个选手所拿元素的和值，而是把问题转换为两个选手所拿元素的差值。这一点很巧妙，是关键的一步。
+
+2. 找出递推表达式：max(nums[beg] - partition(beg + 1, end), nums[end] - partition(beg, end + 1))
+
+3. 通过递推表达式构造递归算法是比较简单的。但是要构造一个非递归的算法难度较大。对于非递归算法，首先在dp中赋初始值，这是我们解题的第一步。
+在这个问题中，我们使用一个二位的数组dp来表示nums数组中任意开始和结束位置两人结果的差值。
+
+初始的时候，我们仅仅知道对角线上的值。dp[i][i] = nums[i]. 这一点很好理解。
+
+接下来既然是求任意的开始和结束，对于二维数组，那肯定是一个双层的循环。通过dp中已知的元素和动态规划的递推表达式，我们就可以构造出我们的
+需要的结果。非递归的方式是从小问题到大问题的过程。
+
+
+
+
+========================================================================================
+The dp[i][j] saves how much more scores that the first-in-action player will get from i to j than the second player. 
+First-in-action means whomever moves first.
+
+
+2, However, we always want to do better than brutal force. We may easily notice that there will be lots of redundant calculation. 
+For example, "player 1 picks left, then player 2 picks left, then player 1 picks right, then player 2 picks right" will end up the 
+same as "player 1 picks right, then player 2 picks right, then player 1 picks left, then player 2 picks left". So, we may want to 
+use dynamic programming to save intermediate states.
+
+3, I think it will be easy to think about using a two dimensional array dp[i][j] to save all the intermediate states. 
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+
+
+
+SICP 习题 （2.6） 解题总结:丘奇计数
+https://blog.csdn.net/keyboardota/article/details/39439363
+
+这里大师们想提醒我们思考的是“数”到底是什么，在计算机系统里可以如何实现“数”;
+
+
+题目先讲到下面的定义，首先是0的定义：
+(define zero (lambda (f) (lambda (x) x)))
+
+然后是操作+ 1的定义：
+(define (add-1 n)
+  (lambda (f) (lambda (x) (f ((n f) x)))))
+
+
+丘奇计数的基本想法就是通过调用0次函数来表示0，通过调用1次函数来表示1，以此类推。。。
+
+所以，这里的zero其实是一个lambda过程，该过程接受另一个过程作为参数，不过对该过程调用0次，什么叫调用0次呢，就是传人什么参数就返回什么参数喽。
+
+对应的，(add-1 n)过程也是返回一个lambda过程，该过程接受另一个过程作为参数，对该过程调用n+1次。
+
+(define one
+  (lambda (f) (lambda (x) (f x))))
+ 
+(define two
+  (lambda (f) (lambda (x) (f (f x)))))
+
+(define (plus m n)
+    (lambda (f)
+        (lambda (x)
+             ((m f) ((n f) x)))))
+(define (f x)
+    (display "*"))

@@ -1,0 +1,18 @@
+
+
+467. Unique Substrings in Wraparound String
+
+题目大意：
+字符串s是小写字母"abcdefghijklmnopqrstuvwxyz"的无限循环，
+s看起来像这样："...zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd...."
+
+现在我们有另外一个字符串p。你需要寻找p有多少个非空子串在s中出现。
+输入p，你需要输出s中有多少个不同的p的非空子串。
+
+
+
+
+
+
+
+

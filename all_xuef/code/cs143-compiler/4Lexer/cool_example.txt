@@ -1,0 +1,34 @@
+
+
+
+
+2-02
+
+class Main {
+	main() : Object {
+		(new IO).out_string((new_IO).in_string().caoncat("\n"))
+	
+	};
+};
+
+
+class Main inherits A2I {
+	main() : Object {
+		(new IO).out_string(i2a(fact(a2i((new_IO).in_string()))).caoncat("\n"))
+	
+	};
+	fact(i: Int): Int {
+		if (i = 0) then 1 else i * fact(i-1) fi
+	};
+	fact_iter(i: Int): Int {
+		let fact: Int <- 1 in {
+			while (not (i = 0)) loop
+				{
+					fact <- fact * i;
+					i <- i - 1;
+				}
+			pool;
+			fact;
+		}
+	}; 
+};

@@ -1,0 +1,116 @@
+
+
+
+# PA1 词法分析器
+第一次作业是做一个词法分析器，lexical analyzer, also called a scanner。
+这其实是一件很琐碎的工作，而核心工作很单一：定义规则把源代码tokenize掉，所以大牛们做了一些工具来方便帮助你处理琐事，你可以专心写规则。
+
+1. 阅读 JLex: A lexical analyzer generator for Java
+http://www.cs.princeton.edu/~appel/modern/java/JLex/current/manual.html
+
+Jlex是一个辅助工具，你按照一定格式定义好规则，然后Jlex将你定义的规则转换为程序，这个自动生成的程序就是你的词法分析器，
+你把源代码喂给它，它就吐出一个一个的token，告诉你这个是关键字那个是标识符。
+
+规则写在一个叫cool.lex的文本文件里，乍看上去格式很复杂，因为它居然还分四个区域，还带有各种稀奇古怪的形如%line的参数，
+细看其实不难，因为你的主要工作全部在"Rules"区完成，然后根据你的实现方式差异，你有可能需要在"Declarations"加上你的类/函数定义，
+可以在"Rules"区调用，然后在"Definitions"定义几个状态/正则别名。
+
+
+
+
+词法分析器生成器将具有一组正则表达式和相应动作的规范作为输入。 它生成一个读取输入的程序（ 词法分析器 ），将输入与spec文件中的正则表达式
+进行匹配，并在正则表达式匹配时运行相应的操作。 Lexers通常是编译器中的第一个前端步骤，匹配关键字，注释，运算符等，并为解析器生成输入令牌流。 
+它们还可以用于许多其他目的。
+
+2 Introduction to Flex/JLex
+Flex allows you to implement a lexical analyzer by writing rules that match on user-defined regular
+expressions and performing a specified action for each matched pattern. Flex compiles your rule file (e.g.,
+“lexer.l”) to C (or, if you are using JLex, Java) source code implementing a finite automaton recognizing
+the regular expressions that you specify in your rule file. Fortunately, it is not necessary to understand
+or even look at the automatically generated (and often very messy) file implementing your rules.
+	Rule files in flex are structured as follows:
+%{
+Declarations
+%}
+Definitions
+%%
+Rules
+%%
+User subroutines
+
+
+
+# You should read the flex/jlex manual to figure out what this description does do.
+
+In this assignment, you are expected to write Flex rules that match on the appropriate regular expressions
+defining valid tokens in Cool as described in Section 10 and Figure 1 of the Cool manual and perform the
+appropriate actions, such as returning a token of the correct type, recording the value of a lexeme where
+appropriate, or reporting an error when an error is encountered. Before you start on this assignment,
+make sure to read Section 10 and Figure 1 of the Cool manual; then study the different tokens defined
+in cool-parse.h. Your implementation needs to define Flex/Jlex rules that match the regular expressions
+defining each token defined in cool-parse.h and perform the appropriate action for each matched token.
+
+
+<YYINITIAL>";"          { return new Symbol(TokenConstants.SEMI);  }
+这是其中的一条规则，意思是在"YYINITIAL"这个状态下，如果遇到";"这个符号输入，那么就输出一个Symbol对象，{}保存你的处理策略。
+目测这个对象的constructor接受一个SEMI常量，跑到TokenConstants.java里面看了一下，这些常量都是int，形如
+public static final int MULT = 27;
+知道这个就很好办了，其他的规则都照葫芦画瓢，无非正则表达式复杂一点，有些情况换个类，加个参数。
+
+1) The value returned by the method CoolLexer.next token is an object of class java cup.runtime.Symbol. 
+This object has a field representing the syntactic category of a token. The syntactic codes for all tokens are defined in the file TokenConstants.java.
+
+2) The component, the semantic value or lexeme (if any), is also placed in a java cup.runtime.Symbol object
+
+3) class identifiers, object identifiers, integers, and strings, the semantic value should be of type AbstractSymbol
+
+
+
+{DIGIT} {
+	cool_yylval.symbol = inttable.add_string(yytext);
+	return DIGIT_TOKEN;
+}
+(See Sections 5 and 6 for a more detailed discussion of the global variable cool_yylval and 
+see Section 4.2 for a discussion of the inttable used in the above code fragment.)
+
+
+Each call on the scanner returns the next token and lexeme from the input. The value returned by the
+method CoolLexer.next token is an object of class java cup.runtime.Symbol. This object has
+a field representing the syntactic category of a token (e.g., integer literal, semicolon, the if keyword,
+etc.). The syntactic codes for all tokens are defined in the file TokenConstants.java. The component,
+the semantic value or lexeme (if any), is also placed in a java cup.runtime.Symbol object. The
+documentation for the class java cup.runtime.Symbol as well as other supporting code is available
+on the course web page. Examples of its use are also given in the skeleton.
+
+其实就是告诉你，像上面那个例子一样，你的规则匹配中之后，要return一个Symbol对象，
+这个Symbol包含一个field代表你匹配中的token的分类或名字id，都在TokenConstants.java里定义好了，去找就是；
+另外一个field是semantic value，也要用Symbol来表示，但是对于3)里的这些token，semantic value要用AbstractSymbol类。
+注意Symbol和AbstractSymbol没有关系，甚至不在同一个包里，看文档就知道了。现在这些东西的关系不是很清楚无所谓，但再往后PA3等可能就要用到。
+
+
+
+
+
+
+
+11.1 Precedence
+The precedence(优先级) of infix binary and prefix unary operations, from highest to lowest, is given by the
+following table:
+.
+@
+~
+isvoid
+* /
++ -
+<= < =
+not
+<-
+
+All binary operations are left-associative, with the exception of assignment, which is right-associative,
+and the three comparison operations, which do not associate.
+运算符的结合性指同一优先级的运算符在表达式中操作的组织方向, 即: 当一个运算对象两侧运算符的优先级别相同时, 运算对象与运算符的结合顺序, 
+C 语言规定了各种运算符的结合方向( 结合性) 。
+大多数运算符结合方向是“自左至右”, 即: 先左后右, 例如a- b+c, b 两侧有- 和+两种运算符的优先级相同, 按先左后右结合方向, b 先与减号结合, 
+执行a- b 的运算, 再执行加c 的运算。
+除了自左至右的结合性外, C 语言有三类运算符参与运算的结合方向是从右至左。即: 单目运算符, 条件运算符, 以及赋值运算符。
+

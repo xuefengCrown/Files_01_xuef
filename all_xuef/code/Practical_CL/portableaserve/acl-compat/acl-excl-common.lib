@@ -1,0 +1,205 @@
+#0Y_ #0Y |CHARSET|::|UTF-8|
+(|COMMON-LISP|::|SETQ| |COMMON-LISP|::|*PACKAGE*|
+ (|SYSTEM|::|%FIND-PACKAGE| "ACL-COMPAT.EXCL"))
+(|SYSTEM|::|C-PROCLAIM|
+ '(|COMMON-LISP|::|SPECIAL| |ACL-COMPAT.EXCL|::|IF*-KEYWORD-LIST|))
+(|SYSTEM|::|REMOVE-OLD-DEFINITIONS| '|ACL-COMPAT.EXCL|::|IF*|)
+(|SYSTEM|::|%PUTD| '|ACL-COMPAT.EXCL|::|IF*|
+ (|SYSTEM|::|MAKE-MACRO|
+  (|COMMON-LISP|::|FUNCTION| |ACL-COMPAT.EXCL|::|IF*|
+   (|COMMON-LISP|::|LAMBDA| (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|)
+    (|COMMON-LISP|::|DECLARE| (|COMMON-LISP|::|CONS| |SYSTEM|::|<MACRO-FORM>|))
+    (|COMMON-LISP|::|DECLARE| (|COMMON-LISP|::|IGNORE| |SYSTEM|::|<ENV-ARG>|))
+    (|COMMON-LISP|::|LET*|
+     ((|ACL-COMPAT.EXCL|::|ARGS|
+       (|COMMON-LISP|::|CDR| |SYSTEM|::|<MACRO-FORM>|)))
+     (|COMMON-LISP|::|BLOCK| |ACL-COMPAT.EXCL|::|IF*|
+      (|COMMON-LISP|::|DO|
+       ((|ACL-COMPAT.EXCL|::|XX|
+         (|COMMON-LISP|::|REVERSE| |ACL-COMPAT.EXCL|::|ARGS|)
+         (|COMMON-LISP|::|CDR| |ACL-COMPAT.EXCL|::|XX|))
+        (|ACL-COMPAT.EXCL|::|STATE| :|INIT|)
+        (|ACL-COMPAT.EXCL|::|ELSESEEN| |COMMON-LISP|::|NIL|)
+        (|ACL-COMPAT.EXCL|::|TOTALCOL| |COMMON-LISP|::|NIL|)
+        (|ACL-COMPAT.EXCL|::|LOOKAT| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+        (|ACL-COMPAT.EXCL|::|COL| |COMMON-LISP|::|NIL|))
+       ((|COMMON-LISP|::|NULL| |ACL-COMPAT.EXCL|::|XX|)
+        (|COMMON-LISP|::|COND|
+         ((|COMMON-LISP|::|EQ| |ACL-COMPAT.EXCL|::|STATE| :|COMPL|)
+          `(|COMMON-LISP|::|COND| ,@|ACL-COMPAT.EXCL|::|TOTALCOL|))
+         (|COMMON-LISP|::|T|
+          (|COMMON-LISP|::|ERROR| "if*: illegal form ~s"
+           |ACL-COMPAT.EXCL|::|ARGS|))))
+       (|COMMON-LISP|::|COND|
+        ((|COMMON-LISP|::|AND|
+          (|COMMON-LISP|::|SYMBOLP|
+           (|COMMON-LISP|::|CAR| |ACL-COMPAT.EXCL|::|XX|))
+          (|COMMON-LISP|::|MEMBER|
+           (|COMMON-LISP|::|SYMBOL-NAME|
+            (|COMMON-LISP|::|CAR| |ACL-COMPAT.EXCL|::|XX|))
+           |ACL-COMPAT.EXCL|::|IF*-KEYWORD-LIST| :|TEST|
+           #'|COMMON-LISP|::|STRING-EQUAL|))
+         (|COMMON-LISP|::|SETQ| |ACL-COMPAT.EXCL|::|LOOKAT|
+          (|COMMON-LISP|::|SYMBOL-NAME|
+           (|COMMON-LISP|::|CAR| |ACL-COMPAT.EXCL|::|XX|)))))
+       (|COMMON-LISP|::|COND|
+        ((|COMMON-LISP|::|EQ| |ACL-COMPAT.EXCL|::|STATE| :|INIT|)
+         (|COMMON-LISP|::|COND|
+          (|ACL-COMPAT.EXCL|::|LOOKAT|
+           (|COMMON-LISP|::|COND|
+            ((|COMMON-LISP|::|STRING-EQUAL| |ACL-COMPAT.EXCL|::|LOOKAT|
+              "thenret")
+             (|COMMON-LISP|::|SETQ| |ACL-COMPAT.EXCL|::|COL|
+              |COMMON-LISP|::|NIL| |ACL-COMPAT.EXCL|::|STATE| :|THEN|))
+            (|COMMON-LISP|::|T|
+             (|COMMON-LISP|::|ERROR| "if*: bad keyword ~a"
+              |ACL-COMPAT.EXCL|::|LOOKAT|))))
+          (|COMMON-LISP|::|T|
+           (|COMMON-LISP|::|SETQ| |ACL-COMPAT.EXCL|::|STATE| :|COL|
+            |ACL-COMPAT.EXCL|::|COL| |COMMON-LISP|::|NIL|)
+           (|COMMON-LISP|::|PUSH|
+            (|COMMON-LISP|::|CAR| |ACL-COMPAT.EXCL|::|XX|)
+            |ACL-COMPAT.EXCL|::|COL|))))
+        ((|COMMON-LISP|::|EQ| |ACL-COMPAT.EXCL|::|STATE| :|COL|)
+         (|COMMON-LISP|::|COND|
+          (|ACL-COMPAT.EXCL|::|LOOKAT|
+           (|COMMON-LISP|::|COND|
+            ((|COMMON-LISP|::|STRING-EQUAL| |ACL-COMPAT.EXCL|::|LOOKAT| "else")
+             (|COMMON-LISP|::|COND|
+              (|ACL-COMPAT.EXCL|::|ELSESEEN|
+               (|COMMON-LISP|::|ERROR| "if*: multiples elses")))
+             (|COMMON-LISP|::|SETQ| |ACL-COMPAT.EXCL|::|ELSESEEN|
+              |COMMON-LISP|::|T|)
+             (|COMMON-LISP|::|SETQ| |ACL-COMPAT.EXCL|::|STATE| :|INIT|)
+             (|COMMON-LISP|::|PUSH|
+              `(|COMMON-LISP|::|T| ,@|ACL-COMPAT.EXCL|::|COL|)
+              |ACL-COMPAT.EXCL|::|TOTALCOL|))
+            ((|COMMON-LISP|::|STRING-EQUAL| |ACL-COMPAT.EXCL|::|LOOKAT| "then")
+             (|COMMON-LISP|::|SETQ| |ACL-COMPAT.EXCL|::|STATE| :|THEN|))
+            (|COMMON-LISP|::|T|
+             (|COMMON-LISP|::|ERROR| "if*: bad keyword ~s"
+              |ACL-COMPAT.EXCL|::|LOOKAT|))))
+          (|COMMON-LISP|::|T|
+           (|COMMON-LISP|::|PUSH|
+            (|COMMON-LISP|::|CAR| |ACL-COMPAT.EXCL|::|XX|)
+            |ACL-COMPAT.EXCL|::|COL|))))
+        ((|COMMON-LISP|::|EQ| |ACL-COMPAT.EXCL|::|STATE| :|THEN|)
+         (|COMMON-LISP|::|COND|
+          (|ACL-COMPAT.EXCL|::|LOOKAT|
+           (|COMMON-LISP|::|ERROR| "if*: keyword ~s at the wrong place "
+            (|COMMON-LISP|::|CAR| |ACL-COMPAT.EXCL|::|XX|)))
+          (|COMMON-LISP|::|T|
+           (|COMMON-LISP|::|SETQ| |ACL-COMPAT.EXCL|::|STATE| :|COMPL|)
+           (|COMMON-LISP|::|PUSH|
+            `(,(|COMMON-LISP|::|CAR| |ACL-COMPAT.EXCL|::|XX|)
+              ,@|ACL-COMPAT.EXCL|::|COL|)
+            |ACL-COMPAT.EXCL|::|TOTALCOL|))))
+        ((|COMMON-LISP|::|EQ| |ACL-COMPAT.EXCL|::|STATE| :|COMPL|)
+         (|COMMON-LISP|::|COND|
+          ((|COMMON-LISP|::|NOT|
+            (|COMMON-LISP|::|STRING-EQUAL| |ACL-COMPAT.EXCL|::|LOOKAT|
+             "elseif"))
+           (|COMMON-LISP|::|ERROR| "if*: missing elseif clause ")))
+         (|COMMON-LISP|::|SETQ| |ACL-COMPAT.EXCL|::|STATE| :|INIT|))))))))
+  '(|COMMON-LISP|::|&REST| |ACL-COMPAT.EXCL|::|ARGS|)))
+(|SYSTEM|::|C-PROCLAIM|
+ '(|COMMON-LISP|::|SPECIAL| |ACL-COMPAT.EXCL|::|*INITIAL-TERMINAL-IO*|))
+(|SYSTEM|::|C-PROCLAIM|
+ '(|COMMON-LISP|::|SPECIAL|
+   |ACL-COMPAT.EXCL|::|*CL-DEFAULT-SPECIAL-BINDINGS*|))
+(|SYSTEM|::|C-DEFUN| '|ACL-COMPAT.EXCL|::|FILESYS-SIZE|
+ (|SYSTEM|::|LAMBDA-LIST-TO-SIGNATURE| '(|COMMON-LISP|::|STREAM|)))
+(|SYSTEM|::|C-DEFUN| '|ACL-COMPAT.EXCL|::|FILESYS-WRITE-DATE|
+ (|SYSTEM|::|LAMBDA-LIST-TO-SIGNATURE| '(|COMMON-LISP|::|STREAM|)))
+(|SYSTEM|::|C-DEFUN| '|ACL-COMPAT.EXCL|::|FROB-REGEXP|
+ (|SYSTEM|::|LAMBDA-LIST-TO-SIGNATURE| '(|ACL-COMPAT.EXCL|::|REGEXP|)))
+(|SYSTEM|::|C-DEFUN| '|ACL-COMPAT.EXCL|::|MATCH-REGEXP|
+ (|SYSTEM|::|LAMBDA-LIST-TO-SIGNATURE|
+  '(|ACL-COMPAT.EXCL|::|STRING-OR-REGEXP| |ACL-COMPAT.EXCL|::|STRING-TO-MATCH|
+    |COMMON-LISP|::|&KEY| |ACL-COMPAT.EXCL|::|NEWLINES-SPECIAL|
+    |ACL-COMPAT.EXCL|::|CASE-FOLD| |COMMON-LISP|::|RETURN|
+    (|ACL-COMPAT.EXCL|::|START| 0.) |ACL-COMPAT.EXCL|::|END|
+    |ACL-COMPAT.EXCL|::|SHORTEST|)))
+(|SYSTEM|::|C-DEFUN| '|ACL-COMPAT.EXCL|::|COMPILE-REGEXP|
+ (|SYSTEM|::|LAMBDA-LIST-TO-SIGNATURE| '(|ACL-COMPAT.EXCL|::|REGEXP|)))
+(|SYSTEM|::|C-PROCLAIM|
+ '(|COMMON-LISP|::|SPECIAL| |ACL-COMPAT.EXCL|::|*CURRENT-CASE-MODE*|))
+(|SYSTEM|::|C-DEFUN| '|ACL-COMPAT.EXCL|::|INTERN*|
+ (|SYSTEM|::|LAMBDA-LIST-TO-SIGNATURE|
+  '(|ACL-COMPAT.EXCL|::|S| |ACL-COMPAT.EXCL|::|LEN| |COMMON-LISP|::|PACKAGE|)))
+(|SYSTEM|::|REMOVE-OLD-DEFINITIONS| '|ACL-COMPAT.EXCL|::|ERRORSET|)
+(|SYSTEM|::|%PUTD| '|ACL-COMPAT.EXCL|::|ERRORSET|
+ (|SYSTEM|::|MAKE-MACRO|
+  (|COMMON-LISP|::|FUNCTION| |ACL-COMPAT.EXCL|::|ERRORSET|
+   (|COMMON-LISP|::|LAMBDA| (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|)
+    (|COMMON-LISP|::|DECLARE| (|COMMON-LISP|::|CONS| |SYSTEM|::|<MACRO-FORM>|))
+    (|COMMON-LISP|::|DECLARE| (|COMMON-LISP|::|IGNORE| |SYSTEM|::|<ENV-ARG>|))
+    "This macro is incomplete.  It was hacked to get AllegroServe\n
+running, but the announce and catch-breaks arguments are ignored.  See\n
+documentation at\n
+http://franz.com/support/documentation/6.1/doc/pages/operators/excl/errorset.htm\n
+An implementation of the catch-breaks argument will necessarily be\n
+implementation-dependent, since Ansi does not allow any\n
+program-controlled interception of a break."
+    (|COMMON-LISP|::|IF|
+     (|COMMON-LISP|::|NOT|
+      (|SYSTEM|::|LIST-LENGTH-IN-BOUNDS-P| |SYSTEM|::|<MACRO-FORM>| 2. 4.
+       |COMMON-LISP|::|NIL|))
+     (|SYSTEM|::|MACRO-CALL-ERROR| |SYSTEM|::|<MACRO-FORM>|)
+     (|COMMON-LISP|::|LET*|
+      ((|ACL-COMPAT.EXCL|::|FORM|
+        (|COMMON-LISP|::|CADR| . #1=(|SYSTEM|::|<MACRO-FORM>|)))
+       (|ACL-COMPAT.EXCL|::|ANNOUNCE|
+        (|COMMON-LISP|::|IF| (|COMMON-LISP|::|CDDR| . #1#)
+         (|COMMON-LISP|::|CADDR| . #1#) |COMMON-LISP|::|NIL|))
+       (|ACL-COMPAT.EXCL|::|CATCH-BREAKS|
+        (|COMMON-LISP|::|IF| (|COMMON-LISP|::|CDDDR| . #1#)
+         (|COMMON-LISP|::|CADDDR| . #1#) |COMMON-LISP|::|NIL|)))
+      (|COMMON-LISP|::|DECLARE|
+       (|COMMON-LISP|::|IGNORE| |ACL-COMPAT.EXCL|::|ANNOUNCE|
+        |ACL-COMPAT.EXCL|::|CATCH-BREAKS|))
+      (|COMMON-LISP|::|BLOCK| |ACL-COMPAT.EXCL|::|ERRORSET|
+       `(|COMMON-LISP|::|LET*|
+         ((|ACL-COMPAT.EXCL|::|OK| |COMMON-LISP|::|NIL|)
+          (|ACL-COMPAT.EXCL|::|RESULTS|
+           (|COMMON-LISP|::|IGNORE-ERRORS|
+            (|COMMON-LISP|::|PROG1|
+             (|COMMON-LISP|::|MULTIPLE-VALUE-LIST| ,|ACL-COMPAT.EXCL|::|FORM|)
+             (|COMMON-LISP|::|SETQ| |ACL-COMPAT.EXCL|::|OK|
+              |COMMON-LISP|::|T|)))))
+         (|COMMON-LISP|::|IF| |ACL-COMPAT.EXCL|::|OK|
+          (|COMMON-LISP|::|APPLY| #'|COMMON-LISP|::|VALUES| |COMMON-LISP|::|T|
+           |ACL-COMPAT.EXCL|::|RESULTS|)
+          |COMMON-LISP|::|NIL|)))))))
+  '(|ACL-COMPAT.EXCL|::|FORM| |COMMON-LISP|::|&OPTIONAL|
+    (|ACL-COMPAT.EXCL|::|ANNOUNCE| |COMMON-LISP|::|NIL|)
+    (|ACL-COMPAT.EXCL|::|CATCH-BREAKS| |COMMON-LISP|::|NIL|))))
+(|SYSTEM|::|REMOVE-OLD-DEFINITIONS| '|ACL-COMPAT.EXCL|::|FAST|)
+(|SYSTEM|::|%PUTD| '|ACL-COMPAT.EXCL|::|FAST|
+ (|SYSTEM|::|MAKE-MACRO|
+  (|COMMON-LISP|::|FUNCTION| |ACL-COMPAT.EXCL|::|FAST|
+   (|COMMON-LISP|::|LAMBDA| (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|)
+    (|COMMON-LISP|::|DECLARE| (|COMMON-LISP|::|CONS| |SYSTEM|::|<MACRO-FORM>|))
+    (|COMMON-LISP|::|DECLARE| (|COMMON-LISP|::|IGNORE| |SYSTEM|::|<ENV-ARG>|))
+    (|COMMON-LISP|::|LET*|
+     ((|ACL-COMPAT.EXCL|::|FORMS|
+       (|COMMON-LISP|::|CDR| |SYSTEM|::|<MACRO-FORM>|)))
+     (|COMMON-LISP|::|BLOCK| |ACL-COMPAT.EXCL|::|FAST|
+      `(|COMMON-LISP|::|LOCALLY|
+        (|COMMON-LISP|::|DECLARE|
+         (|COMMON-LISP|::|OPTIMIZE| (|COMMON-LISP|::|SPEED| 3.)
+          (|COMMON-LISP|::|SAFETY| 0.) (|COMMON-LISP|::|DEBUG| 0.)))
+        ,@|ACL-COMPAT.EXCL|::|FORMS|)))))
+  '(|COMMON-LISP|::|&BODY| |ACL-COMPAT.EXCL|::|FORMS|)))
+(|SYSTEM|::|C-DEFUN| '|ACL-COMPAT.EXCL|::|WRITE-VECTOR|
+ (|SYSTEM|::|LAMBDA-LIST-TO-SIGNATURE|
+  '(|COMMON-LISP|::|SEQUENCE| |COMMON-LISP|::|STREAM| |COMMON-LISP|::|&KEY|
+    |ACL-COMPAT.EXCL|::|START| |ACL-COMPAT.EXCL|::|END|
+    |ACL-COMPAT.EXCL|::|ENDIAN-SWAP|)))
+(|SYSTEM|::|C-DEFUN| '|ACL-COMPAT.EXCL|::|STRING-TO-OCTETS|
+ (|SYSTEM|::|LAMBDA-LIST-TO-SIGNATURE|
+  '(|COMMON-LISP|::|STRING| |COMMON-LISP|::|&KEY|
+    (|ACL-COMPAT.EXCL|::|NULL-TERMINATE| |COMMON-LISP|::|T|)
+    (|ACL-COMPAT.EXCL|::|START| 0.) |ACL-COMPAT.EXCL|::|END|
+    |ACL-COMPAT.EXCL|::|MB-VECTOR| |ACL-COMPAT.EXCL|::|MAKE-MB-VECTOR?|
+    (|ACL-COMPAT.EXCL|::|EXTERNAL-FORMAT| :|DEFAULT|))))

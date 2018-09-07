@@ -1,0 +1,9 @@
+
+
+# 169 Majority Element
+出现次数多于一半的元素
+1) divide and conquer
+2) 随机化算法
+3) sort 
+4) Approach 6: Boyer-Moore Voting Algorithm
+

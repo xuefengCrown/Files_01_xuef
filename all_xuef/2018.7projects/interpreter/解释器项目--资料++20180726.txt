@@ -1,0 +1,50 @@
+
+
+
+
+
+
+cs61A https://cs61a.org/
+Norvig scheme解释器
+《Composing Programs》
+《SICP》
+cs143 编译器
+
+https://ruslanspivak.com/lsbasi-part1/
+http://blog.jobbole.com/88152/
+
+轮子哥
+	正则引擎文章
+	
+手把手教你写一个C语言编译器
+https://wizardforcel.gitbooks.io/diy-c-compiler/content/5.html
+	
+https://www.cnblogs.com/Ninputer/archive/2011/06/08/2075714.html
+
+
+1.《编程语言实现模式》（实用主义程序员）
+2.《Writing Compilers and Interpreters: A Software Engineering Approach》
+3.《现代编译原理——java语言描述》
+4.《现代编译程序设计》
+5.《编译原理技术和工具》（第二版）
+《Engineering a Compiler》
+
+
+写 scheme 的解释器，不用语法分析了
+
+有本书叫《编程语言实现模式》，用 java ANTLR( the next generation of flex/bison for java)，从头开始一步步写个简易编译器（基于 JVM ），
+该书理论讲的很少，基本都是实践过程。 Udacity 上也有门课，用 python (pyFlex/pyBison)写个简单编译器。 Udacity 的特色也是社会培训班类型，
+不讲理论，只讲实践过程。
+
+
+
+((lambda (n)
+   ((lambda (fact) (fact fact n))
+		(lambda (ft k)
+		  (if (= k 1)
+			  1
+			  (* k (ft ft (- k 1)))))))
+ 10)
+ 
+
+

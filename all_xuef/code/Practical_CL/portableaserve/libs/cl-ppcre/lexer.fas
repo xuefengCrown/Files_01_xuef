@@ -1,0 +1,588 @@
+(|SYSTEM|::|VERSION| '(20080430.))
+#0Y_ #0Y |CHARSET|::|UTF-8|
+#Y(#:|1 38 (IN-PACKAGE #:CL-PPCRE)-1|
+   #17Y(00 00 00 00 00 00 00 00 20 01 DA 31 F6 0F 01 19 01)
+   ("CL-PPCRE" |COMMON-LISP|::|*PACKAGE*|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|40 40 (DECLAIM (INLINE MAP-CHAR-TO-SPECIAL-CLASS))-2|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|MAP-CHAR-TO-SPECIAL-CLASS|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|41 62 (DEFUN MAP-CHAR-TO-SPECIAL-CHAR-CLASS (CHR) ...)-3|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|MAP-CHAR-TO-SPECIAL-CHAR-CLASS|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|MAP-CHAR-TO-SPECIAL-CHAR-CLASS|
+       #35Y(00 00 00 00 01 00 00 00 26 02 9E 26 00 12 C6 19 02 C7 19 02 C8 19
+            02 C9 19 02 CA 19 02 CB 19 02 00 19 02)
+       (#S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (#\S . 16.) (#\s . 13.) (#\W . 10.) (#\w . 7.) (#\D . 4.)
+           (#\d . 1.))
+        :|DIGIT-CLASS| :|NON-DIGIT-CLASS| :|WORD-CHAR-CLASS|
+        :|NON-WORD-CHAR-CLASS| :|WHITESPACE-CHAR-CLASS|
+        :|NON-WHITESPACE-CHAR-CLASS|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|CL-PPCRE|::|CHR|)
+       "Maps escaped characters like \"\\d\" to the tokens which represent\n
+their associated character classes."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|64 85 (LOCALLY (DECLARE #) (DEFSTRUCT # "LEXER structures are used to hold the regex string which is\n
+currently lexed and to keep track of the lexer's state." ...))-4|
+   #621Y(00 00 00 00 00 00 00 00 20 01 00 2B 01 DA DB DC 38 01 72 9E 2F 03 5D
+         0B 00 00 DA 2F 04 DA DF 32 A3 DA 68 01 00 E0 63 E1 E2 6B 09 E4 E5 E6
+         E7 E8 E9 EA EB EC ED ED 6F 14 70 15 F0 F1 F2 F3 F4 64 6E 11 1B 6B 09
+         E4 F6 E6 F7 E8 65 1E EA EB EC 65 1F 65 1F 6F 14 70 15 F0 65 20 F2 65
+         21 F4 64 6E 11 1B 6B 09 E4 65 22 E6 65 23 E8 65 1E EA EB EC 65 1F 65
+         1F 6F 14 70 15 F0 65 24 F2 65 25 F4 63 6E 11 1B 6B 09 E4 65 26 E6 65
+         27 E8 65 1E EA EB EC 65 1F 65 1F 6F 14 70 15 F0 65 28 F2 65 29 F4 63
+         6E 11 1B 6B 09 E4 65 2A E6 65 2B E8 65 2C EA EB EC 01 02 6F 14 70 15
+         F0 65 2D F2 65 2E F4 63 6E 11 1B 7B 05 6B 2F E4 E5 E6 E7 E8 E9 EA EB
+         EC ED ED 6F 14 70 15 F0 65 30 65 31 65 32 65 33 63 6E 11 34 6B 2F E4
+         F6 E6 F7 E8 65 1E EA EB EC 65 1F 65 1F 6F 14 70 15 F0 65 35 65 31 65
+         36 65 33 63 6E 11 34 6B 2F E4 65 22 E6 65 23 E8 65 1E EA EB EC 65 1F
+         65 1F 6F 14 70 15 F0 65 37 65 31 65 38 65 33 65 39 6E 11 34 6B 2F E4
+         65 26 E6 65 27 E8 65 1E EA EB EC 65 1F 65 1F 6F 14 70 15 F0 65 3A 65
+         31 65 3B 65 33 65 3C 6E 11 34 6B 2F E4 65 2A E6 65 2B E8 65 2C EA EB
+         EC 01 02 6F 14 70 15 F0 65 3D 65 31 65 3E 65 33 65 3F 6E 11 34 7B 05
+         2D 08 40 E0 2F 41 E0 AD 6D 42 01 32 9C 16 01 65 43 31 62 E2 2F 41 E2
+         65 44 32 9C 65 45 31 62 E1 2F 41 E1 65 46 32 9C 65 47 31 62 65 48 31
+         62 65 49 2F 41 65 49 65 4A 32 9C 65 49 65 4B DA 32 A2 65 4C 31 62 65
+         4D 31 62 65 4E 2F 41 65 4E 65 4F 32 9C 65 4E 65 4B DA 32 A2 65 50 31
+         62 65 51 31 62 65 52 2F 41 65 52 65 53 32 9C 65 52 65 4B DA 32 A2 65
+         54 31 62 65 55 31 62 65 56 2F 41 65 56 65 57 32 9C 65 56 65 4B DA 32
+         A2 65 58 31 62 65 59 31 62 65 5A 2F 41 65 5A 65 5B 32 9C 65 5A 65 4B
+         DA 32 A2 65 5C 31 62 65 5D 31 62 65 5E 2F 41 65 5E 65 5F 32 9C 65 52
+         65 60 DA 32 A2 65 61 31 62 65 62 31 62 65 63 2F 41 65 63 65 64 32 9C
+         65 56 65 60 DA 32 A2 65 65 31 62 65 66 31 62 65 67 2F 41 65 67 65 68
+         32 9C 65 5A 65 60 DA 32 A2 DA 65 69 65 6A 2D 03 6B DA 2F 6C C5 19 01)
+   (|CL-PPCRE|::|LEXER| |COMMON-LISP|::|STRUCTURE-OBJECT| |CLOS|::|CLOSCLASS|
+    |CLOS|::|CLASS-NAMES| |SYSTEM|::|STRUCTURE-UNDEFINE-ACCESSORIES|
+    |SYSTEM|::|DEFSTRUCT-DESCRIPTION| |CL-PPCRE|::|MAKE-LEXER-INTERNAL|
+    |CL-PPCRE|::|COPY-LEXER| |CL-PPCRE|::|LEXER-P|
+    |CLOS|::|<STRUCTURE-EFFECTIVE-SLOT-DEFINITION>| :|NAME| |CL-PPCRE|::|STR|
+    :|INITARGS| (:|STR|) :|TYPE| |COMMON-LISP|::|STRING| :|ALLOCATION|
+    :|INSTANCE| |CLOS|::|INHERITABLE-INITER| #1=""
+    |SYSTEM|::|MAKE-CONSTANT-INITFUNCTION|
+    |CLOS|::|MAKE-INHERITABLE-SLOT-DEFINITION-INITER| |CLOS|::|INHERITABLE-DOC|
+    (|COMMON-LISP|::|NIL|) |CLOS|::|LOCATION| 1. |CLOS|::|READONLY|
+    |CLOS|::|MAKE-INSTANCE-<STRUCTURE-EFFECTIVE-SLOT-DEFINITION>|
+    |CL-PPCRE|::|LEN| (:|LEN|) |COMMON-LISP|::|FIXNUM| 0.
+    (|COMMON-LISP|::|NIL|) 2. |CL-PPCRE|::|REG| (:|REG|) (|COMMON-LISP|::|NIL|)
+    3. |CL-PPCRE|::|POS| (:|POS|) (|COMMON-LISP|::|NIL|) 4.
+    |CL-PPCRE|::|LAST-POS| (:|LAST-POS|) |COMMON-LISP|::|LIST|
+    (|COMMON-LISP|::|NIL|) 5. |CLOS|::|<STRUCTURE-DIRECT-SLOT-DEFINITION>|
+    (|COMMON-LISP|::|NIL|) :|READERS| (|CL-PPCRE|::|LEXER-STR|) :|WRITERS|
+    |CLOS|::|MAKE-INSTANCE-<STRUCTURE-DIRECT-SLOT-DEFINITION>|
+    (|COMMON-LISP|::|NIL|) (|CL-PPCRE|::|LEXER-LEN|) (|COMMON-LISP|::|NIL|)
+    (|CL-PPCRE|::|LEXER-REG|) ((|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-REG|))
+    (|COMMON-LISP|::|NIL|) (|CL-PPCRE|::|LEXER-POS|)
+    ((|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-POS|)) (|COMMON-LISP|::|NIL|)
+    (|CL-PPCRE|::|LEXER-LAST-POS|)
+    ((|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-LAST-POS|))
+    |CLOS|::|DEFINE-STRUCTURE-CLASS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|MAKE-LEXER-INTERNAL|
+       #75Y(00 00 00 00 00 00 00 00 A6 1B 05 00 01 00 3B 05 02 CB FD 3B 04 02
+            CC FC 3B 03 02 CC FB 3B 02 02 CC FA 3D 01 69 00 01 E2 72 45 E3 AD
+            E4 B5 32 44 E3 AD E5 B4 32 44 E3 AD E6 B3 32 44 E3 AD E7 B2 32 44
+            E3 AD E8 B1 32 44 15 19 06)
+       (|COMMON-LISP|::|NIL| :|STR| :|LEN| :|REG| :|POS| :|LAST-POS| #1# 0. 6.
+        |CL-PPCRE|::|LEXER| 1. 2. 3. 4. 5.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP|::|&KEY| (#:|STR| #1#) (#:|LEN| 0.) (#:|REG| 0.)
+        (#:|POS| 0.) (#:|LAST-POS| |COMMON-LISP|::|NIL|))
+       |COMMON-LISP|::|NIL| 1)
+    (|COMMON-LISP|::|INLINE| |CL-PPCRE|::|LEXER-P|)
+    #Y(|CL-PPCRE|::|LEXER-P|
+       #16Y(00 00 00 00 01 00 00 00 20 02 DA AE 32 47 19 02)
+       (|CL-PPCRE|::|LEXER|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    (|COMMON-LISP|::|INLINE| |CL-PPCRE|::|COPY-LEXER|)
+    #Y(|CL-PPCRE|::|COPY-LEXER|
+       #15Y(00 00 00 00 01 00 00 00 26 02 AD 32 46 19 02) ()
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|COMMON-LISP|::|STRUCTURE|) |COMMON-LISP|::|NIL| 1)
+    (|COMMON-LISP|::|FUNCTION| |CL-PPCRE|::|LEXER-STR| (|CL-PPCRE|::|LEXER|)
+     |COMMON-LISP|::|STRING|)
+    (|COMMON-LISP|::|INLINE| |CL-PPCRE|::|LEXER-STR|) |CL-PPCRE|::|LEXER-STR|
+    #Y(|CL-PPCRE|::|LEXER-STR|
+       #17Y(00 00 00 00 01 00 00 00 20 02 DA AE DB 32 43 19 02)
+       (|CL-PPCRE|::|LEXER| 1.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    |SYSTEM|::|DEFSTRUCT-READER|
+    (|COMMON-LISP|::|FUNCTION| |CL-PPCRE|::|LEXER-LEN| (|CL-PPCRE|::|LEXER|)
+     |COMMON-LISP|::|FIXNUM|)
+    (|COMMON-LISP|::|INLINE| |CL-PPCRE|::|LEXER-LEN|) |CL-PPCRE|::|LEXER-LEN|
+    #Y(|CL-PPCRE|::|LEXER-LEN|
+       #17Y(00 00 00 00 01 00 00 00 20 02 DA AE DB 32 43 19 02)
+       (|CL-PPCRE|::|LEXER| 2.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    (|COMMON-LISP|::|FUNCTION| |CL-PPCRE|::|LEXER-REG| (|CL-PPCRE|::|LEXER|)
+     |COMMON-LISP|::|FIXNUM|)
+    (|COMMON-LISP|::|INLINE| |CL-PPCRE|::|LEXER-REG|) |CL-PPCRE|::|LEXER-REG|
+    #Y(|CL-PPCRE|::|LEXER-REG|
+       #17Y(00 00 00 00 01 00 00 00 20 02 DA AE DB 32 43 19 02)
+       (|CL-PPCRE|::|LEXER| 3.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    (|COMMON-LISP|::|FUNCTION| |CL-PPCRE|::|LEXER-POS| (|CL-PPCRE|::|LEXER|)
+     |COMMON-LISP|::|FIXNUM|)
+    (|COMMON-LISP|::|INLINE| |CL-PPCRE|::|LEXER-POS|) |CL-PPCRE|::|LEXER-POS|
+    #Y(|CL-PPCRE|::|LEXER-POS|
+       #17Y(00 00 00 00 01 00 00 00 20 02 DA AE DB 32 43 19 02)
+       (|CL-PPCRE|::|LEXER| 4.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    (|COMMON-LISP|::|FUNCTION| |CL-PPCRE|::|LEXER-LAST-POS|
+     (|CL-PPCRE|::|LEXER|) |COMMON-LISP|::|LIST|)
+    (|COMMON-LISP|::|INLINE| |CL-PPCRE|::|LEXER-LAST-POS|)
+    |CL-PPCRE|::|LEXER-LAST-POS|
+    #Y(|CL-PPCRE|::|LEXER-LAST-POS|
+       #17Y(00 00 00 00 01 00 00 00 20 02 DA AE DB 32 43 19 02)
+       (|CL-PPCRE|::|LEXER| 5.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    (|COMMON-LISP|::|FUNCTION| (|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-REG|)
+     (|COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|LEXER|) |COMMON-LISP|::|FIXNUM|)
+    (|COMMON-LISP|::|INLINE| (|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-REG|))
+    #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-REG|)
+    #Y((|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-REG|)
+       #18Y(00 00 00 00 02 00 00 00 20 03 DA AE DB B1 32 44 19 03)
+       (|CL-PPCRE|::|LEXER| 3.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+    |SYSTEM|::|DEFSTRUCT-WRITER|
+    (|COMMON-LISP|::|FUNCTION| (|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-POS|)
+     (|COMMON-LISP|::|FIXNUM| |CL-PPCRE|::|LEXER|) |COMMON-LISP|::|FIXNUM|)
+    (|COMMON-LISP|::|INLINE| (|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-POS|))
+    #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|)
+    #Y((|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-POS|)
+       #18Y(00 00 00 00 02 00 00 00 20 03 DA AE DB B1 32 44 19 03)
+       (|CL-PPCRE|::|LEXER| 4.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+    (|COMMON-LISP|::|FUNCTION|
+     (|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-LAST-POS|)
+     (|COMMON-LISP|::|LIST| |CL-PPCRE|::|LEXER|) |COMMON-LISP|::|LIST|)
+    (|COMMON-LISP|::|INLINE|
+     (|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-LAST-POS|))
+    #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-LAST-POS|)
+    #Y((|COMMON-LISP|::|SETF| |CL-PPCRE|::|LEXER-LAST-POS|)
+       #18Y(00 00 00 00 02 00 00 00 20 03 DA AE DB B1 32 44 19 03)
+       (|CL-PPCRE|::|LEXER| 5.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+    |COMMON-LISP|::|TYPE|
+    "LEXER structures are used to hold the regex string which is\n
+currently lexed and to keep track of the lexer's state."
+    |SYSTEM|::|%SET-DOCUMENTATION|
+    |CLOS|::|DEFSTRUCT-REMOVE-PRINT-OBJECT-METHOD|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|87 91 (DEFUN MAKE-LEXER (STRING) ...)-5|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|MAKE-LEXER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|MAKE-LEXER|
+       #32Y(00 00 00 00 01 00 00 00 26 02 DA AE 8E 36 0E AE DB 32 3B 14 DC B0
+            72 62 2D 04 03 19 02 9F 1B 73)
+       (:|STR| |COMMON-LISP|::|SIMPLE-STRING| :|LEN|
+        |CL-PPCRE|::|MAKE-LEXER-INTERNAL|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP|::|STRING|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|93 93 (DECLAIM (INLINE END-OF-STRING-P))-6|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|END-OF-STRING-P|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|94 103 (DEFUN END-OF-STRING-P (LEXER) ...)-7|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|END-OF-STRING-P| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|END-OF-STRING-P|
+       #21Y(00 00 00 00 01 00 00 00 26 02 AD 6F 00 AE 6F 01 33 01 33 19 02)
+       (|CL-PPCRE|::|LEXER-LEN| |CL-PPCRE|::|LEXER-POS|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Tests whether we're at the end of the regex string." 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|105 105 (DECLAIM (INLINE LOOKING-AT-P))-8|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|LOOKING-AT-P|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|106 117 (DEFUN LOOKING-AT-P (LEXER CHR) ...)-9|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|LOOKING-AT-P| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|LOOKING-AT-P|
+       #32Y(00 00 00 00 02 00 00 00 26 03 AE 2F 00 59 1F 0E AE 6F 01 AF 6F 02
+            71 32 AE 33 01 07 19 03 19 03)
+       (|CL-PPCRE|::|END-OF-STRING-P| |CL-PPCRE|::|LEXER-STR|
+        |CL-PPCRE|::|LEXER-POS|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER| |CL-PPCRE|::|CHR|)
+       "Tests whether the next character the lexer would see is CHR.\n
+Does not respect extended mode."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|119 119 (DECLAIM (INLINE NEXT-CHAR-NON-EXTENDED))-10|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|NEXT-CHAR-NON-EXTENDED|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|120 134 (DEFUN NEXT-CHAR-NON-EXTENDED (LEXER) ...)-11|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|NEXT-CHAR-NON-EXTENDED| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|NEXT-CHAR-NON-EXTENDED|
+       #39Y(00 00 00 00 01 00 00 00 26 02 AD 88 00 16 AD 6F 01 AE 6F 02 71 32
+            AE 6F 02 72 B1 AC B0 30 03 16 01 15 19 02 00 19 02)
+       (|CL-PPCRE|::|END-OF-STRING-P| |CL-PPCRE|::|LEXER-STR|
+        |CL-PPCRE|::|LEXER-POS|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Returns the next character which is to be examined and updates the\n
+POS slot. Does not respect extended mode."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|136 202 (DEFUN NEXT-CHAR (LEXER) ...)-12|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|NEXT-CHAR| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|NEXT-CHAR|
+       #206Y(00 00 00 00 01 00 00 00 26 02 AD 6F 00 63 AF 2F 01 F8 93 01 0C 14
+             DC 91 01 07 06 AF DD 8A 04 80 55 0E 0E 1D 80 9C 93 01 80 98 14 E0
+             90 01 07 05 AD 89 0F 80 8D AD E0 90 01 07 80 5D 63 9F 1B 80 77 E1
+             B0 6F 01 73 02 37 63 A0 1B 15 E3 E4 63 E5 B0 E6 E7 7B 01 33 06 1E
+             14 E2 91 01 08 07 B1 2F 00 F8 92 00 73 15 1D 64 16 01 AF 2F 00 F9
+             0E 0E 1D 80 4F 1B FF B0 AF 6F 01 72 B1 AC B1 30 05 16 01 AF E0 8A
+             04 FF BA AF 6F 01 72 B2 AC B1 30 05 16 01 0E 0E 1D 2C 1B FF 8D 63
+             9F 1B 09 14 EA 91 01 08 07 B0 2F 00 F8 92 00 73 B0 2F 00 16 01 1B
+             0C 14 89 0F 07 B0 2F 00 F8 92 00 75 15 F9 92 01 FF 68 AF 6F 01 AD
+             90 01 32 FF 43 9E 19 04)
+       (|CL-PPCRE|::|NEXT-CHAR-NON-EXTENDED| |CL-PPCRE|::|LEXER-POS| #\( #\?
+        |CL-PPCRE|::|LOOKING-AT-P|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|) #\# -2. #\)
+        |CL-PPCRE|::|PPCRE-SYNTAX-ERROR| :|POS| :|FORMAT-CONTROL|
+        :|FORMAT-ARGUMENTS| "Comment group not closed"
+        |CL-PPCRE|::|*EXTENDED-MODE-P*| |CL-PPCRE|::|WHITESPACEP| #\Newline)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Returns the next character which is to be examined and updates the\n
+POS slot. Respects extended mode, i.e.  whitespace, comments, and also\n
+nested comments are skipped if applicable."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|204 204 (DECLAIM (INLINE FAIL))-13|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|FAIL|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|205 217 (DEFUN FAIL (LEXER) ...)-14|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|FAIL| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|FAIL|
+       #50Y(00 00 00 00 01 00 00 00 26 02 AD 89 00 18 AD 6F 00 94 00 95 01 AC
+            B1 30 06 16 01 6A 00 AC AF 30 07 16 01 00 19 02 DB DC 63 DD DE DF
+            B3 7B 01 33 06 1E)
+       (|CL-PPCRE|::|LEXER-LAST-POS| |CL-PPCRE|::|PPCRE-SYNTAX-ERROR| :|POS|
+        :|FORMAT-CONTROL| "LAST-POS stack of LEXER ~A is empty"
+        :|FORMAT-ARGUMENTS|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-LAST-POS|)
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Moves (LEXER-POS LEXER) back to the last position stored in\n
+(LEXER-LAST-POS LEXER) and pops the LAST-POS stack."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|219 251 (DEFUN GET-NUMBER (LEXER &KEY # ...) ...)-15|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|GET-NUMBER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|GET-NUMBER|
+       #108Y(00 00 00 00 01 00 00 00 A6 1C 03 00 00 00 3B 03 02 C8 FB 3D 02 3D
+             01 B0 88 04 2D 93 01 0B B0 6F 05 B1 6F 06 71 32 88 07 1F B0 6F 05
+             B1 6F 06 38 01 92 05 1C B3 2F 08 F8 B2 64 31 8A 42 02 93 01 04 14
+             8F AE 20 00 19 07 00 19 05 9E 16 02 1B 67 B3 6F 06 B2 73 02 37 B4
+             6F 08 AD AD 90 01 31 6B 15 16 01 1B 52 AC B3 30 09 9E 19 07)
+       (:|RADIX| :|MAX-LENGTH| :|NO-WHITESPACE-P| 10.
+        |CL-PPCRE|::|END-OF-STRING-P| |CL-PPCRE|::|LEXER-STR|
+        |CL-PPCRE|::|LEXER-POS| |CL-PPCRE|::|WHITESPACEP|
+        |CL-PPCRE|::|LEXER-LEN|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER| |COMMON-LISP|::|&KEY| (|CL-PPCRE|::|RADIX| 10.)
+        |CL-PPCRE|::|MAX-LENGTH| |CL-PPCRE|::|NO-WHITESPACE-P|)
+       "Read and consume the number the lexer is currently looking at and\n
+return it. Returns NIL if no number could be identified.\n
+RADIX is used as in PARSE-INTEGER. If MAX-LENGTH is not NIL we'll read\n
+at most the next MAX-LENGTH characters. If NO-WHITESPACE-P is not NIL\n
+we don't tolerate whitespace in front of the number."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|253 253 (DECLAIM (INLINE TRY-NUMBER))-16|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|TRY-NUMBER|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|254 268 (DEFUN TRY-NUMBER (LEXER &KEY # ...) ...)-17|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|TRY-NUMBER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|TRY-NUMBER|
+       #58Y(00 00 00 00 01 00 00 00 A6 1C 03 00 00 00 3B 03 02 C8 FB 3D 02 3D
+            01 B0 6F 04 B1 6F 05 AD 9E 7A AC B4 30 06 16 03 B0 DA B1 DB B2 DC
+            B3 6E 07 07 9D 1E 05 B1 2F 08 19 06 19 06)
+       (:|RADIX| :|MAX-LENGTH| :|NO-WHITESPACE-P| 10. |CL-PPCRE|::|LEXER-POS|
+        |CL-PPCRE|::|LEXER-LAST-POS|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-LAST-POS|)
+        |CL-PPCRE|::|GET-NUMBER| |CL-PPCRE|::|FAIL|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER| |COMMON-LISP|::|&KEY| (|CL-PPCRE|::|RADIX| 10.)
+        |CL-PPCRE|::|MAX-LENGTH| |CL-PPCRE|::|NO-WHITESPACE-P|)
+       "Like GET-NUMBER but won't consume anything if no number is seen." 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|270 270 (DECLAIM (INLINE MAKE-CHAR-FROM-CODE))-18|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|MAKE-CHAR-FROM-CODE|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|271 288 (DEFUN MAKE-CHAR-FROM-CODE (NUMBER ERROR-POS) ...)-19|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|MAKE-CHAR-FROM-CODE| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|MAKE-CHAR-FROM-CODE|
+       #45Y(00 00 00 00 02 00 00 00 26 03 DA 92 03 01 C6 14 73 02 40 AC DC 91
+            01 31 05 AC 31 29 1E 0D DD DE 63 DF B2 E0 E1 B6 7B 02 33 06 1E 19
+            04)
+       (255. 0. #.|COMMON-LISP|::|CHAR-CODE-LIMIT|
+        |CL-PPCRE|::|PPCRE-SYNTAX-ERROR| :|POS| :|FORMAT-CONTROL|
+        :|FORMAT-ARGUMENTS| "No character for hex-code ~X")
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP|::|NUMBER| |CL-PPCRE|::|ERROR-POS|)
+       "Create character from char-code NUMBER. NUMBER can be NIL\n
+which is interpreted as 0. ERROR-POS is the position where\n
+the corresponding number started within the regex string."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|290 351 (DEFUN UNESCAPE-CHAR (LEXER) ...)-20|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|UNESCAPE-CHAR| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|UNESCAPE-CHAR|
+       #143Y(00 00 00 00 01 00 00 00 26 02 AD 88 00 08 AD 6F 06 9D 26 07 80 76
+             DB DC 63 DD DE CA 1B 18 CE 19 03 0E 08 1C 79 CF 19 03 AE 6F 06 92
+             00 0D DB DC B1 6F 0B DD E6 CA 14 63 33 06 1E E7 AD 71 2B 71 28 73
+             02 3F 31 29 19 04 AE 6F 0B AF E8 E9 EA EB EC 64 2D 07 13 1B 12 AE
+             6F 0B 72 B2 AC B0 30 15 F8 AF E8 F0 EA F1 2D 05 13 14 AC AE 30 14
+             19 05 03 18 19 03 03 19 19 03 03 1A 19 03 03 1B 19 03 03 1C 19 03
+             03 1D 19 03 03 1E 19 03 15 19 02)
+       (|CL-PPCRE|::|END-OF-STRING-P| |CL-PPCRE|::|PPCRE-SYNTAX-ERROR| :|POS|
+        :|FORMAT-CONTROL| "String ends with backslash" :|FORMAT-ARGUMENTS|
+        |CL-PPCRE|::|NEXT-CHAR-NON-EXTENDED|
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (#\e . 116.) (#\a . 112.) (#\b . 108.) (#\f . 104.) (#\r . 100.)
+           (#\n . 96.) (#\t . 92.) (#\9 . 67.) (#\8 . 67.) (#\7 . 67.)
+           (#\6 . 67.) (#\5 . 67.) (#\4 . 67.) (#\3 . 67.) (#\2 . 67.)
+           (#\1 . 67.) (#\0 . 67.) (#\x . 52.) (#\c . 20.) (#\E . 13.))
+        |CL-PPCRE|::|*ALLOW-QUOTING*| :|VOID| #\E |CL-PPCRE|::|LEXER-POS|
+        "Character missing after '\\c' at position ~A" 64. :|RADIX| 16.
+        :|MAX-LENGTH| 2. :|NO-WHITESPACE-P| |CL-PPCRE|::|GET-NUMBER|
+        |CL-PPCRE|::|MAKE-CHAR-FROM-CODE|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|) 8. 3. #\Tab
+        #\Newline #\Return #\Page #\Backspace #\Bell #\Escape)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Convert the characters(s) following a backslash into a token\n
+which is returned. This function is to be called when the backslash\n
+has already been consumed. Special character classes like \\W are\n
+handled elsewhere."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|353 437 (DEFUN COLLECT-CHAR-CLASS (LEXER) ...)-21|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|COLLECT-CHAR-CLASS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|COLLECT-CHAR-CLASS|
+       #231Y(00 00 00 00 01 00 00 00 26 02 00 2B 03 AE 6F 00 00 0B 01 00 0B 01
+             01 0B 01 02 AD 6D 01 01 64 63 B2 2F 02 F8 1D 80 A1 AC DD 90 01 07
+             2B 92 01 80 88 AC E6 90 01 07 80 9C AC E0 91 01 07 0B 06 04 01 1D
+             06 06 04 00 1D 80 74 AC E0 90 01 07 80 74 9D 14 A0 34 7D 01 1B 48
+             B2 6F 02 9D 26 04 3B AC 6F 05 06 06 02 5D 0B 05 02 06 05 00 1D 08
+             E0 06 06 02 5D 0B 05 02 B3 E0 8B 07 13 E0 06 06 02 5D 0B 05 02 B3
+             6F 00 72 B1 AC B5 30 08 16 01 00 0B 05 00 16 01 1B FF BD CF 1B 0E
+             B3 6F 00 72 B2 AC B5 30 08 16 01 B3 2F 0B 14 A1 34 16 01 1B FF A4
+             0E 09 1D 63 16 01 1B FF 9B 9D 1B FF 94 02 0B 04 00 1B FF 90 CB 1B
+             FF 89 16 02 E7 E8 AF E9 EA EB 63 33 06 1E 06 04 00 1D 07 00 0B 04
+             00 E0 A0 34 68 04 02 32 64 19 07)
+       (|CL-PPCRE|::|LEXER-POS|
+        #Y(|CL-PPCRE|::|COLLECT-CHAR-CLASS-HANDLE-CHAR|
+           #56Y(00 00 00 00 01 00 00 00 26 02 07 00 01 1D 05 07 00 02 1C 12 AD
+                07 00 03 5D 0C 00 03 9E 0C 00 02 00 0C 00 01 19 02 69 00 03 DB
+                69 00 02 B0 7B 03 31 B6 00 0C 00 02 1B 68)
+           (|COMMON-LISP|::|NIL| :|RANGE|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|CL-PPCRE|::|C|)
+           "Do the right thing with character C depending on whether\n
+we're inside a range or not."
+           1)
+        |CL-PPCRE|::|NEXT-CHAR-NON-EXTENDED| #\\
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (#\E . 82.) (#\S . 1.) (#\s . 1.) (#\W . 1.) (#\w . 1.) (#\D . 1.)
+           (#\d . 1.))
+        |CL-PPCRE|::|MAP-CHAR-TO-SPECIAL-CHAR-CLASS| #\-
+        |CL-PPCRE|::|LOOKING-AT-P|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|)
+        |CL-PPCRE|::|*ALLOW-QUOTING*| #\E |CL-PPCRE|::|UNESCAPE-CHAR| #\]
+        |CL-PPCRE|::|PPCRE-SYNTAX-ERROR| :|POS| :|FORMAT-CONTROL|
+        "Missing right bracket to close character class" :|FORMAT-ARGUMENTS|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Reads and consumes characters from regex string until a right\n
+bracket is seen. Assembles them into a list (which is returned) of\n
+characters, character ranges, like (:RANGE #\\A #\\E) for a-e, and\n
+tokens representing special character classes."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|439 478 (DEFUN MAYBE-PARSE-FLAGS (LEXER) ...)-22|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|MAYBE-PARSE-FLAGS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|MAYBE-PARSE-FLAGS|
+       #119Y(00 00 00 00 01 00 00 00 26 02 64 01 02 1B 80 43 DB DC 63 DD DE DF
+             63 33 06 1E 7D 02 1B 35 9F 0F 0A 1B 30 9E 26 0B 09 D1 1B 26 D2 1B
+             23 D3 1B 20 00 1B 1D AD E2 90 01 07 61 AD E3 90 01 07 5F 92 02 61
+             9E 26 0F 09 D5 1B 07 D6 1B 04 D7 1B 01 00 14 84 00 B0 2F 00 F9 1D
+             FF B6 AD E0 38 06 CC F9 8E 77 50 AC 31 B1 16 02 F8 AE 6F 13 72 B2
+             AC B0 30 14 16 01 15 19 02)
+       (|CL-PPCRE|::|NEXT-CHAR-NON-EXTENDED| |CL-PPCRE|::|PPCRE-SYNTAX-ERROR|
+        :|POS| :|FORMAT-CONTROL| "Unexpected end of string" :|FORMAT-ARGUMENTS|
+        "-imsx" #.#'|COMMON-LISP|::|CHAR=| #\- #\x
+        |CL-PPCRE|::|*EXTENDED-MODE-P*|
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (#\s . 7.) (#\m . 4.) (#\i . 1.))
+        :|CASE-INSENSITIVE-P| :|MULTI-LINE-MODE-P| :|SINGLE-LINE-MODE-P|
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (#\s . 7.) (#\m . 4.) (#\i . 1.))
+        :|CASE-SENSITIVE-P| :|NOT-MULTI-LINE-MODE-P| :|NOT-SINGLE-LINE-MODE-P|
+        |CL-PPCRE|::|LEXER-POS|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Reads a sequence of modifiers (including #\\- to reverse their\n
+meaning) and returns a corresponding list of \"flag\" tokens.  The\n
+\"x\" modifier is treated specially in that it dynamically modifies\n
+the behaviour of the lexer itself via the special variable\n
+*EXTENDED-MODE-P*."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|480 533 (DEFUN GET-QUANTIFIER (LEXER) ...)-23|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|GET-QUANTIFIER| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|GET-QUANTIFIER|
+       #107Y(00 00 00 00 01 00 00 00 26 02 AD 6F 00 AE 6F 01 AD 9E 7A AC B1 30
+             02 16 03 AD 6F 03 9D 26 04 80 45 CA 19 03 CB 19 03 CC 19 03 AF AE
+             61 02 19 07 B0 E2 64 6E 03 09 B1 6F 0A AC 24 0C 6D B2 2F 0D 19 07
+             AD AE 61 02 19 05 AF 6F 0A AC 24 0B 61 AC 24 0C 6F B0 2F 0D 19 05
+             AE E2 64 6E 03 09 92 00 67 AF 2F 0D 19 04 AE 2F 0D 19 03)
+       (|CL-PPCRE|::|LEXER-POS| |CL-PPCRE|::|LEXER-LAST-POS|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-LAST-POS|)
+        |CL-PPCRE|::|NEXT-CHAR|
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (#\{ . 57.) (#\? . 8.) (#\+ . 5.) (#\* . 2.))
+        (0. |COMMON-LISP|::|NIL|) (1. |COMMON-LISP|::|NIL|) (0. 1.)
+        :|NO-WHITESPACE-P| |CL-PPCRE|::|GET-NUMBER|
+        |CL-PPCRE|::|NEXT-CHAR-NON-EXTENDED| #\, #\} |CL-PPCRE|::|FAIL|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Returns a list of two values (min max) if what the lexer is looking\n
+at can be interpreted as a quantifier. Otherwise returns NIL and\n
+resets the lexer to its old position."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|535 736 (DEFUN GET-TOKEN (LEXER) ...)-24|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|GET-TOKEN| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|GET-TOKEN|
+       #462Y(00 00 00 00 01 00 00 00 26 02 AD 6F 00 AE 6F 01 AD 9E 7A AC B1 30
+             02 16 03 AD 6F 03 92 00 0E AE 6F 01 95 00 AC B1 30 02 16 02 00 19
+             03 26 04 81 9A CA 19 03 CB 19 03 CC 19 03 CD 19 03 CE 19 03 CF 19
+             03 E5 E6 B0 6F 00 72 B2 E7 E8 D4 1B 81 6E E5 E6 94 02 E7 EC E9 B6
+             6F 13 A4 1B 80 EF AE 6F 00 AF 6F 01 B0 2F 10 B0 88 11 65 AD B1 30
+             14 AC B1 30 02 9F 19 05 AE 6F 00 72 B1 AC B0 30 14 16 01 03 17 1B
+             07 AE EF 8A 16 6C 03 18 14 AF 2F 19 5D 19 03 AE 6F 1A 9D 26 1B 80
+             6C 03 1C 19 04 03 1D 19 04 03 1E 19 04 03 1F 19 04 03 20 19 04 AC
+             2F 21 19 04 AD B2 30 14 B1 65 25 65 26 65 27 65 28 6E 05 22 AE 30
+             29 19 06 AF 6F 00 72 B2 AC B1 30 14 F8 B0 6F 22 AC B2 6F 23 91 01
+             32 07 65 24 AD 90 01 33 4F 65 2A AD 61 02 19 06 AF 6F 00 72 B2 AC
+             B1 30 14 F8 B0 65 25 65 26 65 27 65 28 6E 05 22 AD 30 29 19 05 AF
+             6F 00 72 B2 AC B1 30 14 16 01 AF 2F 2B 19 04 AE 65 2C 8B 16 80 A9
+             AE 6F 00 72 B1 AC B0 30 14 16 01 AE 6F 2D AF 6F 1A 93 01 24 AC 65
+             2E 38 06 03 2F F9 8E 77 19 E5 E6 B2 2F 01 78 E7 65 30 E9 B6 6F 13
+             B7 2F 01 78 B8 6F 00 32 60 1B 80 6A 9D 26 31 80 58 E5 E6 63 E7 65
+             32 D4 1B 3E 65 33 9F 5D 19 05 92 01 77 03 34 19 05 03 35 19 05 03
+             36 19 05 03 37 19 05 03 38 19 05 65 39 AE 40 02 19 05 B0 6F 1A 9D
+             26 3A 17 03 3B 19 06 03 3C 19 06 03 34 19 06 E5 E6 63 E7 65 3D D4
+             14 00 1B 1D E5 E6 B3 6F 00 72 B2 E7 65 3E D4 1B 0B E5 E6 B2 6F 00
+             72 B2 E7 65 3F D4 14 A3 14 61 01 14 33 06 1E 03 40 19 03 15 19 02)
+       (|CL-PPCRE|::|LEXER-POS| |CL-PPCRE|::|LEXER-LAST-POS|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-LAST-POS|)
+        |CL-PPCRE|::|NEXT-CHAR|
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (#\( . 232.) (#\\ . 100.) (#\[ . 86.) (#\{ . 47.) (#\* . 20.)
+           (#\+ . 20.) (#\$ . 17.) (#\^ . 14.) (#\. . 11.) (#\? . 8.)
+           (#\| . 5.) (#\) . 2.))
+        :|CLOSE-PAREN| :|VERTICAL-BAR| :|QUESTION-MARK| :|EVERYTHING|
+        :|START-ANCHOR| :|END-ANCHOR| |CL-PPCRE|::|PPCRE-SYNTAX-ERROR| :|POS|
+        :|FORMAT-CONTROL| "Quantifier '~A' not allowed" :|FORMAT-ARGUMENTS|
+        |CL-PPCRE|::|UNGET-TOKEN| |CL-PPCRE|::|GET-QUANTIFIER|
+        "Quantifier '~A' not allowed" |CL-PPCRE|::|LEXER-STR|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|) #\^
+        |CL-PPCRE|::|LOOKING-AT-P| :|INVERTED-CHAR-CLASS| :|CHAR-CLASS|
+        |CL-PPCRE|::|COLLECT-CHAR-CLASS| |CL-PPCRE|::|NEXT-CHAR-NON-EXTENDED|
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (#\0 . 83.) (#\9 . 48.) (#\8 . 48.) (#\7 . 48.) (#\6 . 48.)
+           (#\5 . 48.) (#\4 . 48.) (#\3 . 48.) (#\2 . 48.) (#\1 . 48.)
+           (#\S . 22.) (#\s . 22.) (#\W . 22.) (#\w . 22.) (#\D . 22.)
+           (#\d . 22.) (#\B . 18.) (#\b . 14.) (#\z . 10.) (#\Z . 6.)
+           (#\A . 2.))
+        :|MODELESS-START-ANCHOR| :|MODELESS-END-ANCHOR|
+        :|MODELESS-END-ANCHOR-NO-NEWLINE| :|WORD-BOUNDARY| :|NON-WORD-BOUNDARY|
+        |CL-PPCRE|::|MAP-CHAR-TO-SPECIAL-CHAR-CLASS| |CL-PPCRE|::|GET-NUMBER|
+        |CL-PPCRE|::|LEXER-REG| 10. :|RADIX| 8. :|MAX-LENGTH| 3.
+        |CL-PPCRE|::|MAKE-CHAR-FROM-CODE| :|BACK-REFERENCE|
+        |CL-PPCRE|::|UNESCAPE-CHAR| #\? |CL-PPCRE|::|MAYBE-PARSE-FLAGS| ":)"
+        #.#'|COMMON-LISP|::|CHAR=| "Sequence '~A' not recognized"
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (#\< . 47.) (#\: . 40.) (#\! . 36.) (#\= . 32.) (#\> . 28.)
+           (#\( . 24.) (#\) . 17.) (|COMMON-LISP|::|NIL| . 2.))
+        "End of string following '(?'" :|FLAGS| :|VOID| :|OPEN-PAREN-PAREN|
+        :|OPEN-PAREN-GREATER| :|OPEN-PAREN-EQUAL| :|OPEN-PAREN-EXCLAMATION|
+        :|OPEN-PAREN-COLON|
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (|COMMON-LISP|::|NIL| . 13.) (#\) . 9.) (#\! . 5.) (#\= . 1.))
+        :|OPEN-PAREN-LESS-EQUAL| :|OPEN-PAREN-LESS-EXCLAMATION|
+        "End of string following '(?<'" "Character '~A' may not follow '(?<'"
+        "Character '~A' may not follow '(?'" :|OPEN-PAREN|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Returns and consumes the next token from the regex string (or NIL)." 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|738 738 (DECLAIM (INLINE UNGET-TOKEN))-25|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|UNGET-TOKEN|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|739 750 (DEFUN UNGET-TOKEN (LEXER) ...)-26|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|UNGET-TOKEN| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|UNGET-TOKEN|
+       #39Y(00 00 00 00 01 00 00 00 26 02 AD 89 00 15 AD 6F 00 94 00 95 01 AC
+            B1 30 01 16 01 6A 00 AC AF 30 02 19 03 DD 33 00 1E)
+       (|CL-PPCRE|::|LEXER-LAST-POS|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-LAST-POS|)
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|)
+        "No token to unget (this should not happen)")
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Moves the lexer back to the last position stored in the LAST-POS stack."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|752 752 (DECLAIM (INLINE START-OF-SUBEXPR-P))-27|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|START-OF-SUBEXPR-P|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|753 769 (DEFUN START-OF-SUBEXPR-P (LEXER) ...)-28|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|START-OF-SUBEXPR-P| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|START-OF-SUBEXPR-P|
+       #35Y(00 00 00 00 01 00 00 00 26 02 AD 6F 00 AE 6F 01 9D 59 1C 0C AC DC
+            DD 38 02 71 C1 AE B1 30 04 15 59 19 04)
+       (|CL-PPCRE|::|LEXER-POS| |CL-PPCRE|::|NEXT-CHAR| (#\) #\|)
+        #.#'|COMMON-LISP|::|CHAR=|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Tests whether the next token can start a valid sub-expression, i.e.\n
+a stand-alone regex."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))

@@ -1,0 +1,21 @@
+
+
+
+
+;; exer3.1
+
+(define (make-accumulator init-sum)
+	(lambda (adder) (begin (set! init-sum (+ init-sum adder)) init-sum)))
+
+
+;; exer3.2 监控某过程的调用情况
+(define (make-monitored proc)
+	(let ((call-times 0))
+		(lambda (m) (cond ((eq? 'reset m) (set! call-times 0))
+						  ((eq? 'how-many-calls? m) call-times)
+						  (else (begin (set! call-times (+ 1 call-times)) (proc m)))))))
+
+
+;; 带有局部状态的过程与对象系统						  
+Exercise 3.22.  Instead of representing a queue as a pair of pointers, we can build a queue as a procedure with local state. 
+The local state will consist of pointers to the beginning and the end of an ordinary list.

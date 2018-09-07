@@ -1,0 +1,68 @@
+
+
+
+
+Mapping over trees
+
+
+Exercise 2.30.  Define a procedure square-tree analogous to the square-list procedure of exercise 2.21.
+That is, square-list should behave as follows:
+
+(square-tree
+ (list 1
+       (list 2 (list 3 4) 5)
+       (list 6 7)))
+(1 (4 (9 16) 25) (36 49))
+
+Define square-tree both directly (i.e., without using any higher-order procedures) and also by using map and recursion. 
+
+;;;; without using map
+(define (square-tree tree)
+	(cond
+		((null? tree) nil)
+		((list? (car tree)) (cons (square-tree (car tree))
+								  (square-tree (cdr tree))))
+		(else (cons (* (car tree) (car tree)) (square-tree (cdr tree))))))
+
+;;;; 另一种角度 而这来源于树的递归定义
+;;;; 一棵树要么为空nil, 要么只是一个根节点, 有一系列分支,每个分支都是一棵树
+(define (square-tree tree)
+	(cond
+		((null? tree) nil)
+		((atom? tree) (* tree tree))
+		(else (cons (square-tree (car tree)) (square-tree (cdr tree))))))
+;;;; 正确性验证
+() --> ()
+1 --> 1
+(1) --> (1)
+(3 4) --> (9 16)
+(2 (3 4)) --> (4 (9 16))
+
+;;;; use map
+;;;; 将树(nested list)看作是子树的序列
+(define (square-tree tree)
+	(cond
+		((null? tree) nil)
+		((atom? tree) (* tree tree))
+		(else (map square-tree tree))))
+
+;;;; 它是如何处理空树的? map(proc nil) --> nil
+(define (square-tree tree)
+	(map (lambda (subtree)
+			(if (list? subtree)
+				(square-tree subtree)
+				(* subtree subtree)))
+		  tree))
+
+
+
+
+
+
+
+
+
+
+
+
+

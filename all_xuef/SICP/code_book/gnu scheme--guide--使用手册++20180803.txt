@@ -1,0 +1,12 @@
+
+
+## 执行代码
+Ctrl + x, Ctrl + e
+
+## 粘贴
+Ctrl + y
+
+## load 
+(load "C:\\code_dxf\\xuefgit\\Files_01_xuef\\all_xuef\\SICP\\code_book\\sicp_interpreter.scm")
+
+

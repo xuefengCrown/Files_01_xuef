@@ -1,0 +1,60 @@
+
+
+
+
+
+
+Exercise 3.39.  Which of the five possibilities in the parallel execution shown above remain if 
+we instead serialize execution as follows:
+
+(define x 10)
+
+(define s (make-serializer))
+
+(parallel-execute (lambda () (set! x ((s (lambda () (* x x))))))
+                  (s (lambda () (set! x (+ x 1)))))
+
+1) 先 p1 后 p2, 101
+2) 先 p2 后 p1, 121
+3) 先 p1, 在 p1 准备设置新值之前执行 p2, 然后 p1 将 x 设置为 100
+
+==============================================================================================
+
+To make the above mechanism more concrete, suppose that we have extended Scheme to include a procedure called parallel-execute:
+
+(parallel-execute <p1> <p2> ... <pk>)
+
+Each <p> must be a procedure of no arguments. Parallel-execute creates a separate process for each <p>, which applies 
+<p> (to no arguments). These processes all run concurrently.
+
+As an example of how this is used, consider
+
+(define x 10)
+
+(parallel-execute (lambda () (set! x (* x x)))
+                  (lambda () (set! x (+ x 1))))
+
+This creates two concurrent processes -- P1, which sets x to x times x, and P2, which increments x. 
+After execution is complete, x will be left with one of five possible values, depending on the interleaving 
+of the events of P1 and P2: 
+
+101:  P1 sets x to 100 and then P2 increments x to 101. 
+121:  P2 increments x to 11 and then P1 sets x to x times x. 
+110:  P2 changes x from 10 to 11 between the two times that P1 accesses the value of x during the evaluation of (* x x). 
+11:  P2 accesses x, then P1 sets x to 100, then P2 sets x. 
+100:  P1 accesses x (twice), then P2 sets x to 11, then P1 sets x. 
+
+注意 (set! x (* x x)) 要分三步
+1) 取得x的值(两次)
+在两次取值之间也可能插入其他指令！也就是说这两次取值不是作为一个原子操作的。
+2) 计算 (* x x)
+3) 将变量x设置为新值
+
+
+
+
+
+
+
+
+

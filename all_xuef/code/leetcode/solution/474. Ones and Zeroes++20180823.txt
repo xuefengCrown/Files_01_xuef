@@ -1,0 +1,98 @@
+
+
+
+In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue.
+
+For now, suppose you are a dominator of m 0s and n 1s respectively. On the other hand, there is an array with strings consisting of only 0s and 1s.
+
+Now your task is to find the maximum number of strings that you can form with given m 0s and n 1s. Each 0 and 1 can be used at most once.
+
+Note:
+The given numbers of 0s and 1s will both not exceed 100
+The size of given string array won't exceed 600.
+
+
+
+Input: Array = {"10", "0001", "111001", "1", "0"}, m = 5, n = 3
+Output: 4
+
+Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are “10,”0001”,”1”,”0”
+
+题意:
+使用m个0,n个1, 尽可能多的组装字符串。
+
+枚举:(变化在于)
+是否组装 "10"?
+
+
+
+Input: Array = {"10", "0", "1"}, m = 1, n = 1
+Output: 2
+
+Explanation: You could form "10", but then you'd have nothing left. Better form "0" and "1".
+dp[(i,m,n)] 表示 array[i:],m,n的ans
+扫描 array,
+如果不组装 array[0], dp[(i+1,m,n)]
+如果组装   array[0], 1+dp[(i+1,m',n')]
+
+if m<=0 and n<=0, return 0
+if i>=len(array), return 0
+
+dp(0,1,1)-->dp(1,1,1), dp(1,0,0)
+	dp(1,1,1)-->dp(2,1,1), dp(1,0,1)
+		dp(2,1,1)-->dp(3,1,1), dp(2,1,0)
+		dp(1,0,1)
+
+		
+		
+		
+"""474. Ones and Zeroes (dp)
+dp[(i,m,n)] 表示 array[i:],m,n的ans
+扫描 array,
+如果不组装 array[0], dp[(i+1,m,n)]
+如果组装(而且能够组装)   array[0], 1+dp[(i+1,m',n')]
+
+if m<=0 and n<=0, return 0
+if i>=len(array), return 0
+
+1) Submission Result: Memory Limit Exceeded 
+2) bottom-up 解法还不是很理解
+https://leetcode.com/problems/ones-and-zeroes/discuss/95851/4-Python-solution-with-detailed-explanation
+
+"""
+class Solution(object):
+    def findMaxForm(self, strs, m, n):
+        """
+        :type strs: List[str]
+        :type m: int
+        :type n: int
+        :rtype: int
+        """
+        dp = {}
+        def mx(strs, l, i, m, n): # m 0's
+            if m <= 0 and n <= 0: return 0
+            if i >= l: return 0
+            if (i,m,n) in dp: return dp[(i,m,n)]
+            cnt0 = strs[i].count('0')
+            cnt1 = strs[i].count('1')
+            t1 = mx(strs, l, i+1, m, n)
+            t2 = 0
+            if m >= cnt0 and n >= cnt1:
+                t2 = 1 + mx(strs, l, i+1, m-cnt0, n-cnt1)
+            dp[(i,m,n)] = max(t1, t2)
+            return dp[(i,m,n)]
+        #return mx(strs, len(strs), 0, m, n)
+        prev, curr = [[0]*(n+1) for _ in range(m+1)], [[0]*(n+1) for _ in range(m+1)]
+        for i in range(1, len(strs)+1):
+            zeroes, ones = strs[i-1].count('0'), strs[i-1].count('1')
+            for j in range(m+1):
+                for k in range(n+1):
+                    curr[j][k] = 0
+                    if j >= zeroes and k >= ones:
+                        curr[j][k] = max(prev[j][k], 1+prev[j-zeroes][k-ones])
+                    else:
+                        curr[j][k] = prev[j][k]
+            prev, curr = curr, prev
+        return prev[m][n]
+            
+https://leetcode.com/problems/ones-and-zeroes/discuss/95851/4-Python-solution-with-detailed-explanation       

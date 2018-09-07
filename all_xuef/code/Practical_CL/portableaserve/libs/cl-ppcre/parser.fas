@@ -1,0 +1,165 @@
+(|SYSTEM|::|VERSION| '(20080430.))
+#0Y_ #0Y |CHARSET|::|UTF-8|
+#Y(#:|1 36 (IN-PACKAGE #:CL-PPCRE)-1|
+   #17Y(00 00 00 00 00 00 00 00 20 01 DA 31 F6 0F 01 19 01)
+   ("CL-PPCRE" |COMMON-LISP|::|*PACKAGE*|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|38 154 (DEFUN GROUP (LEXER) ...)-2|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|GROUP| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|GROUP|
+       #235Y(00 00 00 00 01 00 00 00 26 02 AD 2F 00 42 02 AD 24 01 80 67 AD ED
+             EE 38 02 8D C1 80 CB 0E 05 10 05 B2 2F 02 78 B3 6F 06 B4 6F 00 B3
+             25 15 0B B5 6F 16 72 B1 AC B7 30 17 16 01 AC 24 07 80 7C E2 E3 B0
+             E5 F2 D2 14 63 33 06 1E E2 E3 E4 B6 73 02 37 E5 E6 D2 1B 6F E2 E3
+             B5 E5 E8 D2 1B 67 B4 6F 00 B5 6F 06 B6 6F 00 AE 25 07 5F AC 25 07
+             67 E9 A4 1B 34 E2 E3 B5 E5 EC D2 1B 4A AF 2F 02 78 B0 DD 64 6E 03
+             04 0E 05 10 05 92 03 52 B4 6F 10 72 B2 AC B6 30 11 16 01 B4 6C FF
+             6F B5 6F 06 B6 6F 00 AC 25 07 4E E9 A0 14 AF 61 03 16 03 11 19 06
+             F3 B3 AF 7B 01 33 02 24 5D 1B 28 92 06 72 A4 26 1A 1C 03 1B 1B 19
+             03 19 1B 15 03 1C 1B 11 03 1D 1B 0D 03 1E 1B 09 03 1F 1B 05 03 20
+             1B 01 00 14 AE 61 02 16 03 11 19 04 9E 19 04)
+       (|CL-PPCRE|::|GET-TOKEN| :|OPEN-PAREN-PAREN|
+        |CL-PPCRE|::|LEXER-LAST-POS| :|NO-WHITESPACE-P|
+        |CL-PPCRE|::|TRY-NUMBER| |CL-PPCRE|::|*EXTENDED-MODE-P*|
+        |CL-PPCRE|::|REG-EXPR| :|CLOSE-PAREN| |CL-PPCRE|::|PPCRE-SYNTAX-ERROR|
+        :|POS| 2. :|FORMAT-CONTROL|
+        "Opening paren has no matching closing paren" :|FORMAT-ARGUMENTS|
+        "Opening paren has no matching closing paren" :|BRANCH|
+        |CL-PPCRE|::|LEXER-POS|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|)
+        "Opening paren has no matching closing paren"
+        (:|OPEN-PAREN| :|OPEN-PAREN-COLON| :|OPEN-PAREN-GREATER|
+         :|OPEN-PAREN-EQUAL| :|OPEN-PAREN-EXCLAMATION| :|OPEN-PAREN-LESS-EQUAL|
+         :|OPEN-PAREN-LESS-EXCLAMATION|)
+        #.#'|COMMON-LISP|::|EQ| :|OPEN-PAREN| |CL-PPCRE|::|LEXER-REG|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-REG|)
+        "Opening paren has no matching closing paren" :|GROUP|
+        #S(|COMMON-LISP|::|HASH-TABLE| :|TEST| |EXT|::|STABLEHASH-EQ|
+           (:|OPEN-PAREN-LESS-EXCLAMATION| . 25.)
+           (:|OPEN-PAREN-LESS-EQUAL| . 21.) (:|OPEN-PAREN-EXCLAMATION| . 17.)
+           (:|OPEN-PAREN-EQUAL| . 13.) (:|OPEN-PAREN-GREATER| . 9.)
+           (:|OPEN-PAREN-COLON| . 5.) (:|OPEN-PAREN| . 1.))
+        :|REGISTER| :|STANDALONE| :|POSITIVE-LOOKAHEAD| :|NEGATIVE-LOOKAHEAD|
+        :|POSITIVE-LOOKBEHIND| :|NEGATIVE-LOOKBEHIND|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Parses and consumes a <group>.\n
+The productions are: <group> -> \"(\"<regex>\")\"\n
+                                \"(?:\"<regex>\")\"\n
+                                \"(?<\"<regex>\")\"\n
+                                \"(?<flags>:\"<regex>\")\"\n
+                                \"(?=\"<regex>\")\"\n
+                                \"(?!\"<regex>\")\"\n
+                                \"(?<=\"<regex>\")\"\n
+                                \"(?<!\"<regex>\")\"\n
+                                \"(?(\"<num>\")\"<regex>\")\"\n
+                                \"(?(\"<regex>\")\"<regex>\")\"\n
+                                <legal-token>\n
+where <flags> is parsed by the lexer function MAYBE-PARSE-FLAGS.\n
+Will return <parse-tree> or (<grouping-type> <parse-tree>) where\n
+<grouping-type> is one of six keywords - see source for details."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|156 173 (DEFUN GREEDY-QUANT (LEXER) ...)-3|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|GREEDY-QUANT| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|GREEDY-QUANT|
+       #33Y(00 00 00 00 01 00 00 00 26 02 AD 6F 00 AE 6F 01 92 00 03 9E 19 04
+            DC 94 01 9F 5C 78 B0 61 04 19 04)
+       (|CL-PPCRE|::|GROUP| |CL-PPCRE|::|GET-QUANTIFIER| :|GREEDY-REPETITION|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Parses and consumes a <greedy-quant>.\n
+The productions are: <greedy-quant> -> <group> | <group><quantifier>\n
+where <quantifier> is parsed by the lexer function GET-QUANTIFIER.\n
+Will return <parse-tree> or (:GREEDY-REPETITION <min> <max> <parse-tree>)."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|175 193 (DEFUN QUANT (LEXER) ...)-4|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|QUANT| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|QUANT|
+       #41Y(00 00 00 00 01 00 00 00 26 02 AD 6F 00 AE 6F 01 AF 6F 02 93 00 0A
+            14 DD 90 01 07 07 AD B1 30 05 9F 19 05 AE DE 31 B6 1B 77)
+       (|CL-PPCRE|::|GREEDY-QUANT| |CL-PPCRE|::|LEXER-POS|
+        |CL-PPCRE|::|NEXT-CHAR| #\? :|NON-GREEDY-REPETITION|
+        #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Parses and consumes a <quant>.\n
+The productions are: <quant> -> <greedy-quant> | <greedy-quant>\"?\".\n
+Will return the <parse-tree> returned by GREEDY-QUANT and optionally\n
+change :GREEDY-REPETITION to :NON-GREEDY-REPETITION."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|195 263 (DEFUN SEQ (LEXER) ...)-5|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|SEQ| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|SEQ|
+       #172Y(00 00 00 00 01 00 00 00 26 02 AD 89 00 80 9A AD 6F 01 AE 89 00 80
+             8F AE 6C 70 AD 72 2E AD 8F 16 04 94 01 C7 5A 14 93 01 04 AE 8E 2E
+             21 93 01 04 AE 8E 19 1D 93 01 2C 93 00 29 9F 5C 78 8F 2E 23 9F 5C
+             5C 1C 15 9F 5C 5B 14 B0 C8 34 19 06 9F 1B 77 AF AF 38 01 31 1C 1B
+             80 42 AE A0 5C 78 B1 C8 34 1B 1D 93 01 2C 93 00 29 9F 5C 78 8F 19
+             23 9F 5C 5C 1D 11 AE B0 A1 5C 78 38 01 31 1C A0 5C 5B 14 A1 5C 1B
+             13 AF A0 5C 78 38 01 31 1C 9F 5C 5B 19 06 93 00 0A AE B0 A1 5C 7A
+             31 B8 9F 19 06 DC B0 B0 61 03 19 06 15 19 02 C9 19 02)
+       (|CL-PPCRE|::|START-OF-SUBEXPR-P| |CL-PPCRE|::|QUANT| :|SEQUENCE|
+        #Y(|CL-PPCRE|::|SEQ-MAKE-ARRAY-FROM-TWO-CHARS|
+           #35Y(00 00 00 00 02 00 00 00 26 03 DA 64 38 06 C6 FD 7E 02 71 1D AC
+                DC B1 33 01 02 AC DD B0 33 01 02 15 19 03)
+           (2. |COMMON-LISP|::|CHARACTER| 0. 1.)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+           (|CL-PPCRE|::|CHAR1| |CL-PPCRE|::|CHAR2|) |COMMON-LISP|::|NIL| 1)
+        :|VOID|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Parses and consumes a <seq>.\n
+The productions are: <seq> -> <quant> | <quant><seq>.\n
+Will return <parse-tree> or (:SEQUENCE <parse-tree> <parse-tree>)."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|265 313 (DEFUN REG-EXPR (LEXER) ...)-6|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|REG-EXPR| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|REG-EXPR|
+       #91Y(00 00 00 00 01 00 00 00 26 02 AD 6F 00 AE 6F 01 93 00 1F AC 24 03
+            1E AD B0 30 05 AF 6F 06 B0 6F 00 B1 6F 01 93 00 08 AC 24 03 1D AD
+            B3 30 05 9F 19 07 C7 19 04 DE DC B1 6C 50 61 03 19 04 AC B0 9F 5C
+            7A 31 B8 15 19 07 B2 6C FF BE 9D 20 05 94 00 24 04 6A DE B0 AE 61
+            03 19 08)
+       (|CL-PPCRE|::|LEXER-POS| |CL-PPCRE|::|NEXT-CHAR| :|VOID| #\|
+        :|ALTERNATION| #.(|SYSTEM|::|GET-SETF-SYMBOL| '|CL-PPCRE|::|LEXER-POS|)
+        |CL-PPCRE|::|SEQ|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|LEXER|)
+       "Parses and consumes a <regex>, a complete regular expression.\n
+The productions are: <regex> -> <seq> | <seq>\"|\"<regex>.\n
+Will return <parse-tree> or (:ALTERNATION <parse-tree> <parse-tree>)."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|315 330 (DEFUN REVERSE-STRINGS (PARSE-TREE) ...)-7|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|REVERSE-STRINGS| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|REVERSE-STRINGS|
+       #45Y(00 00 00 00 01 00 00 00 26 02 AD 8E 19 06 9E 20 19 AD 1B 0E AD 32
+            64 19 02 AC 94 01 6C 6C 31 B6 83 00 9D 20 03 92 00 71 16 01 9E 19
+            02)
+       () (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|PARSE-TREE|) |COMMON-LISP|::|NIL| 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|332 347 (DEFUN PARSE-STRING (STRING) ...)-8|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|PARSE-STRING| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|PARSE-STRING|
+       #37Y(00 00 00 00 01 00 00 00 26 02 AD 6F 00 AC 6F 01 6F 02 AD 89 03 03
+            15 19 03 DE DF AF 6F 06 E1 E2 E3 63 33 06 1E)
+       (|CL-PPCRE|::|MAKE-LEXER| |CL-PPCRE|::|REG-EXPR|
+        |CL-PPCRE|::|REVERSE-STRINGS| |CL-PPCRE|::|END-OF-STRING-P|
+        |CL-PPCRE|::|PPCRE-SYNTAX-ERROR| :|POS| |CL-PPCRE|::|LEXER-POS|
+        :|FORMAT-CONTROL| "Expected end of string" :|FORMAT-ARGUMENTS|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|COMMON-LISP|::|STRING|)
+       "Translate the regex string STRING into a parse tree." 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))

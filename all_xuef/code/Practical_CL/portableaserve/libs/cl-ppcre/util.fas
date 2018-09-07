@@ -1,0 +1,300 @@
+(|SYSTEM|::|VERSION| '(20080430.))
+#0Y_ #0Y |CHARSET|::|UTF-8|
+#Y(#:|1 36 (IN-PACKAGE #:CL-PPCRE)-1|
+   #17Y(00 00 00 00 00 00 00 00 20 01 DA 31 F6 0F 01 19 01)
+   ("CL-PPCRE" |COMMON-LISP|::|*PACKAGE*|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|38 66 (DEFMACRO WITH-UNIQUE-NAMES (# &BODY BODY) ...)-2|
+   #23Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 72 4C 32 9C C5 19 01)
+   (|CL-PPCRE|::|WITH-UNIQUE-NAMES| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|WITH-UNIQUE-NAMES|
+       #220Y(00 00 00 00 02 00 00 00 26 03 AE DA DA 64 2D 04 01 1D 0C 9F 5C 78
+             A0 5C 79 DD 63 AF 1B 80 AD AE 2F 02 19 03 94 00 00 2B 01 7F 01 00
+             00 1B 80 76 AC E3 30 0A 16 01 1B 80 8C 68 00 00 AC DA DA 63 2D 04
+             01 1D 6B 9E 2B 01 9E 5B 0B 00 00 9E 5C 78 1B 1B AE 32 A6 1B 38 AE
+             31 51 1B 33 9F 1B 30 E5 AD B0 6D 0C 01 E0 63 E7 2D 06 08 16 01 68
+             01 00 AC 8F 18 6B 16 01 68 01 00 E8 AE 8E 18 54 AE 8E 2E 55 AE 8E
+             19 56 AE E9 EA 70 11 EC 2D 03 13 14 7B 02 61 02 16 03 1B 2D DE AD
+             AF 6D 05 01 E0 63 E1 2D 06 08 16 01 68 00 00 9D 21 04 AC 8F 18 68
+             16 01 06 00 00 21 FF 81 68 00 00 E8 68 02 00 72 A6 7B 02 61 02 F8
+             84 02 16 01 83 00 AC 8D 9F FF 53 16 01 AC 80 B1 00 9F 5D 5D 19 05)
+       (2. |SYSTEM|::|LIST-LENGTH-IN-BOUNDS-P| |SYSTEM|::|MACRO-CALL-ERROR|
+        |COMMON-LISP|::|LET| |CL-PPCRE|::|BINDING|
+        #Y(|CL-PPCRE|::|WITH-UNIQUE-NAMES-1|
+           #16Y(00 00 00 00 01 00 00 00 20 02 9E 0C 00 01 19 02)
+           (|COMMON-LISP|::|NIL|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        1. (|COMMON-LISP|::|OR| |COMMON-LISP|::|CONS| |COMMON-LISP|::|SYMBOL|)
+        |SYSTEM|::|CHECK-TYPE-FAILED| (2. . 2.) |SYSTEM|::|DESTRUCTURING-ERROR|
+        |CL-PPCRE|::|VAR|
+        #Y(|CL-PPCRE|::|WITH-UNIQUE-NAMES-2|
+           #16Y(00 00 00 00 01 00 00 00 20 02 9E 0C 00 01 19 02)
+           (|COMMON-LISP|::|NIL|)
+           (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+        |COMMON-LISP|::|SYMBOL| |COMMON-LISP|::|GENSYM| |CL-PPCRE|::|X|
+        (|COMMON-LISP|::|SYMBOL| |COMMON-LISP|::|CHARACTER|
+         |COMMON-LISP|::|STRING|)
+        |SYSTEM|::|TYPECASE-ERROR-STRING|
+        (|COMMON-LISP|::|OR| |COMMON-LISP|::|SYMBOL| |COMMON-LISP|::|CHARACTER|
+         |COMMON-LISP|::|STRING|)
+        |SYSTEM|::|ETYPECASE-FAILED|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|)
+       "Syntax: WITH-UNIQUE-NAMES ( { var | (var x) }* ) declaration* form*\n\n
+Executes a series of forms with each VAR bound to a fresh,\n
+uninterned symbol. The uninterned symbol is as if returned by a call\n
+to GENSYM with the string denoted by X - or, if X is not supplied, the\n
+string denoted by VAR - as argument.\n\n
+The variable bindings created are lexical unless special declarations\n
+are specified. The scopes of the name bindings and declarations do not\n
+include the Xs.\n\n
+The forms are evaluated in order, and the values of all but the last\n
+are discarded (that is, the body is an implicit PROGN)."
+       1)
+    ((|COMMON-LISP|::|&REST| |CL-PPCRE|::|BINDINGS|) |COMMON-LISP|::|&BODY|
+     |CL-PPCRE|::|BODY|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|68 93 (DEFMACRO REBINDING (BINDINGS &BODY BODY) ...)-3|
+   #23Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 72 4C 32 9C C5 19 01)
+   (|CL-PPCRE|::|REBINDING| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|REBINDING|
+       #121Y(00 00 00 00 02 00 00 00 26 03 AE DA DA 64 2D 04 01 1D 0C 9F 5C 78
+             A0 5C 79 AD 01 07 1B 80 42 AE 2F 02 19 03 A3 5B 1B 14 AE AD 80 B8
+             02 1B 1F B0 AD 80 B8 04 1B 27 87 07 06 21 69 A3 FD 38 01 81 AA 04
+             14 B2 7B 02 7B 01 92 01 5D 9D F9 FA 16 01 DD B2 B2 7B 03 7B 01 92
+             03 55 9D FB FC 16 01 83 07 B3 8D 9F 51 DE AD DF B8 DD E0 DD A6 7A
+             04 0F 5D 5D 7A 7B 03 61 03 19 0D)
+       (2. |SYSTEM|::|LIST-LENGTH-IN-BOUNDS-P| |SYSTEM|::|MACRO-CALL-ERROR|
+        |COMMON-LISP|::|LIST| |COMMON-LISP|::|LET|
+        |CL-PPCRE|::|WITH-UNIQUE-NAMES| '|COMMON-LISP|::|LET|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|)
+       "REBINDING ( { var | (var prefix) }* ) form*\n\n
+Evaluates a series of forms in the lexical environment that is\n
+formed by adding the binding of each VAR to a fresh, uninterned\n
+symbol, and the binding of that fresh, uninterned symbol to VAR's\n
+original value, i.e., its value in the current lexical environment.\n\n
+The uninterned symbol is created as if by a call to GENSYM with the\n
+string denoted by PREFIX - or, if PREFIX is not supplied, the string\n
+denoted by VAR - as argument.\n\n
+The forms are evaluated in order, and the values of all but the last\n
+are discarded (that is, the body is an implicit PROGN)."
+       1)
+    (|CL-PPCRE|::|BINDINGS| |COMMON-LISP|::|&BODY| |CL-PPCRE|::|BODY|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|95 140 (EVAL-WHEN (:COMPILE-TOPLEVEL :EXECUTE :LOAD-TOPLEVEL) (DEFVAR *REGEX-CHAR-CODE-LIMIT* CHAR-CODE-LIMIT ...) ...)-4-1|
+   #30Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 DB 8C 57 04 DB DC 31 5A DB DD DE
+        2D 03 05 3E 19 01)
+   ((|COMMON-LISP|::|SPECIAL| |CL-PPCRE|::|*REGEX-CHAR-CODE-LIMIT*|)
+    |CL-PPCRE|::|*REGEX-CHAR-CODE-LIMIT*| #.|COMMON-LISP|::|CHAR-CODE-LIMIT|
+    |COMMON-LISP|::|VARIABLE|
+    "The upper exclusive bound on the char-codes of characters\n
+which can occur in character classes.\n
+Change this value BEFORE creating scanners if you don't need\n
+the full Unicode support of LW, ACL, or CLISP."
+    |SYSTEM|::|%SET-DOCUMENTATION|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|95 140 (EVAL-WHEN (:COMPILE-TOPLEVEL :EXECUTE :LOAD-TOPLEVEL) (DEFVAR *REGEX-CHAR-CODE-LIMIT* CHAR-CODE-LIMIT ...) ...)-4-2|
+   #16Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 3E 19 01)
+   ((|COMMON-LISP|::|TYPE| |COMMON-LISP|::|FIXNUM|
+     |CL-PPCRE|::|*REGEX-CHAR-CODE-LIMIT*|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|95 140 (EVAL-WHEN (:COMPILE-TOPLEVEL :EXECUTE :LOAD-TOPLEVEL) (DEFVAR *REGEX-CHAR-CODE-LIMIT* CHAR-CODE-LIMIT ...) ...)-4-3|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C 3E 19 01)
+   (|CL-PPCRE|::|MAKE-CHAR-HASH| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|MAKE-CHAR-HASH|
+       #46Y(00 00 00 00 01 00 00 00 20 02 38 09 71 6D DA 63 1B 13 AD 80 29 00
+            1D 0B B0 AD 36 01 1D 05 AC AF 64 31 6F 85 01 AD DB 91 01 34 67 9F
+            19 05)
+       (0. #.|COMMON-LISP|::|CHAR-CODE-LIMIT|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|95 140 (EVAL-WHEN (:COMPILE-TOPLEVEL :EXECUTE :LOAD-TOPLEVEL) (DEFVAR *REGEX-CHAR-CODE-LIMIT* CHAR-CODE-LIMIT ...) ...)-4-4|
+   #16Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 3E 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|WORD-CHAR-P|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|95 140 (EVAL-WHEN (:COMPILE-TOPLEVEL :EXECUTE :LOAD-TOPLEVEL) (DEFVAR *REGEX-CHAR-CODE-LIMIT* CHAR-CODE-LIMIT ...) ...)-4-5|
+   #25Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 32 A2 DA DE 32 9C 3E 19
+        01)
+   (|CL-PPCRE|::|WORD-CHAR-P| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    |SYSTEM|::|INLINE-EXPANSION|
+    ((|CL-PPCRE|::|CHR|)
+     #1="Tests whether a character is a \"word\" character.\n
+In the ASCII charset this is equivalent to a-z, A-Z, 0-9, or _,\n
+i.e. the same as Perl's [\\w]."
+     (|COMMON-LISP|::|DECLARE| (|SYSTEM|::|IN-DEFUN| |CL-PPCRE|::|WORD-CHAR-P|)
+      (|COMMON-LISP|::|OPTIMIZE| |COMMON-LISP|::|SPEED|
+       (|COMMON-LISP|::|SAFETY| 0.) (|COMMON-LISP|::|SPACE| 0.)
+       (|COMMON-LISP|::|DEBUG| 0.) (|COMMON-LISP|::|COMPILATION-SPEED| 0.)))
+     (|COMMON-LISP|::|BLOCK| |CL-PPCRE|::|WORD-CHAR-P|
+      (|COMMON-LISP|::|OR| (|COMMON-LISP|::|ALPHANUMERICP| |CL-PPCRE|::|CHR|)
+       (|COMMON-LISP|::|CHAR=| |CL-PPCRE|::|CHR| #\_))))
+    #Y(|CL-PPCRE|::|WORD-CHAR-P|
+       #24Y(00 00 00 00 01 00 00 00 26 02 AD 31 27 1E 07 AD DA 33 01 07 19 02
+            19 02)
+       (#\_) (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|CL-PPCRE|::|CHR|) #1# 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|95 140 (EVAL-WHEN (:COMPILE-TOPLEVEL :EXECUTE :LOAD-TOPLEVEL) (DEFVAR *REGEX-CHAR-CODE-LIMIT* CHAR-CODE-LIMIT ...) ...)-4-6|
+   #52Y(00 00 00 00 00 00 00 00 20 01 DA 8C 57 23 DB DC 72 3B DA 38 01 8D 66 0D
+        AC DA 71 55 8E 13 06 DA DD AE 2D 03 04 DA AD 32 9D DA DF E0 2D 03 07 16
+        01 3E 19 01)
+   (|CL-PPCRE|::|+WHITESPACE-CHAR-STRING+|
+    #1=(#\Space #\Tab #\Newline #\Return #\Page) |COMMON-LISP|::|STRING|
+    (|COMMON-LISP|::|DEFCONSTANT| |CL-PPCRE|::|+WHITESPACE-CHAR-STRING+|
+     (|COMMON-LISP|::|COERCE| '#1# '|COMMON-LISP|::|STRING|)
+     #2="A string of all characters which are considered to be whitespace.\n
+Same as Perl's [\\s].")
+    |SYSTEM|::|CONSTANT-WARNING| |COMMON-LISP|::|VARIABLE| #2#
+    |SYSTEM|::|%SET-DOCUMENTATION|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|95 140 (EVAL-WHEN (:COMPILE-TOPLEVEL :EXECUTE :LOAD-TOPLEVEL) (DEFVAR *REGEX-CHAR-CODE-LIMIT* CHAR-CODE-LIMIT ...) ...)-4-7|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|WHITESPACEP| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|WHITESPACEP|
+       #21Y(00 00 00 00 01 00 00 00 20 02 AD 6B 00 38 06 C6 F9 32 77 19 02)
+       (|CL-PPCRE|::|+WHITESPACE-CHAR-STRING+| #.#'|COMMON-LISP|::|CHAR=|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|142 148 (UNLESS (BOUNDP '+DIGIT-HASH+) (DEFCONSTANT +DIGIT-HASH+ # ...))-5|
+   #53Y(00 00 00 00 00 00 00 00 20 01 DA 31 57 59 1F 23 DB 6F 02 DA 38 01 8D 66
+        0D AC DA 71 55 8E 13 06 DA DD AE 2D 03 04 DA AD 32 9D DA DF E0 2D 03 07
+        C5 19 02 19 01)
+   (|CL-PPCRE|::|+DIGIT-HASH+|
+    #Y(#:|142 148 (UNLESS (BOUNDP '+DIGIT-HASH+) (DEFCONSTANT +DIGIT-HASH+ # ...))-5-1|
+       #18Y(00 00 00 00 01 00 00 00 20 02 DA AE DB 33 02 0B 19 02) (#\0 #\9)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|))
+    |CL-PPCRE|::|MAKE-CHAR-HASH|
+    (|COMMON-LISP|::|DEFCONSTANT| |CL-PPCRE|::|+DIGIT-HASH+|
+     (|CL-PPCRE|::|MAKE-CHAR-HASH|
+      (|COMMON-LISP|::|LAMBDA| (|CL-PPCRE|::|CHR|)
+       (|COMMON-LISP|::|CHAR<=| #\0 |CL-PPCRE|::|CHR| #\9)))
+     #1="Hash-table containing the digits from 0 to 9.")
+    |SYSTEM|::|CONSTANT-WARNING| |COMMON-LISP|::|VARIABLE| #1#
+    |SYSTEM|::|%SET-DOCUMENTATION|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|150 153 (UNLESS (BOUNDP '+WORD-CHAR-HASH+) (DEFCONSTANT +WORD-CHAR-HASH+ # ...))-6|
+   #54Y(00 00 00 00 00 00 00 00 20 01 DA 31 57 59 1F 24 99 01 6F 02 DA 38 01 8D
+        66 0D AC DA 71 55 8E 13 06 DA DD AE 2D 03 04 DA AD 32 9D DA DF E0 2D 03
+        07 C5 19 02 19 01)
+   (|CL-PPCRE|::|+WORD-CHAR-HASH+| |CL-PPCRE|::|WORD-CHAR-P|
+    |CL-PPCRE|::|MAKE-CHAR-HASH|
+    (|COMMON-LISP|::|DEFCONSTANT| |CL-PPCRE|::|+WORD-CHAR-HASH+|
+     (|CL-PPCRE|::|MAKE-CHAR-HASH| #'|CL-PPCRE|::|WORD-CHAR-P|)
+     #1="Hash-table containing all \"word\" characters.")
+    |SYSTEM|::|CONSTANT-WARNING| |COMMON-LISP|::|VARIABLE| #1#
+    |SYSTEM|::|%SET-DOCUMENTATION|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|155 158 (UNLESS (BOUNDP '+WHITESPACE-CHAR-HASH+) (DEFCONSTANT +WHITESPACE-CHAR-HASH+ # ...))-7|
+   #54Y(00 00 00 00 00 00 00 00 20 01 DA 31 57 59 1F 24 99 01 6F 02 DA 38 01 8D
+        66 0D AC DA 71 55 8E 13 06 DA DD AE 2D 03 04 DA AD 32 9D DA DF E0 2D 03
+        07 C5 19 02 19 01)
+   (|CL-PPCRE|::|+WHITESPACE-CHAR-HASH+| |CL-PPCRE|::|WHITESPACEP|
+    |CL-PPCRE|::|MAKE-CHAR-HASH|
+    (|COMMON-LISP|::|DEFCONSTANT| |CL-PPCRE|::|+WHITESPACE-CHAR-HASH+|
+     (|CL-PPCRE|::|MAKE-CHAR-HASH| #'|CL-PPCRE|::|WHITESPACEP|)
+     #1="Hash-table containing all whitespace characters.")
+    |SYSTEM|::|CONSTANT-WARNING| |COMMON-LISP|::|VARIABLE| #1#
+    |SYSTEM|::|%SET-DOCUMENTATION|)
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|160 180 (DEFUN MERGE-HASH (HASH1 HASH2) ...)-8|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|MERGE-HASH| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|MERGE-HASH|
+       #91Y(00 00 00 00 02 00 00 00 26 03 AD 71 73 6B 00 90 01 32 24 AD 71 74
+            AC 31 75 42 03 63 93 03 13 9F F8 14 B4 64 31 6F B0 31 75 42 02 6A
+            03 6A 03 92 03 6D 16 05 9F 19 03 DB 6B 00 63 1B 14 AE 80 29 00 1D
+            0C 14 B1 38 01 8D 6E 05 AC B2 64 31 6F 85 02 AE AE 91 01 34 66 16
+            03 1B 59)
+       (|CL-PPCRE|::|*REGEX-CHAR-CODE-LIMIT*| 0.)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|HASH1| |CL-PPCRE|::|HASH2|)
+       "Returns the \"sum\" of two hashes. This is a destructive operation\n
+on HASH1."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|182 195 (DEFUN MERGE-INVERTED-HASH (HASH1 HASH2) ...)-9|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|MERGE-INVERTED-HASH| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|MERGE-INVERTED-HASH|
+       #47Y(00 00 00 00 02 00 00 00 26 03 DA 6B 01 63 1B 14 AE 80 29 00 1D 0C
+            14 B1 38 01 8C 6E 05 AC B2 64 31 6F 85 02 AE AE 91 01 34 66 16 03
+            9F 19 03)
+       (0. |CL-PPCRE|::|*REGEX-CHAR-CODE-LIMIT*|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|HASH1| |CL-PPCRE|::|HASH2|)
+       "Returns the \"sum\" of HASH1 and the \"inverse\" of HASH2. This is\n
+a destructive operation on HASH1."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|197 262 (DEFUN CREATE-RANGES-FROM-HASH (HASH &KEY DOWNCASEP) ...)-10|
+   #20Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC 32 9C C5 19 01)
+   (|CL-PPCRE|::|CREATE-RANGES-FROM-HASH| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|CREATE-RANGES-FROM-HASH|
+       #267Y(00 00 00 00 01 00 00 00 A6 1C 01 00 00 00 3B 01 0D 7D 01 92 02 0B
+             00 19 03 AD 31 2C 1B 1E 93 02 75 14 71 73 8F AD 6F 01 06 B4 71 74
+             AC 31 75 42 03 01 02 93 04 15 A0 F9 92 0D 5E 9E 14 84 00 B1 31 75
+             42 02 6A 04 6A 04 92 04 6B AC 31 B1 16 05 F8 DB 38 03 72 82 01 02
+             1B 80 7C AC 81 B2 08 AC 81 B1 05 1B 80 6F B4 97 01 82 01 36 08 B1
+             96 01 82 01 35 05 1B 80 5E AC 81 B2 07 AC 81 B1 04 1B 80 53 B3 97
+             01 82 01 36 07 B0 96 01 82 01 35 04 1B 80 42 AC 81 B2 06 AC 81 B1
+             03 1B 38 00 19 0C 87 02 01 14 80 28 00 93 08 FF B0 B4 AD B3 90 02
+             33 FF B3 93 07 41 B3 AD B2 90 02 33 45 93 06 53 B2 AD B1 91 02 33
+             56 B2 97 01 82 01 36 06 AF 96 01 82 01 35 03 83 02 AE 8D 9F 45 96
+             08 71 29 97 06 71 29 93 09 05 14 72 B1 31 29 14 93 07 05 14 72 B2
+             31 29 14 93 0A 05 14 72 B1 31 29 14 93 08 05 14 72 B2 31 29 14 40
+             06 19 0C)
+       (:|DOWNCASEP| #.#'|COMMON-LISP|::|CHAR<|)
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|CL-PPCRE|::|HASH| |COMMON-LISP|::|&KEY| |CL-PPCRE|::|DOWNCASEP|)
+       "Tries to identify up to three intervals (with respect to CHAR<)\n
+which together comprise HASH. Returns NIL if this is not possible.\n
+If DOWNCASEP is true it will treat the hash-table as if it represents\n
+both the lower-case and the upper-case variants of its members and\n
+will only return the respective lower-case intervals."
+       1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|264 270 (DEFMACRO MAYBE-COERCE-TO-SIMPLE-STRING (STRING) ...)-11|
+   #23Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 72 4C 32 9C C5 19 01)
+   (|CL-PPCRE|::|MAYBE-COERCE-TO-SIMPLE-STRING|
+    |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    #Y(|CL-PPCRE|::|MAYBE-COERCE-TO-SIMPLE-STRING|
+       #59Y(00 00 00 00 02 00 00 00 26 03 AE DA DA 63 2D 04 01 1D 23 9F 5C 78
+            DD 72 AA DE AD AF 7B 02 7B 01 DF E0 B0 7B 02 B0 7B 02 64 E1 B2 CD
+            5D 7A 7B 02 7B 03 61 03 19 05 AE 2F 02 19 03)
+       (2. |SYSTEM|::|LIST-LENGTH-IN-BOUNDS-P| |SYSTEM|::|MACRO-CALL-ERROR|
+        "=STRING=" |COMMON-LISP|::|LET| |COMMON-LISP|::|COND|
+        |COMMON-LISP|::|SIMPLE-STRING-P| |COMMON-LISP|::|COERCE|
+        ('|COMMON-LISP|::|SIMPLE-STRING|))
+       (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|)
+       (|SYSTEM|::|<MACRO-FORM>| |SYSTEM|::|<ENV-ARG>|) |COMMON-LISP|::|NIL| 1)
+    (|COMMON-LISP|::|STRING|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|272 272 (DECLAIM (INLINE NSUBSEQ))-12|
+   #15Y(00 00 00 00 00 00 00 00 20 01 DA 31 62 19 01)
+   ((|COMMON-LISP|::|INLINE| |CL-PPCRE|::|NSUBSEQ|))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))
+#Y(#:|273 278 (DEFUN NSUBSEQ (SEQUENCE START &OPTIONAL ...) ...)-13|
+   #25Y(00 00 00 00 00 00 00 00 20 01 DA 2F 01 DA DC DD 32 A2 DA DE 32 9C C5 19
+        01)
+   (|CL-PPCRE|::|NSUBSEQ| |SYSTEM|::|REMOVE-OLD-DEFINITIONS|
+    |SYSTEM|::|INLINE-EXPANSION|
+    ((|COMMON-LISP|::|SEQUENCE| |CL-PPCRE|::|START| .
+      #1=(|COMMON-LISP|::|&OPTIONAL|
+          (|CL-PPCRE|::|END|
+           (|COMMON-LISP|::|LENGTH| |COMMON-LISP|::|SEQUENCE|))))
+     #2="Return a subsequence by pointing to location in original sequence."
+     (|COMMON-LISP|::|DECLARE| (|SYSTEM|::|IN-DEFUN| |CL-PPCRE|::|NSUBSEQ|))
+     (|COMMON-LISP|::|BLOCK| |CL-PPCRE|::|NSUBSEQ|
+      (|COMMON-LISP|::|MAKE-ARRAY|
+       (|COMMON-LISP|::|-| |CL-PPCRE|::|END| |CL-PPCRE|::|START|)
+       :|ELEMENT-TYPE|
+       (|COMMON-LISP|::|ARRAY-ELEMENT-TYPE| |COMMON-LISP|::|SEQUENCE|)
+       :|DISPLACED-TO| |COMMON-LISP|::|SEQUENCE| :|DISPLACED-INDEX-OFFSET|
+       |CL-PPCRE|::|START|)))
+    #Y(|CL-PPCRE|::|NSUBSEQ|
+       #34Y(00 00 00 00 02 00 01 00 26 09 3B 01 04 AF 81 62 01 AD AF 73 01 38
+            38 05 B5 80 06 03 B5 B5 31 1D 19 04)
+       () (|COMMON-LISP|::|T| |COMMON-LISP|::|NIL| |COMMON-LISP|::|NIL|)
+       (|COMMON-LISP|::|SEQUENCE| |CL-PPCRE|::|START| . #1#) #2# 1))
+   (|COMMON-LISP|::|T| |COMMON-LISP|::|T| |COMMON-LISP|::|T|))

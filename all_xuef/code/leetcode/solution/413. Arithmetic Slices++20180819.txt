@@ -1,0 +1,30 @@
+
+
+
+when 1 2 3 --> (1, 2, 3) increment is 3 - 3 + 1 = 1
+when 1 2 3 4 --> (2, 3, 4), (1, 2, 3,4), increment is 4 - 3 + 1 = 2
+when 1 2 3 4 5 --> (3, 4, 5), (2, 3, 4, 5), (1, 2, 3, 4, 5), increment is 5 - 3 + 1 = 3.
+
+
+如果你使用 IDE 只是为了在其帮助下写出能过编译的代码，或是为了调试改 Bug，那么我不认为你是一名合格的程序员——我认为程序员可以被分为两种：
+1. 先确认前条件/不变式/终止条件/边界条件，然后写出正确的代码
+2. 先编写代码，然后通过各种用例/测试/调试对程序进行调整，最后得到似乎正确的代码
+
+
+
+
+#书籍
+Elements of Programming Interviews: The Insiders’ Guide
+编程原本
+程序员面试金典（第5版）
+#文章
+怎样花两年时间去面试一个人
+5 Whiteboard Coding Tips for Interviews
+Is “White-Board-Coding” inappropriate during interviews?
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+
+
+
+
+可能情况是指数级的
+
+这道题是求一个字符串中回文子串的切割，并且输出切割结果，其实是Word Break II和Longest Palindromic Substring结合，
+该做的我们都做过了。首先我们根据Longest Palindromic Substring中的方法建立一个字典，得到字符串中的任意子串是不是回文串的字典，
+不熟悉的朋友可以先看看哈。接下来就跟Word Break II一样，根据字典的结果进行切割，然后按照循环处理递归子问题的方法，如果当前的
+子串满足回文条件，就递归处理字符串剩下的子串。如果到达终点就返回当前结果。算法的复杂度跟Word Break II一样，取决于结果的数量，
+最坏情况是指数量级的。
+
+
+思路：Palindrome Partitioning I
+遇到要求所有组合、可能、排列等解集的题目，一般都是用DFS + backtracking来做。要分割回文的前提是能够判断回文。在做DFS的时候，
+如果每次从start出发查找s[start:end]是否是回文，会使算法复杂度大大增加。而在Longest Palindromic Substring这题中已经知道如何
+用DP来计算任意s[i:j]是否是回文。因此可以先计算该判断矩阵，在DFS的时候用来剪枝，大大提高效率。
+
+
+Input: "aab"
+Output:
+[
+  ["aa","b"],
+  ["a","a","b"]
+]
+
+
+
+

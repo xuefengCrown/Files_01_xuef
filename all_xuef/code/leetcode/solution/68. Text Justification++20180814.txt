@@ -1,0 +1,36 @@
+
+
+
+首先要理解题意：
+http://bangbingsyb.blogspot.com/2014/11/leetcode-text-justification.html
+Example 1:
+
+Input:
+words = ["This", "is", "an", "example", "of", "text", "justification."]
+maxWidth = 16
+Output:
+[
+   "This    is    an",
+   "example  of text",
+   "justification.  "
+]
+Example 2:
+
+Input:
+words = ["What","must","be","acknowledgment","shall","be"]
+maxWidth = 16
+Output:
+[
+  "What   must   be",
+  "acknowledgment  ",
+  "shall be        "
+]
+
+
+
+
+
+
+
+
+

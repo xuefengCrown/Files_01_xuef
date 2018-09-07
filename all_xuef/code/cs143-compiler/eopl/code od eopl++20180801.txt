@@ -1,0 +1,300 @@
+
+
+
+
+
+(define (enumerate idx lst)
+	(cond ((null? lst) nil)
+		  (else (cons (list idx (car lst)) (enumerate (+ 1 idx) (cdr lst))))))
+
+;; chap1	  
+(define (remove-first k lst)
+	(cond ((null? lst) nil)
+		  ((eq? k (car lst)) (cdr lst))
+		  (else (cons (car lst) (remove-first k (cdr lst))))))
+		  
+(remove-first 'a '(a b c))
+
+
+
+The procedure occurs-free? should take a variable var, represented as a
+Scheme symbol, and a lambda-calculus expression exp as defined in defini-
+tion 1.1.8, and determine whether or not var occurs free in exp. We say that a
+variable occurs free in an expression exp if it has some occurrence in exp that
+is not inside some lambda binding of the same variable. For example,
+> (occurs-free? 'x 'x)
+#t
+> (occurs-free? 'x 'y)
+#f
+> (occurs-free? 'x '(lambda (x) (x y)))
+#f
+> (occurs-free? 'x '(lambda (y) (x y)))
+#t
+> (occurs-free? 'x '((lambda (x) x) (x y)))
+#t
+> (occurs-free? 'x '(lambda (y) (lambda (z) (x (y z)))))
+#t
+
+We can solve this problem by following the grammar for lambda-calculus
+expressions
+LcExp :: = Identifier
+	  :: = (lambda (Identifier) LcExp)
+	  :: = (LcExp LcExp)
+
+We can summarize these cases in the rules:
+• If the expression e is a variable, then the variable x occurs free in e if
+and only if x is the same as e.
+• If the expression e is of the form (lambda (y) e'), then the vari-
+able x occurs free in e if and only if y is different from x and x occurs
+free in e ? .
+• If the expression e is of the form (e1 e2 ), then x occurs free in e if
+and only if it occurs free in e1 or e2 . Here, we use “or” to mean
+inclusive or, meaning that this includes the possibility that x occurs
+free in both e1 and e2 . We will generally use “or” in this sense.
+You should convince yourself that these rules capturethe notion of occurring
+“not inside a lambda-binding of x.”
+
+
+occurs-free? : Sym × LcExp → Bool
+usage: returns #t if the symbol var occurs free in exp, otherwise returns #f.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define cadr (lambda (x) (car (cdr x))))
+(define caddr (lambda (x) (cadr (cdr x))))
+(define (occurs-free? var exp)
+	(cond ((symbol? exp) (eq? var exp))
+		  ((eq? (car exp) 'lambda)
+				(and (not (eq? var (car (cadr exp))))
+					 (occurs-free? var (caddr exp))))
+		  (else (or (occurs-free? var (car exp))
+					(occurs-free? var (cadr exp))))))
+
+This procedure is not as readable as it might be. It is hard to tell, for
+example, that (car (cadr exp)) refers to the declaration of a variable
+in a lambda expression, or that (caddr exp) refers to its body. We show
+how to improve this situation considerably in section 2.5.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+subst
+
+(subst new old slist)
+
+> (subst 'a 'b '((b c) (b () d)))
+((a c) (a () d))
+
+S-list ::= ({S-exp}*)
+S-exp ::= Symbol | S-list
+
+;; 
+(define (subst new old slist)
+	(cond ((null? slist) nil)
+		  ((list? (car slist)) (cons (subst new old (car slist)) (subst new old (cdr slist))))
+		  ((eq? old (car slist)) (cons new (subst new old (cdr slist))))
+		  (else (cons (car slist) (subst new old (cdr slist))))))
+
+(define (subst new old slist)
+	(cond ((null? slist) nil)
+		  (else (map (lambda (sub) 
+							  (cond ((null? sub) nil)
+									((list? sub) (subst new old sub))
+									((eq? old sub) new)
+									(else sub)))
+					  slist))))
+					  
+					  
+This example is more complex than our previous ones because the grammar 
+for its input contains two nonterminals, S-list and S-exp.
+					  
+					  
+					  
+;;; 书上代码, 为每个语法rule定义一个过程
+Since we have strictly followed the definition of S-list and S-exp, this recur-
+sion is guaranteed to halt. Since subst and subst-in-s-exp call each
+other recursively, we say they are mutually recursive.
+The decomposition of subst into two procedures, one for each syntactic
+category, is an important technique. It allows us to think about one syn-
+tactic category at a time, which greatly simplifies our thinking about more
+complicated programs.			
+
+We’ve now developed a recipe for writing procedures that operate on
+inductively defined data sets. We summarize it as a slogan.
+###########################################################################
+				Follow the Grammar!
+When defining a procedure that operates on inductively defined data, the
+structure of the program should be patterned after the structure of the data.
+###########################################################################
+More precisely:
+• Write one procedurefor each nonterminal in the grammar. The procedure
+will be responsible for handling the data corresponding to that nontermi-
+nal, and nothing else.
+• In each procedure, write one alternative for each production correspond-
+ing to that nonterminal. You may need additional case structure, but this
+will get you started. For each nonterminal that appears in the right-hand
+side, write a recursive call to the procedure for that nonterminal.
+		  
+			
+1.3 Auxiliary Procedures and Context Arguments
+The Follow-the-Grammar recipe is powerful, but sometimes it is not sufficient.			
+Consider the procedure number-elements. This procedure should
+take any list (v0 v1 v2 ...) and return the list ((0 v0) (1 v1) (2 v2)...).
+############################################################################
+				No Mysterious Auxiliaries!
+When defining an auxiliary procedure, always specify what it does on all
+arguments, not just the initial values.
+############################################################################
+
+
+1.4 Exercises
+Getting the knack of writing recursive programs involves practice.
+
+Define, test, and debug each procedure. Your definition should include a
+contract and usage comment in the style we have used in this chapter. Feel
+free to define auxiliary procedures, but each auxiliary procedure you define
+should have its own specification, as in section 1.3.
+
+
+Exercise 1.15 [*] (duple n x)
+
+(define (duple n x)
+	(cond ((= n 0) nil)
+		  ((= n 1) (list x))
+		  (else (cons x (duple (- n 1) x)))))
+> (duple 4 '(ha ha))
+
+
+Exercise 1.21 [**] (product sos1 sos2)
+> (product '(a b c) '(x y))
+((a x) (a y) (b x) (b y) (c x) (c y))
+
+(define (f lst s) (map (lambda (x) (list x s)) lst))
+
+(define (product lst1 lst2)
+	(cond ((null? lst2) nil)
+		  (else (append (f lst1 (car lst2)) (product lst1 (cdr lst2))))))
+
+
+
+chap2 Data Abstraction
+
+Data abstraction divides a data type into two pieces: an interface and an implementation.
+ The interface tells us what the data of the type represents,
+what the operations on the data are, and what properties these operations
+may be relied on to have. The implementation provides a specific represen-
+tation of the data and code for the operations that make use of that data
+representation.
+
+面向接口编程的程序，易于维护和修改。
+
+In this section we introduce some strategies for representing data types.
+Weillustratethesechoicesusing adatatypeofenvironments. Anenvironment
+associates a value with each element of a finite set of variables. An environ-
+ment may be used to associate variables with their values in a programming
+language implementation. A compiler may also use an environment to asso-
+ciate each variable name with information about that variable.
+
+Variables may be represented in any way we please, so long as we can
+check two variables for equality. We choose to represent variables using
+Scheme symbols, but in a language without a symbol data type, variables
+could be represented by strings, by references into a hash table, or even by
+numbers (see section 3.6).
+
+
+2.2.1 The Environment Interface
+An environment is a function whose domain is a finite set of variables, and
+whose range is the set of all Scheme values.
+
+### 构造器和探测器
+constructors and observers
+
+ We can use any data structure for representing environments, if we
+can distinguish empty environments from non-empty ones, and in which one can
+extract the pieces of a non-empty environment.
+
+
+?????????????????????
+2.2.3 Procedural Representation
+
+The environment interface has an important property: it has exactly one
+observer, apply-env. This allows us to represent an environment as a
+Scheme procedure that takes a variable and returns its associated value.
+
+2.3 Interfaces for Recursive Data Types
+构造器 选择器 谓词
+############################################################################
+Designing an interface for a recursive data type
+1. Include one constructor for each kind of data in the data type.
+2. Include one predicate for each kind of data in the data type.
+3. Include one extractor for each piece of data passed to a constructor
+of the data type.
+############################################################################
+
+
+occurs-free? : Sym × LcExp → Bool
+usage: returns #t if the symbol var occurs free in exp, otherwise returns #f.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define cadr (lambda (x) (car (cdr x))))
+(define caddr (lambda (x) (cadr (cdr x))))
+(define (occurs-free? var exp)
+	(cond ((symbol? exp) (eq? var exp))
+		  ((eq? (car exp) 'lambda)
+				(and (not (eq? var (car (cadr exp))))
+					 (occurs-free? var (caddr exp))))
+		  (else (or (occurs-free? var (car exp))
+					(occurs-free? var (cadr exp))))))
+					
+The constructors are:
+	var-exp : Var → Lc-exp
+	lambda-exp : Var × Lc-exp → Lc-exp
+	app-exp : Lc-exp × Lc-exp → Lc-exp
+The predicates are:
+	var-exp? : Lc-exp → Bool
+	lambda-exp? : Lc-exp → Bool
+	app-exp? : Lc-exp → Bool
+Finally, the extractors are					
+	var-exp->var : Lc-exp → Var
+	lambda-exp->bound-var : Lc-exp → Var
+	lambda-exp->body : Lc-exp → Lc-exp
+	app-exp->rator : Lc-exp → Lc-exp
+	app-exp->rand : Lc-exp → Lc-exp
+
+2.4 A Tool for Defining Recursive Data Types
+
+(define-datatype lc-exp lc-exp?
+	(var-exp
+		(var identifier?))
+	(lambda-exp
+		(bound-var identifier?)
+		(body lc-exp?))
+	(app-exp
+		(rator lc-exp?)
+		(rand lc-exp?)))					
+					
+
+
+					
+chap3 Expressions
+In this chapter, we study the binding and scoping of variables. We do this by
+presenting a sequence of small languages that illustrate these concepts.
+
+
+No matter what implementation strategy we use, we need a front end
+that converts programs into abstract syntax trees. Because programs are
+just strings of characters, our front end needs to group these characters into
+meaningful units. This grouping is usually divided into two stages: scanning
+and parsing.
+
+
+Parsing is the process of organizing the sequence of tokens into hierar-
+chical syntactic structures such as expressions, statements, and blocks.
+
+ The parser takes a sequence of tokens from the scanner and produces an abstract syntax tree.
+
+
+
+
+
+
+
+
