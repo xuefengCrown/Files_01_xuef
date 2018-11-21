@@ -1,0 +1,7 @@
+
+struct student{
+	int num; //编号
+	float score; // 分数
+	struct student *next;
+};
+typedef struct student STU;

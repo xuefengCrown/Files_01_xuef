@@ -1,0 +1,13 @@
+
+DOS:
+color ? (查看命令参数)
+
+1. color 1f  (改变dos界面背景色)
+
+2. notepad "C:\\code_dxf\\xuefgit\\Files_01_xuef\\all_xuef\\程序员练级+Never\\尹成C语言\\C\\8. dos & linux命令.txt"
+
+3. 
+tasklist
+
+4. 
+taskkill 

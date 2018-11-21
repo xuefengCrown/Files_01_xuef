@@ -1,0 +1,7 @@
+
+
+•  C is an imperative language that is typically compiled and requires manual memory management.
+•  We can think of stack and heap memory as an array.
+•  We access this memory using pointers.
+•  We use malloc and free to help us manage memory.
+

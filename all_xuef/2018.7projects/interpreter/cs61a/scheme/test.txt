@@ -1,0 +1,82 @@
+
+
+
+(let ((x 42)
+      (y (* x 10)))  ; x refers to the global value of x, not 42
+       (list x y))
+	  
+(let ((x 42)
+      (y (* x 10)))
+       (list x y))
+
+
+;; problem 19
+
+To make change for 5 with the denominations (4, 3, 2, 1), we get the possibilities:
+4, 1
+3, 2
+3, 1, 1
+2, 2, 1
+2, 1, 1, 1
+1, 1, 1, 1, 1
+	   
+scm> (cons-all 1 '((2 3) (2 4) (3 5)))
+((1 2 3) (1 2 4) (1 3 5))
+
+(define (cons-all a lsts)
+  (map (lambda (lst) (append (list a) lst)) lsts))
+(define >= (lambda (x y) (or (> x y) (= x y))))
+(define (list-change num cents)
+  (cond ((null? cents) (if (= 0 num) '(()) '()))
+		(else (if (>= num (car cents))
+				(append (cons-all (car cents) (list-change (- num (car cents)) cents)) (list-change num (cdr cents)))
+				(list-change num (cdr cents))))))  
+;; test
+(list-change 5 '(4 3 2 1))
+(list-change 10 '(20 10 5 1))
+
+
+
+(define (xodd? x)
+	(if (= x 0)
+		#f
+		(xeven? (- x 1))))
+		
+(define (xeven? x)
+	(if (= x 0) 
+		#t 
+		(xodd? (- x 1))))
+
+
+		
+cons = (λa.λb.λf.f a b)
+head = (λc.c (λa.λb.a))
+tail = (λc.c (λa.λb.b))
+
+(define xcons (lambda (a) (lambda (b) (lambda (f) ((f a) b)))))		
+
+(define xhead (lambda (c) (c (lambda (a) (lambda (b) a)))))
+
+(define xtail (lambda (c) (c (lambda (a) (lambda (b) b)))))	
+		
+(define p ((xcons 1) 2))
+
+		
+nohup java -jar xuef_blog_v2-0.0.1-SNAPSHOT.jar  > logs/blog_log.log &
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+

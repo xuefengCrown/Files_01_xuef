@@ -1,0 +1,22 @@
+
+
+
+Digression: dynamic memory allocation
+	void * malloc(size_t n)
+	•  malloc() allocates blocks of memory
+	•  returns a pointer to unitialized block of memory on success
+	•  returns NULL on failure.
+	•  the returned value should be cast to appropriate type using ().  
+	int *ip=(int*)malloc(sizeof(int)*100)
+	
+	
+	void free(void*)
+	•  Frees memory allocated my malloc()
+	•  Common error: accessing memory after calling free
+
+
+
+
+
+
+

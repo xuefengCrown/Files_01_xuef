@@ -1,0 +1,8 @@
+
+
+FILE *fp = fopen(filename, "w"); // wb
+
+fputs("文本", fp);
+
+// fflush(fp);
+fclose(fp); // 因为文件缓冲区，当fclose时才真正写入文件。 或者调用 fflush(fp);

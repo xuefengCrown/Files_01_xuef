@@ -1,0 +1,16 @@
+
+
+/
+	dev : 设备文件
+	
+ls -l mice	
+sudo chmod 777 mice
+
+
+cd ~
+
+which ls
+
+mkdir -p aa/bb/cc
+
+tree aa

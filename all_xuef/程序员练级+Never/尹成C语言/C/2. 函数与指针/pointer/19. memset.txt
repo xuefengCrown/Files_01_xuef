@@ -1,0 +1,12 @@
+
+
+#include<memory.h>
+
+void main(){
+
+	char str[30] = "china is great";
+	int num[5] = {1,2,3,4,5};
+	
+	memset(str, 'A', 5); // 从str的首地址开始，前进5个字节，进行赋值
+	memset(num, 0, 20); // 对20个字节全部赋值为0，对于数组清零
+}

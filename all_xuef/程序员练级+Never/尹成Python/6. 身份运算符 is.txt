@@ -1,0 +1,13 @@
+
+"""
+is 判断其地址是否相同
+是否共用同一块内存
+"""
+
+num1 = 1
+num2 = 1
+
+print(num1 is num2)
+
+num2 = 2
+print(num1 is num2)

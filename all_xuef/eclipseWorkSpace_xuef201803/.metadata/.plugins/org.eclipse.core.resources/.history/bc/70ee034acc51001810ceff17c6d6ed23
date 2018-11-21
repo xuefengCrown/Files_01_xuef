@@ -1,6 +1,0 @@
-package com.xuef201803.book_dp.factory_method;
-
-public interface DriveManager_ {
-	// 连接数据库
-	String conn();
-}

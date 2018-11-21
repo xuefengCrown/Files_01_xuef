@@ -1,0 +1,5 @@
+
+
+fgetc(fp);
+
+ch != EOF

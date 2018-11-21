@@ -1,0 +1,16 @@
+
+## 文件管理
+chdir (pwd)
+md (mkdir)
+tree (当前目录结构)
+D: (切换到D盘)
+
+explorer (文件资源管理器)
+
+
+## 进程
+taskmgr-----任务管理器（2000/xp/2003
+
+## 修改cmd背景
+color ?
+title "xuef"

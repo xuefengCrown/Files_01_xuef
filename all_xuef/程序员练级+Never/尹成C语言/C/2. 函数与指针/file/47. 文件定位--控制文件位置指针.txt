@@ -1,0 +1,16 @@
+
+p231
+rewind(fp); // 重置文件位置指针到文件开头
+
+fseek // 移动至真
+int fseek(FILE *fp, long offset, int startPos); // 执行成功，文件指针会被设定为 "起始点 + offset"
+C语言中没起始点有三种方式：
+文件开始：SEEK_SET
+文件末尾：SEEK_END
+当前位置：SEEK_CUR
+
+
+ftell // 执行成功时，返回当前文件指针到文件头有多少个字节，否则返回-1
+
+// 时刻注意文件指针的位置
+

@@ -1,0 +1,15 @@
+
+python中的函数有两类：内置函数和自定义函数
+# 要注意，有些内置函数是裸的(如 max, sum)，有些内置函数则被组织在模块中(如 operator.add)
+# 可以使用 dir(operator) 来查看模块具有的属性和函数
+>>> type(max)
+<type 'builtin_function_or_method'>
+
+import operator as op
+>>> type(op.add)
+<type 'builtin_function_or_method'>
+
+# 查看 max的声明和使用方法
+help(max) 
+help(op.add)
+

@@ -1,0 +1,24 @@
+
+1. 结构体指针的样子
+struct myst *p;
+p = &ms;
+(*p).num // === p->num
+
+
+2. 结构体指针有何好处，为什么需要？何时需要
+
+a. 结构体数组容量有限。我们如果想要处理1200万条结构化数据，必须要依赖动态分配内存，这就需要结构体指针！
+
+b. 结构体作为函数参数涉及到大量的数据拷贝，效率很低，（而且由于数据副本机制，导致无法修改该结构体）
+使用结构体指针的效率会很高。
+
+
+struct dangdang *p = (struct dangdang *p)malloc(sizeof(struct dangdang) * 10);
+for(int i=0; i<10; i++){
+	// p[i] 等价于一个结构体
+}
+
+for(struct dangdang *pt = p; pt<p+10; pt++){
+
+}
+

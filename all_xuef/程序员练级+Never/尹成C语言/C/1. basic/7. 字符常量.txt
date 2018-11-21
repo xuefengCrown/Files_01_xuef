@@ -1,0 +1,41 @@
+
+1. 字符（汉字字符占两个字节）
+void main(){
+
+	char ch = 'a';
+	
+	putchar(ch);
+	
+	printf("%c", ch);
+	
+	wchar_t wch = L'念'; // 宽字符
+
+}
+
+2. 字符串常量（以'\0'结尾的字符序列）
+
+3. 在C中，字符串常量不能相加
+
+要在内存中存取字符串，只能使用数组或指针。
+
+4. 实例
+a. 大小写转换
+b. 加密解密
+
+## 将字符串常量写入字符数组
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+
+void main(){
+
+	char str[100] = {0};
+	sprintf(str, "color %c%c", '1', 'f'); // 打印到字符串
+	// 我们还可以使用 for循环来不断改变 控制台的背景色
+	// 本质是利用字符的加加减减来实现字符的切换！
+	system(str);
+}
+
+
+

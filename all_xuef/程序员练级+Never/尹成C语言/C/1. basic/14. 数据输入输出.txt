@@ -1,0 +1,46 @@
+
+#include<stdio.h>
+#include<string.h>
+void main(){
+
+
+	printf("%d, %s", 10, "hello"); // 可以输出到文件，输出到命令行，输出到网页
+	
+	char color_str[100] = {0};
+	sprintf(color_str, "color %.2s", "3d"); // 拼接到到字符串
+	system(color_str);
+
+}
+
+// 控制输出格式
+void main(){
+
+	printf("%010d", 10); // 默认右对齐，此处用0填充
+	
+	printf("%.2s", str); // 截取字符串
+	// %o 无符号八进制
+	// %x 无符号十六进制
+	// %ld 长整型
+}
+
+
+void main(){
+
+	// sprintf 实现字符串加法
+	char str[10] = "task";
+	char form[10] = "123list";
+	char strall[20] = {0};
+	sprintf(strall, "%s%s", str, form+3); // 字符地址的移动实现跳过某一段
+	// 注意C语言中字符串的内存语义
+	
+	printf("%.*f", i, db); // * 让小数点位置变动
+}
+
+
+
+
+
+
+
+
+

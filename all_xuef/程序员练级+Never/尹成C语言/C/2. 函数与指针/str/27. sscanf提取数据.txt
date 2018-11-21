@@ -1,0 +1,19 @@
+
+
+
+#include<stdio.h>
+
+int main(){
+
+  char s[100] = "我是xuef 我有100元"; // ！注意这里不是以 , 作为间隔。因为其不能作为字符串结束符
+  char name[10] = {0};
+  int num;
+  sscanf(s, "我是%s 我有%d元", name, &num);
+  printf("%s, %d\n", name, num);
+
+}
+
+
+
+
+

@@ -1,0 +1,18 @@
+package com.xuef201803.template;
+
+public abstract class Vehicle {
+	public final void drive(){
+		startTheEngine();
+		putIntoGear();
+		looseHandBrake();
+		
+	}
+
+	private void putIntoGear() {
+		
+	}
+
+	private void startTheEngine() {
+		
+	}
+}

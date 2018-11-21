@@ -1,0 +1,12 @@
+
+
+Recall that and array of size n with objects of type t is just a block of memory of size 
+sizeof(t) * n.
+
+1. Test for equality with the constant on the left-hand side.
+	if (3 == x) /* rather than (x == 3) {
+		. . .
+	}
+2. Initialize pointers to NULL.
+	int* p = NULL;
+	int* q;  /* Unitialized , q will point to junk . */

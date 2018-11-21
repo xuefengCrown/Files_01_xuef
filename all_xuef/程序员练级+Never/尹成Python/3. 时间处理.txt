@@ -1,0 +1,4 @@
+import time
+
+t = time.time() # 1970至今的时间(秒)
+

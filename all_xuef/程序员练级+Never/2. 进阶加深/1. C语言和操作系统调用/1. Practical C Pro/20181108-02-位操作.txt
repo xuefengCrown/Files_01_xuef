@@ -1,0 +1,14 @@
+
+
+int val=0xCAFE;
+
+int bits=val&0xF; /∗last four bits∗/ 
+
+
+(b) reverse the byte order (i.e., produce val=0xFECA)
+(c) rotate fourbits (i.e., produce val=0xECAF)
+
+(b)  val = ((0xFF & val) << 8) | (val>>8)
+(b)  val = (val >> 4) | ((val&0xF)<<12)
+
+

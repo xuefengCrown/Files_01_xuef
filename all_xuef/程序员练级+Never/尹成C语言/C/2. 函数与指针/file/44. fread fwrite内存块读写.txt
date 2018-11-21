@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(){
+
+  int num[5] = {1,2,3,4,5};
+  FILE *fp = fopen("/home/xuef/c_scripts/yincheng_c/file/block_rw.txt", "wb");
+
+  if(fp == NULL){
+    printf("file open failed.\n");
+  }else{
+    int res = 0;
+    res = fwrite(num, sizeof(int), 5, fp);
+    if(res == 5){
+      printf("write success.\n");
+    }else{
+      printf("write failed.\n");
+    }
+    fclose(fp);
+  }
+  return 0;
+}

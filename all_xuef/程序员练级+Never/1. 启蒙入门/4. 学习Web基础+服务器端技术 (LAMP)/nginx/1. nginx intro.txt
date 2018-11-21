@@ -1,0 +1,27 @@
+
+
+
+1. intro
+c语言开发的高性能 http 服务器 + 反向代理服务器
+
+2. 配置，安装，启动
+
+安装目录
+
+> cd sbin
+> ./nginx
+
+> ./nginx -s stop
+
+重新加载配置
+> ./nginx -s reload
+
+
+## 注意防火墙
+
+service iptables restart
+
+
+
+
+

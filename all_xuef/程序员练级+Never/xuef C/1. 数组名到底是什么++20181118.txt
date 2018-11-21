@@ -1,0 +1,21 @@
+
+#include<stdio.h>
+
+int main(){
+
+  int a[] = {1,2,3,4,5};
+
+  // 20 a代表这个一维数组, a是第一个元素的首地址?
+  printf("%d\n", sizeof(a));
+  printf("%d\n", *a); // 1
+
+  int b[2][3] = {1,2,3,4,5,6};
+  printf("%d\n", sizeof(b)); // 24 b代表整个二维数组
+  printf("%d\n", sizeof(*b)); // 12 
+  printf("%d\n", sizeof(**b)); // 4
+
+  printf("%d\n", *(((int *)(b+2))-1) ); // 6
+  return 0;
+
+}
+

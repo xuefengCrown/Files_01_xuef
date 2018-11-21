@@ -1,0 +1,46 @@
+
+
+// 赋值语句的左右两侧，类型一定要一致！！！
+
+#include<stdio.h>
+
+int main(){
+  // 使用指针轮询二维数组
+  // 注意！这里首字符'a'的地址和 "aaa"的地址，以及 数组str的地址都是一样的，不同的是如何解释
+  char str[3][5] = {"aaa", "bbb", "ccc"};
+
+  char (*p)[5] = str;
+  for(; p < str + 3; p++){
+    printf("%s\n", *p);
+  }
+
+  // 轮询指针数组
+  char *parr[3] = {"111", "222", "333"};
+
+  char ** pp = NULL;
+  for(pp = parr; pp < parr + 3; pp++){
+    printf("%s\n", *pp);
+  }
+
+}
+
+
+
+
+
+#include<stdio.h>
+
+int main(){
+
+  char s[3][5] = {"aaa", "bbb", "ccc"};
+
+  /**
+  s: 行指针; &s: 代表整个数组; *s: 第一个字符的地址
+  我们可以根据指针指向内容占多大, 基本上可以判断是什么样类型的指针
+  **/
+  // 5, 15, 1
+  printf("%d, %d, %d\n", sizeof(*s), sizeof(*(&s)), sizeof(**s));
+  return 0;
+}
+
+

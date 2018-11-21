@@ -1,0 +1,33 @@
+
+
+1. 静态局部变量
+
+for(in i=1; i<=100; i++){
+	static int sum = 0; // 静态局部变量, 让代码的一致性更强
+	sum += i;
+}
+
+
+// 递归计算 1 + .. + n
+int sum_one2x(int n){
+	if(n == 1) return 1;
+	return sum_one2x(n-1) + n;
+}
+
+int sum_one2x(int n){
+	static int sum = 0;
+	if(n == 0) return sum;
+	sum += n;
+	sum_one2x(n-1);
+}
+
+
+2. 静态全局变量
+静态全局变量和extern变量的不同体现在作用域上。
+extern作用域是本程序的所有源代码文件，只要在一个文件中定义，在其他文件中使用时只要对其进行声明即可。
+而静态全局变量只有定义没有声明，其作用域仅限于从定义位置起到本文件结束的一段代码区域，不能被其他文件中的函数使用。
+
+3. static 声明内部函数
+
+static void print(){
+}

@@ -1,0 +1,18 @@
+
+要想对文件进行读写，系统需要知道很多控制信息，包括文件名，文件当前读写位置，缓冲区位置和大小等。
+为此，C语言提供了“文件型”结构来标示记录待操作文件的信息，该结构定义于头文件 stdio.h中，形式为：
+
+struct _iobuf{
+
+	char *_ptr; //当前缓冲区内容指针
+	int _cnt; // 缓冲区还有多少字符
+	char *_base; //缓冲区起始地址
+	int _flag; //文件流的状态，是否错误或者结束
+	int _file; //文件描述符
+	int _charbuf; //双字节缓存
+	int _bufsiz; // 缓冲区大小
+	char *_tmpfname; // 临时文件名
+
+};
+
+typedef struct _iobuf FILE;

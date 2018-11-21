@@ -1,0 +1,20 @@
+
+
+
+What are objects?
+	Objects model elements of the problem context
+	Each object has:
+		characteristics
+		responsibilities (or required behaviors)
+
+Example
+	Problem 
+		Design and build a computer hockey game
+	Object 
+		Hockey player
+	Characteristics 
+		Position, height, weight, salary, number of goals
+	Responsibilities 
+		Pass the puck, shoot, skate forward, skate backward, punch another player, etc.
+
+

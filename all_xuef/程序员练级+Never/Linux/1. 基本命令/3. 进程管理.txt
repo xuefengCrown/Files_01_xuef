@@ -1,0 +1,15 @@
+
+ps
+
+kill -l
+
+kill -9 pid
+
+top
+
+
+env
+
+echo $PATH
+
+export PATH:

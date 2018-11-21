@@ -1,0 +1,7 @@
+1. turtle
+绘图
+
+2. os
+os.system("calc") # 执行系统指令
+
+3. time

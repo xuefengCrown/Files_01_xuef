@@ -9,8 +9,7 @@ import helper.ParseImgName;
 public class QuadTree {
     private Tile root;
 
-    // 节点太多, 只能递归构造 四分树
-
+    // 递归构造 四分树
     public QuadTree(){
         root = new Tile();
         root.setName("d0_x0_y0");
@@ -19,63 +18,7 @@ public class QuadTree {
         root.setLrlon(-122.2119140625);
         root.setUllat(37.892195547244356);
         root.setLrlat(37.82280243352756);
-        //double midLon = root.getUllon() + Math.abs(root.getUllon()-root.getLrlon())/2;
-        //double midLat = root.getUllat() - Math.abs(root.getUllat()-root.getLrlat())/2;
-        double midLon = (root.getUllon() + root.getLrlon())/2;
-        double midLat = (root.getUllat() + root.getLrlat())/2;
-        Tile d1_x0_y0 = new Tile();
-        d1_x0_y0.setUllon(root.getUllon());
-        d1_x0_y0.setLrlon(midLon);
-        d1_x0_y0.setUllat(root.getUllat());
-        d1_x0_y0.setLrlat(midLat);
-        Tile d1_x1_y0 = new Tile();
-        d1_x1_y0.setUllon(midLon);
-        d1_x1_y0.setLrlon(root.getLrlon());
-        d1_x1_y0.setUllat(root.getUllat());
-        d1_x1_y0.setLrlat(midLat);
-
-        Tile d1_x0_y1 = new Tile();
-        d1_x0_y1.setUllon(root.getUllon());
-        d1_x0_y1.setLrlon(midLon);
-        d1_x0_y1.setUllat(midLat);
-        d1_x0_y1.setLrlat(root.getLrlat());
-
-        Tile d1_x1_y1 = new Tile();
-        d1_x1_y1.setUllon(midLon);
-        d1_x1_y1.setLrlon(root.getLrlon());
-        d1_x1_y1.setUllat(midLat);
-        d1_x1_y1.setLrlat(root.getLrlat());
-
-        d1_x0_y0.setParent(root);
-        d1_x1_y0.setParent(root);
-        d1_x0_y1.setParent(root);
-        d1_x1_y1.setParent(root);
-
-        d1_x0_y0.setName("d1_x0_y0");
-        d1_x1_y0.setName("d1_x1_y0");
-        d1_x0_y1.setName("d1_x0_y1");
-        d1_x1_y1.setName("d1_x1_y1");
-
-        d1_x0_y0.setPos(1);
-        d1_x1_y0.setPos(2);
-        d1_x0_y1.setPos(3);
-        d1_x1_y1.setPos(4);
-
-        d1_x0_y0.setDepth(1);
-        d1_x1_y0.setDepth(1);
-        d1_x0_y1.setDepth(1);
-        d1_x1_y1.setDepth(1);
-        root.setName("d0_x0_y0");
-        root.setDepth(0);
-        root.setNw(d1_x0_y0);
-        root.setNe(d1_x1_y0);
-        root.setSw(d1_x0_y1);
-        root.setSe(d1_x1_y1);
-
-        gen(d1_x0_y0);
-        gen(d1_x1_y0);
-        gen(d1_x0_y1);
-        gen(d1_x1_y1);
+        gen(root);
     }
 
     /**
@@ -88,17 +31,14 @@ public class QuadTree {
         if(p.getDepth() == 7){
             return p;
         }
-        //int pDepth = p.getDepth();
-        // p与三个兄弟块
-        //System.out.println(p.getName());
+        String sufixOfX = ParseImgName.sufixOfX(p.getName());
+        String sufixOfY = ParseImgName.sufixOfY(p.getName());
+        int depth = p.getDepth() + 1;
+		// p的四个分支
         Tile nw4p = new Tile();
         Tile ne4p = new Tile();
         Tile sw4p = new Tile();
         Tile se4p = new Tile();
-
-        String sufixOfX = ParseImgName.sufixOfX(p.getName());
-        String sufixOfY = ParseImgName.sufixOfY(p.getName());
-        int depth = p.getDepth() + 1;
 
         nw4p.setDepth(depth);
         ne4p.setDepth(depth);

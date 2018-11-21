@@ -1,0 +1,41 @@
+
+
+
+#include<string.h>
+
+void main(){
+	
+	
+	char str[100];
+	// 返回拷贝好的字符串地址
+	printf("%s", strcpy(str, "hello, xuef"));
+}
+
+char * strcpy(char *dest, char *source){
+
+}
+
+
+// 实现 strcpy
+#include<stdio.h>
+
+char * mystrcpy(char *dest, char *source);
+
+char * mystrcpy(char *dest, char *source){
+  char *p = dest;
+  if(dest == NULL || source == NULL){
+    return NULL;
+  }
+  while((*p++ = *source++) != '\0')
+    ;
+  *p = '\0';
+  return dest;
+}
+
+int main(){
+  char str[100] = {0};
+  char *source = "hello,xuef";
+
+  printf("%s \n", mystrcpy(str, source));
+  return 0;
+}

@@ -1,0 +1,36 @@
+
+1. 输入输出
+#include<iostream>
+
+void main(){
+	int num;
+	std::cin >> num;
+	std::cout << "hello,world" << num << std::endl;
+}
+
+
+2. 结构体
+
+struct mystruct {
+
+	int num;
+	double db;
+	void go(){
+		std::cout << "hello" << endl;
+	}
+};
+
+void main(){
+	struct mystruct *p;
+	p = new struct mystruct;
+	p->num = 100;
+	p->db = 10.98;
+	p->go();
+}
+
+
+
+
+
+
+

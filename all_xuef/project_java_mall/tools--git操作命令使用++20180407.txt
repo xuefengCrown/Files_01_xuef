@@ -1,4 +1,5 @@
 # 进到 imall
+cd  /c/code_dxf/java_pros/webProxy
 
 $ git init
 $ git add .

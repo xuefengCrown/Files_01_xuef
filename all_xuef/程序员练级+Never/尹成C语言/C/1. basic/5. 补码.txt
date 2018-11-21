@@ -1,0 +1,27 @@
+
+
+void main(){
+
+	unsigned int up=-1;
+	printf("%u", up); //
+	
+	for(int i=0; i<up; i++){
+		printf("hello");
+	}
+}
+
++7  0000 0111
+-7  1000 1001
+
+
+
+void main(){
+
+	int a = 4294967295u; //4294967295u or -1 都是在cpu的寄存器中产生的，本质上都是32个1 
+	unsigned int b = -1;
+
+	printf("%u", a); // %u 表示按照无符号整数来解释该二进制数据
+	printf("%u", b);
+	printf("%d", a); // %d 有符号整数来解释
+}
+

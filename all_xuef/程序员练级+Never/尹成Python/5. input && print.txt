@@ -1,0 +1,12 @@
+
+num = input("输入数字")
+
+print("hello", end=",")
+
+## 格式化字符串
+
+print(format(10.1234, "10.3f")) # 宽度10，保留三位小数
+print(format(10.1234, "<10.3f")) # < 左对齐
+
+print(format(10, "<10d"))
+print(format("10.1234", "10s"))

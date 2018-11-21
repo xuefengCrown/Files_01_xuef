@@ -1,0 +1,63 @@
+
+
+#include <stdio .h>
+#include <stdlib .h>
+#include <string .h>
+#define STRSIZE 100
+#define NFIELDS 9
+
+int main ( )
+{
+	char inputfile [] = "stateoutflow0708.txt ";
+	/* define all the fields */
+	char state code org [STRSIZE];
+	char country code org [STRSIZE];
+	char state code dest [STRSIZE];
+	char country code dest [STRSIZE];
+	char state abbrv [STRSIZE];
+	char state name [STRSIZE];
+	char line [ STRSIZE*NFIELDS ];
+	int  return num =0;
+	int  exmpt num=0;
+	int  aggr agi =0;
+	long  total =0;
+	/* file related */
+	int fields read =0;
+	FILE* fp=fopen ( inputfile , "r" );
+	if ( fp==NULL)
+	{
+	fprintf ( stderr , "Cannot open file\n" );
+	exit ( −1);
+	}
+	/* skip first line */
+	fgets ( line ,STRSIZE*NFIELDS, fp );
+	/* print the header */
+
+	printf ( "%-30s,%6s\n" , "STATE " , "TOTAL " );
+	printf ( " ---------------------------------------\n" );
+	while ( fgets ( line ,STRSIZE*NFIELDS, fp ))
+	{
+		/* parse the fields */
+		fields read=sscanf ( line , "%s %s %s %s %s %s %d %d %d" ,
+							state code org ,
+							country code org ,
+							state code dest ,
+							country code dest ,
+							state abbrv ,
+							state name ,
+							&return num ,
+							&exmpt num ,
+							&aggr agi );
+		if (strcmp( state code org , "\"25\" ")==0)
+		{
+			printf ( "%-30s ,%6d\n" , state name , aggr agi );
+			total  += aggr agi ;
+		}
+	}
+	/* print the header */
+	printf ( " ----------------------------------------\n" );
+	printf ( "%-30s,%6 lu\n" , "TOTAL " , total );
+	fclose ( fp );
+	return 0;
+}
+

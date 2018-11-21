@@ -1,0 +1,28 @@
+
+
+1. 程序(字符串)--->表达式(结构化数据)
+
+2. 如何初始化 全局环境? (要注册哪些东西? 如何注册?)
+1) 一些 primitive procedure 要注册， 如 + - * /
+先要搞清楚 apply
+
+对于 可以把函数当做对象(函数作为第一级元素)的语言来说(如 Scheme、Python)
+将 函数 + 注册进环境 globalEnv 中， 只需要添加一个 '+'-->#[+] 的绑定即可;
+
+Java中如何做?
+
+3. 如何实现 不定参数的过程调用?
+
+4. user-defined-procedure
+Since lambdas are lexically scoped, your new frame should be a child of the frame in which the lambda is defined. 
+The env provided as an argument to make_call_frame is instead the frame in which the procedure is called, which 
+will be useful when you implement a dynamically scoped procedure in problem 16.
+
+彻底搞清楚 lexically scope && dynamically scope
+
+5. 派生表达式
+在我们的语言里，一些特殊形式可以基于其他特殊形式的表达式定义出来，而不必直接去实现。
+一个这样的例子就是cond，它可以实现为一些嵌套的if表达式。
+let表达式也是一种派生表达式。
+
+6. Java 中如何实现 map

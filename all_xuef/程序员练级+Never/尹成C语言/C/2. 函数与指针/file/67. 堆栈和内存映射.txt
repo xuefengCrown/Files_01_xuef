@@ -1,0 +1,22 @@
+
+1. 多线程
+#include<process.h>
+
+_beginthread(runmsg, 0, NULL); // 函数 栈大小 
+
+
+迅雷，分割文件。多线程下载
+
+
+2. 常量区
+
+#define N 100 // 在代码区，无法进行 &N 操作
+
+void main(){
+	
+	char *p = "hello"; // "hello" 在代码区
+
+}
+
+
+

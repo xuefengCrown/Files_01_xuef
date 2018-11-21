@@ -1,0 +1,11 @@
+package com.xuef201803.proxy;
+
+public class BuyHouseProxy implements BuyHouse {
+	BuyHouse buyHouse;
+	@Override
+	public void buyHouse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

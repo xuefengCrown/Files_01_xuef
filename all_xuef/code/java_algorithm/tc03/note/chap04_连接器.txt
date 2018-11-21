@@ -1,0 +1,50 @@
+
+Tomcat中的连接器必须满足以下要求：
+1. It must implement the org.apache.catalina.Connector interface.
+2. It must create request objects whose class implements the org.apache.catalina.Request interface.
+3. It must create response objects whose class implements the org.apache.catalina.Response interface.
+
+
+连接器等待请求，然后创建Request & Response 对象。
+A connector passes the request and response objects to the container by calling the
+org.apache.catalina.Container interface's invoke method, which has the following signature.
+public void invoke(org.apache.catalina.Request request,
+				   org.apache.catalina.Response response);
+				   
+Inside the invoke method, the container loads the servlet class, call its service
+method, manage sessions, log error messages, etc.
+
+tomcat4中的默认连接器使用了对象池; 实现了 HTTP1.1的全部特性。				   
+			
+
+## HTTP1.1 新特性
+1. 持久连接
+2. 块编码
+
+
+## Connector 接口
+tomcat连接器必须实现 Connector 接口，其中最重要的方法有：
+setContainer, 将连接器与某个容器相连
+getContainer, 
+createRequest, 
+and createResponse.
+
+
+## HttpConnector 实现了 Connector接口，实现了 Lifecycle 接口。
+HttpConnector 如何创建服务器套接字? 如何维护 HttpProcessor池? 如何为 HTTP请求提供服务?
+1. 创建服务器套接字(ServerSocket对象工厂)
+The initialize method of HttpConnector calls the open private method that returns
+an instance of java.net.ServerSocket and assigns it to serverSocket. However,
+instead of calling the java.net.ServerSocket constructor, the open method obtains an
+instance of ServerSocket from a server socket factory. If you want to know the
+details of this factory, read the ServerSocketFactory interface and the
+DefaultServerSocketFactory class in the org.apache.catalina.net package. They are
+easy to understand.
+
+
+## 4.4 HttpProcessor(实现了 Runnable接口)
+着重讲解 HttpProcessor类中assign()方法的异步实现，这样HttpConnector实例就能同时处理多个HTTP请求了。(?)
+
+
+
+

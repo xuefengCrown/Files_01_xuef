@@ -1,0 +1,59 @@
+
+
+Let the nodes in the list have the following structure
+
+// struct  defines a new datatype 
+struct node
+{
+	int data;
+	struct node *next;
+};
+
+// 声明变量
+struct node head;
+head.data = 1;
+
+
+// structure pointers
+struct point p={10 ,20};
+struct point ∗ pp=&p ;
+pp−>x = 10; / ∗ changes p . x ∗ /
+int y= pp−>y ; / ∗ same as y=p. y ∗ /
+
+
+// Arrays of structures
+•  Declaring arrays of int:  int x[10];
+•  Declaring arrays of structure:  struct point p[10];
+•  Initializing arrays of int:  int x [4]={0,20,10,2};
+•  Initializing arrays of structure:
+struct point p[3]={0,1,10,20,30,12};
+struct point p [3]={{0,1},{10,20},{30,12}};
+
+
+// Linked List
+Definition: A dynamic data structure that consists of a
+sequence of records where each element contains a link to the
+next record in the sequence.
+
+
+
+struct node * nalloc(int data){
+	struct node *p=(struct node *)malloc(sizeof(struct node));
+	if (p!=NULL){
+		p−>next=NULL;
+		p−>data=data;
+	}
+	return p;
+}
+
+struct node * addfront(struct node *head, int data){
+	struct node * p=nalloc(data);
+	if (p==NULL) return head;
+	p−>next=head ;
+	return p;
+}
+
+
+
+
+

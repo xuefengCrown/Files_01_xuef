@@ -1,0 +1,22 @@
+
+7700878
+
+C标准函数（是跨平台的）
+fopen, fread, printf
+
+应用层API，内核层API
+write
+sys_write
+
+
+## 为什么要学习应用层API
+我们能做更多的事
+
+文件指针(FILE)
+	文件描述符(指向磁盘中真正文件)
+	f_pos
+	buffer(指向缓冲区 8192 bytes)
+	
+	
+应用程序A将"hello"写到C标准缓冲区，flush 后，write会将"hello"写到内核缓冲区，然后write
+返回，表示写成功。有一个守护进程负责缓输出，定时刷新内核缓冲区内容到磁盘文件。

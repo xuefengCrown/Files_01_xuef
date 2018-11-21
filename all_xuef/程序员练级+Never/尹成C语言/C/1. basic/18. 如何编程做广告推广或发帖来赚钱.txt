@@ -1,0 +1,20 @@
+
+百度联盟 （考察其付费方式和模式）
+VPN 定时换 IP
+#include<Windows.h>
+
+void main(){
+
+	
+	// Win+M 全盘最小化
+	keybd_event(0x5b, 0, 0, 0); // 模拟 按下 power(win)键
+	keybd_event('M', 0, 0, 0); // 模拟 按下 'M'键
+	
+	keybd_event('M', 0, 2, 0); // 模拟 松开 'M'键
+	keybd_event(0x5b, 0, 2, 0); // 模拟 松开 power(win)键
+	
+	
+	// 鼠标移动
+	mouse_event
+	// 单双击鼠标
+}

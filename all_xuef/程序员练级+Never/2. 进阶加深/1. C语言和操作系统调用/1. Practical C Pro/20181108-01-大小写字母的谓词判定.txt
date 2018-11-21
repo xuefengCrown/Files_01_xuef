@@ -1,0 +1,14 @@
+
+
+
+
+Write logical expressions that tests whether a given character variable c is
+• lower case letter (Answer:  c>=’a’&& c<=’z’ )
+• upper case letter (Answer:  c>=’A’&& c<=’Z’ )
+• digit (Answer:  c>=’0’&& c<=’9’ )
+• white space (includes space,tab,new line) (Answer:  c==’\n’|| c==’\t’|| c==’’ )
+
+
+
+
+

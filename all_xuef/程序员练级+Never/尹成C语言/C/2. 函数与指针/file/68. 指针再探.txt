@@ -1,0 +1,87 @@
+
+《C程序设计语言》指针与数组
+通常的机器都有一系列连续编号或编址的存储单元，这些存储单元可以单个进行操纵，也可以以连续成组的方式操纵。
+通常情况下，机器的一个字节可以存放一个char类型的数据，两个相邻的字节存储单元可存储一个 short类型的数据，
+而4个相邻的字节存储单元可存储一个long类型的数据。
+
+1. & 运算符(* & 的优先级比算术运算符的优先级高)
+The & operator only applies to objects in memory: variables and array elements.
+
+2. 指针声明
+int *p; // 表明表达式 *p 的结果是 int类型
+
+3. 数组
+数组名即为数组中首元素的地址
+When an array name is passed to a function, 实际传递的是该数组第一个元素的地址.
+4. 数组名与指针的不同
+指针是一个变量，而数组名是一个常量！！！
+
+5. 字符指针与函数
+"I am a string" // 字符串常量是一个字符数组(以 '\0结尾')
+所以，程序可以通过检查空字符找到字符数组的结尾。
+
+6. 指针数组和指向指针的指针 (Pointer Arrays; Pointers to Pointers)
+对一组字符串进行排序。（交换指针）
+每个文本行可通过指向它的第一个字符的指针来访问。
+char *lineptr[MAXLINES]
+says that lineptr is an array of MAXLINES elements, each element of which is a pointer to a char.
+
+7. 多维数组
+static char daytab[2][13] = {
+	{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+	{0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+};
+在C中，二维数组实际上是一种特殊的一维数组，它的每个元素也是一个一维数组。
+f(int daytab[2][13]){ ... }
+f(int daytab[][13]){ ... }
+f(int (*daytab) [13]){ ... } // 参数是一个指针，它指向具有13个整型元素的一维数组。
+// 因为 []的优先级高于 *,所以必须使用().
+
+8. 指针数组的初始化
+static char *name[] = {
+	"Illegal month",
+	"January", "February", "March",
+	"April", "May", "June",
+	"July", "August", "September",
+	"October", "November", "December"
+};
+
+9. 指针与多维数组
+int a[10][20]; // a是一个真正的二维数组，它分配了200个int类型长度的存储空间
+
+int *b[10]; // b, 仅仅分配了10个指针，并且没有初始化。
+// 指针数组的一个重要优点在于，数组的每一行长度可以不同
+char *name[] = { "Illegal month", "Jan", "Feb", "Mar" };
+
+10. 指向函数的指针
+void qsort(void *lineptr[], int left, int right,
+				int (*comp)(void *, void *));
+
+
+void main(){
+
+	int num[5] = {1,2,3,4,5};
+	printf("\n%x", num); // 第一个元素的首地址
+	printf("\n%x", &num); // 一个数组的首地址???
+	
+	printf("\n%d", sizeof(*num)); // num + 1 的步长(前进多少字节)
+	getchar();
+}
+
+
+// 指针数组 vs 数组指针
+int *p[5]; // 数组元素为int* 类型（类比 int p[5] 数组元素为 int类型）
+
+int (*p)[5];
+
+
+// 且看二维数组
+int a[3][4] = {1,2,3,4,5,6,7,8,9,10,11,12};
+printf("\n%x", a);
+printf("\n%x", *a);
+printf("\n%x", &a);
+
+// (p)盒子里装什么类型数据，决定 p+1 的步长
+printf("\n%d", sizeof(*a)); // 16
+printf("\n%d", sizeof(**a)); // 4
+printf("\n%d", sizeof(*&a)); // 48

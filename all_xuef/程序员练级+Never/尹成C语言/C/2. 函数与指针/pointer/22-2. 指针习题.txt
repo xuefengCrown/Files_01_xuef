@@ -1,0 +1,45 @@
+
+1. 指针的步长。把指针指向的内存当作一个盒子，盒子里装什么决定了步长。
+int a[5] = {1,2,3,4,5};
+
+int *p = a;
+int *ptr = (int *)(&a + 1);
+
+printf("%d,%d", *(p+1), *(ptr-1)); // 2, 6
+getchar();
+
+2. 参数副本导致的内存泄露和赋值失败
+void getMem(char *p){
+	p = (char *)malloc(100);
+}
+
+void main(){
+	char *str = NULL;
+	getMem(str);
+	strcpy(str, "hello, world"); // str 为NULL，所以程序会崩溃
+	print(str);
+}
+
+3. 当函数退出，栈内存会自动释放
+char *getMem(void){
+	char p[] = "hello,world";
+	return p;
+}
+
+void test(void){
+	char *str = NULL;
+	str = getMem();
+	strcpy(str, "hello, world");
+	printf(str);
+}
+
+3. 内存泄露
+void getMem(char **p, int num){
+	*p = (char *)malloc(num);
+}
+void test(void){
+	char *str = NULL;
+	getMem(&str, 100);
+	strcpy(str, "hello, world");
+	printf(str);
+}

@@ -1,0 +1,2 @@
+
+access(filename, int mode) // 探测文件属性

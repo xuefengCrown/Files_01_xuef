@@ -1,0 +1,7 @@
+
+char s[3] = {'a', 'b', 'c'};
+char *ps = s; // ps是个小盒子，里面存的是char类型。所以 ps+1 会移动一个字节
+
+char *parr[3] = {"aaa", "bbb", "ccc"};
+char ** pp = parr; // pp是个小盒子，里面存的是char *即地址类型。所以 pp+1 会移动四个字节。
+// 指向指针数组，必须使用二级指针

@@ -1,0 +1,267 @@
+卷 OS 的文件夹 PATH 列表
+卷序列号为 4639-8612
+C:.
+├─Demo
+│  ├─cgi
+│  ├─classes
+│  ├─comparisons
+│  ├─curses
+│  ├─embed
+│  ├─imputil
+│  ├─md5test
+│  ├─metaclasses
+│  ├─newmetaclasses
+│  ├─parser
+│  ├─pdist
+│  ├─pysvr
+│  ├─rpc
+│  ├─scripts
+│  ├─sockets
+│  ├─threads
+│  ├─tix
+│  │  ├─bitmaps
+│  │  └─samples
+│  ├─tkinter
+│  │  ├─guido
+│  │  └─matt
+│  ├─xml
+│  └─zlib
+├─Doc
+│  ├─api
+│  ├─commontex
+│  ├─dist
+│  ├─doc
+│  ├─ext
+│  ├─howto
+│  ├─html
+│  │  └─icons
+│  ├─info
+│  ├─inst
+│  ├─isilo
+│  ├─lib
+│  │  └─sqlite3
+│  ├─mac
+│  ├─paper-a4
+│  ├─paper-letter
+│  ├─perl
+│  ├─ref
+│  ├─templates
+│  ├─tests
+│  ├─texinputs
+│  ├─tools
+│  │  └─sgmlconv
+│  ├─tut
+│  └─whatsnew
+├─Grammar
+├─Include
+├─Lib
+│  ├─bsddb
+│  │  └─test
+│  ├─compiler
+│  ├─ctypes
+│  │  ├─macholib
+│  │  └─test
+│  ├─curses
+│  ├─distutils
+│  │  ├─command
+│  │  └─tests
+│  ├─email
+│  │  ├─mime
+│  │  └─test
+│  │      └─data
+│  ├─encodings
+│  ├─hotshot
+│  ├─idlelib
+│  │  └─Icons
+│  ├─lib-old
+│  ├─lib-tk
+│  ├─logging
+│  ├─msilib
+│  ├─plat-aix3
+│  ├─plat-aix4
+│  ├─plat-atheos
+│  ├─plat-beos5
+│  ├─plat-darwin
+│  ├─plat-freebsd2
+│  ├─plat-freebsd3
+│  ├─plat-freebsd4
+│  ├─plat-freebsd5
+│  ├─plat-freebsd6
+│  ├─plat-freebsd7
+│  ├─plat-generic
+│  ├─plat-irix5
+│  ├─plat-irix6
+│  ├─plat-linux2
+│  ├─plat-mac
+│  │  ├─Carbon
+│  │  └─lib-scriptpackages
+│  │      ├─CodeWarrior
+│  │      ├─Explorer
+│  │      ├─Finder
+│  │      ├─Netscape
+│  │      ├─StdSuites
+│  │      ├─SystemEvents
+│  │      ├─Terminal
+│  │      └─_builtinSuites
+│  ├─plat-netbsd1
+│  ├─plat-next3
+│  ├─plat-os2emx
+│  ├─plat-riscos
+│  ├─plat-sunos5
+│  ├─plat-unixware7
+│  ├─site-packages
+│  ├─sqlite3
+│  │  └─test
+│  ├─test
+│  │  ├─crashers
+│  │  ├─decimaltestdata
+│  │  ├─leakers
+│  │  └─output
+│  ├─wsgiref
+│  └─xml
+│      ├─dom
+│      ├─etree
+│      ├─parsers
+│      └─sax
+├─Mac
+│  ├─BuildScript
+│  │  ├─resources
+│  │  └─scripts
+│  ├─Demo
+│  │  ├─applescript
+│  │  │  └─Disk_Copy
+│  │  ├─example0
+│  │  ├─example1
+│  │  ├─example2
+│  │  ├─html.icons
+│  │  ├─imgbrowse
+│  │  ├─mlte
+│  │  ├─PICTbrowse
+│  │  ├─quicktime
+│  │  ├─resources
+│  │  ├─sound
+│  │  └─textedit
+│  ├─Icons
+│  ├─IDLE
+│  ├─Modules
+│  │  ├─ae
+│  │  ├─ah
+│  │  ├─app
+│  │  ├─carbonevt
+│  │  ├─cf
+│  │  ├─cg
+│  │  ├─cm
+│  │  ├─ctl
+│  │  ├─dlg
+│  │  ├─drag
+│  │  ├─evt
+│  │  ├─file
+│  │  ├─fm
+│  │  ├─folder
+│  │  ├─help
+│  │  ├─ibcarbon
+│  │  ├─icn
+│  │  ├─launch
+│  │  ├─list
+│  │  ├─menu
+│  │  ├─mlte
+│  │  ├─osa
+│  │  ├─qd
+│  │  ├─qdoffs
+│  │  ├─qt
+│  │  ├─res
+│  │  ├─scrap
+│  │  ├─snd
+│  │  ├─te
+│  │  └─win
+│  ├─PythonLauncher
+│  │  └─English.lproj
+│  │      ├─MainMenu.nib
+│  │      ├─MyDocument.nib
+│  │      └─PreferenceWindow.nib
+│  ├─Resources
+│  │  ├─app
+│  │  │  └─Resources
+│  │  │      └─English.lproj
+│  │  │          └─Documentation
+│  │  │              ├─doc
+│  │  │              └─ide
+│  │  ├─framework
+│  │  │  └─English.lproj
+│  │  └─iconsrc
+│  ├─scripts
+│  └─Tools
+│      └─Doc
+│          └─HelpIndexingTool
+├─Misc
+│  ├─RPM
+│  └─Vim
+├─Modules
+│  ├─cjkcodecs
+│  ├─expat
+│  ├─zlib
+│  ├─_ctypes
+│  │  ├─darwin
+│  │  ├─libffi
+│  │  │  ├─include
+│  │  │  └─src
+│  │  │      ├─alpha
+│  │  │      ├─arm
+│  │  │      ├─cris
+│  │  │      ├─darwin
+│  │  │      ├─frv
+│  │  │      ├─ia64
+│  │  │      ├─m32r
+│  │  │      ├─m68k
+│  │  │      ├─mips
+│  │  │      ├─pa
+│  │  │      ├─powerpc
+│  │  │      ├─s390
+│  │  │      ├─sh
+│  │  │      ├─sh64
+│  │  │      ├─sparc
+│  │  │      └─x86
+│  │  ├─libffi_arm_wince
+│  │  └─libffi_msvc
+│  └─_sqlite
+├─Objects
+│  └─stringlib
+├─Parser
+├─PC
+│  ├─bdist_wininst
+│  ├─example_nt
+│  ├─icons
+│  ├─os2emx
+│  ├─os2vacpp
+│  └─VC6
+├─PCbuild
+├─PCbuild8
+├─Python
+├─RISCOS
+│  ├─Modules
+│  ├─Python
+│  └─support
+└─Tools
+    ├─audiopy
+    ├─bgen
+    │  └─bgen
+    ├─buildbot
+    ├─compiler
+    ├─faqwiz
+    ├─framer
+    │  └─framer
+    ├─freeze
+    ├─i18n
+    ├─modulator
+    │  └─Templates
+    ├─msi
+    ├─pybench
+    │  └─package
+    ├─pynche
+    │  └─X
+    ├─scripts
+    ├─unicode
+    │  └─python-mappings
+    ├─versioncheck
+    ├─webchecker
+    └─world

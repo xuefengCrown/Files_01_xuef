@@ -1,0 +1,6 @@
+
+
+fprintf 同 printf，只是 fprintf可往文件写。
+fprintf(stdout, "我是%s", "xuef");
+
+feof(fp); //文件是否到末尾

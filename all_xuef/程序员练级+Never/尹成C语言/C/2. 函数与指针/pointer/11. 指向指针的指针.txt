@@ -1,0 +1,23 @@
+
+/**
+想通过函数修改变量，需要传递指针;
+想通过函数修改指针的值，需要传递指针的指针;
+**/
+
+
+#include<stdio.h>
+#include<Windows.h>
+
+void main(){
+
+	int num = 100; // 代表血值
+	char ch1 = 'A', ch2 = 'B', ch3 = 'C'; // 代表英雄级别
+	char *p = &ch1;
+	
+	while(1){
+		printf("\n我有%d血值，我的级别是%c.", num, *p)
+		Sleep(3000);
+	}
+
+}
+

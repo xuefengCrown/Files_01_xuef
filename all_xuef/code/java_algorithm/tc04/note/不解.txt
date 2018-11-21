@@ -1,0 +1,25 @@
+
+
+1. BootStrap后，有几个 Connector实例?
+
+每个 HttpProcessor实例何时与 特定 Request && Response对象相关联的，如何关联的?
+processor.assign(socket); // 此处的socket为代表cli-server连接的套接字
+
+2. HttpProcessor 线程何时启动?
+
+3. notifyAll() 做了什么?
+
+
+4. assign()同步方法持有的锁是哪个
+synchronized void assign(Socket socket) {}
+
+
+应用启动后， HTTPProcessor都在 wait(等待连接器调用 processor.assign(socket))
+
+assign 执行后，HttpProcessor 线程继续执行。
+
+Why does the await method need to call notifyAll? Just in case another socket
+arrives when the value of available is true. In this case, the "connector thread" will
+stop inside the assign method's while loop until the nofifyAll call from the "processor
+thread" is received.
+

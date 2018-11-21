@@ -19329,3 +19329,98 @@ org.apache.maven.settings.building.SettingsBuildingException: 2 problems were en
 2018-05-07 15:26:33,852 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2018-05-07 15:26:33,857 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2018-05-07 15:26:33,858 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\storemgr\src\test\resources
+2018-10-13 18:30:19,112 [Worker-1] ERROR o.e.m.c.internal.embedder.MavenImpl - Could not read settings.xml, assuming default values
+org.apache.maven.settings.building.SettingsBuildingException: 2 problems were encountered while building the effective settings
+[FATAL] Non-parseable settings C:\Users\moveb\Downloads\cs\java_develop\devInstall\apache-maven-3.2.2\conf\settings.xml: expected name start and not < (position: TEXT seen ...<maven.compiler.source>1.8</<... @260:33)  @ C:\Users\moveb\Downloads\cs\java_develop\devInstall\apache-maven-3.2.2\conf\settings.xml, line 260, column 33
+[FATAL] Non-parseable settings C:\Users\moveb\Downloads\cs\java_develop\devInstall\apache-maven-3.2.2\conf\settings.xml: expected name start and not < (position: TEXT seen ...<maven.compiler.source>1.8</<... @260:33)  @ C:\Users\moveb\Downloads\cs\java_develop\devInstall\apache-maven-3.2.2\conf\settings.xml, line 260, column 33
+
+	at org.apache.maven.settings.building.DefaultSettingsBuilder.build(DefaultSettingsBuilder.java:116) ~[maven-settings-builder-3.0.4.jar:3.0.4]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.getSettings(MavenImpl.java:456) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.getSettings(MavenImpl.java:428) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.repository.RepositoryRegistry.updateRegistry(RepositoryRegistry.java:223) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.repository.RepositoryRegistryUpdateJob.run(RepositoryRegistryUpdateJob.java:47) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53) [org.eclipse.core.jobs_3.5.300.v20130429-1813.jar:na]
+2018-10-13 18:30:33,440 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-10-13 18:30:37,306 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-13 18:30:39,081 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-13 18:30:39,083 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\common\src\main\resources
+2018-10-13 18:30:39,090 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-13 18:30:39,091 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\common\src\test\resources
+2018-10-13 18:30:41,024 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-13 18:30:41,383 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-13 18:30:41,398 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 6 resources
+2018-10-13 18:30:41,437 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-13 18:30:41,437 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\customermgr\src\test\resources
+2018-10-13 18:30:45,260 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-13 18:30:46,548 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-13 18:30:46,554 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-13 18:30:46,558 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-13 18:30:46,566 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-13 18:30:47,300 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-13 18:30:47,306 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-13 18:30:47,311 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-13 18:30:47,319 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-13 18:30:48,238 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-13 18:30:48,246 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 5 resources
+2018-10-13 18:30:48,266 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-13 18:30:48,273 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:30:10,064 [Worker-2] ERROR o.e.m.c.internal.embedder.MavenImpl - Could not read settings.xml, assuming default values
+org.apache.maven.settings.building.SettingsBuildingException: 2 problems were encountered while building the effective settings
+[FATAL] Non-parseable settings C:\Users\moveb\Downloads\cs\java_develop\devInstall\apache-maven-3.2.2\conf\settings.xml: expected name start and not < (position: TEXT seen ...<maven.compiler.source>1.8</<... @260:33)  @ C:\Users\moveb\Downloads\cs\java_develop\devInstall\apache-maven-3.2.2\conf\settings.xml, line 260, column 33
+[FATAL] Non-parseable settings C:\Users\moveb\Downloads\cs\java_develop\devInstall\apache-maven-3.2.2\conf\settings.xml: expected name start and not < (position: TEXT seen ...<maven.compiler.source>1.8</<... @260:33)  @ C:\Users\moveb\Downloads\cs\java_develop\devInstall\apache-maven-3.2.2\conf\settings.xml, line 260, column 33
+
+	at org.apache.maven.settings.building.DefaultSettingsBuilder.build(DefaultSettingsBuilder.java:116) ~[maven-settings-builder-3.0.4.jar:3.0.4]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.getSettings(MavenImpl.java:456) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.getSettings(MavenImpl.java:428) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.repository.RepositoryRegistry.updateRegistry(RepositoryRegistry.java:223) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.repository.RepositoryRegistryUpdateJob.run(RepositoryRegistryUpdateJob.java:47) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53) [org.eclipse.core.jobs_3.5.300.v20130429-1813.jar:na]
+2018-10-25 15:30:43,669 [Worker-5] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-10-25 15:30:52,379 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-25 15:30:54,636 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:30:54,650 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:30:54,660 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:30:54,661 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\architectweb\src\test\resources
+2018-10-25 15:30:56,434 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-25 15:31:00,121 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:00,125 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:31:00,130 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:00,131 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\cartmgr\src\test\resources
+2018-10-25 15:31:01,810 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-25 15:31:03,279 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-25 15:31:03,553 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:03,554 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\common\src\main\resources
+2018-10-25 15:31:03,561 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:03,563 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\common\src\test\resources
+2018-10-25 15:31:05,105 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-25 15:31:05,386 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:05,395 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 6 resources
+2018-10-25 15:31:05,442 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:05,444 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\customermgr\src\test\resources
+2018-10-25 15:31:06,593 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-25 15:31:06,758 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:06,763 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:31:06,769 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:06,770 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\goodsmgrweb\src\test\resources
+2018-10-25 15:31:07,917 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-25 15:31:08,066 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:08,070 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:31:08,075 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:08,077 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\ordermgr\src\test\resources
+2018-10-25 15:31:10,058 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-25 15:31:10,067 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:31:10,072 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-25 15:31:10,081 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:31:11,045 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-25 15:31:11,051 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:31:11,060 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-25 15:31:11,067 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:31:12,193 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-25 15:31:12,203 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 5 resources
+2018-10-25 15:31:12,229 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2018-10-25 15:31:12,236 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:31:13,358 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for javax.servlet.jsp.jstl:jstl:jar:1.2 is missing, no dependency information available
+2018-10-25 15:31:13,502 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:13,506 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2018-10-25 15:31:13,511 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-10-25 15:31:13,513 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\code_dxf\xuefgit\Files_01_xuef\all_xuef\eclipseWorkSpace_xuef201803\architect\storemgr\src\test\resources

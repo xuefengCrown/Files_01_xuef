@@ -1,0 +1,11 @@
+
+lect 189
+// dll
+
+// dll 注射工具
+
+
+_declspec(dllexport) void go(){
+	int *p = (int *)0x1efa24;
+	*p = 9999;
+}

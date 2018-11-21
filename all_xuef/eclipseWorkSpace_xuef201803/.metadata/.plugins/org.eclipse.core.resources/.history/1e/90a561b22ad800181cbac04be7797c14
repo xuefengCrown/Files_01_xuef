@@ -1,0 +1,20 @@
+package com.xuef201803.proxy;
+
+public class BuyHouseProxy implements BuyHouse {
+	BuyHouse buyHouse;
+	public BuyHouseProxy(final BuyHouse buyHouse) {
+		this.buyHouse = buyHouse;
+	}
+	@Override
+	public void buyHouse() {
+		buyHouse.buyHouse();
+	}
+
+	void before(){
+		System.out.println("before...");
+	}
+	
+	void after(){
+		System.out.println("after...");
+	}
+}

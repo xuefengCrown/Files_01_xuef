@@ -1,0 +1,41 @@
+
+
+Today
+•  What memory abstractions does C provide?
+•  What exactly is the distinction between stack and heap?
+
+
+•  How do I use pointers to access memory locations?
+
+•  How do I allocate and free memory on the heap?
+	While programming
+	•  Use malloc to allocate memory on the heap if you will need it after the current function returns.
+	•  Use free to free pointers before you reassign them and lose the pointer.
+
+•  How should I use GDB and Valgrind?
+
+
+•  What is the difference between a compile-time (static) error and a (dynamic) run-time error?
+•  Why are we not using an IDE?
+•  What are some good ways to edit my C files?
+•  How do I use Valgrind if I run Windows?
+•  Other questions?
+
+
+
+struct node{
+	int val ;
+	struct node* next ;
+};
+typedef struct node node_t;
+
+// same as
+typedef struct node node_t{
+	int val;
+	struct node* next;
+} node_t;
+
+
+
+
+•  You will need to have malloc allocate functions that are used beyond the current function.

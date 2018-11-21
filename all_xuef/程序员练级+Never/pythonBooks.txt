@@ -1,0 +1,3 @@
+python cookbook;https://python3-cookbook.readthedocs.io/zh_CN/latest
+程序员练级攻略;https://blog.csdn.net/bible1/article/details/78717094
+Python源码剖析;https://book.douban.com/subject/3117898/

@@ -1,0 +1,35 @@
+
+宏替换
+包含
+条件编译
+
+#include<stdio.h>
+
+#define cn "你好世界"
+#define en "hello world"
+
+# define B 2
+
+void main(){
+#if B == 1
+	printf(cn);
+#else
+	printf(en);
+#endif
+}
+
+
+
+// 减少函数调用的宏展开
+
+#include<stdio.h>
+#include<stdlib.h>
+
+#define THREE_TIMES(x) 3*x
+
+void main(){
+	printf("%d", THREE_TIMES(3));
+
+	system("pause");
+}
+

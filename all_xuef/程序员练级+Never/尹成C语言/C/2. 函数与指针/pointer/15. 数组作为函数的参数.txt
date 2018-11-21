@@ -1,0 +1,30 @@
+
+/*
+gcc arr_as_param.c -std=gnu99
+*/
+
+#include<stdio.h>
+
+// 二维数组，它的每个元素都是有三个元素的一维数组
+void showArr(int n, int(*p)[3]);
+int main(){
+
+  int a[2][3] = {{1,2,3}, {4,5,6}};
+
+  showArr(2, a);
+
+  return 0;
+
+}
+
+void showArr(int n, int(*arr)[3]){
+
+  for(int i=0; i<n; i++){
+    for(int j=0; j<3; j++){
+      printf("%2d ", arr[i][j]);
+    }
+    printf("\n");
+  }
+
+}
+

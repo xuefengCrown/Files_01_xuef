@@ -1,0 +1,6 @@
+
+
+import win32com.client
+
+speaker = win32com.client.Dispatch("SAPI.SPVOICE") # 系统接口
+speaker.Speak("hello, world")

@@ -1,0 +1,21 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct p{
+  int id;
+  char name[20];
+  struct card{
+    int cid;
+    char bank[20];
+  } crd; // 变量 crd
+};
+
+int main(){
+  struct p p1;
+  p1.id = 1;
+  sprintf(p1.name, "xuef");  // !!! 注意这里要使用字符串拷贝
+  p1.crd.cid = 1234;
+  sprintf(p1.crd.bank, "construct bk");
+  printf("%s\n", p1.crd.bank);
+}

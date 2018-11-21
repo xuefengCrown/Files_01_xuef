@@ -1,0 +1,12 @@
+
+
+#include <Windows.h>
+
+void main(){
+
+	int i=0;
+A:	if(i < 1600){
+		i++;
+		goto A;
+	} 
+}

@@ -1,0 +1,25 @@
+package com.xuef201803.proxy;
+/**
+ * 代理类
+ * @author moveb
+ */
+public class BuyHouseProxy implements BuyHouse {
+	BuyHouse buyHouse; // 被代理对象，即委托者
+	public BuyHouseProxy(final BuyHouse buyHouse) {
+		this.buyHouse = buyHouse;
+	}
+	@Override
+	public void buyHouse() {
+		before();
+		buyHouse.buyHouse();
+		after();
+	}
+
+	void before(){
+		System.out.println("before...");
+	}
+	
+	void after(){
+		System.out.println("after...");
+	}
+}

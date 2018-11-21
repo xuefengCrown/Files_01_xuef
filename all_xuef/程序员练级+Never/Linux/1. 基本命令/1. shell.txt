@@ -1,0 +1,12 @@
+
+
+cat /etc/shells
+
+echo $SHELL
+
+## 快捷键
+C + a // 光标到行首
+C + e // 光标到行尾
+C + d // 删除当前字符
+
+

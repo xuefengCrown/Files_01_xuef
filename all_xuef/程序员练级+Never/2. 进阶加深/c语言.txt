@@ -1,0 +1,42 @@
+
+《C语言的科学和艺术》<the art and science of c>
+
+函数的参数和返回值，函数之间进行数据交换的一种方法。
+
+C philosophy: "the abstract memory machine."
+
+编程的关键是从陈述问题到解决问题的转变，逻辑化思考问题，训练自己用计算机能理解的方式表达自己的逻辑。
+最重要的是，不要被困难压倒，要坚持到底。
+
+Processors read from memory, do things, and write to memory.
+代码和数据都存储在 memory 中。
+
+## C memory: the heap && the stack
+The heap is a chunk of memory for the C program to use.
+•  Can think of it as a giant array.
+•  Access heap using special pointer syntax.
+•  The whole program has access to the heap.
+
+### the stack
+C functions get allocated on the stack.
+•  Functions are “pushed on” to the stack when called.
+•  Functions are “popped off” the stack when they return.
+•  Functions can access any memory below the current top of the stack.
+函数是什么？
+1. 一段代码？
+2. 执行上下文（environment or frame）+ parameters && body
+
+
+Including headers
+Header definitions allow us to use things defined elsewhere.
+•  Header files (.h files) typically contain declarations(variables, types, functions). 
+Declarations tell the compiler “these functions are defined somewhere.”
+•  Function definitions typically go in .c files.
+•  Angle brackets indicate library header files; quotes indicate local header files.
+
+
+
+
+
+
+

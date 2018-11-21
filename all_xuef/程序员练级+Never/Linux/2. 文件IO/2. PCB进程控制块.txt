@@ -1,0 +1,19 @@
+ps aux
+
+PCB概念
+
+1.2.1 task_struct 结构体
+/usr/src/linux-headers-xxx/include/linux/sched.h
+
+1.2.2 files_struct 结构体
+
+
+PCB结构体中有个
+/* open file information */
+struct files_struct *files;
+
+
+open
+
+man 2 open 
+

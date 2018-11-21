@@ -1,0 +1,7 @@
+
+char *cp;
+// cp 接受键入字符串时，必须先开辟存储空间
+
+char str[100] = {0};
+cp = str;
+scanf("%s", cp);

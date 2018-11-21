@@ -1,0 +1,56 @@
+
+/**
+游戏中，获得金币基本上都是调用一个函数，如果能够直接频繁调用该函数，就是个外挂的。
+moveXYZ(x,y,z) 
+// 一般游戏中都有这个实现的移动函数，一般玩家都是通过点击鼠标来触发
+// 如果能够侦测到该函数地址，我们就能直接调用该方法进而实现瞬移大法
+**/
+
+
+// 函数名是个地址
+int add(int a, int b){
+	return a+b;
+}
+void main(){
+
+	// 间接调用函数
+	int (*m)(int a, int b) = add;
+	m(1,1);
+}
+
+
+/**
+函数作为参数
+**/
+
+#include<stdio.h>
+
+int identity(int);
+int square(int);
+int cube(int);
+int sum(int b, int(*m)(int));
+
+int identity(int x){
+  return x;
+}
+int square(int x){
+  return x*x;
+}
+
+int cube(int x){
+  return x*square(x);
+}
+
+int sum(int b, int(*m)(int)){
+  if(b == 1) return m(1);
+  return m(b) + sum(b-1,m);
+}
+int main(){
+
+  int b = 100;
+  printf("%d\n", sum(b, identity));
+  printf("%d\n", sum(b, square));
+}
+
+
+

@@ -1,0 +1,29 @@
+
+
+## Preprocessor
+Translation of # directives.
+•  Translates all macros (#DEFINE’s) into inline C code.
+宏替换
+•  Takes #include files and inserts them into the code.
+将 #include files 插入代码
+•  Get redefinition error if structs etc. are defined more than once!
+•  Use #ifndef directive to define things only if they have not been defined.
+	#ifndef  HEADER NAME
+	#define  HEADER NAME
+	/* Header code here. */
+	#endif
+
+
+## Parsing and translation
+Translates to assembly, performing optimizations.
+
+## Assembler
+Translates assembly to machine instructions.
+
+## Linking
+•  Static. 
+For each function called by the program, the assembly
+to that function is included directly in the executable, allowing
+function calls to directly address code.
+•  Dynamic. Function calls call a Procedure Linkage Table,
+which contains the proper addresses of the mapped memory.

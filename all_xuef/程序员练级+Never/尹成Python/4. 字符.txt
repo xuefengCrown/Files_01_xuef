@@ -1,0 +1,9 @@
+
+python没有字符类型
+
+ch = 'A'
+print(type(ch))
+
+# 字符与ASCII码
+ord(ch)
+chr(97)

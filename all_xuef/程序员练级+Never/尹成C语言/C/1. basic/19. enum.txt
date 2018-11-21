@@ -1,0 +1,12 @@
+
+
+
+void main(){
+
+
+	enum day = {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday};
+	
+	enum day day1 = Monday;
+}
+
+

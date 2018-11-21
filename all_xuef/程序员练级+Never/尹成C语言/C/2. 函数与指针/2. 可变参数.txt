@@ -1,0 +1,17 @@
+
+
+// printf 参数可变
+
+
+#include<stdarg.h>
+
+double add(int num, ...){
+
+	double last = 0.0;
+	va_list argp; // 创建一个 char类型的指针
+	va_start(argp, num); // 读取num个参数，并把地址放在argp
+	for(int i=0; i<numl i++){
+		printf("\n%f", va_ard(argp, double)); // 挨个读取参数
+	}
+	va_end(argp);
+}
