@@ -1,0 +1,12 @@
+可迭代对象：
+	list, tuple, dict, set, str
+	generator
+	文件
+
+>>> import collections
+>>> import collections as cs
+>>> isinstance([], cs.Iterable)
+True
+
+
+iter()-->Iterator ???

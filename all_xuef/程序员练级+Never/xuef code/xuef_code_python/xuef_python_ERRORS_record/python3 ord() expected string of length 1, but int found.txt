@@ -1,0 +1,9 @@
+
+
+https://stackoverflow.com/questions/19897209/troubleshooting-typeerror-ord-expected-string-of-length-1-but-int-found
+
+You are running the script using Python 3 where indexing a bytes object returns an integer:
+>>> b"abc"[1]
+98
+Remove the ord() calls. They are redundant in this case.
+

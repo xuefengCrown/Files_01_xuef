@@ -1,0 +1,22 @@
+
+
+80: 超文本传输协议（HTTP）应用使用端口号
+21: ftp
+25: smtp
+
+
+21: （File Transfer Protocol，文件传输协议）服务。
+操作建议：因为有的FTP服务器可以通过匿名登录，所以常常会被黑客利用。
+另外，21端口还会被一些木马利用，比如Blade Runner、FTP Trojan、Doly Trojan、WebEx等等。
+
+23端口主要用于Telnet（远程登录）服务。
+
+操作建议：利用Telnet服务，黑客可以搜索远程登录Unix的服务，扫描操作系统的类型。
+而且在Windows 2000中Telnet服务存在多个严重的漏洞，比如提升权限、拒绝服务等，可以让远程服务器崩溃。
+Telnet服务的23端口也是TTS（Tiny Telnet Server）木马的缺省端口。所以，建议关闭23端口。
+
+
+25
+1. 利用25端口，黑客可以寻找SMTP服务器，用来转发垃圾邮件。
+2. 25端口被很多木马程序所开放，比如Ajan、Antigen、Email Password Sender、ProMail、trojan、Tapiras、Terminator、WinPC、WinSpy等等。
+拿WinSpy来说，通过开放25端口，可以监视计算机正在运行的所有窗口和模块。
