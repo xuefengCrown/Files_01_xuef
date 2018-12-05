@@ -1,0 +1,11 @@
+
+
+# reduce
+在 Python 2 中，reduce 是内置函数，但是在 Python 3 中放到functools 模块里了。
+
+求和时，使用sum会更加清晰。
+
+sum 和 reduce 的通用思想是把某个操作连续应用到序列的元素上，累
+计之前的结果，把一系列值归约成一个值。
+
+

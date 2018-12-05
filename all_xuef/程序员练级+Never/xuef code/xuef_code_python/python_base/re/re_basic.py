@@ -34,7 +34,7 @@ $
 
 | or
 
-() 提升优先级，分组
+() 提升优先级 or 分组
 """
 rex = re.compile(r"[a-z]ello")
 ret = rex.match("sello")

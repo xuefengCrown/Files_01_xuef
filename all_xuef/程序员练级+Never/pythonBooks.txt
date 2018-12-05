@@ -1,3 +1,27 @@
+
 python cookbook;https://python3-cookbook.readthedocs.io/zh_CN/latest
+500 Lines or Less_CN;https://github.com/HT524/500LineorLess_CN
+500 lines or less EN;http://aosabook.org/en/index.html
 程序员练级攻略;https://blog.csdn.net/bible1/article/details/78717094
+Python练手项目推荐;https://www.zhihu.com/question/29372574
 Python源码剖析;https://book.douban.com/subject/3117898/
+7 种可调用类型和其他所有内置类型;https://docs.python.org/3/reference/datamodel.html#the-standard-type-hierarchy
+注解的使用，Stack Overflow 网站中有两个问答值得一读;http://stackoverflow.com/questions/3038033/what-are-good-uses-for-python3s-function-annotations
+What good are Python function annotations?;http://stackoverflow.com/questions/13784713/what-good-are-python-function-annotations
+inspect 模块;https://www.python.org/dev/peps/pep-0362/
+Python Functional Programming HOWTO;http://docs.python.org/3/howto/functional.html
+fn.py;https://github.com/kachayev/fn.py
+Origins of Python's Functional Features;http://python-history.blogspot.com/2009/04/origins-of-pythons-functional-features.html
+
+Alex-Python 设计模式的演讲;http://pyvideo.org/europython-2011/python-design-patterns.html
+Alex-Python 设计模式的演讲pdf;http://www.aleax.it/gdd_pydp.pdf
+
+Peter Norvig: Design Patterns in Dynamic Languages;http://norvig.com/design-patterns/
+
+教你阅读Python开源项目代码;https://zhuanlan.zhihu.com/p/22275595?refer=python-cn
+The Hitchhiker’s Guide to Python;https://docs.python-guide.org/
+中文版The Hitchhiker’s Guide to Python;https://pythonguidecn.readthedocs.io/zh/latest/
+
+Graham Dumpleton 深入剖析了如何实现行为良好的装饰器;https://github.com/GrahamDumpleton/wrapt/blob/develop/blog/README.md
+How You Implemented Your Python Decorator is Wrong;https://github.com/GrahamDumpleton/wrapt/blob/develop/blog/01-how-you-implemented-your-python-decorator-is-wrong.md
+Python Decorator Library 维基页面; https://wiki.python.org/moin/PythonDecoratorLibrary

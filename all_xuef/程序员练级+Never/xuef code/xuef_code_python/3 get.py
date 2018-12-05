@@ -1,6 +1,9 @@
 # python2 使用 urllib2.urlopen()
 import urllib.request
 import urllib.parse
+import requests,re
+
+from bs4 import BeautifulSoup
 
 
 def download(url):
@@ -11,19 +14,21 @@ def download(url):
     response = urllib.request.urlopen(req)
     print(response.getcode())
     print(response.geturl()) # 有时会转发或重定向
-    return response.read() # 响应的报头
+    return response.info() # 响应的报头
     #response.read(100)
 
-url = """
-https://s3.music.126.net/web/s/core_e75d14aff11ef77224105423dfe65396.js?e75d14aff11ef77224105423dfe65396
-
-"""
+url = "https://music.163.com/#/song?id=28557036"
 def main():
     try:
-        data=download(url)
-        with open("js.txt", "wt") as f:
-            print(data, file=f)
-        
+        headers = {
+            'User-agent' : 'Mozilla/4.0(compatible;MSIE 5.5; Windows NT)'
+        }
+        #print(download(url))
+        req_obj = requests.get(url, headers=headers)
+        soup = BeautifulSoup(req_obj.text,'html5lib')
+##        print(soup.find_all('img'))
+        #print(help(BeautifulSoup))
+        print(req_obj.text)
     except URLError as e:
         print("error")
 
