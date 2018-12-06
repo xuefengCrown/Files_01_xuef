@@ -1,0 +1,24 @@
+
+https://pythonguidecn.readthedocs.io/zh/latest/writing/reading.html
+
+
+
+
+成为优秀Python编写者的秘诀是去阅读，理解和领会好的代码。
+
+良好的代码通常遵循 代码风格 中的指南,尽可能向读者表述地简洁清楚。
+
+以下是推荐阅读的Python项目。每个项目都是Python代码的典范。
+
+https://github.com/bottlepy/bottle
+一个文件就实现一个完整的web server, 看完这个再去看什么flask， tornado， django，绝对轻松
+
+Howdoi Howdoi是代码搜寻工具，使用Python编写。
+Flask Flask是基于Werkzeug和Jinja2，使用Python的微框架。它能够快速启动，并且开发意图良好。
+Diamond Diamond是python的守护进程，它收集指标，并且将他们发布至Graphite或其它后端。 
+	它能够收集CPU,内存，网络，I/O，负载和硬盘指标。除此，它拥有实现自定义收集器的API，该API几乎能 从任何资源中获取指标。
+Werkzeug Werkzeug起初只是一个WSGI应用多种工具的集成，现在它已经变成非常重要的WSGI实用模型。 
+	它包括强大的调试器，功能齐全的请求和响应对象，处理entity tags的HTTP工具，缓存控制标头，HTTP数据，cookie处理，文件上传，
+	强大的URL路由系统和一些社区提供的插件模块。
+Requests Requests是Apache2许可的HTTP库，使用Python编写。
+Tablib Tablib是无格式的表格数据集库，使用Python编写。

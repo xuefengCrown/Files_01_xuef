@@ -1,0 +1,29 @@
+
+
+Bottle是一个简单高效的遵循WSGI的微型python Web框架。说微型，是因为它只有一个文件，除Python标准库外，它不依赖于任何第三方模块。
+
+特性:
+1. Routing：把请求映射到函数，建立简洁动态的URLs
+2. Templates：采用内置模板引擎，同时还支持 mako, jinja2, cheetah 等第三方模板
+3. Utilities：便捷地读取表单数据、上传文件、 cookies、HTTP头信息和其它 HTTP相关的元数据
+4. Server：内置HTTP开发服务器，并且支持 paste, fapws3, bjoern, Google App Engine, Cherrypy 或者其它任何WSGI HTTP 服务器
+
+主页和文档见http://bottlepy.org
+
+from bottle import route, run, template
+
+@route('/hello/<name>')
+def index(name):
+    return template('<b>Hello {{name}}</b>!', name=name)
+
+run(host='localhost', port=8080)
+
+
+
+bottle 是一个轻量级的python web框架， 可以适配各种web服务器，包括python自带的wsgiref（默认），
+gevent， cherrypy，gunicorn等等。
+bottle是单文件形式发布，源码在这里https://github.com/bottlepy/bottle下载，代码量不多，可以用来学习web框架。
+这里https://blog.csdn.net/huithe/article/details/8087645也有官方文档的中文翻译。
+
+
+
