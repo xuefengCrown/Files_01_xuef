@@ -1,0 +1,7 @@
+
+
+对每次请求， Bottle 都会把一些参数保存在当前的线程中，通过继承 threading.local 实现线程安全。
+
+class Request(threading.local):
+    pass # 省略其他方法
+	

@@ -1,0 +1,11 @@
+
+Part 4
+From Data Processing to Concurrent Programming
+
+
+The Story So Far
+• Coroutines are similar to generators
+• You can create collections of small processing components and connect them together
+• You can process data by setting up pipelines, dataflow graphs, etc.
+• You can use coroutines with code that has tricky execution (e.g., event driven systems)
+• However, there is so much more going on...

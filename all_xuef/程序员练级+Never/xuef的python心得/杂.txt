@@ -1,0 +1,102 @@
+<Effective Python>
+用Python编写程序，是相当容易的，所以这门语言非常流行。
+但若想掌握Python所特有的优势、魅力和表达能力，则相当困难，而且语言中还有很多隐藏的陷阱，容易令开发者犯错。
+
+Remember: All Python objects are "first-class"
+•Which means that all objects are fair-game(可作弄的对象) for use in a generator pipeline
+
+
+Iterable Mutable Callable Hashable
+#1 python中的一致性
+我们可以迭代所有实现了Iterable协议的类型(包括自定义类型)
+内置类型如: list, dict, str, file...
+
+大量操作是针对 Iterable 的，如
+Consuming Iterables
+•Many operations consume an "iterable" object
+•Reductions:
+sum(s), min(s), max(s)
+•Constructors
+list(s), tuple(s), set(s), dict(s)
+•Various operators
+item in s
+•Many others in the library
+
+
+python是通过鸭子类型和协议来支持这些的。所以真正的python coder，深知python之道，能够写出通用、简洁的代码！
+
+
+#2 维持上下文(类比于人的记忆功能)多次调用之间保存信息
+类与对象
+闭包
+生成器(其栈帧存在于堆内存)
+
+迭代器，保存生成数据的方式和最少的必要上下文信息，而不保存数据。这为无穷序列提供支持
+
+#3 Callable object(在实现 支持wsgi的web_frame时需要了解这个)
+类 :A()
+实现了 __call__方法的类的实例: obj()
+函数: func()
+
+#4 为什么需要对象机制
+The Hitchhiker’s Guide to Python 说的最好
+
+#5 更彻底的皆对象。一致性！！！这是python灵活的一个重要原因！
+函数，类(可理解为模板对象)，代码，模块。都是对象
+类既是对象，我们就能够动态修改它。
+
+函数和类在python中是一等公民，可以：
+1. 可以赋值给变量
+2. 可以添加到集合对象中
+3. 可以作为参数传递给函数
+4. 可以作为函数的返回值
+
+
+#6 更高视角来审视python
+0. 数据类型
+1. 数据结构
+2. 把函数当作对象
+一等函数
+闭包
+装饰器
+3. 面向对象
+4. 控制流程
+生成器
+上下文管理器
+多线程
+协程
+5. 元编程
+
+#7 改变流程
+基本的条件分支
+异常
+	迭代器和生成器利用 StopIteration 来终止。
+控制协程
+	使用next,send, throw,close来与协程通信和数据交流
+
+	
+#8 system programming
+files, file systems,
+parsing, networking, threads, etc.
+	
+	
+#9 yield
+yield produces a value, but suspends the function
+
+#10 generator
+A generator function is a much more convenient way of writing an iterator	
+	
+
+Generator Expressions
+•General syntax
+(expression for i in s if condition)
+•What it means
+for i in s:
+	if condition:
+		yield expression
+		
+		
+		
+使用协程能以多种新方式组织代码，不过与递归和多态（动态调度）一样，要花点时间才能习惯。		
+		
+		

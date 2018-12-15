@@ -1,4 +1,6 @@
 
+Design of Computer Programs;https://www.udacity.com/course/design-of-computer-programs--cs212
+Intro to Artificial Intelligence;https://www.udacity.com/course/intro-to-artificial-intelligence--cs271
 python cookbook;https://python3-cookbook.readthedocs.io/zh_CN/latest
 500 Lines or Less_CN;https://github.com/HT524/500LineorLess_CN
 500 lines or less EN;http://aosabook.org/en/index.html
@@ -25,3 +27,15 @@ The Hitchhiker’s Guide to Python;https://docs.python-guide.org/
 Graham Dumpleton 深入剖析了如何实现行为良好的装饰器;https://github.com/GrahamDumpleton/wrapt/blob/develop/blog/README.md
 How You Implemented Your Python Decorator is Wrong;https://github.com/GrahamDumpleton/wrapt/blob/develop/blog/01-how-you-implemented-your-python-decorator-is-wrong.md
 Python Decorator Library 维基页面; https://wiki.python.org/moin/PythonDecoratorLibrary
+Generator Tricks for Systems Programmers课程;http://www.dabeaz.com/generators/
+A Curious Course on Coroutines and Concurrency课程;http://www.dabeaz.com/coroutines/
+Generators: The Final Frontier; http://www.dabeaz.com/finalgenerator/
+James Powell 使用协程重写了经典的算法,Greedy algorithm with coroutines;http://seriously.dontusethiscode.com/2013/05/01/greedy-coroutine.html
+ActiveState Code 诀窍数据库;https://code.activestate.com/recipes/
+协程的流行诀窍;https://code.activestate.com/recipes/tags/coroutine/
+yield from 结构的工作原理;http://flupy.org/resources/yield-from.pdf
+Greg Ewing一些 yield from 示例:BinaryTree 类、一个简单的 XML 解析器和一个任务调度程序;http://www.cosc.canterbury.ac.nz/greg.ewing/python/yield-from/yield_from.html
+The difference between yield and yield-from;https://groups.google.com/forum/#!msg/python-tulip/bmphRrryuFk/aB45sEJUomYJ
+
+
+

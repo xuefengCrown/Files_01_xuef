@@ -73,7 +73,7 @@ def chg_pic_size(url, width, height):
 
 #http://music.163.com/song/media/outer/url?id=28557036.mp3
 def main():
-    srcs = get_srcs()
+    srcs = get_srcs("https://music.163.com/#/playlist?id=459944247")
     n = 1
     for src in srcs:
         new_src = chg_pic_size(src, 1000, 1000)

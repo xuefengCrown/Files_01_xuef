@@ -1,0 +1,10 @@
+*.pyc
+._*
+*.*~
+dist/
+docs
+release.sh
+*.db
+MANIFEST
+benchmark.py
+test*

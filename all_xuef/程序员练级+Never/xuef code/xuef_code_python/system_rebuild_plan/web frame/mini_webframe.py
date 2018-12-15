@@ -48,10 +48,11 @@ class App(object):
         def decorator(handler):
             self.path_mapping[(method,url)] = handler
 ##            pdb.set_trace()
-            @wraps(handler)
-            def wrapper(*args, **kwargs):
-                return handler(*args, **kwargs)
-            return wrapper
+##            @wraps(handler)
+##            def wrapper(*args, **kwargs):
+##                return handler(*args, **kwargs)
+##            return wrapper
+            return handler
         return decorator
 
 # handler 示例

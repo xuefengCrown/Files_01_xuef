@@ -1,0 +1,113 @@
+
+Data Processing
+	Find out how many bytes of data were transferred by summing up the last column
+	of data in this Apache web server log
+	81.107.39.38 - ... "GET /ply/ HTTP/1.1" 200 7587
+	81.107.39.38 - ... "GET /favicon.ico HTTP/1.1" 404 133
+	81.107.39.38 - ... "GET /ply/bookplug.gif HTTP/1.1" 200 23903
+	81.107.39.38 - ... "GET /ply/ply.html HTTP/1.1" 200 97238
+	81.107.39.38 - ... "GET /ply/example.html HTTP/1.1" 200 2359
+	66.249.72.134 - ... "GET /index.html HTTP/1.1" 200 4447
+	
+	and the log file might be huge (Gbytes)
+	
+	
+	#Just use a simple for-loop
+	with open("access-log") as wwwlog:
+		total = 0
+		for line in wwwlog:
+			bytes_sent = line.rsplit(None,1)[1]
+			if bytes_sent != '-':
+				total += int(bytes_sent)
+		print("Total", total)
+
+	#A Generator Solution
+	with open("access-log") as wwwlog:
+		bytecolumn = (line.rsplit(None,1)[1] for line in wwwlog)
+		bytes_sent = (int(x) for x in bytecolumn if x != '-')
+		print("Total", sum(bytes_sent))
+	# 注意数据是如何流动的!!!
+	That's different!
+		•Less code
+		•A completely different programming style
+
+		Generators as a Pipeline
+		•To understand the solution, think of it as a data processing pipeline
+		access-log---> wwwlog---> bytecolumn---> bytes_sent---> sum()---> total
+		•Each step is defined by iteration/generation
+
+
+		More Thoughts
+		•
+		The generator solution was based on the
+		concept of pipelining data between
+		different components
+		•
+		What if you had more advanced kinds of
+		components to work with?
+		•
+		Perhaps you could perform different kinds
+		of processing by just plugging various
+		pipeline components together
+
+
+Parsing and Processing Data
+
+	Web server logs consist of different columns of
+	data. Parse each line into a useful data structure
+	that allows us to easily inspect the different fields.
+
+	81.107.39.38 - - [24/Feb/2008:00:08:59 -0600] "GET ..." 200 7587
+	host referrer user [datetime] "request" status bytes
+
+	Let's route the lines through a regex parser
+		logpats = r'(\S+) (\S+) (\S+) \[(.*?)\] '\
+					r'"(\S+) (\S+) (\S+)" (\S+) (\S+)'
+		logpat = re.compile(logpats)
+		groups = (logpat.match(line) for line in loglines)
+		tuples = (g.groups() for g in groups if g)
+
+		
+Processing Infinite Data
+
+
+Part 6 Feeding the Pipeline
+
+
+Part 7 Extending the Pipeline
+
+
+Part 8 Advanced Data Routing
+
+The Story So Far
+•You can use generators to set up pipelines
+•You can extend the pipeline over the network
+•You can extend it between threads
+•However, it's still just a pipeline (there is one input and one output).
+•Can you do more than that?
+
+Multiple Sources
+•Can a processing pipeline be fed by multiple sources---for example, multiple generators?
+
+
+
+Broadcasting
+•Can you broadcast to multiple consumers?
+
+Broadcasting
+•Consume a generator and send to consumers
+def broadcast(source, consumers):
+	for item in source:
+		for c in consumers:
+			c.send(item)
+			
+			
+			
+•It works, but now the control-flow is unusual
+•The broadcast loop is what runs the program
+•Consumers run by having items sent to them			
+			
+
+
+
+			

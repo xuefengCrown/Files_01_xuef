@@ -1,0 +1,85 @@
+
+《Composing Programs》;http://composingprograms.com/pages/48-parallel-computing.html
+《Python cookbook
+《Fluent python》
+《Python核心编程》
+《Python编程实战》
+《Parallel Programming with Python》 关于并行计算
+《High Performance Python》 关于 数据，算法，最佳实践
+
+《用Python写网络爬虫》
+《精通Scrapy网络爬虫》
+
+
+《Python算法教程》
+
+
+《High Performance Python》
+《Functional Python Programming》
+《Learning Python Design Pattern》
+
+
+进阶
+《Python 3面向对象编程》亚马逊 / 豆瓣
+《Python高手之路》亚马逊 / 豆瓣
+《Python编程实战:运用设计模式、并发和程序库创建高质量程序》亚马逊 / 豆瓣
+《Python高级编程》亚马逊 / 豆瓣
+《Python应用核心编程》豆瓣
+《Python进阶》在线
+《Effective Python:编写高质量Python代码的59个有效方法》亚马逊 / 豆瓣
+《流畅的Python》亚马逊 / 豆瓣
+《Python设计模式》亚马逊 / 豆瓣
+《精通 Python 设计模式》亚马逊 / 豆瓣
+高阶
+
+《Python性能分析与优化》亚马逊 / 豆瓣
+《高性能Python》亚马逊 / 豆瓣
+《Cython - A Guide for Python Programmers》豆瓣
+《Python源码剖析》豆瓣
+参考
+
+《Python标准库》亚马逊 / 豆瓣
+《Python Cookbook》亚马逊 / 豆瓣
+《Python参考手册》亚马逊 / 豆瓣
+《Python in a Nutshell》豆瓣
+数据结构与算法
+《Data Structures and Algorithms in Python》豆瓣
+《Problem Solving with Algorithms and Data Structures Using Python》豆瓣
+《Python算法教程》
+
+Intermediate
+	Python 3 Object-Oriented Programming by Dusty Phillips English 2nd Edition
+	The Hacker's Guide to Python by Julien Danjou English Edition
+	Python in Practice: Create Better Programs Using Concurrency, Libraries, and Patterns by Mark Summerfield English Edition
+	Expert Python Programming: Best practices for designing, coding, and distributing your Python software by Tarek Ziadé English Edition
+	Core Python Applications Programming by Wesley Chun English 3rd Edition
+	Intermediate Python Online
+	Effective Python: 59 Specific Ways to Write Better Python English Edition
+	Fluent Python by Luciano Ramalho English Edition
+	Learning Python Design Patterns by Chetan Giridhar English 2nd Edition
+	Mastering Python Design Patterns by Sakis Kasampalis English Edition
+Advanced
+	Mastering Python High Performance by Fernando Doglio English Edition
+	High Performance Python: Practical Performant Programming for Humans by Micha Gorelick English Edition
+	Cython - A Guide for Python Programmers by Kurt W. Smith English Edition
+References
+	The Python Standard Library by Example by Doug Hellmann English Edition
+	Python Cookbook by David Beazley & Brian K. Jones English 3rd Edition
+	Python Essential Reference by David M. Beazley English 4th Edition
+	Python in a Nutshell by Alex Martelli English 2nd Edition
+Data Structures and Algorithms
+	Data Structures and Algorithms in Python by Michael T. Goodrich & Roberto Tamassia & Michael H. Goldwasser English Edition
+	Problem Solving with Algorithms and Data Structures Using Python by Bradley N. Miller & David L. Ranum English 2nd Edition
+	Python Algorithms: Mastering Basic Algorithms in the Python Language by Magnus Lie Hetland 
+
+
+
+
+
+
+
+
+
+
+
+
