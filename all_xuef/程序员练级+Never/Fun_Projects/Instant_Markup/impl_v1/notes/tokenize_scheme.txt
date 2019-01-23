@@ -1,0 +1,50 @@
+{tokenize_scheme}
+
+## tokenize_scheme.py
+
+```
+"""
+生成令牌流
+"""
+#利用命名捕获组的正则表达式来定义所有可能的令牌，包括空格
+import re
+
+LPAREN = r'(?P<LPAREN>\()'
+RPAREN = r'(?P<RPAREN>\))'
+SYMBOL = r'(?P<SYMBOL>[a-zA-Z!$%&*+./:<=>?"@^_~-][0-9a-zA-Z!$%&*+./:<=>?"@^_~-]*)'
+INTEGER=r'(?P<INTEGER>-?[0-9]+)'
+BOOLEAN=r'(?P<BOOLEAN>\#t|\#f)'
+FLOAT=r"(?P<FLOAT>-?([0-9]*\.[0-9]+)|([0-9]+\.[0-9]*))"
+CHARACTER=r'(?P<CHARACTER>\#\\(space|newline|.))'
+STRING=r'(?P<STRING>"(\\"|\\n|[a-zA-Z*+/!?=<>. -])*")'
+QUOTESUGAR = r"(?P<QUOTESUGAR>')"
+QUASIQUOTESUGAR = r"(?P<QUASIQUOTESUGAR>`)"
+UNQUOTESUGAR = r"(?P<UNQUOTESUGAR>,)"
+UNQUOTESPLICINGSUGAR = r"(?P<UNQUOTESPLICINGSUGAR>,@)"
+#COMMENT = r";[^\n]*"
+#WS = r'(?P<WS> \t\n)'
+WS = r'(?P<WS>\s+)'
+
+pats = (LPAREN,RPAREN,SYMBOL,INTEGER,
+          BOOLEAN,FLOAT,CHARACTER,STRING,
+          QUOTESUGAR,QUASIQUOTESUGAR,UNQUOTESUGAR,
+          UNQUOTESPLICINGSUGAR,WS)
+
+master_pat = re.compile('|'.join(pats))
+
+from collections import namedtuple
+Token = namedtuple('Token', ['type', 'value'])
+
+def generate_tokens(text):
+    scanner = master_pat.scanner(text)
+    for m in iter(scanner.match, None):
+        tok = Token(m.lastgroup, m.group())
+        if tok.type != 'WS': # 过滤空格
+            yield  tok
+
+if __name__ == '__main__':
+    # Example use
+    code_s = '(lambda (x) (* x x))'
+    for tok in generate_tokens(master_pat, code_s):
+        print(tok)
+```

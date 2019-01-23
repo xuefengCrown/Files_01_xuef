@@ -1,0 +1,19 @@
+package com.interp.lox;
+
+import java.util.ArrayList;                                               
+import java.util.HashMap;                                                 
+import java.util.List;                                                    
+import java.util.Map;                                                      
+
+class LoxScanner {                                                           
+  private final String source;                                            
+  private final List<Token> tokens = new ArrayList<>();                   
+
+  LoxScanner(String source) {                                                
+    this.source = source;                                                 
+  }                                                                       
+}   
+
+public class LoxScanner {
+
+}

@@ -1,0 +1,173 @@
+
+def f(a,b=2):
+  return a+b
+
+{'body': [{'args': {'args': [{'annotation': None,
+                              'arg': 'a',
+                              'nodetype': 'arg'},
+                             {'annotation': None,
+                              'arg': 'b',
+                              'nodetype': 'arg'}],
+                    'defaults': [{'n': 2, 'nodetype': 'Num'}],
+                    'kw_defaults': [],
+                    'kwarg': None,
+                    'kwonlyargs': [],
+                    'nodetype': 'arguments',
+                    'vararg': None},
+           'body': [{'nodetype': 'Return',
+                     'value': {'left': {'ctx': {'nodetype': 'Load'},
+                                        'id': 'a',
+                                        'nodetype': 'Name'},
+                               'nodetype': 'BinOp',
+                               'op': {'nodetype': 'Add'},
+                               'right': {'ctx': {'nodetype': 'Load'},
+                                         'id': 'b',
+                                         'nodetype': 'Name'}}}],
+           'decorator_list': [],
+           'name': 'f',
+           'nodetype': 'FunctionDef',
+           'returns': None}],
+ 'nodetype': 'Module'}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+def f(a,b=2): # 有默认值参数须跟在位置参数后面
+  c = a + b
+  d = c * c
+  return d
+
+def m(c):
+  c2 = c + c
+  return c2
+
+{'body': [{'args': {'args': [{'annotation': None,
+                              'arg': 'a',
+                              'nodetype': 'arg'},
+                             {'annotation': None,
+                              'arg': 'b',
+                              'nodetype': 'arg'}],
+                    'defaults': [{'n': 2, 'nodetype': 'Num'}],
+                    'kw_defaults': [],
+                    'kwarg': None,
+                    'kwonlyargs': [],
+                    'nodetype': 'arguments',
+                    'vararg': None},
+           'body': [{'nodetype': 'Assign',
+                     'targets': [{'ctx': {'nodetype': 'Store'},
+                                  'id': 'c',
+                                  'nodetype': 'Name'}],
+                     'value': {'left': {'ctx': {'nodetype': 'Load'},
+                                        'id': 'a',
+                                        'nodetype': 'Name'},
+                               'nodetype': 'BinOp',
+                               'op': {'nodetype': 'Add'},
+                               'right': {'ctx': {'nodetype': 'Load'},
+                                         'id': 'b',
+                                         'nodetype': 'Name'}}},
+                    {'nodetype': 'Assign',
+                     'targets': [{'ctx': {'nodetype': 'Store'},
+                                  'id': 'd',
+                                  'nodetype': 'Name'}],
+                     'value': {'left': {'ctx': {'nodetype': 'Load'},
+                                        'id': 'c',
+                                        'nodetype': 'Name'},
+                               'nodetype': 'BinOp',
+                               'op': {'nodetype': 'Mult'},
+                               'right': {'ctx': {'nodetype': 'Load'},
+                                         'id': 'c',
+                                         'nodetype': 'Name'}}},
+                    {'nodetype': 'Return',
+                     'value': {'ctx': {'nodetype': 'Load'},
+                               'id': 'd',
+                               'nodetype': 'Name'}}],
+           'decorator_list': [],
+           'name': 'f',
+           'nodetype': 'FunctionDef',
+           'returns': None},
+		   
+          {'args': {'args': [{'annotation': None,
+                              'arg': 'c',
+                              'nodetype': 'arg'}],
+                    'defaults': [],
+                    'kw_defaults': [],
+                    'kwarg': None,
+                    'kwonlyargs': [],
+                    'nodetype': 'arguments',
+                    'vararg': None},
+           'body': [{'nodetype': 'Assign',
+                     'targets': [{'ctx': {'nodetype': 'Store'},
+                                  'id': 'c2',
+                                  'nodetype': 'Name'}],
+                     'value': {'left': {'ctx': {'nodetype': 'Load'},
+                                        'id': 'c',
+                                        'nodetype': 'Name'},
+                               'nodetype': 'BinOp',
+                               'op': {'nodetype': 'Add'},
+                               'right': {'ctx': {'nodetype': 'Load'},
+                                         'id': 'c',
+                                         'nodetype': 'Name'}}},
+                    {'nodetype': 'Return',
+                     'value': {'ctx': {'nodetype': 'Load'},
+                               'id': 'c2',
+                               'nodetype': 'Name'}}],
+           'decorator_list': [],
+           'name': 'm',
+           'nodetype': 'FunctionDef',
+           'returns': None}],
+ 'nodetype': 'Module'}
+ 
+## BoolOp
+a and b and c
+
+{'body': [{'nodetype': 'Expr',
+           'value': {'nodetype': 'BoolOp',
+                     'op': {'nodetype': 'And'},
+                     'values': [{'ctx': {'nodetype': 'Load'},
+                                 'id': 'a',
+                                 'nodetype': 'Name'},
+                                {'ctx': {'nodetype': 'Load'},
+                                 'id': 'b',
+                                 'nodetype': 'Name'},
+                                {'ctx': {'nodetype': 'Load'},
+                                 'id': 'c',
+                                 'nodetype': 'Name'}]}}],
+ 'nodetype': 'Module'}
+ 
+ 
+## BinOp
+
+1 + 2 + 3
+
+{'body': [{'nodetype': 'Expr',
+           'value': {'left': {'left': {'n': 1, 'nodetype': 'Num'},
+                              'nodetype': 'BinOp',
+                              'op': {'nodetype': 'Add'},
+                              'right': {'n': 2, 'nodetype': 'Num'}},
+                     'nodetype': 'BinOp',
+                     'op': {'nodetype': 'Add'},
+                     'right': {'n': 3, 'nodetype': 'Num'}}}],
+ 'nodetype': 'Module'}
+
+ 
+## Compare
+1 > 2
+
+{'body': [{'nodetype': 'Expr',
+           'value': {'comparators': [{'n': 2, 'nodetype': 'Num'}],
+                     'left': {'n': 1, 'nodetype': 'Num'},
+                     'nodetype': 'Compare',
+                     'ops': [{'nodetype': 'Gt'}]}}],
+ 'nodetype': 'Module'}
+
+ 

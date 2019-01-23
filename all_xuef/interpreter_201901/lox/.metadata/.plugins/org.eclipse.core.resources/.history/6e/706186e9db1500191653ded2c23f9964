@@ -1,0 +1,23 @@
+package com.interp.lox.visitor_pattern;
+
+public abstract class Pastry {
+	abstract void accept(PastryVisitor visitor);
+}
+
+class Beignet extends Pastry {
+
+	@Override
+	void accept(PastryVisitor visitor) {
+		// TODO Auto-generated method stub
+		
+	}
+}                             
+
+class Cruller extends Pastry {
+
+	@Override
+	void accept(PastryVisitor visitor) {
+		// TODO Auto-generated method stub
+		
+	}
+}

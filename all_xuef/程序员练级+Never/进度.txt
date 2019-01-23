@@ -1,0 +1,12 @@
+
+2019.1.18
+	《Python源码剖析》 p204
+	《cpython-internals》lec6 结束
+	
+2019.1.20
+	《Python源码剖析》 p290
+		函数部分没仔细看，对于异常处理和栈帧展开有了更深的理解
+	《cpython-internals》lec7 结束
+	
+2019.1.22
+	《cpython-internals》lec8 结束

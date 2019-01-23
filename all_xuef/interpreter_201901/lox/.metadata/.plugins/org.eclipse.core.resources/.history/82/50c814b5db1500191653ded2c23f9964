@@ -1,0 +1,16 @@
+package com.interp.lox.visitor_pattern;
+
+/**
+ * We want to be able to define new operations for them¡ª
+ * cooking them, eating them, decorating them, etc.¡ª
+ * without having to add a new method to each class every time.
+ * 
+ * Given some pastry, how do we route it to the correct method 
+ * on the visitor based on its type?
+ * @author moveb
+ *
+ */
+public interface PastryVisitor {
+	void visitBeignet(Beignet beignet); 
+    void visitCruller(Cruller cruller); 
+}

@@ -1,0 +1,19 @@
+#lang plai-typed
+
+(require "python-core-syntax.rkt"
+         "python-primitives.rkt")
+
+(define (interp-env expr env)
+  (type-case ))
+
+(define (bind-args args vals env)
+  (cond [(and (empty? args) (empty? vals)) env]
+        [(or (empty? args) (empty? vals))
+         (error 'interp "Arity mismatch")]
+        [(and (cons? args) (cons? vals))
+         (hash-set (bind-args (rest args) (rest vals) env)
+                   (first args) (first vals))]))
+
+(define (interp expr)
+  (interp-env expr (hash (list))))
+

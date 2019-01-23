@@ -1,0 +1,11 @@
+{assignment vs binding}
+
+# assignment vs binding
+
+We will be concerned primarily with a single effect: assignment to a location in memory. 
+How does assignment differ from binding? As we have seen, binding is local, 
+but variable assignment is potentially global. 
+It is about the sharing of values between otherwise unrelatedportions of the computation. 
+Two procedures can share information if they both know about the same location in memory. 
+A single procedure can share information with a future invocation of itself by leaving the 
+information in a known location.

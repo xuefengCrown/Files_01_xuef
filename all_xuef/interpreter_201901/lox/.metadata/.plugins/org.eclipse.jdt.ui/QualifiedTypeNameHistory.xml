@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.Expr.Binary"/>
+<fullyQualifiedTypeName name="com.interp.lox.TokenType"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.Parser"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.Expr"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.AstPrinter"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.Expr.Visitor"/>
+<fullyQualifiedTypeName name="java.lang.InternalError"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.Interpreter"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.RuntimeError"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.Stmt.Visitor"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.LoxCallable"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.ReturnException"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Stack"/>
+<fullyQualifiedTypeName name="com.interp.lox.Token"/>
+<fullyQualifiedTypeName name="com.interp.lox.Lox"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.interp.lox.parse.Resolver"/>
+</qualifiedTypeNameHistroy>

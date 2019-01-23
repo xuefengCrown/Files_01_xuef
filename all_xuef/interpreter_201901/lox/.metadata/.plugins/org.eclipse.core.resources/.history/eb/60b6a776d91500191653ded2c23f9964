@@ -1,0 +1,6 @@
+package com.interp.lox.visitor_pattern;
+
+public interface PastryVisitor {
+	void visitBeignet(Beignet beignet); 
+    void visitCruller(Cruller cruller); 
+}

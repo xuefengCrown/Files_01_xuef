@@ -1,0 +1,11 @@
+package com.interp.lox.visitor_pattern;
+
+public abstract class Pastry {
+
+}
+
+class Beignet extends Pastry {
+}                             
+
+class Cruller extends Pastry {
+}

@@ -1,0 +1,5 @@
+{Python-内置函数剖析}
+
+#Python-内置函数剖析
+
+- {Python: sum}: (https://xuefengcrown.github.io/python-builtin-sum.html)

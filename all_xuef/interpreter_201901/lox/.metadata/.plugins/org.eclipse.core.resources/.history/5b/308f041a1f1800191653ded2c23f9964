@@ -1,0 +1,140 @@
+package com.interp.lox.parse;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.interp.lox.parse.Expr.Assign;
+import com.interp.lox.parse.Expr.Binary;
+import com.interp.lox.parse.Expr.Call;
+import com.interp.lox.parse.Expr.Grouping;
+import com.interp.lox.parse.Expr.Literal;
+import com.interp.lox.parse.Expr.Logical;
+import com.interp.lox.parse.Expr.Unary;
+import com.interp.lox.parse.Expr.Variable;
+import com.interp.lox.parse.Stmt.Block;
+import com.interp.lox.parse.Stmt.Expression;
+import com.interp.lox.parse.Stmt.Function;
+import com.interp.lox.parse.Stmt.If;
+import com.interp.lox.parse.Stmt.Print;
+import com.interp.lox.parse.Stmt.Return;
+import com.interp.lox.parse.Stmt.Var;
+import com.interp.lox.parse.Stmt.While;
+
+public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
+	private final Interpreter interpreter;
+	private final Stack<Map<String, Boolean>> scopes = new Stack<>();
+	Resolver(Interpreter interpreter) {
+		this.interpreter = interpreter;
+	}
+
+	@Override
+	public Void visitBlockStmt(Block stmt) {
+		beginScope();
+		resolve(stmt.stmts);
+		endScope();
+		return null;
+	}
+
+	void resolve(List<Stmt> statements) {
+		for (Stmt statement : statements) {
+			resolve(statement);
+		}
+	}
+
+	private void resolve(Stmt stmt) {
+		stmt.accept(this);
+	}
+	private void beginScope() {                   
+	    scopes.push(new HashMap<String, Boolean>());
+	  } 
+
+	@Override
+	public Void visitExpressionStmt(Expression stmt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitFunctionStmt(Function stmt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitIfStmt(If stmt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitPrintStmt(Print stmt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitReturnStmt(Return stmt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitVarStmt(Var stmt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitWhileStmt(While stmt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitAssignExpr(Assign expr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitBinaryExpr(Binary expr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitCallExpr(Call expr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitGroupingExpr(Grouping expr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitLiteralExpr(Literal expr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitLogicalExpr(Logical expr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitUnaryExpr(Unary expr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitVariableExpr(Variable expr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

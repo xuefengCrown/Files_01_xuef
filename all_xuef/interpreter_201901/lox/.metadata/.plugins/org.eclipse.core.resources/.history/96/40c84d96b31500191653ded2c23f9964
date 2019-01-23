@@ -1,0 +1,13 @@
+package com.interp.lox;
+
+public class Lox {
+
+	public static void main(String[] args) {
+		runPrompt();
+	}
+	
+	private static void runFile(String path) throws IOException {
+	    byte[] bytes = Files.readAllBytes(Paths.get(path));        
+	    run(new String(bytes, Charset.defaultCharset()));          
+	} 
+}

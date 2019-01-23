@@ -1,0 +1,7 @@
+{代码重构相关}
+
+# 代码重构相关
+
+## 定义新函数来抽象出公共模式(Abstract common patterns with a new function.)
+
+- value-arithmetic-expression (https://xuefengcrown.github.io/value-arithmetic-expression.html)

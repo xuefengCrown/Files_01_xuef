@@ -1,0 +1,5 @@
+package com.interp.lox.parse;
+
+public class LoxFunction {
+
+}

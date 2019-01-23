@@ -1,0 +1,11 @@
+
+In the last few years, type annotation syntax and semantics 
+were gradually introduced to Python language.
+
+Now, generally speaking, a type is a type checker concept and a class is a runtime concept. 
+
+
+But what is a type checker? It’s a tool that analyses our code (similar to flake8, but way smarter). 
+It doesn’t run our code in any way, but statically checks the code for type consistency. 
+
+

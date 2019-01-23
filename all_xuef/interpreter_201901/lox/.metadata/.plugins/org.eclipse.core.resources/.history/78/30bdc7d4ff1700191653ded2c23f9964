@@ -1,0 +1,33 @@
+package com.interp.lox.parse;
+
+import java.util.List;
+
+// seems like a Closure
+public class LoxFunction implements LoxCallable {
+	private final Stmt.Function declaration;
+	// 保存函数被定义时的环境
+	private Environment savedEnv;
+	LoxFunction(Stmt.Function declaration, Environment savedEnv) {
+		this.declaration = declaration;
+		this.savedEnv = savedEnv;
+	}
+
+	@Override
+	public Object call(Interpreter interpreter, List<Object> arguments) {
+		Environment environment = new Environment(interpreter.globals);
+		for (int i = 0; i < declaration.params.size(); i++) {
+			environment.bind(declaration.params.get(i).lexeme, arguments.get(i));
+		}
+		try {
+			interpreter.evalBlock(declaration.body, environment);
+		} catch (ReturnException returnValue) {
+			return returnValue.value;
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "<fn " + declaration.name.lexeme + ">";
+	}
+}

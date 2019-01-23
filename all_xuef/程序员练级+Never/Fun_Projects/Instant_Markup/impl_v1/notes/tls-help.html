@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>
+The Little Schemer相关
+</title><link href="./css/style.css" rel="stylesheet" type="text/css"> </head>              <div class="container"><body>
+<h1>
+ The Little Schemer相关
+</h1>
+<h2>
+ scheme解释器
+</h2>
+<ul>
+<li>
+BiwaScheme: (<a href="https://repl.it/languages/Scheme">https://repl.it/languages/Scheme</a>)
+</li>
+<li>
+BiwaScheme Reference: (<a href="https://www.biwascheme.org/doc/reference.html">https://www.biwascheme.org/doc/reference.html</a>)
+</li>
+<li>
+cs61a-scheme(可能需要翻墙): (<a href="https://scheme.cs61a.org/">https://scheme.cs61a.org/</a>)
+</li>
+</ul>
+<h2>
+ 阅读建议
+</h2>
+<pre><code>
+程序接受数据并产生数据。程序设计需要彻底理解数据; 好的程序会反映出所处理数据的结构。
+大多数的数据集合，并由此延伸到大多数程序，都是可递归表示的。
+递归是依据自身定义对象或解决问题的方法。
+
+本书的目标是引导读者学习递归思维模式。本书以 Scheme 语言作为载体。
+建议先阅读《sicp》第一章以对 Scheme有所了解后再读本书。
+
+由于我们唯一关心的是递归编程，因此我们仅在Scheme的几个招式上下功夫：
+car、cdr、cons、eq?、null?、zero?、add1、sub1、number?、and、or、quote、lambda、
+define以及cond。
+
+阅读本书切勿走马观花、一味图快。请仔细阅读，金玉珠玑分散在书中各个角落。
+本书很重要，重要的书至少读三遍。阅读时做到一步一个脚印。
+在未完全理解一章之前，不要尝试跳到下一章。问题按难度递增排序;
+解决不了早先的问题，后面的问题则将更难回答。
+
+本书以对话方式组织内容，涉及Scheme程序的样例趣谈时，对话将在你（读者）和我们（作者）之间进行。
+请尽可能动手试验阅读到的样例代码。获取Scheme是一件很容易的事。
+尽管在不同Scheme实现之间存在微小语法差异(主要是特殊名称和特定函数方面的拼写)，
+但Scheme语法基本上是一致的。
+
+;; 要玩转Scheme，还得定义本书引入的atom?、sub1和add1
+(define (atom? lst)
+  (not (list? lst)))
+
+(define (add1 n)
+  (+ n 1))
+(define (sub1 n)
+  (- n 1))
+</code></pre>
+</div></body></html>

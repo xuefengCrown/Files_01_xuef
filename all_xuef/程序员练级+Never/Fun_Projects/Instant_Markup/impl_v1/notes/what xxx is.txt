@@ -1,0 +1,301 @@
+{some insights about programming}
+
+# some insights about programming
+
+## Parsing
+
+```
+Parsing is the act of turning an input character stream into a 
+more structured, internal representation.
+A common internal representation is as a tree, 
+which programs can recursively process.
+
+Parsing的本质就是--将非结构化或半结构化数据转为结构化数据。
+```
+
+## 语法是什么
+
+```
+语法其实只是对语言的本质结构，“抽象语法树”（abstract syntax tree，AST），的一种编码。
+一个良好的编码，应该极度简单，不引起歧义，而且应该容易解码。在程序语言里，这个“解码”
+的过程叫做“语法分析”（parse）。         --王垠《谈语法》
+```
+
+## Env (环境是什么)
+
+```
+An environment is a list of pairs of names associated with...what?
+环境是名字到值（如果有赋值的话，那么是名字到地址）的映射。
+
+(define-type Binding
+  [bind (name : symbol) (val : number)])
+ 
+(define-type-alias Env (listof Binding))
+(define mt-env empty)
+(define extend-env cons)
+也可以用过程来表示
+```
+
+## Procedure (过程是什么)
+
+```
+func_name-->func-def (param, body)
+procedure是一个值(value), 它支持调用。过程创建和调用是一种协议。
+```
+
+## 过程调用的本质
+
+```
+;; eager application 
+new_env = (extend-env ((fdC-arg fd) 
+					   (interp arg env)) env)
+answer = (interp (fdC-body fd) new_env)
+```
+
+
+## What Is an Interpreter?(a program)
+
+```
+In order to run a program on a computer, something in the computer must 
+understand the intentions of the code, perform the necessary computations, 
+and then return the results. This thing acts as a mediator between the programmer's 
+ideas and the hardware that computes them. One such mediator is an interpreter.
+																--《cs61as》
+```
+
+## what is object?
+
+```
+An object is just a value that dispatches on a given name.
+对象是对给定名称进行分派的一种值。
+
+an object knows how to do certain things.
+you send a message to an object, the object carries out the method.
+In oop paradigm, the objects have state.
+
+We ordinarily view the world as populated by independent objects, 
+each of which has a state that changes over time. 
+An object is said to "have state" if its behavior is influenced by its history.
+
+The modularity principle states that a program should be composed of a collection of 
+internally cohesive units, called objects, that can communicate and interoperate 
+without needing information about their internal structure.
+```
+
+## what is constructor?
+
+```
+A constructor is simply a function that is invoked at object construction time. 
+```
+
+## JSON
+
+```
+JSON，它和s-expression有着本质的不同！
+
+在某些语言（如JavaScript）中，程序员可以直接写出对象。
+这是个非常受欢迎的概念，JavaScript中该功能的部分语法成了网络标准——JSON。
+在其他语言（如Java）中，对象只能通过调用某个类的构造函数来创建。
+```
+
+## 异常
+
+```
+这是一种非常糟糕的写法，不但繁复，而且可能掩盖运行时错误。有时候你发现有些语句莫名其妙没有执行，
+折腾好久才发现是因为某个地方抛出了异常，所以跳到了这种 catch 的地方，然后被忽略了。
+```
+
+##every alias is also a reference.
+
+## GC
+
+所有GC算法的核心是通过值间引用关系遍历内存。
+
+## define vs. set!
+
+在我们的语言中，给未绑定的变量赋值会导致错误。但是在有些语言中，这种操作会导致该变量被定义。
+语言设计者常犯的错误是没有很好的确定想要的语义。
+
+## 宏
+
+```
+a macro is actually a function. 
+It is not, however, a function from regular run-time values to other run-time values, 
+but rather a function from syntax to syntax.
+```
+
+## function as value
+
+```
+这种将函数当做数据的方式， 产生了大量强大而有用的编程习语（Idiom）。
+```
+
+## web
+
+```
+stateless! to avoid the burden of connections
+hiden fields VS cookies
+all tabs share the same cookies, they are global state.
+
+Web协议从其概念上就被设计为无状态的（stateless）：它不将与中间计算相关的状
+态存储在服务器上。这使得Web程序员被迫在其他地方维护所有必要的状态，每个请求都需
+要携带能够完全恢复计算所需的状态。
+```
+
+## cps
+
+```
+CPS，是Continuation Passing Style的缩写，它是一种编码风格，函数执行完以后，并不通过返回值，
+而是调用它自己的Continuation来完成计算。
+
+Continuation 应该在什么情况下使用呢？通常在尝试模拟一个本质上是无状态的应用时可以简化你的任务。
+Continuation 很适合在 Web 应用程序中使用。
+```
+
+## Procedures are Closures
+
+```
+Scheme procedure's aren't really just pieces of code you can execute; they're closures.
+
+A closure records not only what code a procedure must run, but also 
+what environment it was created in.
+这是实现词法作用域的关键！
+When you call it, that environment is restored before the actual code is executed. 
+That is, the "current environment pointer" is set to point to that environment, and 
+whenever the procedure references a variable, it will be looked up there.
+
+This ensures that when a procedure executes, it sees the exact same variable bindings 
+that were visible when it was created.
+
+
+(define make-counter
+	;; create a procedure that will bind count and
+	;; return a new procedure that will increment that
+	;; binding and return its value
+	(lambda ()
+		(let ((count 0))
+			(lambda ()
+				(set! count (+ count 1))
+
+This example shows that we can use closures to create private variable bindings. 
+Notice that once we've exited a let, the variables aren't visible anymore. 
+But if we call a closure that was created there, they become visible again---to that closure only. 
+
+;; 闭包与对象的相似性！
+If you're familiar with object-oriented programming, you may notice a resemblance between 
+closures and "objects" in the object-oriented sense. 
+A closure associates data with a procedure, where an object associates data with multiple procedures. 
+```
+
+## let
+
+```
+Evaluating an expression(such as a let) may create a new environment, and 
+subexpressions (such as the let body) can simply be evaluated in the new environment 
+by recursive calls to eval.
+```
+
+## define a procedure
+
+```
+It allows new procedures to be defined, creating closures. Closures pair environments with code bodies
+that are interpreted by the interpreter. 
+```
+
+## Calling a closure
+
+```
+Calling a closure is much like evaluating a let. 
+The arguments are bound in a local environment (like let variables), and the body 
+is interpreted in that environment.
+```
+
+## macro
+
+```
+We can write cond as a macro using if, let as a macro using lambda, letrec as a macro
+using let, lambda, and set!, and so on.
+```
+
+## Extensible Treatment of Special Forms???
+
+```
+In the interpreter in the last chapter, we implemented special forms directly 
+in the interpreter---eval-list checked compound expressions to see if they began 
+with a special form name. In effect, we hardcoded the meanings of special form names 
+in the procedure eval-special-form.
+
+In our new interpreter, we'll use a cleaner approach, which treats special form 
+definitions pretty much like variable definitions. This will let us put special forms 
+in particular environments, and use the normal scoping mechanisms to look up the routines
+that compile them.
+
+This has several advantages. The first is that it makes our interpreter more modular. 
+We can create different environments with different special forms, and use the same 
+interpreter to interpret different languages. That is, we separate out the basic operation 
+of the interpreter from the particular special forms we decide on.
+The second advantage is that it will allow us to build an elegant macro facility, 
+so that new special forms can be defined in terms of old ones.
+
+The third advantage is that we can use the same scoping rules for special forms that 
+we use for variables. This will be very convenient later, because we will be able to 
+define local macros, in much the same way we define local procedures.
+```
+
+## new binding
+
+```
+To support this, we need to represent bindings slightly differently. 
+Now we'll have a third part to each binding, telling what kind of binding it is--
+a variable binding, a special form binding, or a macro binding.
+```
+
+## defining the syntax of our language(如何严格定义语言的语法)
+
+```
+Inductive Definitions
+Since inductive definitions are ubiquitous in the study of programming languages, 
+it is worth pausing for a moment to examine this one in detail.
+
+最简单表达式; atom
+生成复杂表达式的规则; rules
+```
+
+## Semantic(语义)
+
+```
+给出如何对项进行求值的精确定义
+a precise definition of how terms are evaluated——i.e., the semantics of the language.
+```
+
+## 过程
+
+```
+Procedural (or functional) abstraction is a key feature of essentially all 
+programming languages.
+
+(5*4*3*2*1) + (7*6*5*4*3*2*1) - (3*2*1)
+rewrite it as factorial(5) + factorial(7) - factorial(3)
+```
+
+## type checker
+
+```
+we need to know the type of every expression.
+```
+
+## Lambda-Calculus
+
+```
+the lambda-calculus, a formal system invented in the 1920s by Alonzo Church, 
+in which all computation is reduced to the basic operations of function definition 
+and application. 
+Following Landin’s insight, as well as the pioneering work of John McCarthy
+on Lisp (1959, 1981), the lambda-calculus has seen widespread use in the
+specification of programming language features, in language design and implementation, 
+and in the study of type systems.
+
+Its importance arises from the fact that it can be viewed simultaneously 
+as a simple programming language in which computations can be described and 
+as a mathematical object about which rigorous statements can be proved.
+```

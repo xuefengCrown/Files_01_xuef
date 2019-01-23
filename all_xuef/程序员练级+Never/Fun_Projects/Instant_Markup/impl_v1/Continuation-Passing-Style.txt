@@ -1,0 +1,24 @@
+{Continuation-Passing-Style}
+
+#Continuation-Passing-Style
+
+CPS 作为一种编程方法就是人为地把 continuation(后续动作) 作为一个高阶函数显式地暴露出来。
+
+call/cc 是语言提供给程序员用以获得当前 continuation 的机制。
+
+为什么用cps：惰性求值、异步、流程控制...
+一般这么做是因为和recursive相比，它需要更少的memory/stack和更少的control context存储，
+尤其是在call数字很大的时候会明显。因为当用recursive function的时候，在没完成之前要用多少memory，
+存多少control context是不确定的。一般function做的事情仅仅只是把当前evaluate的结果pass给control context。
+CPS是会多一个argument，用来pass control context给function。这样它就会知道在evaluate这一步之后下一步要做什么。
+
+
+## 参考
+
+- 《indiana: Continuation》: (https://cgi.soic.indiana.edu/~c311/lib/exe/fetch.php?media=cps-notes.scm)
+
+- 《知乎:怎样理解 CPS》: (https://www.zhihu.com/question/20259086)
+
+- 《王垠:有关 Continuation》: (https://docs.huihoo.com/homepage/shredderyin/wiki/ContinuationNotes.html)
+
+

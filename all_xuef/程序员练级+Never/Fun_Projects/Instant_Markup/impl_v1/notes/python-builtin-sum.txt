@@ -1,0 +1,62 @@
+{python: sum}
+
+# python: sum
+
+## sum 使用说明
+
+```
+## python2.7
+>>> help(sum)
+Help on built-in function sum in module __builtin__:
+
+sum(...)
+    sum(iterable[, start]) -> value
+
+    Return the sum of an iterable or sequence of numbers (NOT strings)
+    plus the value of 'start' (which defaults to 0).  When the sequence is
+    empty, return start.
+
+>>>
+```
+
+### 基本求和
+
+```
+>>> sum(range(1,101), 0)
+5050
+```
+
+### 碾平(flat)嵌套列表
+
+```
+## 只是好玩，尽量不要这么写;[请使用 itertools.chain()]
+>>> nested_lst = [[1, 2, 3], [4, 5, 6], [7], [8, 9]]
+>>> sum(nested_lst, [])
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+## 使用 itertools.chain()
+>>> import itertools
+>>> list(itertools.chain(*nested_lst))
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+我们扩展了 '+' 操作符的含义，我们把 '求和' 概念延伸了。
+
+## 如何 sum strings?
+
+sum能把列表相加，却不能 sum strings.(官方建议使用 join)
+
+```
+>>> ''.join([chr(i) for i in range(ord('a'), ord('z')+1)])
+'abcdefghijklmnopqrstuvwxyz'
+```
+
+## 官方建议
+
+```
+For some use cases, there are good alternatives to sum(). 
+The preferred, fast way to concatenate a sequence of strings is by calling ''.join(sequence).
+To add floating point values with extended precision, see math.fsum().
+To concatenate a series of iterables, consider using itertools.chain().
+```
+

@@ -1,0 +1,88 @@
+
+Exercise 3.11 [*] In a real language, one might have many operators such as those in
+the preceding exercises. Rearrange the code in the interpreter so that it is easy to add
+new operators.
+
+(define grammar
+  '((program (expression) a-program)
+    (expression (number) const-exp)
+    (expression (nullary-op) nullary-exp)
+    (expression (unary-op "(" expression ")") unary-exp)
+    (expression (binary-op "(" expression "," expression ")") binary-exp)
+    (expression (n-ary-op "(" (separated-list expression ",") ")") n-ary-exp)
+    (expression ("if" expression "then" expression "else" expression) if-exp)
+    (expression (identifier) var-exp)
+    (expression ("let" identifier "=" expression "in" expression) let-exp)))
+
+; ------------------------------------------------------------------------------
+; A table for n-ary operations, represented as an association list.
+
+(define make-table
+  (lambda lst
+    (lambda (op)
+      (cdr (assoc op lst)))))
+
+(define entry cons)
+
+; ------------------------------------------------------------------------------	
+; ------------------------------------------------------------------------------
+; Tables of n-ary operations.
+
+(define nullary-table
+  (make-table (entry "emptylist" emptylist-val)))
+  
+(define unary-table
+  (make-table (entry "zero?" (unary-arithmetic-predicate zero?))
+              (entry "minus" (unary-arithmetic-func -))
+              (entry "car" expval->car)
+              (entry "cdr" expval->cdr)
+              (entry "null?" (unary-list-predicate expval->emptylist?))))
+
+(define binary-table
+  (make-table (entry "+" (binary-arithmetic-func +))
+              (entry "-" (binary-arithmetic-func -))
+              (entry "*" (binary-arithmetic-func *))
+              (entry "/" (binary-arithmetic-func quotient))
+              (entry "equal?" (binary-relation =))
+              (entry "greater?" (binary-relation >))
+              (entry "less?" (binary-relation <))
+              (entry "cons" cons-val)))
+
+(define n-ary-table
+  (make-table (entry "list" list-val)))
+
+; ------------------------------------------------------------------------------
+(cases expression exp
+      (const-exp (num) (num-val num))
+      (nullary-exp (op)
+        ((nullary-table op)))
+      (unary-exp (op exp1)
+        (let ((val1 (value-of exp1 env)))
+          ((unary-table op) val1)))
+      (binary-exp (op exp1 exp2)
+        (let ((val1 (value-of exp1 env))
+              (val2 (value-of exp2 env)))
+          ((binary-table op) val1 val2)))
+      (n-ary-exp (op exprs)
+        (let ((vals (map (lambda (expr) (value-of expr env)) exprs)))
+          ((n-ary-table op) vals)))
+      (if-exp (exp1 exp2 exp3)
+        (let ((val1 (value-of exp1 env)))
+          (if (expval->bool val1)
+              (value-of exp2 env)
+              (value-of exp3 env))))
+      (var-exp (var)
+        (apply-env env var))
+      (let-exp (var exp1 body)
+        (let ((val1 (value-of exp1 env)))
+          (value-of body (extend-env var val1 env)))))
+		  
+???它们不是可以全部归为 函数调用吗???
+
+
+
+
+
+
+
+

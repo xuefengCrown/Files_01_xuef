@@ -1,0 +1,69 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+</ul>
+<title>
+python: sum
+</title><link href="./css/style.css" rel="stylesheet" type="text/css"> </head>              <div class="container"><body>
+<h1>
+ python: sum
+</h1>
+<h2>
+ sum 使用说明
+</h2>
+<pre><code>
+## python2.7
+&gt;&gt;&gt; help(sum)
+Help on built-in function sum in module __builtin__:
+
+sum(...)
+    sum(iterable[, start]) -&gt; value
+
+    Return the sum of an iterable or sequence of numbers (NOT strings)
+    plus the value of &#x27;start&#x27; (which defaults to 0).  When the sequence is
+    empty, return start.
+
+&gt;&gt;&gt;
+</code></pre>
+<h3>
+ 基本求和
+</h3>
+<pre><code>
+&gt;&gt;&gt; sum(range(1,101), 0)
+5050
+</code></pre>
+<h3>
+ 碾平(flat)嵌套列表
+</h3>
+<pre><code>
+## 只是好玩，尽量不要这么写;[请使用 itertools.chain()]
+&gt;&gt;&gt; nested_lst = [[1, 2, 3], [4, 5, 6], [7], [8, 9]]
+&gt;&gt;&gt; sum(nested_lst, [])
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+## 使用 itertools.chain()
+&gt;&gt;&gt; import itertools
+&gt;&gt;&gt; list(itertools.chain(*nested_lst))
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre>
+<p>
+我们扩展了 '+' 操作符的含义，我们把 '求和' 概念延伸了。
+</p>
+<h2>
+ 如何 sum strings?
+</h2>
+<p>
+sum能把列表相加，却不能 sum strings.(官方建议使用 join)
+</p>
+<pre><code>
+&gt;&gt;&gt; &#x27;&#x27;.join([chr(i) for i in range(ord(&#x27;a&#x27;), ord(&#x27;z&#x27;)+1)])
+&#x27;abcdefghijklmnopqrstuvwxyz&#x27;
+</code></pre>
+<h2>
+ 官方建议
+</h2>
+<pre><code>
+For some use cases, there are good alternatives to sum(). 
+The preferred, fast way to concatenate a sequence of strings is by calling &#x27;&#x27;.join(sequence).
+To add floating point values with extended precision, see math.fsum().
+To concatenate a series of iterables, consider using itertools.chain().
+</code></pre>
+</div></body></html>

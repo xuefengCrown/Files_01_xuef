@@ -1,0 +1,5 @@
+
+// typedef 定义类型别名
+typedef int Length; // 一例胜前言
+
+typedef struct sObj Obj;

@@ -1,0 +1,12 @@
+package com.interp.lox.parse;
+
+import java.util.List;
+
+/**
+ * The Java representation of any Lox object that can be called like a function will implement this interface. 
+ * @author moveb
+ *
+ */
+public interface LoxCallable {
+	Object call(Interpreter interpreter, List<Object> arguments);
+}

@@ -1,0 +1,7 @@
+#lang eopl
+
+(define-datatype Env Env?
+  [mt-env]
+  [extend-env (save-var symbol?)
+              (save-val scheme-val?)
+              (saved-env Env?)])

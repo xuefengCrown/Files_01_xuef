@@ -1,0 +1,70 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+</ul>
+<title>
+value-arithmetic-expression
+</title><link href="./css/style.css" rel="stylesheet" type="text/css"> </head>              <div class="container"><body>
+<h1>
+ value-arithmetic-expression
+</h1>
+<h2>
+ 求值中缀算术表达式(支持 +,-,*,/,^运算)
+</h2>
+<h3>
+ version1
+</h3>
+<pre><code>
+(define (atom? a) (not (list? a)))
+(define (^ n m) ; 幂运算
+  (if (= m 0) 1 (* n (^ n (- m 1)))))
+
+;; 求值函数
+;;;; (value &#x27;((4 ^ 6) / (2 * 4)))
+(define (value aexp)
+  (cond ((atom? aexp) aexp)
+        ((eq? &#x27;+ (cadr aexp)) 
+            (+ (value (car aexp)) (value (caddr aexp))))
+        ((eq? &#x27;* (cadr aexp)) 
+            (* (value (car aexp)) (value (caddr aexp))))
+        ((eq? &#x27;- (cadr aexp)) 
+            (- (value (car aexp)) (value (caddr aexp))))
+        ((eq? &#x27;/ (cadr aexp)) 
+            (/ (value (car aexp)) (value (caddr aexp))))
+        ((eq? &#x27;^ (cadr aexp)) 
+            (^ (value (car aexp)) (value (caddr aexp))))))   
+			
+;; value假设输入是标准中缀算术表达式(支持 +,-,*,/,^ 且二元操作)
+</code></pre>
+<p>
+value中存在大段相似代码, 我们重构它！
+</p>
+<h3>
+ version2
+</h3>
+<pre><code>
+(define symbol2func 
+  (lambda (x) 
+    (cond ((eq? &#x27;+ x) +)
+          ((eq? &#x27;- x) -)
+          ((eq? &#x27;* x) *)
+          ((eq? &#x27;/ x) /)
+          ((eq? &#x27;^ x) ^))))
+		  
+(define (val2 aexp)
+  (cond ((atom? aexp) aexp)
+        (else ((symbol2func (cadr aexp)) 
+                (value (car aexp)) (value (caddr aexp))))))
+				
+;; (val2 &#x27;((4 ^ 6) / (2 * 4)))
+</code></pre>
+<p>
+我们定义了新函数 symbol2func, 将value中的模式抽象出来。
+symbol2func 完成符号到函数的翻译。
+</p>
+<h2>
+ 参考
+</h2>
+<ul>
+<li>
+《The Little Schemer》chap8
+</li>
+</div></body></html>

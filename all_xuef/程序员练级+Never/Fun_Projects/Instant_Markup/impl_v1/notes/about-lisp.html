@@ -1,0 +1,168 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>
+关于Lisp
+</title><link href="./css/style.css" rel="stylesheet" type="text/css"> </head>              <div class="container"><body>
+<h1>
+关于Lisp
+</h1>
+<h2>
+ 表处理
+</h2>
+<p>
+Lisp的字面意思就是表处理(list processing), 其实也可以称为树处理, 这和处理XML节点没有什么不同。
+</p>
+<h2>
+ Code is Data(代码即数据)
+</h2>
+<p>
+Most languages make a sharp distinction between code and data; Lisp does not. 
+This makes it possible to, for example, trivially write a Lisp parser in Lisp, 
+and to manipulate Lisp code within Lisp.
+</p>
+<p>
+The best description of this enlightenment that I have found is The Nature of Lisp.
+</p>
+<h2>
+ Homoiconicity(同像)
+</h2>
+<p>
+在计算机编程领域，Homoiconicity(同像)是一种编程语言的属性，
+用来指该语言的程序的基本表现形式本身同时也是该语言自身的数据结构。
+如LISP就是Homoiconic(同像的)。
+C#的Lambda表达式也是同像的，可以被传唤成表达式树结构，但C#本身不是。
+</p>
+<p>
+meaning its syntax for expressions is the same as its syntax for data. 
+Writing code in Lisp looks awfully like you're writing out a list, and vice-versa. 
+Thus, interpreting Lisp code with Lisp code is as simple as running through lists 
+with car and cdr.
+</p>
+<h2>
+ list && xml && tree
+</h2>
+<pre><code>
+int add(int arg1, int arg2)
+{
+    return arg1+arg2;
+}
+// 将代码解析成 xml
+&lt;define-function return-type=&quot;int&quot; name=&quot;add&quot;&gt;
+    &lt;arguments&gt;
+        &lt;argument type=&quot;int&quot;&gt;arg1&lt;/argument&gt;
+        &lt;argument type=&quot;int&quot;&gt;arg2&lt;/argument&gt;
+    &lt;/arguments&gt;
+    &lt;body&gt;
+        &lt;return&gt;
+            &lt;add value1=&quot;arg1&quot; value2=&quot;arg2&quot; /&gt;
+        &lt;/return&gt;
+    &lt;/body&gt;
+&lt;/define&gt;
+</code></pre>
+<p>
+源代码在解析之后也是用树结构来存放的, 任何编译程序都会把源代码解析成一棵抽象语法树, 
+这样的表示法很恰当, 因为源代码就是层次结构的:
+函数包含参数和代码块, 代码快包含表达式和语句, 语句包含变量和运算符等等。
+</p>
+<p>
+我们可以写一个转换器, 把Java代码转成XML, 另一个转换器把XML转回到Java。
+一样的道理, 这种手段也可以用来对付C++(这样做跟发疯差不多么。可是的确有人在做。
+</p>
+<p>
+进一步说,凡是有相同语言特性而语法不同的语言, 都可以把XML当作中介来互相转换代码。
+实际上几乎所有的主流语言都在一定程度上满足这个条件。我们可以把XML作为一种中间表示法,
+在两种语言之间互相译码。比方说, 我们可以用Java2XML把Java代码转换成XML, 然后用
+XML2CPP再把XML转换成C++代码, 运气好的话, 就是说, 如果我们小心避免使用那些C++不
+具备的Java特性的话, 我们可以得到完好的C++程序。
+</p>
+<p>
+看一下上面这个XML版本的add函数例子, 你怎样给它分类, 是代码还是数据?
+是代码也是数据!
+</p>
+<h2>
+ Ant
+</h2>
+<p>
+ant是怎样工作的？原理非常简单。Ant把包含有构造命令的XML文件(算代码还是算数据,
+你自己想吧)，交给一个Java程序来解析每一个元素，实际情况比我说的还要简单得多。
+一个简单的XML指令会导致具有相同名字的Java类装入，并执行其代码。
+</p>
+<pre><code>
+&lt;copy todir=&quot;../new/dir&quot;&gt;
+	&lt;fileset dir=&quot;src_dir&quot; /&gt;
+&lt;/copy&gt;
+</code></pre>
+<p>
+这段文字的含义是把源目录复制到目标目录，Ant会找到一个"copy"任务(实际上就是一个
+Java类), 通过调用Java的方法来设置适当参数(todir和fileset)，然后执行这个任务。
+Ant带有一组核心类, 可以由用户任意扩展, 只要遵守若干约定就可以。Ant找到这些类,
+每当遇到XML元素有同样的名字, 就执行相应的代码。过程非常简单。Ant做到了我们前面
+所说的东西: 它是一个语言解释器, 以XML作为语法, 把XML元素转译为适当的Java指令。
+我们可以写一个"add"任务, 然后, 当发现XML中有add描述的时候, 就执行这个add任务。
+由于Ant是非常流行的项目, 前面展示的策略就显得更为明智。毕竟, 这个工具每天差不
+多有几千家公司在使用。
+</p>
+<h2>
+ 为什么是 XML
+</h2>
+<p>
+在语义的可构造性方面, XML的弹性是Java望尘莫及的。
+</p>
+<p>
+如果程序员自己也能修改抽象语法树该有多好! 那样我们就可以构造用于特定问题的子语言。
+</p>
+<h2>
+ 元编程(为什么要用代码来写代码呢?)
+</h2>
+<h3>
+ 数据库访问层
+</h3>
+<p>
+我们连接数据库结构定义, 遍历数据表, 然后对每个表创建一个类。
+</p>
+<h3>
+ C预处理器
+</h3>
+<p>
+我们都用过C/C++的预处理器, 我们用它执行简单的编译指令, 来产生简单的代码变换。
+</p>
+<h2>
+ 符号(symbol), 表和函数
+</h2>
+<p>
+大体上, 符号相当于C++或Java语言中的标志符, 它的名字可以用来访问变量值。
+</p>
+<p>
+当Lisp系统遇到这样的表时, 它所做的就是试图执行它们。其实, Lisp源码就是特定的一种表。
+Lisp执行表的顺序是这样的, 表的第一个元素当作函数, 其他元素当作函数的参数。
+如果参数也是一个表，递归之。
+</p>
+<p>
+上述的例子中, 所有的表都是当作代码来处理的。怎样把表当作数据来处理呢? 
+在Lisp中, 我们给表加一个前缀 ' 来表示数据。(抑制求值)
+</p>
+<p>
+表是Lisp内置的数据结构, Lisp含有大量的工具来快速有效的操作表。
+而且, Lisp没有语义约束, 你可以构造任何数据结构, 只要你原意。
+</p>
+<p>
+XML对我们来说就是一个Lisp的表(s表达式), 我们可以遍历这个表, 然后把相关数据提交给用户。
+可是, 既然我们用Lisp, 就根本没有必要再用XML格式保存数据, 直接用s表达式就好了, 
+这样就没有必要做转换了。
+</p>
+<h2>
+ macro(宏) && `
+</h2>
+<p>
+` 反单引号, 意思是对表不求值, 但可以对表中某元素求值。
+</p>
+<h2>
+ 其他文章
+</h2>
+<ul>
+<li>
+The Nature of Lisp.(<a href="http://www.defmacro.org/ramblings/lisp.html">http://www.defmacro.org/ramblings/lisp.html</a>)
+</li>
+<li>
+The Nature of Lisp.中文: (<a href="https://www.douban.com/note/481729056/">https://www.douban.com/note/481729056/</a>)
+</li>
+</div></body></html>

@@ -1,0 +1,40 @@
+{一些编程好书}
+
+#一些编程好书
+
+###Python
+
+- 《Composing Programs》:(http://composingprograms.com/)
+
+- 《Composing Programs中文版》:(https://www.ctolib.com/docs/sfile/sicp-py-zh/index.html)
+
+- 《Python3-Cookbook》:(https://python3-cookbook.readthedocs.io/zh_CN/latest/)
+
+- 《Python最佳实践指南》:(https://pythonguidecn.readthedocs.io/zh/latest/)
+
+
+###Lisp
+
+- 《The Little Schemer》: (http://uternet.github.io/TLS/)
+
+- 《How 2 Design Programs》: (https://htdp.org/2018-01-06/)
+
+- 《The Root of Lisp中文》: (http://daiyuwen.freeshell.org/gb/rol/roots_of_lisp.html)
+
+- 《ANSI Common Lisp》: (https://acl.readthedocs.io/en/latest/zhCN/)
+
+- 《bulid-your-lisp》: (http://www.buildyourownlisp.com/contents)
+
+- 《build-your-lisp中文》:(https://ksco.gitbooks.io/build-your-own-lisp/)
+
+- 《eopl》
+
+
+###博客
+
+- 《王垠 Blog》: (http://www.yinwang.org/)
+
+
+##Other
+
+- 《Clean Architecture: A Craftsman's Guide to Software Structure and Design》

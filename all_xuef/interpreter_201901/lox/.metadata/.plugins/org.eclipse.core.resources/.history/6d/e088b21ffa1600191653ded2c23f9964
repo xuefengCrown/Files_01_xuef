@@ -1,0 +1,38 @@
+package com.interp.lox.parse;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.interp.lox.Token;
+
+public class Environment {
+	// store the bindings
+	// the same name should refer to the same variable (ignoring scope for now).
+	// Using the string ensures all of those tokens refer to the same map key.
+	private final Map<String, Object> bindings = new HashMap<>();
+	
+	private Environment parent;
+	Environment(){}
+	Environment(Environment parent){
+		this.parent = parent;
+	}
+	// we don¡¯t check to see if it¡¯s already present
+	public void bind(String var, Object val) {
+		bindings.put(var, val);
+	}
+
+	public Object lookup(Token name) {
+		if (bindings.containsKey(name.lexeme)) {
+			return bindings.get(name.lexeme);
+		}
+		throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
+	}
+
+	void assign(Token name, Object value) {
+		if (bindings.containsKey(name.lexeme)) {
+			bindings.put(name.lexeme, value);
+			return;
+		}
+		throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
+	}
+}

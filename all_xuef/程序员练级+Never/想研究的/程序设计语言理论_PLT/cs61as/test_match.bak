@@ -1,0 +1,4 @@
+#lang racket
+
+(match '(1 2 3)
+  [(list a b c) (list c b a)])

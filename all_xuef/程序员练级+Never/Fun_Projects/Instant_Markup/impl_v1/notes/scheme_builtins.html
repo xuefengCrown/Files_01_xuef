@@ -1,0 +1,76 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>
+scheme_builtins
+</title><link href="./css/style.css" rel="stylesheet" type="text/css"> </head>              <div class="container"><body>
+<h2>
+ scheme_builtins.py
+</h2>
+<pre><code>
+List = list
+
+BUILTINS = {}
+
+def builtin(name):
+    &quot;&quot;&quot;注册scheme builtin procedure&quot;&quot;&quot;
+    def add(fn):
+        BUILTINS[name] = fn
+        return fn
+    return add # 返回的add，作为装饰器
+
+
+@builtin(&quot;&lt;&quot;)
+def scheme_less(x1, x2):
+    return x1 &lt; x2
+
+@builtin(&quot;&gt;&quot;)
+def scheme_great(x1, x2):
+    return x1 &gt; x2
+
+@builtin(&quot;boolean?&quot;)
+def scheme_booleanp(x):
+    return x is True or x is False
+
+def scheme_truep(val):
+    &quot;&quot;&quot;All values in Scheme are true except False.&quot;&quot;&quot;
+    return val is not False
+
+def scheme_falsep(val):
+    &quot;&quot;&quot;Only False is false in Scheme.&quot;&quot;&quot;
+    return val is False
+
+@builtin(&quot;not&quot;)
+def scheme_not(x):
+    return not scheme_truep(x)
+
+@builtin(&quot;equal?&quot;)
+def scheme_equalp(x, y):
+    if scheme_pairp(x) and scheme_pairp(y):
+        return scheme_equalp(x.first, y.first) and scheme_equalp(x.second, y.second)
+    elif scheme_numberp(x) and scheme_numberp(y):
+        return x == y
+    else:
+        return type(x) == type(y) and x == y
+
+@builtin(&quot;eq?&quot;)
+def scheme_eqp(x, y):
+    if scheme_numberp(x) and scheme_numberp(y):
+        return x == y
+    elif scheme_symbolp(x) and scheme_symbolp(y):
+        return x == y
+    else:
+        return x is y
+
+@builtin(&quot;pair?&quot;)
+def scheme_pairp(x):
+    return isinstance(x, List)
+
+
+@builtin(&quot;symbol?&quot;)
+def scheme_symbolp(x):
+    return isinstance(x, str) and not scheme_stringp(x)
+
+@builtin(&quot;number?&quot;)
+def scheme_numberp(x):
+    return isinstance(x, (int, float)) and not scheme_booleanp(x)
+</code></pre>
+</div></body></html>

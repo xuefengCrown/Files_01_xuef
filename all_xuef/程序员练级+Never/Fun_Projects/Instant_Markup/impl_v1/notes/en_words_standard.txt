@@ -1,0 +1,48 @@
+{记录一些单词}
+
+# 记录一些单词
+
+## 计算机相关
+
+```
+type inference: 类型推导
+semantic: 语义
+syntactic sugar: 语法糖
+desugar: 脱糖
+cartesian product: 笛卡尔积(常见于对列表推导式的讨论中)
+special syntax for arithmetic sequences
+derivation: 派生
+
+nullary operation 空元运算 
+nullary constructor 无参构造器
+unary-op 一元操作
+binary-op 二元操作
+n-ary-op n元操作
+
+concrete syntax: 具体语法
+abstract syntax: 抽象语法
+
+lexical scoping: 词法作用域
+
+Evaluation strategy: 求值策略
+
+continuation: 后续部分
+
+imperative: 命令的
+declarative: 声明式
+logic programming
+
+derivation: 推导,派生
+
+Instantiation: 实例化
+initialization: 初始化
+
+deduction: 推理
+induction: 归纳
+
+Inductive Definition
+
+disassembler: 反汇编
+
+phase: 阶段(the phases of compiler)
+```

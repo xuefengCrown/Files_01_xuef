@@ -1,0 +1,5 @@
+
+
+#define SEQ_FLAG 1L<<7
+
+为了方便的test, and,or

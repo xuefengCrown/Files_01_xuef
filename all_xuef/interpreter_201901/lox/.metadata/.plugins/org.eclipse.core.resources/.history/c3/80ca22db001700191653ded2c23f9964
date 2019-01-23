@@ -1,0 +1,71 @@
+package com.interp.lox.parse;
+
+import com.interp.lox.Token;
+
+public abstract class Stmt {
+	interface Visitor<R> {
+		R visitBlockStmt(Block stmt);
+
+		// R visitClassStmt(Class stmt);
+
+		R visitExpressionStmt(Expression stmt);
+
+		// R visitFunctionStmt(Function stmt);
+
+		// R visitIfStmt(If stmt);
+
+		R visitPrintStmt(Print stmt);
+
+		// R visitReturnStmt(Return stmt);
+
+		R visitVarStmt(Var stmt);
+
+		// R visitWhileStmt(While stmt);
+	}
+	
+	//±äÁ¿ÉùÃ÷Óï¾ä
+	static class Var extends Stmt{
+		Token name;
+		//the initializer expression. 
+		//(If there isn¡¯t an initializer, that¡¯s null.)
+		Expr initializer; 
+		Var(Token name, Expr initializer){
+			this.name = name;
+			this.initializer = initializer;
+		}
+		@Override
+		<R> R accept(Visitor<R> visitor) {
+			return visitor.visitVarStmt(this);
+		}
+	}
+	//???
+	static class Expression extends Stmt {
+		Expression(Expr expression) {
+			this.expression = expression;
+		}
+
+		<R> R accept(Visitor<R> visitor) {
+			return visitor.visitExpressionStmt(this);
+		}
+
+		final Expr expression;
+	}
+
+	static class Print extends Stmt {
+		Print(Expr expression) {
+			this.expression = expression;
+		}
+
+		<R> R accept(Visitor<R> visitor) {
+			return visitor.visitPrintStmt(this);
+		}
+
+		final Expr expression;
+	}
+	
+	static class Block extends Stmt {
+		List<Stmt> stmts;
+		
+	}
+	abstract <R> R accept(Visitor<R> visitor);
+}

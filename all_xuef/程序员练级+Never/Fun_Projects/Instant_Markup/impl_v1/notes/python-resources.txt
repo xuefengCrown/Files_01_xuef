@@ -1,0 +1,12 @@
+{一些重要的Python参考}
+
+# 一些重要的Python参考
+
+## 官方文档
+
+- 《What's New In Python 3.0》: (https://docs.python.org/3.0/whatsnew/3.0.html)
+
+
+## Other
+
+- 《stackoverflow: alex-martelli》(https://stackoverflow.com/users/95810/alex-martelli)

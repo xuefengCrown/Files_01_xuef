@@ -1,0 +1,25 @@
+{xuef_Scheme_Interpreter_20190101}
+
+# xuef_Scheme_Interpreter_20190101
+
+## intro
+
+```
+目前支持:
+1. 变量定义
+2. 函数定义
+3. 绑定(let)
+4. if
+5. 函数调用
+词法作用域
+```
+
+## 代码
+
+- 1. 词法分析(tokenize_scheme.py): (https://xuefengcrown.github.io/tokenize_scheme.html)
+
+- 2. 递归下降分析构建抽象语法树(recursive_descent_parse.py): (https://xuefengcrown.github.io/recursive_descent_parse.html)
+
+- 3. 内置函数(scheme_builtins.py): (https://xuefengcrown.github.io/scheme_builtins.html)
+
+- 4. 解释器主程序(scheme_interp.py): (https://xuefengcrown.github.io/scheme_interp.html)

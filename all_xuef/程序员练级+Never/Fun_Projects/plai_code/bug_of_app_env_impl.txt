@@ -1,0 +1,39 @@
+
+(define (f1 x) (f2 4))
+(define (f2 y) (+ x y))
+ 
+(f1 3)
+
+;; in Racket, it raise an error.
+;; In fact, so will our substitution-based interpreter!
+;The broken environment interpreter above implements what is known as dynamic scope.
+
+;This means the environment accumulates bindings as the program executes. 
+;As a result, whether an identifier is even bound depends on the history of program execution. 
+;We should regard this unambiguously as a flaw of programming language design.
+
+In contrast, substitution—and environments, done correctly—give us lexical scope or static scope. 
+“Lexical” in this context means “as determined from the source program”, while “static” in computer science 
+means “without running the program”, so these are appealing to the same intuition.
+
+
+;; What went wrong when we switched to environments?
+;; That is, the environment only grows; it never shrinks.
+
+
+;; 使用env实现等价的替换模型?
+(extend-env (bind (fdC-arg fd)
+				  (interp a env fds))
+			  mt-env)
+
+;Now we have truly reproduced the behavior of the substitution interpreter.
+
+
+; undefined variable f2
+(r2 '(let ([f1 (lambda (x) (f2 4))]) 
+         (let ([f2 (lambda (y) (+ x y))])
+           (f1 3))))
+		   
+(r2 '(let ([f2 (lambda (y) (+ x y))]) ; undefined variable x
+         (let ([f1 (lambda (x) (f2 4))] )
+           (f1 3))))

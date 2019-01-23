@@ -1,0 +1,111 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>
+recursive_descent_parse
+</title><link href="./css/style.css" rel="stylesheet" type="text/css"> </head>              <div class="container"><body>
+<h2>
+ recursive_descent_parse.py
+</h2>
+<pre><code>
+&quot;&quot;&quot;
+The reader is a simple kind of recursive descent parser for normal Scheme data structures.
+(A parser converts a sequence of tokens into a syntax tree that
+describes the nesting of expressions or statements.)
+
+It is a &quot;top-down&quot; parser, because it recognizes high-level structures before
+lower-level ones--e.g., it recognizes the beginning of a list before reading
+and recognizing the items in the list.
+(That is, on seeing a left parenthesis, it &quot;predicts&quot; that it will see sequence
+of list elements followed by a matching right parenthesis.)
+&quot;&quot;&quot;
+##The reader converts a linear sequence of characters into a simple parse tree.
+##A parse tree represents the syntactic structure (phrase groupings) of a sequence of characters.
+
+#S-exp EBNF
+&quot;&quot;&quot;
+S-list ::= ({ S-exp }∗)
+S-exp ::= Symbol | S-list
+&quot;&quot;&quot;
+from tokenize_scheme import generate_tokens
+
+class SexpParser():
+    &#x27;&#x27;&#x27;
+    Implementation of a recursive descent parser. Each method
+    implements a single grammar rule. Use the ._accept() method
+    to test and accept the current lookahead token. Use the ._expect()
+    method to exactly match and discard the next token on the input
+    (or raise a SyntaxError if it doesn&#x27;t match).
+    &#x27;&#x27;&#x27;
+
+    def parse(self, text):
+        self.tokens = generate_tokens(text)
+        self.tok = None  # Last symbol consumed
+        self.nexttok = None  # Next symbol tokenized
+        self._advance()  # Load first lookahead token
+        
+        return self.sexp()
+
+    def _advance(self):
+        &#x27;Advance one token ahead&#x27;
+        self.tok, self.nexttok = self.nexttok, next(self.tokens, None)
+
+    def _accept(self, toktype):
+        &#x27;Test and consume the next token if it matches toktype&#x27;
+        if self.nexttok and self.nexttok.type == toktype:
+            self._advance()
+            return True
+        else:
+            return False
+
+    def _expect(self, toktype):
+        &#x27;Consume next token if it matches toktype or raise SyntaxError&#x27;
+        if not self._accept(toktype):
+            raise SyntaxError(&#x27;Expected &#x27; + toktype)
+
+    # Grammar rules follow
+    def sexp(self):
+        &quot;S-exp ::= Symbol | S-list&quot;
+        if self._accept(&#x27;INTEGER&#x27;):
+            return int(self.tok.value)
+        elif self._accept(&#x27;FLOAT&#x27;):
+            return float(self.tok.value)
+        elif self._accept(&#x27;BOOLEAN&#x27;):# TODO
+            return {&#x27;#t&#x27;: True, &#x27;#f&#x27;: False}[self.tok.value]
+        elif self._accept(&#x27;SYMBOL&#x27;) or self._accept(&#x27;STRING&#x27;) or \
+             self._accept(&#x27;CHARACTER&#x27;):
+            return self.tok.value
+        else:
+            return self.slist()
+            
+    def slist(self):
+        &quot;S-list ::= ({ S-exp }∗)&quot;
+        s = []
+        self._accept(&#x27;LPAREN&#x27;)
+        while not self._accept(&#x27;RPAREN&#x27;):
+            sube = self.sexp()
+            s.append(sube)
+        return s[:]
+def descent_parser():
+    parser = SexpParser()
+    print(parser.parse(&#x27;2&#x27;))
+    print(parser.parse(&#x27;(+ 1 2 3)&#x27;))
+    print(parser.parse(&#x27;(lambda (x) (* x (+ x 1)))&#x27;))
+    print(parser.parse(&#x27;(let ((x 1) (y 2)) (+ x y))&#x27;))
+    print(parser.parse(&#x27;(if (&gt; x 3) 1 0)&#x27;))
+    print(parser.parse(&#x27;(define area (* a a))&#x27;))
+    print(parser.parse(&#x27;(proc (* y y) (* x x))&#x27;))
+if __name__ == &#x27;__main__&#x27;:
+    descent_parser()
+
+## 打印结果
+&quot;&quot;&quot;
+2
+[&#x27;+&#x27;, 1, 2, 3]
+[&#x27;lambda&#x27;, [&#x27;x&#x27;], [&#x27;*&#x27;, &#x27;x&#x27;, [&#x27;+&#x27;, &#x27;x&#x27;, 1]]]
+[&#x27;let&#x27;, [[&#x27;x&#x27;, 1], [&#x27;y&#x27;, 2]], [&#x27;+&#x27;, &#x27;x&#x27;, &#x27;y&#x27;]]
+[&#x27;if&#x27;, [&#x27;&gt;&#x27;, &#x27;x&#x27;, 3], 1, 0]
+[&#x27;define&#x27;, &#x27;area&#x27;, [&#x27;*&#x27;, &#x27;a&#x27;, &#x27;a&#x27;]]
+[&#x27;proc&#x27;, [&#x27;*&#x27;, &#x27;y&#x27;, &#x27;y&#x27;], [&#x27;*&#x27;, &#x27;x&#x27;, &#x27;x&#x27;]]
+&gt;&gt;&gt; 
+&quot;&quot;&quot;
+</code></pre>
+</div></body></html>

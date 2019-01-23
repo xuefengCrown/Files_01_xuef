@@ -1,0 +1,29 @@
+{所有文章}
+
+#目录
+
+- 少数派意见 (https://xuefengcrown.github.io/argu2truth.html)
+
+- 一些编程好书 (https://xuefengcrown.github.io/index.html)
+
+- 策略模式 in Python (https://xuefengcrown.github.io/Python-strategy-pattern.html)
+
+- 我们为什么定义类?(https://xuefengcrown.github.io/why-we-need-class.html)
+
+- 匿名函数捕获变量值的机制 (https://xuefengcrown.github.io/param-binding.html)
+
+- 关于 Lisp (https://xuefengcrown.github.io/about-lisp.html)
+
+- scheme解释器实现相关资料 (https://xuefengcrown.github.io/scheme-interpreter-ref.html)
+
+- Python-内置函数剖析 (https://xuefengcrown.github.io/python-builtin-analyse.html)
+
+- The Little Schemer相关 (https://xuefengcrown.github.io/tls-help.html)
+
+- 代码重构相关 (https://xuefengcrown.github.io/code-refactor.html)
+
+- 如何把握一门编程语言的要点？ (https://xuefengcrown.github.io/programming-language-core.html)
+
+- 程序设计语言理论相关 (https://xuefengcrown.github.io/plt-resources.html)
+
+- xuef_Scheme_Interpreter_20190101 (https://xuefengcrown.github.io/xuef_Scheme_Interpreter_20190101.html)

@@ -1,0 +1,301 @@
+{scheme要点}
+
+#scheme要点
+
+##append
+
+```
+(define a1 '(1 2 3))
+(define a2 '(a b c))
+(define x (append a1 a2))
+x
+; (1 2 3 a b c)
+
+(set-car! a2 'd)
+x
+; (1 2 3 d b c)
+
+(set-car! a1 4)
+x
+; (1 2 3 d b c)
+
+```
+
+从这里可以看到，append 返回的 list 里，把第一个参数复制了一 份，
+而把第二个参数原封不动挂在了第一个参数的复制品后面。
+结论就是：append 会“共享”最后一个参数。
+
+一定要心里有数：哪部分数据是共享的！
+
+##eq? 只有在两个参数指向同一个对象时才为 #t. 
+
+eq? 可以判断两个变量是不是指向同一个对象。这样有很多用处。
+
+The best way to solve a complex problem is to break it down into component parts, 
+learn each of the parts, and learn how the parts go together.
+
+
+##define
+
+define is a way of giving meaning to an identifier--making it refer to a piece of storage
+
+```
+The define expression does three things:
+1. It declares to Scheme that we're going to have a variable named foo in the current scope.
+
+2. It tells Scheme to actually allocate storage for the variable. The storage is called a binding---we
+"bind" the variable foo to a particular piece of memory, so that we can refer to that storage by
+the name foo.
+3. It tells Scheme what initial value to put in the storage.
+```
+
+## Scheme values are always pointers to objects
+
+```
+Conceptually, all Scheme objects are allocated on the heap, and referred to via pointers. 
+This actually makes life simple, because you don't have to worry about whether you should 
+dereference a pointer when you want to use a value--you always do. 
+```
+
+## Definitions vs. Assignments
+
+```
+Python对这两者没有区分。
+```
+
+## The Boolean Values
+
+```
+它是一种约定，符号本身不重要，语义才重要。只要控制流能够识别它，就足够了。
+我们用 #f作为'False'的符号。
+```
+
+## Dynamic Typing
+
+```
+Scheme is dynamically typed, meaning that variables don't have fixed types, but objects do. 
+In dynamically typed systems, types are enforced at runtime. 
+```
+
+## Type and Equality Predicates
+
+```
+类型可以理解为一个集合，它的元素具有某种相同属性。
+针对某类型会定义一系列操作。
+所以，类型检测就很重要了。
+它是什么东西(类型)，它是谁(相等性检测)是个根本问题，知道它是什么东西，
+我们才能进一步采取动作。
+类(class)到底是个什么？我们为什么需要类？
+Python中有type(ti), isinstance(a, A)
+
+Since a pointer can point to any kind of thing, it's often good to know what kind
+of thing it does point to. For example, you might have a mixed list of different 
+kinds of things, and want to go through the list, doing a different operation for 
+each kind of object you encounter. For this, Scheme provides type predicates, 
+which are procedures which test to see whether the pointed-to object is of a
+particular type.
+```
+
+## Lexical Scope
+
+```
+When you see a variable name in the code, you can tell what variable it refers 
+just to by looking at the source code for the program. 
+```
+
+## Env
+
+```
+The set of all bindings that are visible at a given point during program execution 
+is called a binding environment. 
+That is, a binding environment maps a set of names to the pieces of storage they name.
+```
+
+## Procedures
+
+```
+Scheme procedures are "first class," meaning that they're objects in the language. 
+
+In Scheme, procedures are data objects--you can have a pointer to a procedure and 
+do the same things you can do with any other Scheme value.
+
+Procedures are special, of course, because they're the only kind of object that 
+supports the procedure call operation.
+
+An unusual feature of Scheme is that it uses a unified namespace, which means that 
+there's only one kind of name for both normal variables and procedures.
+
+;; define a procedure
+When you define a procedure like this, you're really doing three things: 
+creating a procedure, creating a normal variable (named min), and initializing 
+the variable with a pointer to the procedure.
+
+(set! min +)
+That assignment expression will look up the value of the variable +, which is the
+addition procedure, and assign that into the variable min.
+```
+
+### procedure call
+
+```
+It is important to understand how procedure calls actually work in Scheme.
+(+ a b)
+1. eval + --> a procedure
+2. eval a, b
+3. apply the procedure to those values
+
+;; !!!
+The fact that the first (operator) subexpression is evaluated just like any other expression 
+can be very useful. Rather than giving the name of a particular procedure to call, we can 
+use any expression whose result is a procedure. 
+
+;; Function as Value 的意义
+
+;; 注意子表达式的求值顺序
+One warning about combinations: the Scheme language doesn't specify the order in which 
+the subexpressions of a combination are evaluated. Don't write code that depends on 
+whether the operator expression is evaluated first, or on the order of evaluation of 
+the argument expressions.
+
+;;  first-class procedures 的意义
+
+```
+
+### Higher-Order Procedures
+
+```
+xuef: 理解 lambda的最佳办法就是为 lambda 表达式写解释器。
+(lambda (x) e1) ;会创建一个Closure<exp, cenv>,此处的cenv就是闭包创建时的environment
+注意！procedure call的执行过程:
+1. 扩展env, new-env = extend-env( (arg, arg-val), cenv)
+2. 在 new-env中求值函数体! (interp (closure-body clos) new-env)
+如果，我们将 cenv改为 env，得到的就是动态作用域！(而不再是词法即静态作用域)
+env 是执行时环境，而 cenv是闭包创建时的环境(所以才是词法作用域)！
+
+We say that lambda creates a closure, a procedure whose free variable references 
+are "fixed" at the time the procedure is created. Whenever the procedure references 
+a free variable, it will will refer to the bindings of those variables in the environment 
+where the procedure was created.
+
+;; Scheme
+(let ([x 2])
+  (let ([f (lambda (y) (* x y))])
+    (let ([x 4])
+      (f 3))))
+
+;; => 6
+
+There is a very good reason for this, and it's the rule used by most programming languages. 
+It is important that the meaning of a procedure be fixed where it is defined, rather than 
+having the meaning depend on where it is called from. 
+```
+
+### letrec---it means let with recursive definitions.
+
+
+### a very special control structure called call-with-current-continuation
+
+```
+call-with-current-continuation allows you to save the state of a computation, package it
+up as a data structure, and go off and do something else. Whenever you want, you can 
+restore the old saved state, abandoning the current computation and and picking up where 
+the saved computation left off.
+
+This is far more powerful than normal procedure calling and returning, and allows you 
+to implement advanced control structures such as backtracking, cooperative multitasking, 
+and custom exception-handling.
+
+You won't use call-with-current-continuation most of the time, because more
+conventional control structures are usually sufficient. But if you need to customize
+Scheme with a special control structure to solve a particular kind of problem, you 
+can do it with call-with-current-continuation.
+```
+
+## interpreter
+
+```
+using recursion in the natural way avoids the need for side effects, because 
+data structures are generally created at the right times, rather than being 
+created too early and having to be updated later.
+```
+
+### The reader
+
+```
+The reader is a simple kind of recursive descent parser for normal Scheme 
+data structures.
+```
+
+### 动态类型
+
+```
+在《Python编程实战:运用设计模式、并发和程序库创建高质量程序》的适配器一节中，
+我们check某对象是否是适配的renderer时，我们只看它是否实现了指定的方法。
+所谓的鸭子类型。
+动态类型使得我们更容易写出通用的函数(参数泛化更容易！)
+scheme中的递归函数，很依赖于这一点。
+
+另外，python和scheme不在函数定义时检测参数的类型，这让我们可以在函数内部来基于参数
+的结构来分类处理(模式匹配)。
+As in the earlier examples of recursion over lists and pair trees, the main recursive procedure 
+can accept pointers to either interior nodes (lists representing compound expressions), 
+or leaves of the tree. Either counts as an expression. 
+Dynamic typing lets us implement this straightforwardly, so that our recursion doesn't have to 
+"bottom out" until we actually hit a leaf. Things would be more complicated in C or Pascal, 
+which don't allow a procedure to accept an argument that may be either a list or a number.
+
+in Scheme every variable's type is really a kind of variant record--it can hold a (pointer to a) 
+number or a (pointer to a) pair or a (pointer to) anything else.
+
+如何 tag数据？这很重要！
+C doesn't automatically keep track of which variant a particular record represents--e.g., 
+a leaf or nonleaf--and you must code this yourself by adding a tag field, and setting and 
+checking it appropriately.
+
+It is possible to do Scheme-style recursion straightforwardly in some statically-typed languages, 
+notably ML and Haskell. These polymorphic languages allow you to declare disjoint union types. 
+A disjoint union is an "any of these" type--you can say that an argument will be of some type 
+or some other type.
+
+In Scheme, the language only supports one very general kind of disjoint union type: pointer to anything.
+
+how a more advanced interpreter can support more different ways of combining the primitive expressions.
+;; 方便地支持中缀表达式
+Flexibility
+
+;; 只关心我们感兴趣的部分。语言的本质！而不是Parser的细节。
+Our example interpreter implements Scheme in Scheme.
+
+;; desugar && core
+and then things
+you need can be defined in terms of things you already have. Writing an interpreter for a subset of Scheme in
+C is not hard--just a little tedious. Then you can use lambda to create most of the rest of the procedures in
+terms of simpler procedures. Interestingly, you can also implement most of the defining constructs and
+control constructs of Scheme in Scheme, by writing macros, which we'll discuss later.
+
+P.G 用7个基本操作写eval。
+
+You can start out this way even if you want your Scheme system to use a compiler. You can write the
+compiler in Scheme, and use the interpreter to run the compiler and generate machine code.
+
+Once the compiler works, you can compile the compiler, so that it runs faster. 
+
+To get Scheme to work on a new system, without even needing an interpreter, you can cross-compile.
+
+can easily be extended！！！
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

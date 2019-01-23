@@ -1,0 +1,22 @@
+{cps-notes}
+
+#cps-notes
+
+```
+Which part of (f (g (h i) j) k) can be done first? 
+(h i), since it must be evaluated before (g (h i) j) can be applied.
+
+What about (f (g (h i) (j k)))? Scheme doesn't specify the order in
+which arguments are evaluated so it could be either (h i) or (j k).
+
+So, let's take control. (h i (lambda (hi) ...)) We assume that hi is
+the result of applying (h i). Then, we drop in everything else that
+has to be done to replace the ...:
+
+(f (g (h i) (j l)))
+
+becomes
+
+(h i (lambda (hi) (f (g hi (j l)))))
+
+```

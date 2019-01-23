@@ -1,0 +1,7 @@
+#lang racket
+
+(define (squares lst)
+  (cond [(null? lst) '()]
+        [else (cons (* (car lst) (car lst)) (squares (cdr lst)))]
+        ))
+

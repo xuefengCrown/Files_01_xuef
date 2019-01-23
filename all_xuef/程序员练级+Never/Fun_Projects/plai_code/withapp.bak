@@ -1,0 +1,20 @@
+#lang plai
+;; impl procedure call
+(define-type ExprC
+  [numC (n number?)]
+  [idC (s symbol?)]
+  [appC (fun symbol?) (arg ExprC?)]
+  [plusC (l ExprC?) (r ExprC?)]
+  [multC (l ExprC?) (r ExprC?)])
+
+(define-type FunDefC
+  [fdC (name symbol?)
+       (arg symbol?)
+       (body ExprC?)])
+
+
+;(fdC 'double 'x (plusC (idC 'x) (idC 'x)))
+
+;(fdC 'quadruple 'x (appC 'double (appC 'double (idC 'x))))
+
+;(fdC 'const5 '_ (numC 5))

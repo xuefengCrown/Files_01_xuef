@@ -1,0 +1,289 @@
+package com.interp.lox.parse;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.interp.lox.Lox;
+import com.interp.lox.Token;
+import com.interp.lox.TokenType;
+import com.interp.lox.parse.Expr.Assign;
+import com.interp.lox.parse.Expr.Binary;
+import com.interp.lox.parse.Expr.Call;
+import com.interp.lox.parse.Expr.Grouping;
+import com.interp.lox.parse.Expr.Literal;
+import com.interp.lox.parse.Expr.Logical;
+import com.interp.lox.parse.Expr.Unary;
+import com.interp.lox.parse.Expr.Variable;
+import com.interp.lox.parse.Stmt.Block;
+import com.interp.lox.parse.Stmt.Expression;
+import com.interp.lox.parse.Stmt.If;
+import com.interp.lox.parse.Stmt.Print;
+import com.interp.lox.parse.Stmt.Var;
+import com.interp.lox.parse.Stmt.While;
+
+public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
+
+	final Environment globals = new Environment();                       
+	private Environment environment = globals; 
+
+	/**
+	 * In a binary expression, we evaluate the operands in left-to-right order.
+	 */
+	@Override
+	public Object visitBinaryExpr(Binary expr) {
+		String op = expr.operator.lexeme;
+		TokenType tokenType = expr.operator.type;
+		Expr l = expr.left;
+		Expr r = expr.right;
+
+		Object lv = l.accept(this);
+		Object rv = r.accept(this);
+		// +,-,*,/
+		if (TokenType.MINUS.equals(tokenType)) {
+			return (Double) lv - (Double) rv;
+		} else if (TokenType.STAR.equals(tokenType)) {
+			return (Double) lv * (Double) rv;
+		} else if (TokenType.SLASH.equals(tokenType)) {
+			return (Double) lv / (Double) rv;
+		} else if (TokenType.PLUS.equals(tokenType)) {
+			if (lv instanceof Double && rv instanceof Double) {
+				return (Double) lv + (Double) rv;
+			}
+			// The + operator can also be used to concatenate two strings.
+			// in Java, JavaScript, Python, the "+" is overload
+			if (lv instanceof String && rv instanceof String) {
+				return (String) lv + (String) rv;
+			}
+			// the comparison operators always produce a Boolean.
+		} else if (TokenType.GREATER.equals(tokenType)) {
+			return (Double) lv > (Double) rv;
+		} else if (TokenType.GREATER_EQUAL.equals(tokenType)) {
+			return (Double) lv >= (Double) rv;
+		} else if (TokenType.LESS.equals(tokenType)) {
+			return (Double) lv < (Double) rv;
+		} else if (TokenType.LESS_EQUAL.equals(tokenType)) {
+			return (Double) lv <= (Double) rv;
+		}
+		// !=, ==
+		else if (TokenType.BANG_EQUAL.equals(tokenType)) {
+			return !isEqual(lv, rv);
+		} else if (TokenType.EQUAL_EQUAL.equals(tokenType)) {
+			return isEqual(lv, rv);
+		}
+		// TODO: detecting errors
+		return null;
+	}
+
+	private boolean isEqual(Object a, Object b) {
+		// nil is only equal to nil.
+		if (a == null && b == null)
+			return true;
+		if (a == null)
+			return false;
+		// 注意这里的 == 的语义,是不同于 Java中的 == 的!
+		return a.equals(b);
+	}
+
+	@Override
+	public Object visitGroupingExpr(Grouping expr) {
+		Expr e = expr.expression;
+
+		return e.accept(this);
+	}
+
+	@Override
+	public Object visitLiteralExpr(Literal expr) {
+		return expr.value;
+	}
+
+	@Override
+	public Object visitUnaryExpr(Unary expr) {
+		Token op = expr.operator;
+		TokenType tokenType = op.type;
+		Expr r = expr.right;
+		// op: -, !
+		if (tokenType.equals(TokenType.MINUS)) {
+			return -(Double) r.accept(this);
+		} else if (tokenType.equals(TokenType.BANG)) {
+			return !isTruthy(r);
+		}
+		return null;
+	}
+
+	// false and nil are falsey
+	private boolean isTruthy(Object object) {
+		if (object == null)
+			return false;
+		if (object instanceof Boolean)
+			return (boolean) object;
+		return true;
+	}
+
+	// the user’s view of Lox objects and their internal representation in Java.
+	// To convert any Lox value to a string
+	private String stringify(Object object) {
+		if (object == null)
+			return "nil";
+
+		// Hack. Work around Java adding ".0" to integer-valued doubles.
+		if (object instanceof Double) {
+			String text = object.toString();
+			if (text.endsWith(".0")) {
+				text = text.substring(0, text.length() - 2);
+			}
+			return text;
+		}
+
+		return object.toString();
+	}
+
+	// 版本一，求值表达式
+	public Object interp(Expr e) {
+		try {
+			return e.accept(this);
+		} catch (RuntimeError error) {
+			Lox.runtimeError(error);
+		}
+		// TODO: is this ok???
+		return null;
+	}
+
+	/**
+	 * Unlike expressions, statements produce no values, so the return type of
+	 * the visit methods is Void, not Object.
+	 */
+	@Override
+	public Void visitExpressionStmt(Expression stmt) {
+		Expr expr = stmt.expression;
+		eval(expr);
+		return null;
+	}
+
+	@Override
+	public Void visitPrintStmt(Print stmt) {
+		Object value = eval(stmt.expression);
+		System.out.println(stringify(value));
+		return null;
+	}
+
+	public Object eval(Expr e) {
+		return e.accept(this);
+	}
+
+	// to accept a list of statements—in other words, a program
+	public void interp2(List<Stmt> stmts) {
+		try {
+			for (Stmt statement : stmts) {
+				evalStmt(statement);
+			}
+		} catch (RuntimeError error) {
+			Lox.runtimeError(error);
+		}
+	}
+
+	Void evalStmt(Stmt s) {
+		return s.accept(this);
+	}
+
+	// 变量声明 var a = 1;
+	@Override
+	public Void visitVarStmt(Var stmt) {
+		Object value = null;
+		if (stmt.initializer != null) {
+			value = eval(stmt.initializer);
+		}
+		environment.bind(stmt.name.lexeme, value);
+		return null;
+	}
+
+	@Override
+	public Object visitVariableExpr(Variable expr) {
+		return environment.lookup(expr.name);
+	}
+
+	@Override
+	public Object visitAssignExpr(Assign expr) {
+		Object value = eval(expr.value);
+
+		environment.assign(expr.name, value);
+		// return the assigned value. That’s because assignment is an expression
+		// that can be nested inside other expressions
+		return value;
+	}
+
+	@Override
+	public Void visitBlockStmt(Block stmt) {
+		// To eval a block, we create a new environment
+		// for the block’s scope
+		evalBlock(stmt.stmts, new Environment(environment));
+		return null;
+	}
+
+	// executes a list of statements in the context of a given environment
+	void evalBlock(List<Stmt> statements, Environment newEnv) {
+		Environment parentEnv = this.environment;
+		try {
+			// 变量lookup,是从 this.environment 开始
+			// 所以这里将 this.environment 指向 newEnv
+			this.environment = newEnv;
+			for (Stmt statement : statements) {
+				evalStmt(statement);
+			}
+		} finally {
+			this.environment = parentEnv;
+		}
+	}
+
+	// if statement 的语义很简单
+	@Override
+	public Void visitIfStmt(If stmt) {
+		if (isTruthy(eval(stmt.test))) {
+			evalStmt(stmt.trueClause);
+		} else if (stmt.falseClause != null) {
+			evalStmt(stmt.falseClause);
+		}
+		return null;
+	}
+
+	@Override
+	public Object visitLogicalExpr(Logical expr) {
+		Object left = eval(expr.left);
+
+		if (expr.operator.type == TokenType.OR) {
+			if (isTruthy(left))
+				return left;
+		} else {
+			if (!isTruthy(left))
+				return left;
+		}
+
+		return eval(expr.right);
+	}
+
+	@Override
+	public Void visitWhileStmt(While stmt) {
+		while (isTruthy(eval(stmt.condition))) {
+			evalStmt(stmt.body);
+		}
+		return null;
+	}
+
+	@Override
+	public Object visitCallExpr(Call expr) {
+		// TODO: 需要结合 func definition 才能完整理解
+		Object callee = eval(expr.callee);
+
+		List<Object> arguments = new ArrayList<>();
+		for (Expr argument : expr.arguments) {
+			arguments.add(eval(argument));
+		}
+
+		if (!(callee instanceof LoxCallable)) {
+			//throw an exception, but now we’re throwing our own runtime exception type, 
+			//one that the interpreter knows how to catch and report gracefully.
+			throw new RuntimeError(expr.paren, "Can only call functions and classes.");
+		}
+		LoxCallable function = (LoxCallable) callee;
+		return function.call(this, arguments);
+	}
+}

@@ -1,0 +1,247 @@
+package com.interp.lox.parse;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.interp.lox.Lox;
+import com.interp.lox.Token;
+import com.interp.lox.TokenType;
+import static com.interp.lox.TokenType.*;
+
+public class Parser {
+	private static class ParseError extends RuntimeException {
+	}
+
+	private final List<Token> tokens;
+	private int current = 0;
+
+	public Parser(List<Token> tokens) {
+		this.tokens = tokens;
+	}
+
+	private Expr expression() {
+		//return equality();
+		return assignment();
+	}
+
+	// equality ¡ú comparison ( ( "!=" | "==" ) comparison )* ;
+	private Expr equality() {
+		Expr expr = comparison();
+
+		while (match(BANG_EQUAL, EQUAL_EQUAL)) {
+			Token operator = previous();
+			Expr right = comparison();
+			expr = new Expr.Binary(expr, operator, right);
+		}
+
+		return expr;
+	}
+
+	private boolean match(TokenType... types) {
+		for (TokenType type : types) {
+			if (check(type)) {
+				advance();
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private boolean check(TokenType type) {
+		if (isAtEnd())
+			return false;
+		return peek().type == type;
+	}
+
+	private Token advance() {
+		if (!isAtEnd())
+			current++;
+		return previous();
+	}
+
+	private boolean isAtEnd() {
+		return peek().type == EOF;
+	}
+
+	private Token peek() {
+		return tokens.get(current);
+	}
+
+	private Token previous() {
+		return tokens.get(current - 1);
+	}
+
+	// comparison ¡ú addition ( ( ">" | ">=" | "<" | "<=" ) addition )* ;
+	private Expr comparison() {
+		Expr expr = addition();
+
+		while (match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
+			Token operator = previous();
+			Expr right = addition();
+			expr = new Expr.Binary(expr, operator, right);
+		}
+
+		return expr;
+	}
+
+	private Expr addition() {
+		Expr expr = multiplication();
+
+		while (match(MINUS, PLUS)) {
+			Token operator = previous();
+			Expr right = multiplication();
+			expr = new Expr.Binary(expr, operator, right);
+		}
+
+		return expr;
+	}
+
+	private Expr multiplication() {
+		Expr expr = unary();
+
+		while (match(SLASH, STAR)) {
+			Token operator = previous();
+			Expr right = unary();
+			expr = new Expr.Binary(expr, operator, right);
+		}
+
+		return expr;
+	}
+
+	/**
+	 * unary ¡ú ( "!" | "-" ) unary | primary ;
+	 */
+	private Expr unary() {
+		if (match(BANG, MINUS)) {
+			Token operator = previous();
+			Expr right = unary();
+			return new Expr.Unary(operator, right);
+		}
+
+		return primary();
+	}
+
+	/**
+	 * primary ¡ú NUMBER | STRING | "false" | "true" | "nil" | "(" expression ")"
+	 * ;
+	 */
+	private Expr primary() {
+		if (match(FALSE))
+			return new Expr.Literal(false);
+		if (match(TRUE))
+			return new Expr.Literal(true);
+		if (match(NIL))
+			return new Expr.Literal(null);
+
+		if (match(NUMBER, STRING)) {
+			return new Expr.Literal(previous().literal);
+		}
+
+		if (match(IDENTIFIER)) {
+			return new Expr.Variable(previous());
+		}
+
+		if (match(LEFT_PAREN)) {
+			Expr expr = expression();
+			consume(RIGHT_PAREN, "Expect ')' after expression.");
+			return new Expr.Grouping(expr);
+		}
+		throw error(peek(), "Expect expression.");
+	}
+
+	private Token consume(TokenType type, String message) {
+		if (check(type))
+			return advance();
+
+		throw error(peek(), message);
+	}
+
+	private ParseError error(Token token, String message) {
+		Lox.error(token, message);
+		return new ParseError();
+	}
+
+	public Expr parse() {
+		try {
+			return expression();
+		} catch (ParseError error) {
+			return null;
+		}
+	}
+
+	public List<Stmt> parse2() {
+		List<Stmt> statements = new ArrayList<>();
+		while (!isAtEnd()) {
+			statements.add(declaration());
+		}
+		return statements;
+	}
+
+	private Stmt declaration() {
+		// First, it looks to see if we¡¯re at a variable declaration by
+		// looking for the leading var keyword.
+		// If not, it bubbles up to the ¡°higher precedence¡± statement method.
+		try {
+			if (match(VAR))
+				return varDeclaration();
+
+			return statement();
+		} catch (ParseError error) {
+			// synchronize();
+			return null;
+		}
+	}
+
+	private Stmt varDeclaration() {
+		Token name = consume(IDENTIFIER, "Expect variable name.");
+
+		Expr initializer = null;
+		if (match(EQUAL)) {
+			initializer = expression();
+		}
+		consume(SEMICOLON, "Expect ';' after variable declaration.");
+		return new Stmt.Var(name, initializer);
+	}
+
+	private Stmt statement() {
+		if (match(PRINT)) // match will consume the matching
+			return printStatement();
+		return expressionStatement();
+	}
+
+	private Stmt printStatement() {
+		Expr value = expression();
+		consume(SEMICOLON, "Expect ';' after value.");
+		return new Stmt.Print(value);
+	}
+
+	private Stmt expressionStatement() {
+		Expr expr = expression();
+		consume(SEMICOLON, "Expect ';' after expression.");
+		return new Stmt.Expression(expr);
+	}
+
+	private Expr assignment() {
+		Expr expr = equality();
+
+		if (match(EQUAL)) {
+			Token equals = previous();
+			//assignment is right-associative, we instead recursively call 
+			//assignment() to parse the right-hand side.
+			Expr value = assignment();
+			//we look at the left-hand side expression and figure out 
+			//what kind of assignment target it is. We convert the r-value 
+			//expression node into an l-value representation.
+			
+			if (expr instanceof Expr.Variable) {
+				Token name = ((Expr.Variable) expr).name;
+				return new Expr.Assign(name, value);
+			}
+
+			error(equals, "Invalid assignment target.");
+		}
+
+		return expr;
+	}
+}

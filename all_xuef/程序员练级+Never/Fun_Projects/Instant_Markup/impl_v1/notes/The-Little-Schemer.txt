@@ -1,0 +1,507 @@
+{The Little Schemer}
+
+#The Little Schemer
+
+## atom, list, S-expression
+
+## The Law of Car
+
+```
+The primitive car is defined only for non-empty lists.
+
+```
+
+## The Law of Cdr
+
+```
+The primitive  cdr  is defined only for non-empty lists. 
+The cdr of any non­empty list is always another list.
+
+```
+
+## The Law of Cons
+
+```
+cons  adds any S-expression to the front of a list.
+
+The primitive cons  takes two arguments.
+The second argument to  cons  must be a list. 
+The result is a list.
+```
+
+## The Law of Null?
+
+```
+The primitive null? is defined only for lists.
+```
+
+## The Law of Eq?
+
+```
+The primitive eq? takes two arguments. 
+Each must be a non­numeric atom.
+```
+
+## or
+
+```
+(or ...) asks two questions, one at a time. 
+If the first one is true it stops and answers true.
+Otherwise it asks the second question and answers with 
+whatever the second question answers.
+```
+
+## The First Commandment
+
+```
+Always ask null? as the first question in expressing
+any function.
+```
+
+## The Second Commandment
+
+```
+Use cons to build lists.
+```
+
+## terminate
+
+```
+When recurring on a list of atoms, lat, ask two questions
+about it: (null? lat) and else.
+When recurring on a number, n, ask two questions about
+it: (zero? n) and else.
+```
+
+## 将问题向终点推进
+
+必须要进行 car,cdr操作,这是在将问题向终点推进。不断降低问题规模!
+
+## The Sixth Commandment
+
+```
+Simplify only after the function is correct.
+```
+
+## The Seventh Commandment
+
+```
+Recur on the  subparts  that are of the same nature:
+• On the sublists of a list.
+• On the subexpressions of an arithmetic expression.
+```
+
+## The Eighth Commandment
+
+Use help functions to abstract from representations.
+
+## The Ninth Commandment
+
+Abstract common patterns with a new function.(chap8)
+
+
+
+
+
+
+
+
+
+```
+; define some procedure for the little schemer 
+;;builtins: car,cdr,null?
+;;non-have: atom?
+(define (atom? lst)
+  (not (list? lst)))
+
+;; lat?
+(define (lat? lst)
+  (if (null? lst)
+      #t
+      (and (atom? (car lst)) (lat? (cdr lst)))))
+;; test lat?
+; (lat? '((Jack) Sprat could eat no chicken fat))
+
+;(cond ...)   asks questions;
+;(lambda ...) creates a function;
+;(define ...) gives it a name.
+
+(define (mymember? a lat)
+  (if (null? lat)
+      #f
+      (or (equal? a (car lat)) (mymember? a (cdr lat)))))
+;(mymember? 'meat '(mashed potatoes and meat gravy))
+
+;chap3 rember
+(define (rember a lat)
+  (cond ((null? lat) '())
+        ((atom? (car lat))
+          (if (equal? a (car lat))
+              (rember a (cdr lat))
+              (cons (car lat) (rember a (cdr lat)))))
+        (else (cons (rember a (car lat)) (rember a (cdr lat))))))
+; (rember 'mint '(lamb chops and mint flavored mint jelly))
+
+; firsts
+(define (firsts l)
+  (if (null? l)
+      '()
+      (cons (caar l) (firsts (cdr l)))))
+; (firsts '((five plums) (four) (eleven green oranges)))
+;(define l '(((five plums) four) (eleven green oranges) ((no) more)))
+
+(define (insertR new old lat)
+  (cond ((null? lat) '())
+        ((equal? old (car lat))
+          (cons old (cons new (insertR new old (cdr lat)))))
+        (else (cons (car lat) (insertR new old (cdr lat))))))
+;(insertR 'topping 'fudge '(ice cream with fudge for dessert))
+
+(define (insertL new old lat)
+  (cond ((null? lat) '())
+        ((equal? old (car lat))
+          (cons new (cons old (insertL new old (cdr lat)))))
+        (else (cons (car lat) (insertL new old (cdr lat))))))
+
+;(insertR 'fried 'fish '(chips and fish or fish and fried))
+
+
+; chap4
+(define (1+ n) (+ n 1))
+(define (1- n) (- n 1))
+(define add1 1+)
+(define sub1 1-) 
+;; write the function +
+;; Hint: It uses  zero? add11  and  sub1
+(define (add n m)
+  (if (zero? n)
+      m
+      (add (1- n) (1+ m))))
+
+(define (sum tup)
+  (if (null? tup)
+      0
+      (add (car tup) (sum (cdr tup)))))
+
+(define (range start stop step)
+  (if (> start stop)
+      '()
+      (cons start (range (add start step) stop step))))
+
+(define (tup+ tup1 tup2)
+  (cond ((and (null? tup1) (null? tup2)) '())
+        ((null? tup1) tup2)
+        ((null? tup2) tup1)
+        (else (cons (add (car tup1) (car tup2))
+                    (tup+ (cdr tup1) (cdr tup2))))))
+					
+;; >
+(define (gt n m)
+  (cond ((zero? n) #f)
+        ((zero? m) #t)
+        (else (gt (1- n) (1- m)))))
+		
+;ope on nested list
+(define (eqlist? l1 l2)
+  (cond ((and (null? l1) (null? l2)) #t)
+        ((or (null? l1) (null? l2)) #f)
+        ((and (list? (car l1)) (list (car l2)))
+          (and (eqlist? (car l1) (car l2)) (eqlist? (cdr l1) (cdr l2))))
+        ((or (list? (car l1)) (list? (car l2))) #f)
+        (else (and (eq? (car l1) (car l2)) (eqlist? (cdr l1) (cdr l2))))
+        ))
+(define l1 '(beef ((sausage)) (and (soda))))
+(define l2 '(beef ((sausage)) (and (soda ho))))
+
+;;An S-expression is either an atom or a (possibly empty) list of S-exps.
+(define (equal s1 s2)
+  (cond ((and (atom? s1) (atom? s2)) (eq? s1 s2))
+        ((or (atom? s1) (atom? s2)) #f)
+        (else (eqlist? s1 s2))))
+;Now, rewrite  eqlist?  using  equal?
+(define (eqlist2? l1 l2)
+  (cond ((and (null? l1) (null? l2)) #t)
+        ((or (null? l1) (null? l2)) #f)
+        (else (and (equal-s? (car l1) (car l2)) (eqlist2? (cdr l1) (cdr l2))))))
+
+;;必须要进行 car,cdr操作,这是在将问题向终点推进。不断降低问题规模!
+
+;chap5
+;an arithmetic expression is either a number, or
+;two arithmetic expressions combined by  +,*,or ^
+(define (numbered? aexp)
+  (cond ((atom? aexp) #t)
+        ((eq? '+ (cadr aexp)) 
+            (and (numbered? (car aexp)) (numbered? (caddr aexp))))
+        ((eq? '* (cadr aexp)) 
+            (and (numbered? (car aexp)) (numbered? (caddr aexp))))
+        ((eq? '^ (cadr aexp))
+            (and (numbered? (car aexp)) (numbered? (caddr aexp))))
+        (else #f)))
+
+(define (value aexp) ;value 中缀算术表达式
+  (cond ((atom? aexp) aexp)
+        ((eq? '+ (cadr aexp)) 
+            (+ (value (car aexp)) (value (caddr aexp))))
+        ((eq? '* (cadr aexp)) 
+            (* (value (car aexp)) (value (caddr aexp))))))
+
+; 注意: value假设输入是标准中缀算术表达式(支持 +,* 操作)
+
+;chap6
+;; (() () () ())
+(define sero '())
+(define (sero? n) (null? n))
+(define (edd1 n) (cons '() n))
+(define (zub1 n) (cdr n))
+(define (edd n m)
+  (cond ((sero? m) n)
+        (else (edd (edd1 n) (zub1 m)))))		
+
+;chap7
+(define (set? s)
+  (cond ((null? s) #t)
+        ((mymember? (car s) (cdr s)) #f)
+        (else (set? (cdr s)))))
+
+(define (makeset lat)
+  (cond ((null? lat) '())
+        ((mymember? (car lat) (cdr lat)) (makeset (cdr lat)))
+        (else (cons (car lat) (makeset (cdr lat))))))
+
+(define (subset? set1 set2)
+  (cond ((null? set1) #t)
+        (else (and (mymember? (car set1) set2) 
+                   (subset? (cdr set1) set2)))))
+
+;; wocao, 我没想到这种方法
+(define (eqset? set1 set2)
+  (and (subset? set1 set2) (subset? set2 set1)))
+  
+
+(define (intersect set1 set2)
+  (cond ((null? set1) '())
+        ((mymember? (car set1) set2)
+          (cons (car set1) (intersect (cdr set1) set2)))
+        (else (intersect (cdr set1) set2))))
+
+(define (union set1 set2)
+  (cond ((null? set1) set2)
+        ((mymember? (car set1) set2)
+          (union (cdr set1) set2))
+        (else (cons (car set1) (union (cdr set1) set2)))))
+;; 对于无序表, 只看前两个元素是无法做出有效的决定的!(本质)
+
+(define (a-pair? s)
+  (cond ((atom? s) #f)
+        ((null? s) #f)
+        ((null? (cdr s)) #f)
+        ((null? (cddr s)) #t)
+        (else #f)))
+		
+; helper for pair
+(define (first p) (car p))
+(define (second p) (cadr p))
+(define (build s1 s2) (cons s1 (cons s2 '())))
+
+;(revrel '((8 a) (pumpkin pie) (got sick)))
+; --> ((a 8) (pie pumpkin) (sick got))
+(define (revrel rel)
+  (cond ((null? rel) '())
+        (else (cons (build (second (car rel)) (first (car rel)))
+                    (revrel (cdr rel))))))  
+
+
+; chap8 lambda the ultimate
+(define (rember-f test? a l)
+  (cond ((null? l) '())
+        ((test? a (car l)) (rember-f test? a (cdr l)))
+        (else (cons (car l) (rember-f test? a (cdr l))))))
+;;(eq? '(1 2) '(1 2)) --> #f
+
+;;rewrite rember-f
+(define (rember-f2 test?)
+  (lambda (a l)
+    (cond ((null? l) '())
+          ((test? a (car l)) ((rember-f2 test?) a (cdr l)))
+          (else (cons (car l) ((rember-f2 test?) a (cdr l)))))))
+
+(define rember-eq? (rember-f2 eq?))
+(define rember-equal? (rember-f2 equal?))
+
+(define (insertL-f test?)
+  (lambda (new old l)
+    (cond ((null? l) '())
+          ((test? old (car l)) 
+            (cons new (cons old ((insertL-f test?) new old (cdr l)))))
+          (else (cons (car l) ((insertL-f test?) new old (cdr l))))
+    )))
+(define insertL-eq? (insertL-f eq?))
+
+(define (insertR-f test?)
+  (lambda (new old l)
+    (cond ((null? l) '())
+          ((test? old (car l))
+            (cons old (cons new ((insertR-f test?) new old (cdr l)))))
+          (else (cons (car l) ((insertR-f test?) new old (cdr l)))))))
+(define insertR-eq? (insertR-f eq?))
+;(insertR-eq? 'b 'a '(a a a a a))
+;; 注意: insertL-f与insertR-f 代码基本一样, 我们需要进一步抽象!!!
+
+
+;;;;对 insertL-f与insertR-f 进行重构
+;将不同的部分抽离出来
+(define (seqL new old l)
+  (cons new (cons old l)))
+(define (seqR new old l)
+  (cons old (cons new l)))
+
+(define (insert-g test? seq)
+  (lambda (new old l)
+    (cond ((null? l) '())
+          ((test? old (car l))
+            (seq new old ((insert-g test? seq) new old (cdr l))))
+          (else (cons (car l) ((insert-g test? seq) new old (cdr l))))
+    )))
+(define insertL-eq?-2 (insert-g eq? seqL))
+;(insertL-eq?-2 'b 'a '(a a a a a))
+
+(define (subst new old l)
+  (cond ((null? l) '())
+        ((eq? old (car l))
+          (cons new (subst new old (cdr l))))
+        (else (cons (car l) (subst new old (cdr l))))))
+;(subst 'b 'a '(a b b a a c c))
+;; 注意 subst与insertL 的代码结构几乎一样,其实它们的功能某种程度上'相同'
+;; 我们可以用 insert-g 生产出 subst
+(define subst2 (insert-g eq? 
+                        (lambda (new old l) (cons new l))))
+;(subst2 'b 'a '(a b b a a c c))
+
+;; 我们甚至能用 insert-g 生产出 rember
+(define rember2 (lambda (old l)
+                  ((insert-g eq? (lambda (new old l) l))
+                    #f old l)
+                  ))
+; (rember2 'a '(a b b a a c c))
+
+
+;chap9
+(define (eternity x)
+  (eternity x))
+
+
+
+;; without define
+;length0
+(lambda (l) 
+  (cond ((null? l) 0)
+        (else (1+ (eternity (cdr l))))))
+;length<=1
+(lambda (l) 
+  (cond 
+    ((null? l) 0)
+    (else 
+      (1+ 
+        ((lambda (l) 
+          (cond 
+            ((null? l) 0)
+            (else 
+              (1+ (eternity (cdr l)))))) 
+          (cdr l))))))
+;length-f
+((lambda (length)
+  (lambda (l)
+    (cond
+      ((null? l) 0)
+      (else (1+ (length (cdr l)))))))
+  eternity) ;this creates length0
+
+;mk-length
+((lambda (mk-length);mk-length是一个以函数为参数的高阶函数
+  (mk-length eternity))
+(lambda (length)
+  (lambda (l)
+    (cond
+      ((null? l) 0)
+      (else (1+ (length (cdr l))))
+    )))
+) ;;length0
+
+((lambda (mk-length)
+  (mk-length (mk-length eternity)))
+(lambda (length)
+  (lambda (l)
+    (cond
+      ((null? l) 0)
+      (else (1+ (length (cdr l))))
+    )))
+) ;;length<=1
+
+(((lambda (mk-length)
+    (mk-length mk-length))
+  (lambda (mk-length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1
+                ((mk-length eternity)
+                  (cdr l))))))))
+'(apple))
+
+
+
+((lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1
+                ((lambda (l)
+                    (cond
+                      ((null? l) 0)
+                      (else (add1 ((eternity eternity) (cdr l))))))
+                  (cdr l))))))
+'(banana))
+
+;length
+((lambda (mk-length)
+  (mk-length mk-length)) ;apply it to itself
+ (lambda (mk-length)
+  (lambda (l)
+    (cond 
+      ((null? l) 0)
+      (else (add1
+              ((mk-length mk-length) 
+               (cdr l))))
+    )))
+)
+;;length 改进版
+((lambda (mk-length)
+  (mk-length mk-length)) ;apply it to itself
+ (lambda (mk-length)
+  ((lambda (length)
+    (lambda (l)
+     (cond 
+      ((null? l) 0)
+      (else (add1
+              (length
+               (cdr l))))
+     )))
+   (mk-length mk-length))
+  )
+)
+
+					
+
+;subst* 与过程调用实现
+(define (subst* new old l)
+  (cond 
+    ((null? l) '())
+    ((atom? (car l)) 
+      (if (eq? old (car l)) 
+          (cons new (subst* new old (cdr l)))
+          (cons (car l) (subst* new old (cdr l)))))
+    (else (cons (subst* new old (car l)) (subst* new old (cdr l)))))
+)
+;(subst* 1 'x '(f x (f x (f x x))))
+					
+```

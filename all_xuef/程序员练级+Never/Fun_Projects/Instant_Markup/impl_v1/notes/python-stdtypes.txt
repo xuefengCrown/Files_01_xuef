@@ -1,0 +1,251 @@
+{python内置类型摘要}
+
+# python内置类型摘要(python 3.2)
+
+## 4. Built-in Types
+
+```
+本节描述解释器内置标准类型。
+
+主要内置类型有: numerics, sequences, mappings, classes, instances and exceptions.
+
+Some operations are supported by several object types; 
+all objects can be compared, tested for truth value, 
+and converted to a string (with the repr() function or 
+the slightly different str() function). 
+The latter function is implicitly used when an object is written by the print() function.
+
+```
+
+### 4.1. Truth Value Testing
+
+```
+Any object can be tested for truth value, for use in an if or while condition 
+or as operand of the Boolean operations below. 
+
+The following values are considered false:
+	None
+
+	False
+
+	zero of any numeric type, for example, 0, 0.0, 0j.
+
+	any empty sequence, for example, '', (), [].
+
+	any empty mapping, for example, {}.
+
+	instances of user-defined classes, if the class defines a __bool__() or __len__() method, 
+	when that method returns the integer zero or bool value False.
+```
+
+### 4.2. Boolean Operations — and, or, not
+
+没什么特别的，自行测试！
+
+### 4.3. Comparisons
+
+```
+## 支持链式
+x < y <= z is equivalent to x < y and y <= z
+
+== 与 is
+== 比较值(类似于java的 equal)， is比较地址(java中的 ==)
+```
+
+### 4.4. Numeric Types — int, float, complex
+
+```
+Integers have unlimited precision. 
+Floating point numbers are usually implemented using double in C;
+精度与内部表示细节参见: sys.float_info
+Complex numbers have a real and imaginary part, which are each a floating point number. 
+
+Numbers are created by numeric literals or as the result of built-in functions and operators.
+
+The constructors int(), float(), and complex() can be used to produce numbers of a specific type.
+```
+
+### 4.4.4. Hashing of numeric types
+
+### 4.5. Iterator Types
+
+```
+iterator.__iter__()
+	Return the iterator object itself. 
+
+iterator.__next__()
+	Return the next item from the container. If there are no further items, 
+	raise the StopIteration exception. 
+```
+
+### 4.5.1. Generator Types
+
+Python’s generators provide a convenient way to implement the iterator protocol. 
+
+### 4.6. Sequence Types — str, bytes, bytearray, list, tuple, range
+
+```
+序列(sequence)作为接口，它支持的操作值得细读。
+如元素包含检查，拼接，索引以及切片，元素查找。
+
+!!!注意 下面操作是浅拷贝的!!!
+>>> lists = [[]] * 3
+
+## lists[1:-1]可以对称切片
+
+值得注意的还有:
+Sequence types also support comparisons. In particular, tuples and lists 
+are compared lexicographically by comparing corresponding elements.
+
+```
+
+### 4.6.1. String Methods
+
+```
+In addition, Python’s strings support the sequence type methods described in the Sequence Types.
+To output formatted strings, see the String Formatting section. 
+Also, see the re module for string functions based on regular expressions.
+
+听说字符串格式化，使用str.format()比较好。
+
+```
+
+### 4.6.3. Range Type
+
+```
+The range type is an immutable sequence which is commonly used for looping. 
+注意，python3中 range()返回的是一个 generator
+```
+
+### 4.6.4. Mutable Sequence Types
+
+```
+List and bytearray objects support additional operations that 
+allow in-place modification of the object. 
+
+Strings and tuples are immutable sequence types: such objects cannot be modified once created. 
+
+支持的操作可以读一下。
+```
+
+### 4.6.5. Bytes and Byte Array Methods
+
+```
+没看
+```
+
+### 4.7. Set Types — set, frozenset
+
+```
+## 注意这里说的，集合元素必须 可哈希(hashable)
+A set object is an unordered collection of distinct hashable objects.
+
+集合支持: 交并补操作，元素包含检查。
+但因为集合中元素无序，所以它不支持索引，切片以及其他基于序列的操作。
+
+set and frozenset
+set 是mutable(可变的)，所以不能作为dict的键或者集合元素。
+
+The frozenset type is immutable and hashable — its contents cannot be altered after it is created; 
+it can therefore be used as a dictionary key or as an element of another set.
+```
+
+### 4.8. Mapping Types
+
+```
+A mapping object maps hashable values to arbitrary objects. 
+Mappings are mutable objects. 
+
+创建字典时注意 zip的使用。
+```
+
+### 4.8.1. Dictionary view objects(字典视图)
+
+```
+The objects returned by dict.keys(), dict.values() and dict.items() are view objects. 
+They provide a dynamic view on the dictionary’s entries, 
+which means that when the dictionary changes, the view reflects these changes.
+```
+
+### 4.9. memoryview type
+
+```
+## 我目前不知道它的用途
+memoryview objects allow Python code to access the internal data of an object that 
+supports the buffer protocol without copying. 
+Memory is generally interpreted as simple bytes.
+```
+
+### 4.10. Context Manager Types
+
+```
+Python defines several context managers to support easy thread synchronisation, 
+prompt closure of files or other objects, and simpler manipulation of the active 
+decimal arithmetic context. 
+```
+
+## 4.11. Other Built-in Types
+
+### 4.11.1 Modules
+
+```
+A special member of every module is __dict__. 
+```
+
+### 4.11.2. Classes and Class Instances
+
+### 4.11.3. Functions¶
+
+```
+Function objects are created by function definitions. 
+The only operation on a function object is to call it: func(argument-list).
+
+There are really two flavors of function objects: built-in functions and user-defined functions. 
+Both support the same operation (to call the function), but the implementation is different, 
+hence the different object types.
+
+See Function definitions for more information.
+```
+
+### 4.11.4. Methods
+
+```
+Methods are functions that are called using the attribute notation. 
+There are two flavors: built-in methods (such as append() on lists) and class instance methods. 
+
+If you access a method (a function defined in a class namespace) through an instance, 
+you get a special object: a bound method (also called instance method) object. 
+When called, it will add the self argument to the argument list. 
+Bound methods have two special read-only attributes: m.__self__ is the object on which the method operates, 
+and m.__func__ is the function implementing the method. Calling m(arg-1, arg-2, ..., arg-n) is completely 
+equivalent to calling m.__func__(m.__self__, arg-1, arg-2, ..., arg-n).
+
+
+Like function objects, bound method objects support getting arbitrary attributes. 
+However, since method attributes are actually stored on the underlying function object (meth.__func__), 
+setting method attributes on bound methods is disallowed. Attempting to set a method attribute results in 
+a TypeError being raised. In order to set a method attribute, you need to explicitly set it on the 
+underlying function object:
+
+class C:
+    def method(self):
+        pass
+
+c = C()
+c.method.__func__.whoami = 'my name is c'
+
+```
+
+### 4.11.5. Code Objects
+
+### 4.11.6. Type Objects
+
+### 4.11.7. The Null Object
+
+### 4.11.9. Boolean Values
+
+### 4.12. Special Attributes
+
+```
+值得读一下。
+```

@@ -1,0 +1,33 @@
+{程序设计语言理论相关}
+
+#程序设计语言理论相关资料
+
+## 每本书都要有其他基础，所以自行判定是否适合
+
+##That is a big question and different people will give different answers.
+
+##Great minds discuss ideas. Average minds discuss events. Small minds discuss people.
+
+##When you're teaching yourself it is hard to know when you have gotten "enough" of preliminary topics and move on. 
+
+## 1
+
+- 《sicp》
+
+- 《cs61as》 (http://berkeley-cs61as.github.io/syllabus.html)
+
+- 《cs61a-2010》 (http://www-inst.eecs.berkeley.edu/~cs61a/su10/)
+
+- 《plai》 (http://cs.brown.edu/courses/cs173/2012/book/index.html)
+
+- 《plai video》 (http://cs.brown.edu/courses/csci1730/2012/Videos/)
+
+- 《Programming and Programming Languages》 (https://papl.cs.brown.edu/2018/)
+
+- 《Software Foundations》 (https://softwarefoundations.cis.upenn.edu/)
+
+## 2
+
+- 《Practical Foundations for Programming Languages》
+
+

@@ -1,0 +1,50 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>
+匿名函数捕获变量值的机制
+</title><link href="./css/style.css" rel="stylesheet" type="text/css"> </head>              <div class="container"><body>
+<h1>
+匿名函数捕获变量值的机制
+</h1>
+<h2>
+ 自由变量是运行时绑定值的
+</h2>
+<pre><code>
+&gt;&gt;&gt; x = 10
+&gt;&gt;&gt; a = lambda y: x + y
+&gt;&gt;&gt; x = 20
+&gt;&gt;&gt; b = lambda y: x + y
+
+&gt;&gt;&gt; a(10)
+30
+&gt;&gt;&gt; b(10)
+30
+&gt;&gt;&gt;
+</code></pre>
+<p>
+其中的奥妙在于lambda表达式中的x是一个自由变量， 在运行时绑定值，而不是定义时就绑定，这跟函数的默认值参数定义是不同的。
+</p>
+<h2>
+ 默认参数在定义时绑定值
+</h2>
+<p>
+如果你想让某个匿名函数在定义时就捕获到值，可以将那个参数值定义成默认参数即可，就像下面这样：
+</p>
+<pre><code>
+&gt;&gt;&gt; x = 10
+&gt;&gt;&gt; a = lambda y, x=x: x + y
+&gt;&gt;&gt; x = 20
+&gt;&gt;&gt; b = lambda y, x=x: x + y
+&gt;&gt;&gt; a(10)
+20
+&gt;&gt;&gt; b(10)
+30
+&gt;&gt;&gt;
+</code></pre>
+<h2>
+ 参考
+</h2>
+<ul>
+<li>
+《Python3-Cookbook》
+</li>
+</div></body></html>

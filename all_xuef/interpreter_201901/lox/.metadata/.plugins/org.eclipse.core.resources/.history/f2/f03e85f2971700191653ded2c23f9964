@@ -1,0 +1,56 @@
+package com.interp.lox.parse;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.interp.lox.Token;
+
+public class Environment {
+	// store the bindings
+	// the same name should refer to the same variable (ignoring scope for now).
+	// Using the string ensures all of those tokens refer to the same map key.
+	private final Map<String, Object> bindings = new HashMap<>();
+	
+	private Environment parent;
+	
+	//The no-argument constructor is for the global scope¡¯s environment, 
+	//which ends the chain. 
+	Environment(){
+		this.parent = null;
+	}
+	Environment(Environment parent){
+		this.parent = parent;
+	}
+	
+	//a new variable is always declared in the current innermost scope.
+	public void bind(String var, Object val) {
+		// we don¡¯t check to see if it¡¯s already present
+		bindings.put(var, val);
+	}
+
+	//But variable lookup and assignment work with existing variables and 
+	//they need to walk the chain to find it. 
+	public Object lookup(Token name) {
+		if (bindings.containsKey(name.lexeme)) {
+			return bindings.get(name.lexeme);
+		}
+		// if parent env is not null, search var in it
+		if(parent != null){
+			return parent.lookup(name);
+		}
+		throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
+	}
+
+	void assign(Token name, Object value) {
+		System.out.println();
+		if (bindings.containsKey(name.lexeme)) {
+			bindings.put(name.lexeme, value);
+			return;
+		}
+		
+		if(this.parent != null){
+			parent.assign(name, value);
+		}
+		throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
+	}
+}

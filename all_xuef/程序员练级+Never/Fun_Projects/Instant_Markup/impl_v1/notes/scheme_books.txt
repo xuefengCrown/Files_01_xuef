@@ -1,0 +1,14 @@
+《Common Lisp: A Gentle Introduction to Symbolic Computation》
+《Teaching Yourself Scheme in Fixnum Days》
+《Structure and Interpretation of Computer Programs》
+《ANSI Common Lisp》
+《How to Design Programs》
+《Simply Scheme--Introducing Computer Science》
+《The Little Schemer》 和 《The Seasoned Schemer》
+《The Scheme Programming Language, 3e》
+《Scheme and the Art of Programming》
+《Programming in Scheme: Learn Scheme through Artificial Intelligence Programs》
+
+《An Introduction to Lmabda Calculi for Computer Scientists》
+《Programming Language and Lambda Calculi》
+

@@ -1,0 +1,55 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+</ul>
+<title>
+tokenize_scheme
+</title><link href="./css/style.css" rel="stylesheet" type="text/css"> </head>              <div class="container"><body>
+<h2>
+ tokenize_scheme.py
+</h2>
+<pre><code>
+&quot;&quot;&quot;
+生成令牌流
+&quot;&quot;&quot;
+#利用命名捕获组的正则表达式来定义所有可能的令牌，包括空格
+import re
+
+LPAREN = r&#x27;(?P&lt;LPAREN&gt;\()&#x27;
+RPAREN = r&#x27;(?P&lt;RPAREN&gt;\))&#x27;
+SYMBOL = r&#x27;(?P&lt;SYMBOL&gt;[a-zA-Z!$%&amp;*+./:&lt;=&gt;?&quot;@^_~-][0-9a-zA-Z!$%&amp;*+./:&lt;=&gt;?&quot;@^_~-]*)&#x27;
+INTEGER=r&#x27;(?P&lt;INTEGER&gt;-?[0-9]+)&#x27;
+BOOLEAN=r&#x27;(?P&lt;BOOLEAN&gt;\#t|\#f)&#x27;
+FLOAT=r&quot;(?P&lt;FLOAT&gt;-?([0-9]*\.[0-9]+)|([0-9]+\.[0-9]*))&quot;
+CHARACTER=r&#x27;(?P&lt;CHARACTER&gt;\#\\(space|newline|.))&#x27;
+STRING=r&#x27;(?P&lt;STRING&gt;&quot;(\\&quot;|\\n|[a-zA-Z*+/!?=&lt;&gt;. -])*&quot;)&#x27;
+QUOTESUGAR = r&quot;(?P&lt;QUOTESUGAR&gt;&#x27;)&quot;
+QUASIQUOTESUGAR = r&quot;(?P&lt;QUASIQUOTESUGAR&gt;`)&quot;
+UNQUOTESUGAR = r&quot;(?P&lt;UNQUOTESUGAR&gt;,)&quot;
+UNQUOTESPLICINGSUGAR = r&quot;(?P&lt;UNQUOTESPLICINGSUGAR&gt;,@)&quot;
+#COMMENT = r&quot;;[^\n]*&quot;
+#WS = r&#x27;(?P&lt;WS&gt; \t\n)&#x27;
+WS = r&#x27;(?P&lt;WS&gt;\s+)&#x27;
+
+pats = (LPAREN,RPAREN,SYMBOL,INTEGER,
+          BOOLEAN,FLOAT,CHARACTER,STRING,
+          QUOTESUGAR,QUASIQUOTESUGAR,UNQUOTESUGAR,
+          UNQUOTESPLICINGSUGAR,WS)
+
+master_pat = re.compile(&#x27;|&#x27;.join(pats))
+
+from collections import namedtuple
+Token = namedtuple(&#x27;Token&#x27;, [&#x27;type&#x27;, &#x27;value&#x27;])
+
+def generate_tokens(text):
+    scanner = master_pat.scanner(text)
+    for m in iter(scanner.match, None):
+        tok = Token(m.lastgroup, m.group())
+        if tok.type != &#x27;WS&#x27;: # 过滤空格
+            yield  tok
+
+if __name__ == &#x27;__main__&#x27;:
+    # Example use
+    code_s = &#x27;(lambda (x) (* x x))&#x27;
+    for tok in generate_tokens(master_pat, code_s):
+        print(tok)
+</code></pre>
+</div></body></html>

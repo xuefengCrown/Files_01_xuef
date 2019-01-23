@@ -1,0 +1,71 @@
+
+##import pdb
+List = list
+
+BUILTINS = {}
+
+def builtin(name):
+    """注册scheme builtin procedure"""
+    def add(fn):
+        BUILTINS[name] = fn
+        return fn
+    return add # 返回的add，作为装饰器
+
+
+@builtin("<")
+def scheme_less(x1, x2):
+    return x1 < x2
+
+@builtin(">")
+def scheme_great(x1, x2):
+    return x1 > x2
+
+@builtin("boolean?")
+def scheme_booleanp(x):
+    return x is True or x is False
+
+def scheme_truep(val):
+    """All values in Scheme are true except False."""
+    return val is not False
+
+def scheme_falsep(val):
+    """Only False is false in Scheme."""
+    return val is False
+
+@builtin("not")
+def scheme_not(x):
+    return not scheme_truep(x)
+
+@builtin("equal?")
+def scheme_equalp(x, y):
+    if scheme_pairp(x) and scheme_pairp(y):
+        return scheme_equalp(x.first, y.first) and scheme_equalp(x.second, y.second)
+    elif scheme_numberp(x) and scheme_numberp(y):
+        return x == y
+    else:
+        return type(x) == type(y) and x == y
+
+@builtin("eq?")
+def scheme_eqp(x, y):
+    if scheme_numberp(x) and scheme_numberp(y):
+        return x == y
+    elif scheme_symbolp(x) and scheme_symbolp(y):
+        return x == y
+    else:
+        return x is y
+
+@builtin("pair?")
+def scheme_pairp(x):
+    return isinstance(x, List)
+
+
+@builtin("symbol?")
+def scheme_symbolp(x):
+    return isinstance(x, str) and not scheme_stringp(x)
+
+@builtin("number?")
+def scheme_numberp(x):
+    return isinstance(x, (int, float)) and not scheme_booleanp(x)
+
+
+##pdb.set_trace()

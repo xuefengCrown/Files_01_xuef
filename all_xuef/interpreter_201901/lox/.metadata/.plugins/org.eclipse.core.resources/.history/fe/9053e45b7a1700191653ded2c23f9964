@@ -1,0 +1,12 @@
+package com.interp.lox.parse;
+
+import java.util.List;
+
+public class LoxFunction implements LoxCallable {
+
+	@Override
+	public Object call(Interpreter interpreter, List<Object> arguments) {
+		return null;
+	}
+
+}

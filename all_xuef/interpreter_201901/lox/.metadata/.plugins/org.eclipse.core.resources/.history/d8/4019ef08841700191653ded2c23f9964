@@ -1,0 +1,10 @@
+package com.interp.lox.parse;
+
+public class Return {
+	final Object value;
+
+	Return(Object value) extends RuntimeException {
+		super(null, null, false, false);
+		this.value = value;
+	}
+}

@@ -1,0 +1,58 @@
+{value-arithmetic-expression}
+
+# value-arithmetic-expression
+
+## 求值中缀算术表达式(支持 +,-,*,/,^运算)
+
+### version1
+
+```
+(define (atom? a) (not (list? a)))
+(define (^ n m) ; 幂运算
+  (if (= m 0) 1 (* n (^ n (- m 1)))))
+
+;; 求值函数
+;;;; (value '((4 ^ 6) / (2 * 4)))
+(define (value aexp)
+  (cond ((atom? aexp) aexp)
+        ((eq? '+ (cadr aexp)) 
+            (+ (value (car aexp)) (value (caddr aexp))))
+        ((eq? '* (cadr aexp)) 
+            (* (value (car aexp)) (value (caddr aexp))))
+        ((eq? '- (cadr aexp)) 
+            (- (value (car aexp)) (value (caddr aexp))))
+        ((eq? '/ (cadr aexp)) 
+            (/ (value (car aexp)) (value (caddr aexp))))
+        ((eq? '^ (cadr aexp)) 
+            (^ (value (car aexp)) (value (caddr aexp))))))   
+			
+;; value假设输入是标准中缀算术表达式(支持 +,-,*,/,^ 且二元操作)
+```
+
+value中存在大段相似代码, 我们重构它！
+
+### version2
+
+```
+(define symbol2func 
+  (lambda (x) 
+    (cond ((eq? '+ x) +)
+          ((eq? '- x) -)
+          ((eq? '* x) *)
+          ((eq? '/ x) /)
+          ((eq? '^ x) ^))))
+		  
+(define (val2 aexp)
+  (cond ((atom? aexp) aexp)
+        (else ((symbol2func (cadr aexp)) 
+                (value (car aexp)) (value (caddr aexp))))))
+				
+;; (val2 '((4 ^ 6) / (2 * 4)))
+```
+
+我们定义了新函数 symbol2func, 将value中的模式抽象出来。
+symbol2func 完成符号到函数的翻译。
+
+## 参考
+
+- 《The Little Schemer》chap8

@@ -1,0 +1,11 @@
+
+//声明指针
+int *a; //表明 *a 产生的结果类型是 int
+
+int *a, *b, *c;
+
+char *message = "Hello world";
+/**
+char *message;
+message = "Hello world";
+*/
